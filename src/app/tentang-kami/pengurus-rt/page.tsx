@@ -1,6 +1,5 @@
-import { Users, User, Phone, MapPin, Search } from "lucide-react";
+import { Users, User, Phone, MapPin } from "lucide-react";
 
-// Data Dummy 10 RT (Bisa Anda sesuaikan dengan data asli Ketua RT di RW 12)
 const DATA_RT = [
   {
     rt: "01",
@@ -66,90 +65,86 @@ const DATA_RT = [
 
 export default function PengurusRT() {
   return (
-    <div className="min-h-screen bg-gray-50 pb-16 font-sans">
-      {/* HERO SECTION */}
-      <div className="bg-[#1a3a6b] relative overflow-hidden">
-        {/* Dekorasi Background */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-400 opacity-10 rounded-full blur-2xl -translate-x-1/2 translate-y-1/2"></div>
-
-        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <div className="min-h-screen bg-white pb-20 font-sans">
+      {/* HERO */}
+      <div className="bg-[#1a3a6b] px-6 md:px-16 py-16 md:py-24">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+            <p className="text-xs font-semibold tracking-widest text-blue-300/70 uppercase mb-4">
+              Tentang Kami
+            </p>
+            <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-4 tracking-tight">
               Daftar Pengurus RT
             </h1>
-            <p className="text-[15px] md:text-[16px] text-blue-100 max-w-xl leading-relaxed">
-              Mengenal lebih dekat para ujung tombak pelayanan warga. Berikut
-              adalah daftar Ketua Rukun Tetangga (RT) di lingkungan RW 12
-              Kelurahan Kutabumi.
+            <p className="text-[15px] text-blue-100/80 max-w-xl leading-relaxed">
+              Para ujung tombak pelayanan warga di lingkungan RW 12 Kelurahan
+              Kutabumi.
             </p>
           </div>
 
-          {/* Opsional: Kotak Pencarian / Info Tambahan */}
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 flex items-center gap-4 text-white w-full md:w-auto">
-            <div className="w-10 h-10 bg-blue-400/20 rounded-full flex items-center justify-center shrink-0">
-              <Users size={20} className="text-blue-100" />
+          {/* Stat box */}
+          <div className="flex items-center gap-4 bg-white/10 border border-white/10 rounded-md px-6 py-4 shrink-0">
+            <div className="w-10 h-10 bg-white/10 rounded-md flex items-center justify-center">
+              <Users size={18} className="text-blue-200" />
             </div>
             <div>
-              <p className="text-[12px] text-blue-100 font-medium uppercase tracking-wider">
+              <p className="text-[11px] text-blue-300/70 font-semibold uppercase tracking-widest mb-0.5">
                 Total RT Aktif
               </p>
-              <p className="text-2xl font-bold">10 Wilayah</p>
+              <p className="text-2xl font-bold text-white">10 Wilayah</p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* MAIN CONTENT: GRID KARTU RT */}
-      <div className="max-w-6xl mx-auto px-6 -mt-8 relative z-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {/* GRID */}
+      <div className="max-w-6xl mx-auto px-6 md:px-16 py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
           {DATA_RT.map((item) => (
             <div
               key={item.rt}
-              className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+              className="bg-white border border-gray-100 hover:border-[#1a3a6b]/20 rounded-md overflow-hidden transition-colors group"
             >
-              {/* Header Kartu */}
-              <div className="bg-gradient-to-r from-[#1a3a6b] to-[#2a508f] p-4 flex items-center justify-between">
-                <h3 className="text-white font-bold text-lg">RT {item.rt}</h3>
-                <span className="text-[11px] font-semibold bg-white/20 text-white px-2.5 py-1 rounded-full backdrop-blur-sm">
+              {/* Header */}
+              <div className="bg-[#1a3a6b] px-5 py-3.5 flex items-center justify-between">
+                <h3 className="text-white font-bold text-sm tracking-wide">
+                  RT {item.rt}
+                </h3>
+                <span className="text-[10px] font-semibold text-blue-200/70 uppercase tracking-widest">
                   RW 12
                 </span>
               </div>
 
-              {/* Body Kartu */}
+              {/* Body */}
               <div className="p-5 flex flex-col gap-4">
-                {/* Info Ketua */}
-                <div className="flex items-start gap-3">
-                  <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center shrink-0 group-hover:bg-[#1a3a6b] transition-colors duration-300">
+                {/* Ketua */}
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 bg-blue-50 rounded-md flex items-center justify-center shrink-0 group-hover:bg-[#1a3a6b] transition-colors">
                     <User
-                      size={20}
-                      className="text-[#1a3a6b] group-hover:text-white transition-colors duration-300"
+                      size={16}
+                      className="text-[#1a3a6b] group-hover:text-white transition-colors"
                     />
                   </div>
                   <div>
-                    <p className="text-[11px] text-gray-400 font-medium uppercase tracking-wider mb-0.5">
+                    <p className="text-[10.5px] text-gray-400 font-semibold uppercase tracking-widest mb-0.5">
                       Ketua RT
                     </p>
-                    <p className="text-[15px] font-bold text-gray-800 leading-tight">
+                    <p className="text-[13.5px] font-bold text-gray-900 leading-tight">
                       {item.ketua}
                     </p>
                   </div>
                 </div>
 
-                <div className="w-full h-px bg-gray-100 my-0.5"></div>
+                <div className="border-t border-gray-100" />
 
                 {/* Kontak & Lokasi */}
-                <div className="flex flex-col gap-2.5">
-                  <div className="flex items-center gap-3 text-[13px] text-gray-600">
-                    <div className="w-6 h-6 rounded flex items-center justify-center bg-gray-50 shrink-0">
-                      <MapPin size={14} className="text-gray-400" />
-                    </div>
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center gap-2.5 text-[12.5px] text-gray-500">
+                    <MapPin size={13} className="text-gray-300 shrink-0" />
                     <span className="truncate">{item.lokasi}</span>
                   </div>
-                  <div className="flex items-center gap-3 text-[13px] text-gray-600">
-                    <div className="w-6 h-6 rounded flex items-center justify-center bg-gray-50 shrink-0">
-                      <Phone size={14} className="text-gray-400" />
-                    </div>
+                  <div className="flex items-center gap-2.5 text-[12.5px] text-gray-500">
+                    <Phone size={13} className="text-gray-300 shrink-0" />
                     <span>{item.telp}</span>
                   </div>
                 </div>

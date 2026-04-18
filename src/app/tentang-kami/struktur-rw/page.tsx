@@ -4,153 +4,148 @@ import {
   Trash2,
   Heart,
   HardHat,
-  Users,
   FileText,
   Wallet,
-  ChevronDown,
 } from "lucide-react";
+
+const BIDANG = [
+  {
+    bidang: "Keamanan & Ketertiban",
+    icon: Shield,
+    tugas: "Siskamling & koordinasi keamanan lingkungan.",
+    koordinator: "Nama Penanggung Jawab",
+  },
+  {
+    bidang: "Kebersihan & Lingkungan",
+    icon: Trash2,
+    tugas: "Pengelolaan sampah & program kerja bakti.",
+    koordinator: "Nama Penanggung Jawab",
+  },
+  {
+    bidang: "Pembangunan & Sarana",
+    icon: HardHat,
+    tugas: "Perawatan jalan & infrastruktur wilayah.",
+    koordinator: "Nama Penanggung Jawab",
+  },
+  {
+    bidang: "Sosial & Kerohanian",
+    icon: Heart,
+    tugas: "Kegiatan keagamaan & santunan warga.",
+    koordinator: "Nama Penanggung Jawab",
+  },
+];
 
 export default function StrukturRW() {
   return (
-    <div className="min-h-screen bg-gray-50 pb-16 font-sans">
-      {/* HERO SECTION */}
-      <div className="bg-[#1a3a6b] relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-400 opacity-10 rounded-full blur-2xl -translate-x-1/2 translate-y-1/2"></div>
-
-        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 relative z-10 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+    <div className="min-h-screen bg-white pb-20 font-sans">
+      {/* HERO */}
+      <div className="bg-[#1a3a6b] px-6 md:px-16 py-16 md:py-24">
+        <div className="max-w-6xl mx-auto">
+          <p className="text-xs font-semibold tracking-widest text-blue-300/70 uppercase mb-4">
+            Tentang Kami
+          </p>
+          <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-4 tracking-tight">
             Struktur Organisasi RW 12
           </h1>
-          <p className="text-[15px] md:text-[16px] text-blue-100 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-[15px] text-blue-100/80 max-w-xl leading-relaxed">
             Sinergi pengurus dalam melayani dan mengelola lingkungan demi
-            kenyamanan seluruh warga RW 12 Kelurahan Kutabumi periode 2024 -
-            2027.
+            kenyamanan seluruh warga RW 12 Kutabumi periode 2024–2027.
           </p>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 -mt-12 relative z-20">
-        {/* TOP LEVEL: KETUA RW */}
-        <div className="flex justify-center mb-12">
-          <div className="bg-white rounded-2xl shadow-md border-t-4 border-[#1a3a6b] p-6 w-full max-w-sm text-center group hover:shadow-lg transition-all">
-            <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-[#1a3a6b] transition-colors">
-              <User
-                size={40}
-                className="text-[#1a3a6b] group-hover:text-white"
-              />
-            </div>
-            <h3 className="text-lg font-bold text-gray-800">Nama Ketua RW</h3>
-            <p className="text-[#1a3a6b] font-semibold text-sm uppercase tracking-wider">
-              Ketua RW 12
-            </p>
-          </div>
-        </div>
-
-        {/* SECOND LEVEL: SEKRETARIS & BENDAHARA */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16 relative">
-          {/* Garis Penghubung (Desktop) */}
-          <div className="hidden md:block absolute -top-12 left-1/2 w-px h-12 bg-gray-200"></div>
-
-          {/* Sekretaris */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex items-center gap-5 hover:border-blue-200 transition-all">
-            <div className="w-16 h-16 bg-blue-50 rounded-lg flex items-center justify-center shrink-0">
-              <FileText size={28} className="text-[#1a3a6b]" />
+      <div className="max-w-6xl mx-auto px-6 md:px-16 py-16">
+        {/* KETUA RW */}
+        <div className="mb-3">
+          <p className="text-[11px] font-semibold tracking-widest text-gray-400 uppercase mb-6">
+            Pimpinan
+          </p>
+          <div className="flex items-center gap-5 bg-[#f8f9fc] border border-gray-100 rounded-md px-7 py-6 max-w-sm">
+            <div className="w-12 h-12 bg-[#1a3a6b] rounded-md flex items-center justify-center shrink-0">
+              <User size={22} className="text-white" />
             </div>
             <div>
-              <p className="text-[11px] text-gray-400 font-bold uppercase tracking-widest">
-                Sekretaris
+              <p className="text-[11px] font-semibold tracking-widest text-gray-400 uppercase mb-0.5">
+                Ketua RW 12
               </p>
-              <h4 className="text-[16px] font-bold text-gray-800">
-                Nama Sekretaris
-              </h4>
-            </div>
-          </div>
-
-          {/* Bendahara */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex items-center gap-5 hover:border-blue-200 transition-all">
-            <div className="w-16 h-16 bg-blue-50 rounded-lg flex items-center justify-center shrink-0">
-              <Wallet size={28} className="text-[#1a3a6b]" />
-            </div>
-            <div>
-              <p className="text-[11px] text-gray-400 font-bold uppercase tracking-widest">
-                Bendahara
+              <p className="text-[16px] font-bold text-gray-900">
+                Nama Ketua RW
               </p>
-              <h4 className="text-[16px] font-bold text-gray-800">
-                Nama Bendahara
-              </h4>
             </div>
           </div>
         </div>
 
-        {/* THIRD LEVEL: SEKSI-SEKSI (BIDANG) */}
-        <div className="text-center mb-8">
-          <h2 className="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
-            <Users size={22} className="text-[#1a3a6b]" />
-            Bidang & Seksi Operasional
-          </h2>
-          <div className="w-16 h-1 bg-[#1a3a6b] mx-auto mt-2 rounded-full"></div>
-        </div>
+        {/* Connector line */}
+        <div className="w-px h-8 bg-gray-200 ml-11 mb-3" />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            {
-              bidang: "Keamanan & Ketertiban",
-              icon: Shield,
-              color: "text-red-500",
-              bg: "bg-red-50",
-              tugas: "Siskamling & koordinasi keamanan.",
-            },
-            {
-              bidang: "Kebersihan & Lingkungan",
-              icon: Trash2,
-              color: "text-green-500",
-              bg: "bg-green-50",
-              tugas: "Pengelolaan sampah & kerja bakti.",
-            },
-            {
-              bidang: "Pembangunan & Sarana",
-              icon: HardHat,
-              color: "text-orange-500",
-              bg: "bg-orange-50",
-              tugas: "Perawatan jalan & infrastruktur.",
-            },
-            {
-              bidang: "Sosial & Kerohanian",
-              icon: Heart,
-              color: "text-pink-500",
-              bg: "bg-pink-50",
-              tugas: "Kegiatan keagamaan & santunan.",
-            },
-          ].map((item, idx) => {
-            const Icon = item.icon;
-            return (
+        {/* SEKRETARIS & BENDAHARA */}
+        <div className="mb-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-2xl">
+            {[
+              {
+                jabatan: "Sekretaris",
+                nama: "Nama Sekretaris",
+                icon: FileText,
+              },
+              { jabatan: "Bendahara", nama: "Nama Bendahara", icon: Wallet },
+            ].map(({ jabatan, nama, icon: Icon }) => (
               <div
-                key={idx}
-                className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-all"
+                key={jabatan}
+                className="flex items-center gap-4 bg-[#f8f9fc] border border-gray-100 hover:border-[#1a3a6b]/20 rounded-md px-6 py-5 transition-colors"
               >
-                <div
-                  className={`w-12 h-12 ${item.bg} rounded-lg flex items-center justify-center mb-4`}
-                >
-                  <Icon size={24} className={item.color} />
+                <div className="w-10 h-10 bg-blue-50 rounded-md flex items-center justify-center shrink-0">
+                  <Icon size={18} className="text-[#1a3a6b]" />
                 </div>
-                <h4 className="text-[15px] font-bold text-gray-800 mb-2">
-                  {item.bidang}
-                </h4>
-                <p className="text-[12px] text-gray-500 leading-relaxed mb-4">
-                  {item.tugas}
-                </p>
-                <div className="pt-4 border-t border-gray-50">
-                  <p className="text-[11px] text-gray-400 font-bold uppercase tracking-widest mb-1">
-                    Koordinator
+                <div>
+                  <p className="text-[11px] font-semibold tracking-widest text-gray-400 uppercase mb-0.5">
+                    {jabatan}
                   </p>
-                  <p className="text-[13px] font-semibold text-gray-700 leading-tight">
-                    Nama Penanggung Jawab
-                  </p>
+                  <p className="text-[14px] font-bold text-gray-900">{nama}</p>
                 </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
+        </div>
+
+        {/* Connector line */}
+        <div className="w-px h-8 bg-gray-200 ml-11 mb-3" />
+
+        {/* BIDANG */}
+        <div>
+          <p className="text-[11px] font-semibold tracking-widest text-gray-400 uppercase mb-6">
+            Bidang & Seksi Operasional
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {BIDANG.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.bidang}
+                  className="bg-[#f8f9fc] border border-gray-100 hover:border-[#1a3a6b]/20 rounded-md p-5 flex flex-col gap-3 transition-colors"
+                >
+                  <div className="w-9 h-9 bg-white border border-gray-100 rounded-md flex items-center justify-center">
+                    <Icon size={17} className="text-[#1a3a6b]" />
+                  </div>
+                  <div>
+                    <h4 className="text-[13.5px] font-bold text-gray-900 leading-snug mb-1">
+                      {item.bidang}
+                    </h4>
+                    <p className="text-[12px] text-gray-400 leading-relaxed">
+                      {item.tugas}
+                    </p>
+                  </div>
+                  <div className="border-t border-gray-100 pt-3 mt-auto">
+                    <p className="text-[10.5px] text-gray-400 font-semibold uppercase tracking-widest mb-0.5">
+                      Koordinator
+                    </p>
+                    <p className="text-[13px] font-bold text-gray-700">
+                      {item.koordinator}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
