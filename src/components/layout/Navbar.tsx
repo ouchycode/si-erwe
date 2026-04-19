@@ -75,13 +75,19 @@ const NAV_ITEMS = [
         label: "Berita Terkini",
         href: "/informasi/berita",
         icon: Newspaper,
-        sub: "Pengumuman & info warga terbaru",
+        sub: "Pengumuman & info kegiatan terbaru",
       },
       {
         label: "Statistik Warga",
         href: "/informasi/statistik",
         icon: BarChart2,
-        sub: "Data kependudukan & demografi",
+        sub: "Data demografi & grafik kependudukan",
+      },
+      {
+        label: "Data Warga",
+        href: "/informasi/data-warga",
+        icon: Users,
+        sub: "Direktori lengkap pencarian warga",
       },
       {
         label: "Rukun Kematian",
