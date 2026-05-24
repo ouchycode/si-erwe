@@ -25,17 +25,17 @@ export default function HubungiKami() {
   };
 
   return (
-    <div className="min-h-screen bg-white pb-20 font-sans">
+    <div className="min-h-screen bg-gray-50 pb-20 font-sans">
       <PageHeader
         category="Layanan Warga"
         title="Hubungi Kami"
         description="Punya pertanyaan, keluhan, atau saran? Hubungi sekretariat RW 12 melalui formulir atau kontak di bawah ini."
       />
 
-      <div className="max-w-6xl mx-auto px-6 md:px-16 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
           {/* FORM */}
-          <div className="lg:col-span-3 bg-white border border-gray-100 rounded-md p-6 md:p-8">
+          <div className="lg:col-span-3 bg-white border border-gray-200 rounded-xs p-6 md:p-8 shadow-sm">
             <div className="flex items-center gap-2.5 mb-7 pb-5 border-b border-gray-100">
               <Send size={15} className="text-brand-primary" />
               <h2 className="text-[13.5px] font-bold text-gray-900">
@@ -89,9 +89,9 @@ export default function HubungiKami() {
           </div>
 
           {/* SIDEBAR */}
-          <div className="lg:col-span-2 flex flex-col gap-4">
+          <div className="lg:col-span-2 flex flex-col gap-6">
             {/* Kontak Resmi */}
-            <div className="bg-brand-primary rounded-md p-6 text-white">
+            <div className="bg-brand-primary rounded-xs p-6 text-white shadow-sm border border-brand-primary-hover">
               <p className="text-[11px] font-semibold tracking-widest text-white/40 uppercase mb-5">
                 Informasi Sekretariat
               </p>
@@ -136,8 +136,8 @@ export default function HubungiKami() {
                   },
                 ].map(({ icon: Icon, label, content }) => (
                   <div key={label} className="flex items-start gap-3">
-                    <div className="w-8 h-8 bg-white/10 rounded-md flex items-center justify-center shrink-0">
-                      <Icon size={14} className="text-white/60" />
+                    <div className="w-8 h-8 bg-white/10 rounded-xs flex items-center justify-center shrink-0 border border-white/5">
+                      <Icon size={14} className="text-white/80" />
                     </div>
                     <div>
                       <p className="text-[10.5px] text-white/40 font-semibold uppercase tracking-widest mb-1">
@@ -151,7 +151,7 @@ export default function HubungiKami() {
             </div>
 
             {/* Jam Operasional */}
-            <div className="bg-brand-light border border-gray-100 rounded-md p-6">
+            <div className="bg-white border border-gray-200 rounded-xs p-6 shadow-sm">
               <div className="flex items-center gap-2.5 mb-4 pb-4 border-b border-gray-100">
                 <Clock size={14} className="text-brand-primary" />
                 <h3 className="text-[13px] font-bold text-gray-900">

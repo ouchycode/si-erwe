@@ -3,6 +3,7 @@ import { Figtree, Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import AccessibilityWidget from "@/components/layout/AccessibilityWidget";
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -33,6 +34,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
 
         <Footer />
+        <AccessibilityWidget />
         <Toaster position="top-right" richColors />
       </body>
     </html>

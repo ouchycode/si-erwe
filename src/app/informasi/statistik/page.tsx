@@ -14,7 +14,7 @@ const generateData = (config: Record<string, [number, number]>) => {
 
   for (let i = 1; i <= 8; i++) {
     const rt = i.toString().padStart(3, "0");
-    const row: any = { rt };
+    const row: Record<string, number | string> = { rt };
     
     Object.entries(config).forEach(([key, [min, max]]) => {
       const val = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -150,7 +150,7 @@ export default function StatistikPage() {
       }));
   }, [activeCategory]);
 
-  const sortedData = [...activeCategory.data].sort((a: any, b: any) => {
+  const sortedData = [...activeCategory.data].sort((a: Record<string, string | number>, b: Record<string, string | number>) => {
     if (!sortConfig) return 0;
     const { key, direction } = sortConfig;
     const aValue = a[key];
@@ -233,8 +233,8 @@ export default function StatistikPage() {
           <div className="flex-1 w-full bg-white border border-gray-200 shadow-sm overflow-hidden rounded-xs">
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-center">
-                <thead>
-                  <tr className="border-b border-gray-200 text-[10px] uppercase font-bold text-gray-600 bg-[#FAFAFA]">
+                <thead className="sticky top-0 shadow-sm z-10">
+                  <tr className="border-b border-gray-200 text-[10px] uppercase font-bold text-gray-600 bg-gray-50">
                     <th
                       className="py-4 px-4 cursor-pointer hover:bg-gray-100 transition-colors"
                       onClick={() => requestSort("rt")}
@@ -262,9 +262,9 @@ export default function StatistikPage() {
                   {sortedData.map((row, index) => (
                     <tr
                       key={row.rt}
-                      className={`border-b border-gray-100 last:border-0 hover:bg-blue-50/30 transition-colors ${
-                        index % 2 === 0 ? "bg-white" : "bg-[#FAFAFA]/50"
-                      }`}
+                      className={`${
+                        index % 2 === 0 ? "bg-white" : "bg-gray-50/50"
+                      } hover:bg-blue-50/50 transition-colors duration-150`}
                     >
                       <td className="py-3 px-4 font-medium text-gray-700">
                         {row.rt}
@@ -283,7 +283,7 @@ export default function StatistikPage() {
                     </td>
                     {activeCategory.columns.map(col => (
                       <td key={col.key} className="py-4 px-4 border-l border-gray-100 text-brand-primary">
-                        {activeCategory.totals[col.key] || Object.values(activeCategory.data).reduce((acc: number, r: any) => acc + (r[col.key] || 0), 0)}
+                        {activeCategory.totals[col.key] || Object.values(activeCategory.data).reduce((acc: number, r: Record<string, string | number>) => acc + (r[col.key] as number || 0), 0)}
                       </td>
                     ))}
                   </tr>

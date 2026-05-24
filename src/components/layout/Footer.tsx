@@ -29,7 +29,7 @@ export default function Footer() {
   const breadcrumbs = getBreadcrumbs();
 
   return (
-    <footer className="bg-[#FAFAFA] border-t border-gray-200 font-sans mt-auto">
+    <footer className="bg-gray-50 border-t border-gray-200 font-sans mt-auto">
       <div className="max-w-7xl mx-auto px-4 md:px-8 pt-8 pb-12">
         {/* Breadcrumb Area */}
         <div className="flex items-center gap-2 mb-10 pb-6 border-b border-gray-200">
@@ -96,6 +96,7 @@ export default function Footer() {
               <Link href="/tentang-kami/profil" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Profil</Link>
               <Link href="/tentang-kami/struktur-rw" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Struktur RW</Link>
               <Link href="/tentang-kami/pengurus-rt" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Pengurus RT</Link>
+              <Link href="/tentang-kami/peta-wilayah" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Peta Wilayah</Link>
             </div>
           </div>
 
@@ -104,6 +105,9 @@ export default function Footer() {
             <h4 className="text-sm font-bold text-gray-900">Layanan</h4>
             <div className="flex flex-col gap-3">
               <Link href="/layanan/administrasi-kependudukan" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Administrasi Kependudukan</Link>
+              <Link href="/layanan/e-surat" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">E-Surat Pengantar</Link>
+              <Link href="/layanan/lapor-warga" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Lapor Warga</Link>
+              <Link href="/layanan/iuran-warga" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Pembayaran Iuran</Link>
               <Link href="/layanan/keamanan-wilayah" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Keamanan Wilayah</Link>
               <Link href="/layanan/kebersihan-lingkungan" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Kebersihan Lingkungan</Link>
             </div>
@@ -116,6 +120,7 @@ export default function Footer() {
               <Link href="/informasi/berita" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Berita</Link>
               <Link href="/informasi/statistik" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Statistik</Link>
               <Link href="/informasi/rukem" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Rukun Kematian</Link>
+              <Link href="/informasi/galeri" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Galeri Kegiatan</Link>
             </div>
           </div>
 

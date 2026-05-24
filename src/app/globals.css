@@ -9,8 +9,8 @@
   --font-mono: var(--font-geist-mono);
   
   /* Pemerintahan Navy Blue (Biru Dongker) */
-  --color-brand-primary: #1e3a8a; /* blue-900 */
-  --color-brand-primary-hover: #1e40af; /* blue-800 */
+  --color-brand-primary: #1B2B4C; /* Navy */
+  --color-brand-primary-hover: #243963; /* Lighter Navy */
   --color-brand-light: #eff6ff; /* blue-50 */
   
   --radius-xs: 4px;

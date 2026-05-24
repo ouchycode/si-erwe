@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Users, Home, MapPin, FileText, PhoneCall, ShieldAlert } from "lucide-react";
+import { Users, Home, MapPin, FileText, PhoneCall, ShieldAlert, BarChart2 } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -39,11 +39,11 @@ export default function Hero() {
               <span className="text-sm font-bold text-gray-900 group-hover:text-blue-700 transition-colors">Surat Pengantar</span>
             </Link>
             
-            <Link href="/informasi/data-warga" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-gray-50">
+            <Link href="/informasi/statistik" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-gray-50">
               <div className="w-12 h-12 bg-gray-50 border border-gray-200 text-emerald-700 rounded-xs flex items-center justify-center mb-3 group-hover:bg-emerald-700 group-hover:text-white transition-colors duration-200">
-                <Users size={20} strokeWidth={2} />
+                <BarChart2 size={20} strokeWidth={2} />
               </div>
-              <span className="text-sm font-bold text-gray-900 group-hover:text-emerald-700 transition-colors">Data Warga</span>
+              <span className="text-sm font-bold text-gray-900 group-hover:text-emerald-700 transition-colors">Statistik Warga</span>
             </Link>
             
             <Link href="/layanan/keamanan-wilayah" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-gray-50">

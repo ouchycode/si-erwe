@@ -2,14 +2,54 @@ import { Users, User, Phone, MapPin } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 
 const DATA_RT = [
-  { rt: "01", ketua: "Lorem Ipsum", lokasi: "Blok A, Dolor Sit Amet", telp: "0812-XXXX-XXXX" },
-  { rt: "02", ketua: "Consectetur Adipiscing", lokasi: "Blok B, Elit Sed", telp: "0812-XXXX-XXXX" },
-  { rt: "03", ketua: "Do Eiusmod", lokasi: "Blok C, Tempor Incididunt", telp: "0812-XXXX-XXXX" },
-  { rt: "04", ketua: "Ut Labore", lokasi: "Blok D, Et Dolore", telp: "0812-XXXX-XXXX" },
-  { rt: "05", ketua: "Magna Aliqua", lokasi: "Blok E, Ut Enim", telp: "0812-XXXX-XXXX" },
-  { rt: "06", ketua: "Ad Minim", lokasi: "Blok F, Veniam Quis", telp: "0812-XXXX-XXXX" },
-  { rt: "07", ketua: "Nostrud Exercitation", lokasi: "Blok G, Ullamco Laboris", telp: "0812-XXXX-XXXX" },
-  { rt: "08", ketua: "Nisi Ut Aliquip", lokasi: "Blok H, Ex Ea Commodo", telp: "0812-XXXX-XXXX" },
+  {
+    rt: "01",
+    ketua: "Lorem Ipsum",
+    lokasi: "Blok A, Dolor Sit Amet",
+    telp: "0812-XXXX-XXXX",
+  },
+  {
+    rt: "02",
+    ketua: "Consectetur Adipiscing",
+    lokasi: "Blok B, Elit Sed",
+    telp: "0812-XXXX-XXXX",
+  },
+  {
+    rt: "03",
+    ketua: "Do Eiusmod",
+    lokasi: "Blok C, Tempor Incididunt",
+    telp: "0812-XXXX-XXXX",
+  },
+  {
+    rt: "04",
+    ketua: "Ut Labore",
+    lokasi: "Blok D, Et Dolore",
+    telp: "0812-XXXX-XXXX",
+  },
+  {
+    rt: "05",
+    ketua: "Magna Aliqua",
+    lokasi: "Blok E, Ut Enim",
+    telp: "0812-XXXX-XXXX",
+  },
+  {
+    rt: "06",
+    ketua: "Ad Minim",
+    lokasi: "Blok F, Veniam Quis",
+    telp: "0812-XXXX-XXXX",
+  },
+  {
+    rt: "07",
+    ketua: "Nostrud Exercitation",
+    lokasi: "Blok G, Ullamco Laboris",
+    telp: "0812-XXXX-XXXX",
+  },
+  {
+    rt: "08",
+    ketua: "Nisi Ut Aliquip",
+    lokasi: "Blok H, Ex Ea Commodo",
+    telp: "0812-XXXX-XXXX",
+  },
 ];
 
 export default function PengurusRT() {

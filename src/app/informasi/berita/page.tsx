@@ -41,12 +41,6 @@ const BERITA_DUMMY = [
   },
 ];
 
-const KATEGORI_COLOR: Record<string, string> = {
-  "Lorem Ipsum": "bg-blue-50 text-blue-700",
-  "Dolor Sit": "bg-green-50 text-green-700",
-  "Amet Elit": "bg-amber-50 text-amber-700",
-  Consectetur: "bg-purple-50 text-purple-700",
-};
 
 import { PageHeader } from "@/components/ui/PageHeader";
 
