@@ -1,6 +1,6 @@
-import Hero from "@/app/home/Hero";
-import LayananSection from "@/app/home/LayananSection";
-import BeritaSection from "@/app/home/BeritaSection";
+import Hero from "@/components/home/Hero";
+import LayananSection from "@/components/home/LayananSection";
+import BeritaSection from "@/components/home/BeritaSection";
 
 export default function Home() {
   return (

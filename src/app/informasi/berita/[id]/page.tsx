@@ -50,7 +50,7 @@ export default function DetailBerita() {
   return (
     <div className="min-h-screen bg-white pb-20 font-sans">
       {/* BREADCRUMB */}
-      <div className="bg-[#1a3a6b] px-6 md:px-16 py-5 border-b border-white/10">
+      <div className="bg-brand-primary px-6 md:px-16 py-5 border-b border-white/10">
         <div className="max-w-6xl mx-auto">
           <Link
             href="/informasi/berita"
@@ -69,7 +69,7 @@ export default function DetailBerita() {
             {/* Meta + Judul */}
             <div className="p-6 md:p-8">
               <div className="flex flex-wrap items-center gap-2.5 mb-4">
-                <span className="inline-flex items-center gap-1.5 bg-blue-50 text-[#1a3a6b] text-[11px] font-semibold uppercase tracking-widest px-2.5 py-1 rounded-sm">
+                <span className="inline-flex items-center gap-1.5 bg-blue-50 text-brand-primary text-[11px] font-semibold uppercase tracking-widest px-2.5 py-1 rounded-sm">
                   <Tag size={11} />
                   {DETAIL_BERITA.category}
                 </span>
@@ -85,7 +85,7 @@ export default function DetailBerita() {
 
               <div className="flex items-center gap-3 py-4 border-t border-b border-gray-100">
                 <div className="w-9 h-9 bg-blue-50 rounded-md flex items-center justify-center shrink-0">
-                  <User size={16} className="text-[#1a3a6b]" />
+                  <User size={16} className="text-brand-primary" />
                 </div>
                 <div>
                   <p className="text-[10.5px] text-gray-400 font-semibold uppercase tracking-widest mb-0.5">
@@ -111,12 +111,12 @@ export default function DetailBerita() {
 
             {/* Konten */}
             <div
-              className="p-6 md:p-8 prose prose-sm prose-gray max-w-none text-gray-600 prose-headings:text-gray-900 prose-headings:font-bold prose-a:text-[#1a3a6b]"
+              className="p-6 md:p-8 prose prose-sm prose-gray max-w-none text-gray-600 prose-headings:text-gray-900 prose-headings:font-bold prose-a:text-brand-primary"
               dangerouslySetInnerHTML={{ __html: DETAIL_BERITA.content }}
             />
 
             {/* Share */}
-            <div className="px-6 md:px-8 py-5 bg-[#f8f9fc] border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="px-6 md:px-8 py-5 bg-brand-light border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <p className="text-[12.5px] font-semibold text-gray-500 flex items-center gap-2">
                 <Share2 size={14} className="text-gray-400" />
                 Bagikan berita ini
@@ -153,7 +153,7 @@ export default function DetailBerita() {
           <div className="flex flex-col gap-4">
             <div className="bg-white border border-gray-100 rounded-md p-6 sticky top-24">
               <div className="flex items-center gap-2.5 mb-5 pb-4 border-b border-gray-100">
-                <Tag size={14} className="text-[#1a3a6b]" />
+                <Tag size={14} className="text-brand-primary" />
                 <h3 className="text-[13px] font-bold text-gray-900">
                   Berita Lainnya
                 </h3>
@@ -166,7 +166,7 @@ export default function DetailBerita() {
                     href={`/informasi/berita/${item.id}`}
                     className="group flex flex-col gap-1 py-3.5 first:pt-0 last:pb-0 no-underline"
                   >
-                    <p className="text-[13px] font-semibold text-gray-700 group-hover:text-[#1a3a6b] transition-colors leading-snug line-clamp-2">
+                    <p className="text-[13px] font-semibold text-gray-700 group-hover:text-brand-primary transition-colors leading-snug line-clamp-2">
                       {item.title}
                     </p>
                     <span className="flex items-center gap-1.5 text-[11.5px] text-gray-400">
@@ -179,7 +179,7 @@ export default function DetailBerita() {
 
               <Link
                 href="/informasi/berita"
-                className="mt-5 flex items-center justify-center gap-2 w-full py-2.5 bg-[#f8f9fc] hover:bg-[#1a3a6b] hover:text-white border border-gray-100 text-[#1a3a6b] rounded-md text-[12.5px] font-semibold transition-colors no-underline"
+                className="mt-5 flex items-center justify-center gap-2 w-full py-2.5 bg-brand-light hover:bg-brand-primary hover:text-white border border-gray-100 text-brand-primary rounded-md text-[12.5px] font-semibold transition-colors no-underline"
               >
                 Lihat Semua Berita
                 <ChevronRight size={14} />

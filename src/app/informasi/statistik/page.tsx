@@ -1,218 +1,343 @@
-import {
-  BarChart2,
-  Users,
-  User,
-  Activity,
-  Briefcase,
-  GraduationCap,
-  PieChart,
-} from "lucide-react";
+"use client";
 
-const SUMMARY = [
-  { label: "Total Penduduk", value: "1.850", icon: Users },
-  { label: "Kepala Keluarga", value: "450", icon: Activity },
-  { label: "Laki-laki", value: "950", icon: User },
-  { label: "Perempuan", value: "900", icon: User },
-];
+import { useState, useMemo } from "react";
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
+import { ChevronUp, ChevronDown, BarChart2 } from "lucide-react";
+import { PageHeader } from "@/components/ui/PageHeader";
 
-const USIA = [
-  { label: "Balita (0–5 Tahun)", count: 185, percent: 10 },
-  { label: "Anak-anak (6–12 Tahun)", count: 277, percent: 15 },
-  { label: "Remaja (13–18 Tahun)", count: 370, percent: 20 },
-  { label: "Dewasa (19–55 Tahun)", count: 832, percent: 45 },
-  { label: "Lansia (> 55 Tahun)", count: 186, percent: 10 },
-];
+// Helper to generate 8 RTs of dummy data for each category
+const generateData = (config: Record<string, [number, number]>) => {
+  const data = [];
+  const totals: Record<string, number> = {};
+  
+  Object.keys(config).forEach(k => totals[k] = 0);
 
-const PENDIDIKAN = [
-  { label: "SD / Sederajat", count: 250, percent: 13.5 },
-  { label: "SMP / Sederajat", count: 350, percent: 18.9 },
-  { label: "SMA / Sederajat", count: 800, percent: 43.2 },
-  { label: "Diploma (D1–D4)", count: 200, percent: 10.8 },
-  { label: "Sarjana (S1/S2/S3)", count: 250, percent: 13.5 },
-];
+  for (let i = 1; i <= 8; i++) {
+    const rt = i.toString().padStart(3, "0");
+    const row: any = { rt };
+    
+    Object.entries(config).forEach(([key, [min, max]]) => {
+      const val = Math.floor(Math.random() * (max - min + 1)) + min;
+      row[key] = val;
+      totals[key] += val;
+    });
+    
+    // Auto-calculate "jumlah" if not explicitly defined but needed
+    if (!config.jumlah) {
+      row.jumlah = Object.entries(row).reduce((acc: number, [k, v]) => k !== 'rt' ? acc + (v as number) : acc, 0);
+    }
+    
+    data.push(row);
+  }
+  
+  return { data, totals };
+};
 
-const PEKERJAAN = [
-  { label: "Karyawan Swasta", count: 650, percent: 35 },
-  { label: "Wiraswasta / Pedagang", count: 350, percent: 19 },
-  { label: "PNS / TNI / POLRI", count: 150, percent: 8 },
-  { label: "Pelajar / Mahasiswa", count: 450, percent: 24 },
-  { label: "Lainnya / Mengurus RT", count: 250, percent: 14 },
-];
+const STATS_DATA = {
+  "Rumah & Bangunan": {
+    columns: [
+      { key: "jumlah", label: "JUMLAH" },
+      { key: "tempatTinggal", label: "TEMPAT TINGGAL" },
+      { key: "tempatUsaha", label: "TEMPAT USAHA" },
+    ],
+    ...generateData({
+      tempatTinggal: [40, 90],
+      tempatUsaha: [2, 10],
+    }),
+    chartColors: ["#0f4c5c", "#e2e8f0"],
+    chartTitle: "Komposisi Bangunan",
+  },
+  "Penduduk": {
+    columns: [
+      { key: "jumlah", label: "TOTAL" },
+      { key: "lakiLaki", label: "LAKI-LAKI" },
+      { key: "perempuan", label: "PEREMPUAN" },
+    ],
+    ...generateData({
+      lakiLaki: [50, 100],
+      perempuan: [50, 105],
+    }),
+    chartColors: ["#3b82f6", "#ec4899"],
+    chartTitle: "Berdasarkan Jenis Kelamin",
+  },
+  "Kelompok Usia": {
+    columns: [
+      { key: "balita", label: "BALITA" },
+      { key: "remaja", label: "REMAJA" },
+      { key: "dewasa", label: "DEWASA" },
+      { key: "lansia", label: "LANSIA" },
+    ],
+    ...generateData({
+      balita: [10, 25],
+      remaja: [20, 40],
+      dewasa: [60, 120],
+      lansia: [15, 30],
+    }),
+    chartColors: ["#10b981", "#f59e0b", "#3b82f6", "#6366f1"],
+    chartTitle: "Komposisi Usia",
+  },
+  "Agama": {
+    columns: [
+      { key: "islam", label: "ISLAM" },
+      { key: "kristen", label: "KRISTEN" },
+      { key: "katolik", label: "KATOLIK" },
+      { key: "hindu", label: "HINDU" },
+      { key: "buddha", label: "BUDDHA" },
+    ],
+    ...generateData({
+      islam: [80, 150],
+      kristen: [10, 30],
+      katolik: [5, 20],
+      hindu: [0, 5],
+      buddha: [0, 5],
+    }),
+    chartColors: ["#10b981", "#3b82f6", "#6366f1", "#f59e0b", "#ef4444"],
+    chartTitle: "Penganut Agama",
+  },
+  "Pendidikan": {
+    columns: [
+      { key: "sd", label: "SD/SEDERAJAT" },
+      { key: "smp", label: "SMP/SEDERAJAT" },
+      { key: "sma", label: "SMA/SEDERAJAT" },
+      { key: "sarjana", label: "D3/S1/S2" },
+    ],
+    ...generateData({
+      sd: [10, 30],
+      smp: [15, 35],
+      sma: [40, 80],
+      sarjana: [20, 50],
+    }),
+    chartColors: ["#ef4444", "#f59e0b", "#10b981", "#3b82f6"],
+    chartTitle: "Tingkat Pendidikan",
+  },
+  "Golongan Darah": {
+    columns: [
+      { key: "a", label: "GOL A" },
+      { key: "b", label: "GOL B" },
+      { key: "ab", label: "GOL AB" },
+      { key: "o", label: "GOL O" },
+    ],
+    ...generateData({
+      a: [20, 50],
+      b: [20, 50],
+      ab: [5, 20],
+      o: [30, 70],
+    }),
+    chartColors: ["#ef4444", "#3b82f6", "#8b5cf6", "#10b981"],
+    chartTitle: "Golongan Darah",
+  },
+};
 
-const AGAMA = [
-  { label: "Islam", count: 1450, percent: 78.3 },
-  { label: "Kristen Protestan", count: 200, percent: 10.8 },
-  { label: "Katolik", count: 120, percent: 6.4 },
-  { label: "Buddha", count: 60, percent: 3.2 },
-  { label: "Hindu / Lainnya", count: 20, percent: 1.1 },
-];
+const TABS = Object.keys(STATS_DATA);
 
-function BarRow({
-  label,
-  count,
-  percent,
-  suffix = "Jiwa",
-}: {
-  label: string;
-  count: number;
-  percent: number;
-  suffix?: string;
-}) {
+export default function StatistikPage() {
+  const [activeTab, setActiveTab] = useState(TABS[0]);
+  const [sortConfig, setSortConfig] = useState<{
+    key: string;
+    direction: "asc" | "desc";
+  } | null>(null);
+
+  const activeCategory = STATS_DATA[activeTab as keyof typeof STATS_DATA];
+  
+  // Format chart data based on totals
+  const chartData = useMemo(() => {
+    return activeCategory.columns
+      .filter(col => col.key !== 'jumlah') // Exclude total column from chart
+      .map((col, index) => ({
+        name: col.label,
+        value: activeCategory.totals[col.key] || 0,
+        color: activeCategory.chartColors[index % activeCategory.chartColors.length]
+      }));
+  }, [activeCategory]);
+
+  const sortedData = [...activeCategory.data].sort((a: any, b: any) => {
+    if (!sortConfig) return 0;
+    const { key, direction } = sortConfig;
+    const aValue = a[key];
+    const bValue = b[key];
+
+    if (aValue < bValue) return direction === "asc" ? -1 : 1;
+    if (aValue > bValue) return direction === "asc" ? 1 : -1;
+    return 0;
+  });
+
+  const requestSort = (key: string) => {
+    let direction: "asc" | "desc" = "asc";
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const getSortIcon = (key: string) => {
+    if (sortConfig?.key === key) {
+      return sortConfig.direction === "asc" ? (
+        <ChevronUp size={12} className="text-gray-900" />
+      ) : (
+        <ChevronDown size={12} className="text-gray-900" />
+      );
+    }
+    return (
+      <div className="flex flex-col opacity-30">
+        <ChevronUp size={10} className="-mb-1" />
+        <ChevronDown size={10} />
+      </div>
+    );
+  };
+
   return (
-    <div>
-      <div className="flex justify-between text-[12.5px] text-gray-600 mb-1.5">
-        <span className="font-medium">{label}</span>
-        <span className="font-semibold text-gray-900 tabular-nums">
-          {count.toLocaleString("id-ID")} {suffix}
-        </span>
-      </div>
-      <div className="w-full bg-gray-100 rounded-sm h-1.5">
-        <div
-          className="bg-[#1a3a6b] h-1.5 rounded-sm transition-all"
-          style={{ width: `${percent}%` }}
-        />
-      </div>
-    </div>
-  );
-}
-
-function StatCard({
-  icon: Icon,
-  label,
-  value,
-}: {
-  icon: React.ElementType;
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="bg-[#f8f9fc] border border-gray-100 rounded-md p-5 flex items-center gap-4">
-      <div className="w-10 h-10 bg-white border border-gray-100 rounded-md flex items-center justify-center shrink-0">
-        <Icon size={17} className="text-[#1a3a6b]" />
-      </div>
-      <div>
-        <p className="text-[10.5px] font-semibold tracking-widest text-gray-400 uppercase mb-0.5">
-          {label}
-        </p>
-        <p className="text-xl font-bold text-gray-900">{value}</p>
-      </div>
-    </div>
-  );
-}
-
-function Section({
-  icon: Icon,
-  title,
-  children,
-}: {
-  icon: React.ElementType;
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="bg-white border border-gray-100 rounded-md p-6">
-      <div className="flex items-center gap-2.5 mb-6 pb-4 border-b border-gray-100">
-        <Icon size={16} className="text-[#1a3a6b]" />
-        <h2 className="text-[13.5px] font-bold text-gray-900">{title}</h2>
-      </div>
-      <div className="flex flex-col gap-4">{children}</div>
-    </div>
-  );
-}
-
-export default function StatistikWarga() {
-  return (
-    <div className="min-h-screen bg-white pb-20 font-sans">
-      {/* HERO */}
-      <div className="bg-[#1a3a6b] px-6 md:px-16 py-16 md:py-24">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <div>
-            <p className="text-xs font-semibold tracking-widest text-blue-300/70 uppercase mb-4">
-              Data Demografi
-            </p>
-            <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-4 tracking-tight">
-              Statistik Warga RW 12
-            </h1>
-            <p className="text-[15px] text-blue-100/80 max-w-xl leading-relaxed">
-              Pusat data demografi kependudukan yang diperbarui secara berkala —
-              berdasarkan gender, usia, pendidikan, dan pekerjaan.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-3 bg-white/10 border border-white/10 rounded-md px-5 py-4 shrink-0">
-            <Activity size={16} className="text-green-300" />
+    <div className="min-h-screen bg-gray-50 pb-20 font-sans">
+      <PageHeader
+        category="Data Demografi"
+        title="Statistik Warga RW 12"
+        description="Visualisasi data kependudukan, demografi, dan persebaran warga di lingkungan RW 12 Kutabumi yang diperbarui secara berkala."
+        rightContent={
+          <div className="flex items-center gap-3 bg-white/10 border border-white/20 rounded-xs px-5 py-4 shrink-0">
+            <BarChart2 size={16} className="text-green-300" />
             <div>
               <p className="text-[10.5px] text-blue-300/70 font-semibold uppercase tracking-widest mb-0.5">
-                Update Terakhir
+                Periode Data
               </p>
-              <p className="text-[14px] font-bold text-white">19 April 2026</p>
+              <p className="text-sm font-bold text-white leading-none">
+                s.d. Desember 2025
+              </p>
             </div>
           </div>
-        </div>
-      </div>
+        }
+      />
 
-      <div className="max-w-6xl mx-auto px-6 md:px-16 py-16 flex flex-col gap-10">
-        {/* SUMMARY */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {SUMMARY.map((s) => (
-            <StatCard
-              key={s.label}
-              icon={s.icon}
-              label={s.label}
-              value={s.value}
-            />
+      <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10">
+        {/* Tabs */}
+        <div className="flex flex-wrap gap-2 mb-8">
+          {TABS.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => {
+                setActiveTab(tab);
+                setSortConfig(null);
+              }}
+              className={`px-4 py-2 text-xs font-semibold transition-all border ${
+                activeTab === tab
+                  ? "border-brand-primary text-brand-primary bg-blue-50/50 shadow-sm"
+                  : "border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700 bg-white shadow-sm"
+              }`}
+            >
+              {tab}
+            </button>
           ))}
         </div>
 
-        {/* BREAKDOWN */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Section icon={PieChart} title="Berdasarkan Kelompok Usia">
-            {USIA.map((d) => (
-              <BarRow
-                key={d.label}
-                label={d.label}
-                count={d.count}
-                percent={d.percent}
-                suffix="Jiwa"
-              />
-            ))}
-          </Section>
+        {/* Content Layout */}
+        <div className="flex flex-col lg:flex-row gap-6 items-start">
+          {/* Table Container */}
+          <div className="flex-1 w-full bg-white border border-gray-200 shadow-sm overflow-hidden rounded-xs">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm text-center">
+                <thead>
+                  <tr className="border-b border-gray-200 text-[10px] uppercase font-bold text-gray-600 bg-[#FAFAFA]">
+                    <th
+                      className="py-4 px-4 cursor-pointer hover:bg-gray-100 transition-colors"
+                      onClick={() => requestSort("rt")}
+                    >
+                      <div className="flex items-center justify-center gap-2">
+                        RT
+                        {getSortIcon("rt")}
+                      </div>
+                    </th>
+                    {activeCategory.columns.map(col => (
+                      <th
+                        key={col.key}
+                        className="py-4 px-4 cursor-pointer hover:bg-gray-100 transition-colors border-l border-gray-100"
+                        onClick={() => requestSort(col.key)}
+                      >
+                        <div className="flex items-center justify-center gap-2">
+                          {col.label}
+                          {getSortIcon(col.key)}
+                        </div>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedData.map((row, index) => (
+                    <tr
+                      key={row.rt}
+                      className={`border-b border-gray-100 last:border-0 hover:bg-blue-50/30 transition-colors ${
+                        index % 2 === 0 ? "bg-white" : "bg-[#FAFAFA]/50"
+                      }`}
+                    >
+                      <td className="py-3 px-4 font-medium text-gray-700">
+                        {row.rt}
+                      </td>
+                      {activeCategory.columns.map(col => (
+                        <td key={col.key} className="py-3 px-4 border-l border-gray-50 text-gray-600">
+                          {row[col.key]}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                  {/* Totals Row */}
+                  <tr className="border-t-2 border-gray-200 bg-gray-50 font-bold">
+                    <td className="py-4 px-4 text-gray-900">
+                      TOTAL
+                    </td>
+                    {activeCategory.columns.map(col => (
+                      <td key={col.key} className="py-4 px-4 border-l border-gray-100 text-brand-primary">
+                        {activeCategory.totals[col.key] || Object.values(activeCategory.data).reduce((acc: number, r: any) => acc + (r[col.key] || 0), 0)}
+                      </td>
+                    ))}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-          <Section icon={GraduationCap} title="Berdasarkan Pendidikan Akhir">
-            {PENDIDIKAN.map((d) => (
-              <BarRow
-                key={d.label}
-                label={d.label}
-                count={d.count}
-                percent={d.percent}
-                suffix="Orang"
-              />
-            ))}
-          </Section>
-
-          <Section icon={Briefcase} title="Berdasarkan Pekerjaan Utama">
-            {PEKERJAAN.map((d) => (
-              <BarRow
-                key={d.label}
-                label={d.label}
-                count={d.count}
-                percent={d.percent}
-                suffix="Orang"
-              />
-            ))}
-          </Section>
-
-          <Section icon={Users} title="Berdasarkan Agama">
-            {AGAMA.map((d) => (
-              <BarRow
-                key={d.label}
-                label={d.label}
-                count={d.count}
-                percent={d.percent}
-                suffix="Orang"
-              />
-            ))}
-          </Section>
+          {/* Chart Container */}
+          <div className="w-full lg:w-[350px] shrink-0 bg-white border border-gray-200 shadow-sm rounded-xs p-6 sticky top-24">
+            <h3 className="text-sm font-bold text-center text-gray-800 mb-6 uppercase tracking-widest">
+              {activeCategory.chartTitle}
+            </h3>
+            <div className="h-[250px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={chartData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={0}
+                    outerRadius={100}
+                    paddingAngle={2}
+                    dataKey="value"
+                    label={({ value }) => `${value}`}
+                    labelLine={false}
+                  >
+                    {chartData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={entry.color}
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    formatter={(value) => [`${value} Jiwa/Unit`, "Jumlah"]}
+                    contentStyle={{ borderRadius: '4px', fontSize: '12px' }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+            
+            <div className="flex flex-col gap-2 mt-6 border-t border-gray-100 pt-4">
+              {chartData.map((data, idx) => (
+                <div key={idx} className="flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: data.color }} />
+                    <span className="text-gray-600">{data.name}</span>
+                  </div>
+                  <span className="font-bold text-gray-900">{data.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

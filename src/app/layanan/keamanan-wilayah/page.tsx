@@ -8,6 +8,7 @@ import {
   FileWarning,
   Video,
 } from "lucide-react";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 const KONTAK = [
   {
@@ -16,13 +17,19 @@ const KONTAK = [
     telp: "0812-3456-7890",
     href: "tel:081234567890",
     icon: ShieldAlert,
+    color: "text-brand-primary",
+    bg: "bg-blue-50",
+    border: "border-blue-100",
   },
   {
     label: "Polsek Pasar Kemis",
     sub: "Tindak kriminal & gangguan kamtibmas",
-    telp: "110 / (021) 59xxxx",
+    telp: "110 / (021) 4527xxx",
     href: "tel:110",
     icon: Siren,
+    color: "text-red-700",
+    bg: "bg-red-50",
+    border: "border-red-100",
   },
   {
     label: "Ambulans & Damkar",
@@ -30,6 +37,9 @@ const KONTAK = [
     telp: "112 / 119",
     href: "tel:112",
     icon: AlertTriangle,
+    color: "text-orange-700",
+    bg: "bg-orange-50",
+    border: "border-orange-100",
   },
 ];
 
@@ -42,7 +52,7 @@ const TATA_TERTIB = [
   {
     icon: Clock,
     judul: "Jam Malam & Akses Portal",
-    desc: "Portal utama ditutup pukul 23.00 WIB. Akses di atas jam tersebut hanya melalui pintu utama Blok A yang dijaga petugas keamanan.",
+    desc: "Portal utama ditutup pukul 23.00 WIB. Akses di atas jam tersebut hanya melalui pintu utama yang dijaga petugas keamanan.",
   },
   {
     icon: Video,
@@ -56,57 +66,44 @@ const JADWAL = [
   { hari: "Selasa", rt: "RT 03 & RT 04" },
   { hari: "Rabu", rt: "RT 05 & RT 06" },
   { hari: "Kamis", rt: "RT 07 & RT 08" },
-  { hari: "Jumat", rt: "RT 09 & RT 10" },
+  { hari: "Jumat", rt: "RT 01 – RT 08 (Giliran)" },
   { hari: "Sabtu", rt: "Pemuda / Karang Taruna", full: true },
   { hari: "Minggu", rt: "Petugas Keamanan Inti", full: true },
 ];
 
 export default function KeamananWilayah() {
   return (
-    <div className="min-h-screen bg-white pb-20 font-sans">
-      {/* HERO */}
-      <div className="bg-[#1a3a6b] px-6 md:px-16 py-16 md:py-24">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-xs font-semibold tracking-widest text-blue-300/70 uppercase mb-4">
-            Layanan Warga
-          </p>
-          <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-4 tracking-tight">
-            Keamanan Wilayah RW 12
-          </h1>
-          <p className="text-[15px] text-blue-100/80 max-w-xl leading-relaxed">
-            Sistem informasi keamanan lingkungan terpadu. Hubungi kontak darurat
-            jika terjadi gangguan keamanan, ketertiban, atau keadaan darurat
-            medis.
-          </p>
-        </div>
-      </div>
+    <div className="min-h-screen bg-gray-50 pb-20">
+      <PageHeader
+        category="Layanan Warga"
+        title="Keamanan Wilayah RW 12"
+        description="Sistem informasi keamanan lingkungan terpadu. Hubungi kontak darurat jika terjadi gangguan keamanan, ketertiban, atau keadaan darurat medis."
+      />
 
-      <div className="max-w-6xl mx-auto px-6 md:px-16 py-16 flex flex-col gap-14">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10 flex flex-col gap-8 pb-20">
         {/* KONTAK DARURAT */}
-        <div>
-          <p className="text-[11px] font-semibold tracking-widest text-gray-400 uppercase mb-6">
+        <div className="bg-white rounded-xs border border-gray-200 shadow-sm p-8">
+          <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-6">
             Kontak Darurat
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {KONTAK.map(({ label, sub, telp, href, icon: Icon }) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {KONTAK.map(({ label, sub, telp, href, icon: Icon, color, bg, border }) => (
               <div
                 key={label}
-                className="bg-[#f8f9fc] border border-gray-100 rounded-md p-6 flex flex-col gap-4"
+                className="bg-gray-50 border border-gray-200 rounded-xs p-6 flex flex-col gap-4"
               >
-                <div className="w-10 h-10 bg-white border border-gray-100 rounded-md flex items-center justify-center">
-                  <Icon size={18} className="text-[#1a3a6b]" />
+                <div className={`w-11 h-11 rounded-xs border flex items-center justify-center ${bg} ${border}`}>
+                  <Icon size={20} className={color} />
                 </div>
                 <div>
-                  <h3 className="text-[14px] font-bold text-gray-900 mb-0.5">
-                    {label}
-                  </h3>
-                  <p className="text-[12px] text-gray-400">{sub}</p>
+                  <h3 className="text-base font-bold text-gray-900 mb-1">{label}</h3>
+                  <p className="text-sm text-gray-500">{sub}</p>
                 </div>
                 <a
                   href={href}
-                  className="flex items-center gap-2.5 bg-[#1a3a6b] hover:bg-[#14306e] text-white text-[12.5px] font-semibold px-4 py-2.5 rounded-md no-underline transition-colors mt-auto"
+                  className="flex items-center gap-2.5 bg-brand-primary hover:bg-brand-primary-hover text-white text-sm font-bold px-4 py-2.5 rounded-xs no-underline transition-colors mt-auto"
                 >
-                  <PhoneCall size={13} />
+                  <PhoneCall size={14} />
                   {telp}
                 </a>
               </div>
@@ -117,29 +114,24 @@ export default function KeamananWilayah() {
         {/* TATA TERTIB + JADWAL */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Tata Tertib */}
-          <div>
-            <div className="flex items-center gap-2.5 mb-6">
-              <FileWarning size={16} className="text-[#1a3a6b]" />
-              <p className="text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
+          <div className="bg-white rounded-xs border border-gray-200 shadow-sm p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-9 h-9 bg-blue-50 border border-blue-100 rounded-xs flex items-center justify-center shrink-0">
+                <FileWarning size={16} className="text-brand-primary" />
+              </div>
+              <p className="text-xs font-bold tracking-widest text-gray-400 uppercase">
                 Tata Tertib Keamanan
               </p>
             </div>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               {TATA_TERTIB.map(({ icon: Icon, judul, desc }) => (
-                <div
-                  key={judul}
-                  className="flex items-start gap-4 bg-[#f8f9fc] border border-gray-100 rounded-md p-5"
-                >
-                  <div className="w-9 h-9 bg-white border border-gray-100 rounded-md flex items-center justify-center shrink-0">
-                    <Icon size={16} className="text-[#1a3a6b]" />
+                <div key={judul} className="flex items-start gap-4 bg-gray-50 border border-gray-200 rounded-xs p-5">
+                  <div className="w-9 h-9 bg-white border border-gray-200 rounded-xs flex items-center justify-center shrink-0">
+                    <Icon size={16} className="text-brand-primary" />
                   </div>
                   <div>
-                    <h4 className="text-[13.5px] font-bold text-gray-900 mb-1">
-                      {judul}
-                    </h4>
-                    <p className="text-[12px] text-gray-400 leading-relaxed">
-                      {desc}
-                    </p>
+                    <h4 className="text-sm font-bold text-gray-900 mb-1">{judul}</h4>
+                    <p className="text-sm text-gray-500 leading-relaxed">{desc}</p>
                   </div>
                 </div>
               ))}
@@ -147,14 +139,14 @@ export default function KeamananWilayah() {
           </div>
 
           {/* Jadwal Siskamling */}
-          <div className="bg-[#1a3a6b] rounded-md p-6 md:p-8 text-white">
-            <div className="flex items-center gap-2.5 mb-2">
-              <ShieldAlert size={16} className="text-blue-300" />
-              <h2 className="text-[13px] font-bold tracking-wide">
-                Jadwal Ronda / Siskamling
-              </h2>
+          <div className="bg-brand-primary rounded-xs border border-brand-primary-hover p-8 text-white shadow-sm">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-9 h-9 bg-white/10 rounded-xs flex items-center justify-center shrink-0">
+                <ShieldAlert size={16} className="text-blue-300" />
+              </div>
+              <h2 className="text-base font-bold tracking-wide">Jadwal Ronda / Siskamling</h2>
             </div>
-            <p className="text-[12px] text-blue-100/70 mb-6 leading-relaxed">
+            <p className="text-sm text-blue-100/70 mb-6 leading-relaxed ml-12">
               Tugas ronda malam setiap blok/RT mulai pukul 23.00 – 04.00 WIB.
             </p>
 
@@ -162,14 +154,12 @@ export default function KeamananWilayah() {
               {JADWAL.map((item) => (
                 <div
                   key={item.hari}
-                  className={`p-3 rounded-md border border-white/10 bg-white/5 ${item.full ? "col-span-2 bg-white/10" : ""}`}
+                  className={`p-3 rounded-xs border border-white/10 bg-white/5 ${item.full ? "col-span-2 bg-white/10" : ""}`}
                 >
-                  <p className="text-[10.5px] text-blue-300/80 font-bold uppercase tracking-wider mb-0.5">
+                  <p className="text-[10px] text-blue-300/80 font-bold uppercase tracking-wider mb-0.5">
                     {item.hari}
                   </p>
-                  <p className="text-[13px] font-semibold text-white">
-                    {item.rt}
-                  </p>
+                  <p className="text-sm font-bold text-white">{item.rt}</p>
                 </div>
               ))}
             </div>

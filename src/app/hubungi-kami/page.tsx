@@ -2,123 +2,96 @@
 
 import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
 
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { toast } from "sonner";
+
 export default function HubungiKami() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Terima kasih! Pesan Anda telah terkirim.");
+    toast.success("Pesan Terkirim", {
+      description: "Terima kasih! Pesan Anda telah terkirim ke sekretariat RW 12.",
+    });
   };
 
   return (
     <div className="min-h-screen bg-white pb-20 font-sans">
-      {/* HERO */}
-      <div className="bg-[#1a3a6b] px-6 md:px-16 py-16 md:py-24">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-xs font-semibold tracking-widest text-blue-300/70 uppercase mb-4">
-            Layanan Warga
-          </p>
-          <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-4 tracking-tight">
-            Hubungi Kami
-          </h1>
-          <p className="text-[15px] text-blue-100/80 max-w-xl leading-relaxed">
-            Punya pertanyaan, keluhan, atau saran? Hubungi sekretariat RW 12
-            melalui formulir atau kontak di bawah ini.
-          </p>
-        </div>
-      </div>
+      <PageHeader
+        category="Layanan Warga"
+        title="Hubungi Kami"
+        description="Punya pertanyaan, keluhan, atau saran? Hubungi sekretariat RW 12 melalui formulir atau kontak di bawah ini."
+      />
 
       <div className="max-w-6xl mx-auto px-6 md:px-16 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           {/* FORM */}
           <div className="lg:col-span-3 bg-white border border-gray-100 rounded-md p-6 md:p-8">
             <div className="flex items-center gap-2.5 mb-7 pb-5 border-b border-gray-100">
-              <Send size={15} className="text-[#1a3a6b]" />
+              <Send size={15} className="text-brand-primary" />
               <h2 className="text-[13.5px] font-bold text-gray-900">
                 Kirim Pesan / Aspirasi
               </h2>
             </div>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex flex-col gap-1.5">
-                  <label
-                    htmlFor="nama"
-                    className="text-[12px] font-semibold text-gray-500 uppercase tracking-wider"
-                  >
-                    Nama Lengkap
-                  </label>
-                  <input
-                    type="text"
-                    id="nama"
-                    required
-                    placeholder="Nama Anda"
-                    className="w-full px-4 py-2.5 text-[13.5px] border border-gray-200 rounded-md focus:outline-none focus:border-[#1a3a6b] focus:ring-1 focus:ring-[#1a3a6b]/20 bg-[#f8f9fc] focus:bg-white transition-all"
-                  />
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div className="flex flex-col gap-2">
+                  <Label htmlFor="nama">Nama Lengkap</Label>
+                  <Input id="nama" required placeholder="Nama Anda" />
                 </div>
-                <div className="flex flex-col gap-1.5">
-                  <label
-                    htmlFor="kontak"
-                    className="text-[12px] font-semibold text-gray-500 uppercase tracking-wider"
-                  >
-                    No. HP / Blok Rumah
-                  </label>
-                  <input
-                    type="text"
-                    id="kontak"
-                    required
-                    placeholder="0812... / Blok A No. 5"
-                    className="w-full px-4 py-2.5 text-[13.5px] border border-gray-200 rounded-md focus:outline-none focus:border-[#1a3a6b] focus:ring-1 focus:ring-[#1a3a6b]/20 bg-[#f8f9fc] focus:bg-white transition-all"
-                  />
+                <div className="flex flex-col gap-2">
+                  <Label htmlFor="kontak">No. HP / Blok Rumah</Label>
+                  <Input id="kontak" required placeholder="0812... / Blok A No. 5" />
                 </div>
               </div>
 
-              <div className="flex flex-col gap-1.5">
-                <label
-                  htmlFor="kategori"
-                  className="text-[12px] font-semibold text-gray-500 uppercase tracking-wider"
-                >
-                  Kategori Pesan
-                </label>
-                <select
-                  id="kategori"
-                  className="w-full px-4 py-2.5 text-[13.5px] border border-gray-200 rounded-md focus:outline-none focus:border-[#1a3a6b] focus:ring-1 focus:ring-[#1a3a6b]/20 bg-[#f8f9fc] focus:bg-white transition-all text-gray-600"
-                >
-                  <option value="pertanyaan">Pertanyaan Umum</option>
-                  <option value="laporan">Laporan Keluhan / Keamanan</option>
-                  <option value="saran">Saran & Masukan</option>
-                  <option value="lainnya">Lainnya</option>
-                </select>
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="kategori">Kategori Pesan</Label>
+                <Select required defaultValue="pertanyaan">
+                  <SelectTrigger id="kategori">
+                    <SelectValue placeholder="Pilih Kategori" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="pertanyaan">Pertanyaan Umum</SelectItem>
+                    <SelectItem value="laporan">Laporan Keluhan / Keamanan</SelectItem>
+                    <SelectItem value="saran">Saran & Masukan</SelectItem>
+                    <SelectItem value="lainnya">Lainnya</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
-              <div className="flex flex-col gap-1.5">
-                <label
-                  htmlFor="pesan"
-                  className="text-[12px] font-semibold text-gray-500 uppercase tracking-wider"
-                >
-                  Isi Pesan
-                </label>
-                <textarea
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="pesan">Isi Pesan</Label>
+                <Textarea
                   id="pesan"
                   rows={5}
                   required
                   placeholder="Tuliskan detail pesan atau aspirasi Anda..."
-                  className="w-full px-4 py-2.5 text-[13.5px] border border-gray-200 rounded-md focus:outline-none focus:border-[#1a3a6b] focus:ring-1 focus:ring-[#1a3a6b]/20 bg-[#f8f9fc] focus:bg-white transition-all resize-none"
+                  className="resize-none"
                 />
               </div>
 
-              <button
-                type="submit"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#1a3a6b] hover:bg-[#14306e] text-white text-[13px] font-semibold px-6 py-3 rounded-md border-none cursor-pointer transition-colors"
-              >
+              <Button type="submit" className="w-full sm:w-auto mt-2 flex gap-2" size="lg">
                 Kirim Pesan
                 <Send size={14} />
-              </button>
+              </Button>
             </form>
           </div>
 
           {/* SIDEBAR */}
           <div className="lg:col-span-2 flex flex-col gap-4">
             {/* Kontak Resmi */}
-            <div className="bg-[#1a3a6b] rounded-md p-6 text-white">
+            <div className="bg-brand-primary rounded-md p-6 text-white">
               <p className="text-[11px] font-semibold tracking-widest text-white/40 uppercase mb-5">
                 Informasi Sekretariat
               </p>
@@ -178,9 +151,9 @@ export default function HubungiKami() {
             </div>
 
             {/* Jam Operasional */}
-            <div className="bg-[#f8f9fc] border border-gray-100 rounded-md p-6">
+            <div className="bg-brand-light border border-gray-100 rounded-md p-6">
               <div className="flex items-center gap-2.5 mb-4 pb-4 border-b border-gray-100">
-                <Clock size={14} className="text-[#1a3a6b]" />
+                <Clock size={14} className="text-brand-primary" />
                 <h3 className="text-[13px] font-bold text-gray-900">
                   Jam Operasional
                 </h3>
