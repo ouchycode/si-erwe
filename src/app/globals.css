@@ -140,3 +140,13 @@
     @apply font-sans;
   }
 }
+
+@layer components {
+  .icon-badge {
+    @apply bg-brand-primary border border-brand-primary-hover text-white transition-colors duration-200;
+  }
+  .group:hover .icon-badge,
+  .icon-badge:hover {
+    @apply bg-brand-primary-hover;
+  }
+}

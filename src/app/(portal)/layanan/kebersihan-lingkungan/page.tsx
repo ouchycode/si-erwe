@@ -18,9 +18,6 @@ const JADWAL_SAMPAH = [
     sub: "Sisa makanan, dedaunan, sayuran busuk.",
     hari: "Setiap Hari (Pagi)",
     jam: "07.00 – 10.00 WIB",
-    color: "text-emerald-700",
-    bg: "bg-emerald-50",
-    border: "border-emerald-100",
   },
   {
     icon: Recycle,
@@ -28,9 +25,6 @@ const JADWAL_SAMPAH = [
     sub: "Plastik, kertas, kardus, botol, kaca.",
     hari: "Selasa, Kamis, Sabtu",
     jam: "13.00 – 15.00 WIB",
-    color: "text-blue-700",
-    bg: "bg-blue-50",
-    border: "border-blue-100",
   },
 ];
 
@@ -89,13 +83,13 @@ export default function KebersihanLingkungan() {
             </div>
 
             {/* Jadwal per jenis */}
-            {JADWAL_SAMPAH.map(({ icon: Icon, judul, sub, hari, jam, color, bg, border }) => (
+            {JADWAL_SAMPAH.map(({ icon: Icon, judul, sub, hari, jam}) => (
               <div
                 key={judul}
-                className="bg-gray-50 border border-gray-200 rounded-xs p-6 flex flex-col gap-4"
+                className="group bg-gray-50 border border-gray-200 rounded-xs p-6 flex flex-col gap-4 hover:bg-white hover:shadow-md transition-all duration-300"
               >
-                <div className={`w-10 h-10 rounded-xs border flex items-center justify-center ${bg} ${border}`}>
-                  <Icon size={18} className={color} />
+                <div className={`w-10 h-10 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm`}>
+                  <Icon size={18} />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-base font-bold text-gray-900 mb-1">{judul}</h3>
@@ -118,8 +112,8 @@ export default function KebersihanLingkungan() {
           {/* Kerja Bakti */}
           <div className="bg-white rounded-xs border border-gray-200 shadow-sm p-8 flex flex-col gap-5">
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-9 h-9 bg-emerald-50 border border-emerald-100 rounded-xs flex items-center justify-center shrink-0">
-                <Users size={16} className="text-emerald-700" />
+              <div className="w-9 h-9 bg-brand-primary border border-brand-primary-hover rounded-xs flex items-center justify-center shrink-0 text-white shadow-sm">
+                <Users size={16} />
               </div>
               <p className="text-xs font-bold tracking-widest text-gray-400 uppercase">
                 Gotong Royong & Kerja Bakti
@@ -142,10 +136,10 @@ export default function KebersihanLingkungan() {
               </div>
             </div>
 
-            <div className="bg-gray-50 border border-gray-200 rounded-xs p-5">
+            <div className="group bg-gray-50 border border-gray-200 rounded-xs p-5 hover:bg-white hover:shadow-sm transition-all duration-200">
               <div className="flex items-start gap-3">
-                <div className="w-9 h-9 bg-emerald-50 border border-emerald-100 rounded-xs flex items-center justify-center shrink-0">
-                  <Leaf size={15} className="text-emerald-700" />
+                <div className="w-9 h-9 bg-brand-primary border border-brand-primary-hover rounded-xs flex items-center justify-center shrink-0 text-white shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200">
+                  <Leaf size={15} />
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-gray-900 mb-1.5">Program Penghijauan (KWT)</h4>
@@ -161,18 +155,18 @@ export default function KebersihanLingkungan() {
           {/* Tata Tertib */}
           <div className="bg-white rounded-xs border border-gray-200 shadow-sm p-8 flex flex-col gap-4">
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-9 h-9 bg-orange-50 border border-orange-100 rounded-xs flex items-center justify-center shrink-0">
-                <AlertOctagon size={16} className="text-orange-700" />
+              <div className="w-9 h-9 bg-brand-primary border border-brand-primary-hover rounded-xs flex items-center justify-center shrink-0 text-white shadow-sm">
+                <AlertOctagon size={16} />
               </div>
               <p className="text-xs font-bold tracking-widest text-gray-400 uppercase">
                 Tata Tertib Lingkungan
               </p>
             </div>
 
-            {TATA_TERTIB.map(({ icon: Icon, judul, desc }) => (
-              <div key={judul} className="flex items-start gap-4 bg-gray-50 border border-gray-200 rounded-xs p-5">
-                <div className="w-9 h-9 bg-white border border-gray-200 rounded-xs flex items-center justify-center shrink-0">
-                  <Icon size={15} className="text-brand-primary" />
+            {TATA_TERTIB.map(({ icon: Icon, judul, desc}) => (
+              <div key={judul} className="group flex items-start gap-4 bg-gray-50 border border-gray-200 rounded-xs p-5 hover:bg-white hover:shadow-sm transition-all duration-200">
+                <div className={`w-9 h-9 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm`}>
+                  <Icon size={15} />
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-gray-900 mb-1">{judul}</h4>

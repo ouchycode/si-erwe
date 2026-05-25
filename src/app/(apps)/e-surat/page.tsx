@@ -27,6 +27,7 @@ export default function ESuratPage() {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(INITIAL_DATA);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [registrationCode, setRegistrationCode] = useState<string>("");
 
   const updateForm = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -43,6 +44,7 @@ export default function ESuratPage() {
     // Simulate API Call delay
     setTimeout(() => {
       setIsSubmitting(false);
+      setRegistrationCode(`RW12/${new Date().getFullYear()}/${(Math.random() * 10000).toFixed(0).padStart(4, '0')}`);
       setStep(3); // Go to success/print step
     }, 1500);
   };
@@ -236,12 +238,12 @@ export default function ESuratPage() {
                   </p>
 
                   {/* PDF Receipt Mockup */}
-                  <div className="w-full max-w-sm bg-gray-50 border border-gray-200 rounded-xs p-6 mb-8 text-left relative overflow-hidden">
+                  <div className="w-full max-w-sm bg-gray-50 border border-gray-200 rounded-xs p-6 mb-6 text-left relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-1 h-full bg-brand-primary" />
                     <div className="flex items-start justify-between mb-4 pb-4 border-b border-gray-200">
                       <div>
                         <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Nomor Registrasi</p>
-                        <p className="text-sm font-mono font-bold text-gray-900">RW12/{new Date().getFullYear()}/{(Math.random() * 10000).toFixed(0).padStart(4, '0')}</p>
+                        <p className="text-xl font-mono font-extrabold text-brand-primary m-0">{registrationCode}</p>
                       </div>
                       <Printer size={20} className="text-gray-300" />
                     </div>
@@ -252,9 +254,13 @@ export default function ESuratPage() {
                       </div>
                       <div>
                         <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Dokumen</p>
-                        <p className="text-sm font-bold text-brand-primary">{formData.jenisSurat}</p>
+                        <p className="text-sm font-bold text-gray-900">{formData.jenisSurat}</p>
                       </div>
                     </div>
+                  </div>
+
+                  <div className="bg-blue-50 text-blue-900 text-xs font-medium p-4 rounded-xs max-w-sm w-full mb-8 text-left leading-relaxed border border-blue-100">
+                    <strong>Penting:</strong> Simpan Nomor Registrasi di atas untuk mengambil surat fisik di Balai Warga. Notifikasi pengambilan akan dikirimkan otomatis ke WhatsApp Anda.
                   </div>
 
                   <div className="flex items-center gap-4">

@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Figtree, Geist } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import AccessibilityWidget from "@/components/layout/AccessibilityWidget";
+import { FeatureProvider } from "@/context/FeatureContext";
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -28,14 +26,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id" className={cn("h-full", "antialiased", figtree.variable, "font-sans", geist.variable)}>
-      <body className="min-h-full flex flex-col bg-gray-100 font-sans">
-        <Navbar />
-
-        <main className="flex-1">{children}</main>
-
-        <Footer />
-        <AccessibilityWidget />
-        <Toaster position="top-right" richColors />
+      <body className="min-h-full bg-gray-100 font-sans">
+        <FeatureProvider>
+          {children}
+          <Toaster position="top-right" richColors />
+        </FeatureProvider>
       </body>
     </html>
   );

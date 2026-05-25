@@ -105,9 +105,6 @@ export default function Footer() {
             <h4 className="text-sm font-bold text-gray-900">Layanan</h4>
             <div className="flex flex-col gap-3">
               <Link href="/layanan/administrasi-kependudukan" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Administrasi Kependudukan</Link>
-              <Link href="/layanan/e-surat" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">E-Surat Pengantar</Link>
-              <Link href="/layanan/lapor-warga" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Lapor Warga</Link>
-              <Link href="/layanan/iuran-warga" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Pembayaran Iuran</Link>
               <Link href="/layanan/keamanan-wilayah" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Keamanan Wilayah</Link>
               <Link href="/layanan/kebersihan-lingkungan" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Kebersihan Lingkungan</Link>
             </div>

@@ -96,11 +96,8 @@ export default function PengurusRT() {
               <div className="p-5 flex flex-col gap-4">
                 {/* Ketua */}
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 bg-blue-50 border border-blue-100 rounded-xs flex items-center justify-center shrink-0 group-hover:bg-brand-primary transition-colors duration-200">
-                    <User
-                      size={16}
-                      className="text-brand-primary group-hover:text-white transition-colors duration-200"
-                    />
+                  <div className="w-9 h-9 bg-brand-primary border border-brand-primary-hover text-white rounded-xs flex items-center justify-center shrink-0 shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200">
+                    <User size={16} />
                   </div>
                   <div>
                     <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-0.5">

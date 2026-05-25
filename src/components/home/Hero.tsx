@@ -32,29 +32,29 @@ export default function Hero() {
         {/* Quick Links Card - Dashboard Shape */}
         <div className="bg-white rounded-xs border border-gray-200 p-6 md:p-8 mb-6 shadow-sm">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-            <Link href="/layanan/administrasi-kependudukan" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-gray-50">
-              <div className="w-12 h-12 bg-gray-50 border border-gray-200 text-blue-700 rounded-xs flex items-center justify-center mb-3 group-hover:bg-blue-700 group-hover:text-white transition-colors duration-200">
+            <Link href="/layanan/administrasi-kependudukan" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-gray-50/50">
+              <div className="w-12 h-12 w-12 h-12 rounded-xs flex items-center justify-center mb-3 icon-badge shadow-md">
                 <FileText size={20} strokeWidth={2} />
               </div>
-              <span className="text-sm font-bold text-gray-900 group-hover:text-blue-700 transition-colors">Surat Pengantar</span>
+              <span className="text-sm font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Surat Pengantar</span>
             </Link>
             
-            <Link href="/informasi/statistik" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-gray-50">
-              <div className="w-12 h-12 bg-gray-50 border border-gray-200 text-emerald-700 rounded-xs flex items-center justify-center mb-3 group-hover:bg-emerald-700 group-hover:text-white transition-colors duration-200">
+            <Link href="/informasi/statistik" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-gray-50/50">
+              <div className="w-12 h-12 w-12 h-12 rounded-xs flex items-center justify-center mb-3 icon-badge shadow-md">
                 <BarChart2 size={20} strokeWidth={2} />
               </div>
-              <span className="text-sm font-bold text-gray-900 group-hover:text-emerald-700 transition-colors">Statistik Warga</span>
+              <span className="text-sm font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Statistik Warga</span>
             </Link>
             
-            <Link href="/layanan/keamanan-wilayah" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-gray-50">
-              <div className="w-12 h-12 bg-gray-50 border border-gray-200 text-red-700 rounded-xs flex items-center justify-center mb-3 group-hover:bg-red-700 group-hover:text-white transition-colors duration-200">
+            <Link href="/layanan/keamanan-wilayah" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-gray-50/50">
+              <div className="w-12 h-12 w-12 h-12 rounded-xs flex items-center justify-center mb-3 icon-badge shadow-md">
                 <ShieldAlert size={20} strokeWidth={2} />
               </div>
-              <span className="text-sm font-bold text-gray-900 group-hover:text-red-700 transition-colors">Lapor Keamanan</span>
+              <span className="text-sm font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Lapor Keamanan</span>
             </Link>
             
-            <Link href="/hubungi-kami" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-gray-50">
-              <div className="w-12 h-12 bg-brand-light border border-brand-primary/20 text-brand-primary rounded-xs flex items-center justify-center mb-3 group-hover:bg-brand-primary group-hover:text-white transition-colors duration-200">
+            <Link href="/hubungi-kami" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-gray-50/50">
+              <div className="w-12 h-12 w-12 h-12 rounded-xs flex items-center justify-center mb-3 icon-badge shadow-md">
                 <PhoneCall size={20} strokeWidth={2} />
               </div>
               <span className="text-sm font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Pusat Bantuan</span>

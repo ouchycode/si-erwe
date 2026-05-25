@@ -22,10 +22,7 @@ import {
   Phone,
   Info,
   Map,
-  Camera,
-  FileCheck,
-  Megaphone,
-  CreditCard
+  Camera
 } from "lucide-react";
 
 const NAV_ITEMS = [
@@ -63,21 +60,6 @@ const NAV_ITEMS = [
         label: "Administrasi Kependudukan",
         href: "/layanan/administrasi-kependudukan",
         icon: FileText,
-      },
-      {
-        label: "E-Surat Pengantar",
-        href: "/layanan/e-surat",
-        icon: FileCheck,
-      },
-      {
-        label: "Lapor Warga",
-        href: "/layanan/lapor-warga",
-        icon: Megaphone,
-      },
-      {
-        label: "Pembayaran Iuran",
-        href: "/layanan/iuran-warga",
-        icon: CreditCard,
       },
       {
         label: "Keamanan Wilayah",

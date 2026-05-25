@@ -17,9 +17,6 @@ const KONTAK = [
     telp: "0812-3456-7890",
     href: "tel:081234567890",
     icon: ShieldAlert,
-    color: "text-brand-primary",
-    bg: "bg-blue-50",
-    border: "border-blue-100",
   },
   {
     label: "Polsek Pasar Kemis",
@@ -27,9 +24,6 @@ const KONTAK = [
     telp: "110 / (021) 4527xxx",
     href: "tel:110",
     icon: Siren,
-    color: "text-red-700",
-    bg: "bg-red-50",
-    border: "border-red-100",
   },
   {
     label: "Ambulans & Damkar",
@@ -37,9 +31,6 @@ const KONTAK = [
     telp: "112 / 119",
     href: "tel:112",
     icon: AlertTriangle,
-    color: "text-orange-700",
-    bg: "bg-orange-50",
-    border: "border-orange-100",
   },
 ];
 
@@ -87,13 +78,13 @@ export default function KeamananWilayah() {
             Kontak Darurat
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {KONTAK.map(({ label, sub, telp, href, icon: Icon, color, bg, border }) => (
+            {KONTAK.map(({ label, sub, telp, href, icon: Icon}) => (
               <div
                 key={label}
-                className="bg-gray-50 border border-gray-200 rounded-xs p-6 flex flex-col gap-4"
+                className="group bg-gray-50 border border-gray-200 rounded-xs p-6 flex flex-col gap-4 hover:bg-white hover:shadow-md transition-all duration-300"
               >
-                <div className={`w-11 h-11 rounded-xs border flex items-center justify-center ${bg} ${border}`}>
-                  <Icon size={20} className={color} />
+                <div className={`w-11 h-11 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm`}>
+                  <Icon size={20} />
                 </div>
                 <div>
                   <h3 className="text-base font-bold text-gray-900 mb-1">{label}</h3>
@@ -116,18 +107,18 @@ export default function KeamananWilayah() {
           {/* Tata Tertib */}
           <div className="bg-white rounded-xs border border-gray-200 shadow-sm p-8">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-9 h-9 bg-blue-50 border border-blue-100 rounded-xs flex items-center justify-center shrink-0">
-                <FileWarning size={16} className="text-brand-primary" />
+              <div className="w-9 h-9 bg-brand-primary border border-brand-primary-hover rounded-xs flex items-center justify-center shrink-0 shadow-sm text-white">
+                <FileWarning size={16} />
               </div>
               <p className="text-xs font-bold tracking-widest text-gray-400 uppercase">
                 Tata Tertib Keamanan
               </p>
             </div>
             <div className="flex flex-col gap-4">
-              {TATA_TERTIB.map(({ icon: Icon, judul, desc }) => (
-                <div key={judul} className="flex items-start gap-4 bg-gray-50 border border-gray-200 rounded-xs p-5">
-                  <div className="w-9 h-9 bg-white border border-gray-200 rounded-xs flex items-center justify-center shrink-0">
-                    <Icon size={16} className="text-brand-primary" />
+              {TATA_TERTIB.map(({ icon: Icon, judul, desc}) => (
+                <div key={judul} className="group flex items-start gap-4 bg-gray-50 border border-gray-200 rounded-xs p-5 hover:bg-white hover:shadow-sm transition-all duration-200">
+                  <div className={`w-9 h-9 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm`}>
+                    <Icon size={16} />
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-gray-900 mb-1">{judul}</h4>

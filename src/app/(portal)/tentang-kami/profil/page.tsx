@@ -1,4 +1,4 @@
-import { Target, Eye, BookOpen, MapPin, Users, Home } from "lucide-react";
+import { Target, Eye, BookOpen, MapPin, Users, Home, Building2, Calendar } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 
 export default function ProfilRW() {
@@ -8,6 +8,19 @@ export default function ProfilRW() {
         category="Tentang Kami"
         title="Profil & Sejarah RW 12"
         description="Mengenal lebih dekat lingkungan RW 12 Kutabumi, Kab. Tangerang — bersama membangun kehidupan bertetangga yang rukun, aman, dan sejahtera."
+        rightContent={
+          <div className="flex items-center gap-4 bg-white/10 border border-white/20 rounded-xs px-6 py-4 shrink-0">
+            <div className="w-10 h-10 bg-white/10 rounded-xs flex items-center justify-center">
+              <Building2 size={18} className="text-blue-200" />
+            </div>
+            <div>
+              <p className="text-xs text-blue-300/80 font-bold uppercase tracking-widest mb-0.5">
+                Periode Kepengurusan
+              </p>
+              <p className="text-2xl font-extrabold text-white">2024 — 2027</p>
+            </div>
+          </div>
+        }
       />
 
       {/* CONTENT — pulls up over the PageHeader */}
@@ -18,10 +31,10 @@ export default function ProfilRW() {
           <div className="lg:col-span-2 flex flex-col gap-6">
 
             {/* Sejarah */}
-            <div className="bg-white rounded-xs border border-gray-200 shadow-sm p-8">
+            <div className="group bg-white rounded-xs border border-gray-200 shadow-sm p-8 hover:shadow-md transition-all duration-300">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-blue-50 border border-blue-100 rounded-xs flex items-center justify-center shrink-0">
-                  <BookOpen size={18} className="text-brand-primary" />
+                <div className="w-10 h-10 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm">
+                  <BookOpen size={18} />
                 </div>
                 <h2 className="text-xl font-bold text-gray-900">Sejarah Singkat</h2>
               </div>
@@ -61,10 +74,10 @@ export default function ProfilRW() {
               </div>
 
               {/* Misi */}
-              <div className="bg-white rounded-xs border border-gray-200 p-8 flex flex-col gap-4 shadow-sm">
+              <div className="group bg-white rounded-xs border border-gray-200 p-8 flex flex-col gap-4 shadow-sm hover:shadow-md transition-all duration-300">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-blue-50 border border-blue-100 rounded-xs flex items-center justify-center shrink-0">
-                    <Target size={18} className="text-brand-primary" />
+                  <div className="w-10 h-10 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm">
+                    <Target size={18} />
                   </div>
                   <h2 className="text-sm font-bold tracking-widest uppercase text-gray-500">
                     Misi
@@ -98,13 +111,14 @@ export default function ProfilRW() {
               </p>
               <div className="flex flex-col divide-y divide-gray-100">
                 {[
-                  { icon: Home, label: "Jumlah RT", value: "8 Rukun Tetangga" },
-                  { icon: Users, label: "Total Kepala Keluarga", value: "± 350 KK" },
-                  { icon: MapPin, label: "Kelurahan", value: "Kutabumi" },
-                ].map(({ icon: Icon, label, value }) => (
-                  <div key={label} className="flex items-center gap-4 py-4 first:pt-0 last:pb-0">
-                    <div className="w-10 h-10 bg-blue-50 border border-blue-100 rounded-xs flex items-center justify-center shrink-0">
-                      <Icon size={16} className="text-brand-primary" />
+                  { icon: Home, label: "Jumlah RT", value: "8 Rukun Tetangga", badgeStyle: "bg-brand-primary border border-brand-primary-hover text-white shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200" },
+                  { icon: Users, label: "Total Kepala Keluarga", value: "± 350 KK", badgeStyle: "bg-brand-primary border border-brand-primary-hover text-white shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200" },
+                  { icon: MapPin, label: "Kelurahan", value: "Kutabumi", badgeStyle: "bg-brand-primary border border-brand-primary-hover text-white shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200" },
+                  { icon: Calendar, label: "Kecamatan", value: "Pasar Kemis", badgeStyle: "bg-brand-primary border border-brand-primary-hover text-white shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200" },
+                ].map(({ icon: Icon, label, value}) => (
+                  <div key={label} className="group flex items-center gap-4 py-4 first:pt-0 last:pb-0">
+                    <div className={`w-10 h-10 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm`}>
+                      <Icon size={16} />
                     </div>
                     <div>
                       <p className="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-0.5">

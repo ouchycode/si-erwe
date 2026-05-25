@@ -84,19 +84,19 @@ export default function AdministrasiKependudukan() {
           {/* Kiri: Persyaratan */}
           <div className="lg:col-span-2 flex flex-col gap-4">
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-9 h-9 bg-blue-50 border border-blue-100 rounded-xs flex items-center justify-center shrink-0">
-                <FileSignature size={16} className="text-brand-primary" />
+              <div className="w-9 h-9 bg-brand-primary border border-brand-primary-hover rounded-xs flex items-center justify-center shrink-0 shadow-sm text-white">
+                <FileSignature size={16} />
               </div>
               <p className="text-xs font-bold tracking-widest text-gray-400 uppercase">
                 Persyaratan Dokumen
               </p>
             </div>
 
-            {LAYANAN.map(({ icon: Icon, judul, syarat }) => (
-              <div key={judul} className="bg-white border border-gray-200 rounded-xs p-6 shadow-sm">
+            {LAYANAN.map(({ icon: Icon, judul, syarat}) => (
+              <div key={judul} className="group bg-white border border-gray-200 rounded-xs p-6 shadow-sm hover:shadow-md transition-all duration-300">
                 <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
-                  <div className="w-10 h-10 bg-blue-50 border border-blue-100 rounded-xs flex items-center justify-center shrink-0">
-                    <Icon size={18} className="text-brand-primary" />
+                  <div className={`w-10 h-10 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm`}>
+                    <Icon size={18} />
                   </div>
                   <h3 className="text-base font-bold text-gray-900">{judul}</h3>
                 </div>

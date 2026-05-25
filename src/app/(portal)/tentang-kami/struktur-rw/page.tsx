@@ -6,6 +6,7 @@ import {
   HardHat,
   FileText,
   Wallet,
+  Users,
 } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 
@@ -15,36 +16,24 @@ const BIDANG = [
     icon: Shield,
     tugas: "Siskamling & koordinasi keamanan lingkungan.",
     koordinator: "Lorem Ipsum",
-    color: "text-red-700",
-    bg: "bg-red-50",
-    border: "border-red-100",
   },
   {
     bidang: "Kebersihan & Lingkungan",
     icon: Trash2,
     tugas: "Pengelolaan sampah & program kerja bakti.",
     koordinator: "Dolor Sit Amet",
-    color: "text-emerald-700",
-    bg: "bg-emerald-50",
-    border: "border-emerald-100",
   },
   {
     bidang: "Pembangunan & Sarana",
     icon: HardHat,
     tugas: "Perawatan jalan & infrastruktur wilayah.",
     koordinator: "Consectetur Adipiscing",
-    color: "text-orange-700",
-    bg: "bg-orange-50",
-    border: "border-orange-100",
   },
   {
     bidang: "Sosial & Kerohanian",
     icon: Heart,
     tugas: "Kegiatan keagamaan & santunan warga.",
     koordinator: "Elit Sed Do",
-    color: "text-purple-700",
-    bg: "bg-purple-50",
-    border: "border-purple-100",
   },
 ];
 
@@ -55,6 +44,19 @@ export default function StrukturRW() {
         category="Tentang Kami"
         title="Struktur Organisasi RW 12"
         description="Sinergi pengurus dalam melayani dan mengelola lingkungan demi kenyamanan seluruh warga RW 12 Kutabumi periode 2024–2027."
+        rightContent={
+          <div className="flex items-center gap-4 bg-white/10 border border-white/20 rounded-xs px-6 py-4 shrink-0">
+            <div className="w-10 h-10 bg-white/10 rounded-xs flex items-center justify-center">
+              <Users size={18} className="text-blue-200" />
+            </div>
+            <div>
+              <p className="text-xs text-blue-300/80 font-bold uppercase tracking-widest mb-0.5">
+                Total Pengurus
+              </p>
+              <p className="text-2xl font-extrabold text-white">7 Orang</p>
+            </div>
+          </div>
+        }
       />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10">
@@ -64,9 +66,9 @@ export default function StrukturRW() {
           <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-5">
             Pimpinan
           </p>
-          <div className="flex items-center gap-5 bg-white border border-gray-200 rounded-xs px-7 py-6 max-w-sm shadow-sm">
-            <div className="w-12 h-12 bg-brand-primary rounded-xs flex items-center justify-center shrink-0">
-              <User size={22} className="text-white" />
+          <div className="group flex items-center gap-5 bg-white border border-gray-200 rounded-xs px-7 py-6 max-w-sm shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="w-12 h-12 bg-brand-primary border border-brand-primary-hover rounded-xs flex items-center justify-center shrink-0 text-white shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200">
+              <User size={22} />
             </div>
             <div>
               <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-1">
@@ -84,15 +86,15 @@ export default function StrukturRW() {
         <div className="mb-2">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
             {[
-              { jabatan: "Sekretaris", nama: "Dolor Sit Amet", icon: FileText },
-              { jabatan: "Bendahara", nama: "Consectetur Adipiscing", icon: Wallet },
-            ].map(({ jabatan, nama, icon: Icon }) => (
+              { jabatan: "Sekretaris", nama: "Dolor Sit Amet", icon: FileText, badgeStyle: "bg-brand-primary border border-brand-primary-hover text-white shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200" },
+              { jabatan: "Bendahara", nama: "Consectetur Adipiscing", icon: Wallet, badgeStyle: "bg-brand-primary border border-brand-primary-hover text-white shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200" },
+            ].map(({ jabatan, nama, icon: Icon}) => (
               <div
                 key={jabatan}
-                className="flex items-center gap-4 bg-white border border-gray-200 rounded-xs px-6 py-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+                className="group flex items-center gap-4 bg-white border border-gray-200 rounded-xs px-6 py-5 shadow-sm hover:shadow-md transition-all duration-200"
               >
-                <div className="w-10 h-10 bg-blue-50 border border-blue-100 rounded-xs flex items-center justify-center shrink-0">
-                  <Icon size={18} className="text-brand-primary" />
+                <div className={`w-10 h-10 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm`}>
+                  <Icon size={18} />
                 </div>
                 <div>
                   <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-0.5">
@@ -119,10 +121,10 @@ export default function StrukturRW() {
               return (
                 <div
                   key={item.bidang}
-                  className="bg-white border border-gray-200 rounded-xs p-6 flex flex-col gap-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+                  className="group bg-white border border-gray-200 rounded-xs p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-all duration-200"
                 >
-                  <div className={`w-10 h-10 rounded-xs border flex items-center justify-center ${item.bg} ${item.border}`}>
-                    <Icon size={18} className={item.color} />
+                  <div className={`w-10 h-10 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm`}>
+                    <Icon size={18} />
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-gray-900 leading-snug mb-1">
