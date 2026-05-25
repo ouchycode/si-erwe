@@ -75,7 +75,7 @@ export default function IuranWargaPage() {
         <div className="bg-white border border-slate-100 shadow-sm rounded-xs p-6 md:p-8">
           <form onSubmit={handleSearch} className="flex flex-col md:flex-row items-end gap-4">
             <div className="flex-1 w-full space-y-2">
-              <label className="text-xs font-bold text-gray-500 uppercase tracking-widest flex items-center gap-1.5">
+              <label className="text-sm font-bold text-slate-700 mb-1.5 inline-block flex items-center gap-1.5">
                 <Home size={14} /> Nomor Blok / Rumah
               </label>
               <div className="relative">

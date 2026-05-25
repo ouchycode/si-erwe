@@ -113,7 +113,7 @@ export default function ESuratPage() {
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Nomor Induk Kependudukan (NIK)</label>
+                      <label className="text-sm font-bold text-slate-700 mb-1.5 inline-block">Nomor Induk Kependudukan (NIK)</label>
                       <input 
                         required
                         type="text" 
@@ -125,7 +125,7 @@ export default function ESuratPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Nama Lengkap Sesuai KTP</label>
+                      <label className="text-sm font-bold text-slate-700 mb-1.5 inline-block">Nama Lengkap Sesuai KTP</label>
                       <input 
                         required
                         type="text" 
@@ -137,7 +137,7 @@ export default function ESuratPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-gray-500 uppercase tracking-widest flex items-center gap-1"><MapPin size={12}/> RT Domisili</label>
+                      <label className="text-sm font-bold text-slate-700 mb-1.5 inline-block flex items-center gap-1"><MapPin size={12}/> RT Domisili</label>
                       <select 
                         name="rt"
                         value={formData.rt}
@@ -150,7 +150,7 @@ export default function ESuratPage() {
                       </select>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-gray-500 uppercase tracking-widest flex items-center gap-1"><Phone size={12}/> Nomor WhatsApp Aktif</label>
+                      <label className="text-sm font-bold text-slate-700 mb-1.5 inline-block flex items-center gap-1"><Phone size={12}/> Nomor WhatsApp Aktif</label>
                       <input 
                         required
                         type="text" 
@@ -180,7 +180,7 @@ export default function ESuratPage() {
                   
                   <div className="space-y-6">
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Jenis Surat Pengantar</label>
+                      <label className="text-sm font-bold text-slate-700 mb-1.5 inline-block">Jenis Surat Pengantar</label>
                       <select 
                         name="jenisSurat"
                         value={formData.jenisSurat}
@@ -195,7 +195,7 @@ export default function ESuratPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Tujuan / Alasan Keperluan</label>
+                      <label className="text-sm font-bold text-slate-700 mb-1.5 inline-block">Tujuan / Alasan Keperluan</label>
                       <textarea 
                         required
                         name="keperluan"

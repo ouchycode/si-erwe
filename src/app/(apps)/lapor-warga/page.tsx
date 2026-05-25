@@ -102,11 +102,11 @@ export default function LaporWargaPage() {
   const getStatusBadge = (status: Ticket["status"]) => {
     switch (status) {
       case "Menunggu":
-        return <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-yellow-100 text-yellow-800 text-[10px] font-bold uppercase tracking-widest"><Clock size={12}/> Menunggu</span>;
+        return <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-yellow-100 text-yellow-800 text-xs font-bold"><Clock size={12}/> Menunggu</span>;
       case "Diproses":
-        return <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-blue-100 text-blue-800 text-[10px] font-bold uppercase tracking-widest"><AlertTriangle size={12}/> Diproses</span>;
+        return <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-blue-100 text-blue-800 text-xs font-bold"><AlertTriangle size={12}/> Diproses</span>;
       case "Selesai":
-        return <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-green-100 text-green-800 text-[10px] font-bold uppercase tracking-widest"><CheckCircle2 size={12}/> Selesai</span>;
+        return <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-green-100 text-green-800 text-xs font-bold"><CheckCircle2 size={12}/> Selesai</span>;
     }
   };
 
@@ -180,7 +180,7 @@ export default function LaporWargaPage() {
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-gray-500 uppercase tracking-widest flex justify-between">
+                      <label className="text-sm font-bold text-slate-700 mb-1.5 inline-block flex justify-between">
                         <span>Nama Pelapor</span>
                         <span className="text-gray-400 font-medium tracking-normal text-[10px]">*Opsional</span>
                       </label>
@@ -193,7 +193,7 @@ export default function LaporWargaPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-gray-500 uppercase tracking-widest flex justify-between">
+                      <label className="text-sm font-bold text-slate-700 mb-1.5 inline-block flex justify-between">
                         <span>No. WhatsApp</span>
                         <span className="text-gray-400 font-medium tracking-normal text-[10px]">*Opsional</span>
                       </label>
@@ -208,7 +208,7 @@ export default function LaporWargaPage() {
                   </div>
 
                   <div className="space-y-2 pt-2 border-t border-gray-100">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Judul Singkat Laporan</label>
+                    <label className="text-sm font-bold text-slate-700 mb-1.5 inline-block">Judul Singkat Laporan</label>
                     <input 
                       required
                       value={judul}
@@ -221,7 +221,7 @@ export default function LaporWargaPage() {
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Kategori</label>
+                      <label className="text-sm font-bold text-slate-700 mb-1.5 inline-block">Kategori</label>
                       <select 
                         value={kategori}
                         onChange={(e) => setKategori(e.target.value)}
@@ -234,7 +234,7 @@ export default function LaporWargaPage() {
                       </select>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Titik Lokasi</label>
+                      <label className="text-sm font-bold text-slate-700 mb-1.5 inline-block">Titik Lokasi</label>
                       <input 
                         required
                         value={lokasi}
@@ -247,7 +247,7 @@ export default function LaporWargaPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Deskripsi Detail</label>
+                    <label className="text-sm font-bold text-slate-700 mb-1.5 inline-block">Deskripsi Detail</label>
                     <textarea 
                       required
                       value={deskripsi}
