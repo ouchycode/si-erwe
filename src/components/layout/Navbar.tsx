@@ -128,7 +128,7 @@ export default function Navbar() {
               <Building2 className="text-white w-5 h-5 md:w-6 md:h-6" />
             </div>
             <div className="flex flex-col">
-              <span className="text-sm md:text-lg font-extrabold text-brand-primary leading-tight">
+              <span className="text-sm md:text-lg font-bold text-brand-primary leading-tight">
                 Sekretariat RW 12 Kutabumi
               </span>
               <span className="text-[10px] md:text-xs text-gray-500 font-medium uppercase tracking-widest mt-0.5">
@@ -139,11 +139,11 @@ export default function Navbar() {
 
           {/* Right info (Desktop) */}
           <div className="hidden md:flex items-center gap-6 text-gray-500 text-xs font-semibold">
-            <span className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-xs border border-gray-100">
+            <span className="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xs border border-gray-100">
               <MapPin size={14} className="text-brand-primary" /> 
               Kutabumi, Tangerang
             </span>
-            <span className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-xs border border-gray-100">
+            <span className="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xs border border-gray-100">
               <Calendar size={14} className="text-brand-primary" /> 
               {today}
             </span>

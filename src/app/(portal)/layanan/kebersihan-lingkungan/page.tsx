@@ -48,7 +48,7 @@ const TATA_TERTIB = [
 
 export default function KebersihanLingkungan() {
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-slate-50 pb-20">
       <PageHeader
         category="Layanan Warga"
         title="Kebersihan Lingkungan RW 12"
@@ -57,7 +57,7 @@ export default function KebersihanLingkungan() {
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10 flex flex-col gap-8 pb-20">
         {/* JADWAL SAMPAH */}
-        <div className="bg-white rounded-xs border border-gray-200 shadow-sm p-8">
+        <div className="bg-white rounded-xs border border-slate-100 shadow-sm p-8">
           <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-6">
             Jadwal Pengangkutan Sampah
           </p>
@@ -78,7 +78,7 @@ export default function KebersihanLingkungan() {
                 <p className="text-[10px] text-blue-300/80 font-bold uppercase tracking-widest mb-1">
                   Iuran Kebersihan
                 </p>
-                <p className="text-lg font-extrabold">Rp 20.000 / Bulan</p>
+                <p className="text-lg font-bold">Rp 20.000 / Bulan</p>
               </div>
             </div>
 
@@ -86,16 +86,16 @@ export default function KebersihanLingkungan() {
             {JADWAL_SAMPAH.map(({ icon: Icon, judul, sub, hari, jam}) => (
               <div
                 key={judul}
-                className="group bg-gray-50 border border-gray-200 rounded-xs p-6 flex flex-col gap-4 hover:bg-white hover:shadow-md transition-all duration-300"
+                className="group bg-white border border-slate-100 rounded-xs p-6 flex flex-col gap-4 hover:shadow-md transition-all duration-300"
               >
                 <div className={`w-10 h-10 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm`}>
                   <Icon size={18} />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-base font-bold text-gray-900 mb-1">{judul}</h3>
+                  <h3 className="text-base font-bold text-slate-800 mb-1">{judul}</h3>
                   <p className="text-sm text-gray-500">{sub}</p>
                 </div>
-                <div className="border-t border-gray-200 pt-4">
+                <div className="border-t border-slate-100 pt-4">
                   <p className="text-[10px] font-bold tracking-widest text-gray-400 uppercase mb-1">
                     Jadwal Angkut
                   </p>
@@ -110,20 +110,20 @@ export default function KebersihanLingkungan() {
         {/* KERJA BAKTI + TATA TERTIB */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Kerja Bakti */}
-          <div className="bg-white rounded-xs border border-gray-200 shadow-sm p-8 flex flex-col gap-5">
+          <div className="bg-white rounded-xs border border-slate-100 shadow-sm p-8 flex flex-col gap-5">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-9 h-9 bg-brand-primary border border-brand-primary-hover rounded-xs flex items-center justify-center shrink-0 text-white shadow-sm">
                 <Users size={16} />
               </div>
-              <p className="text-xs font-bold tracking-widest text-gray-400 uppercase">
+              <h2 className="text-lg font-bold text-slate-800">
                 Gotong Royong & Kerja Bakti
-              </p>
+              </h2>
             </div>
 
-            <div className="bg-gray-50 border border-gray-200 rounded-xs p-5">
+            <div className="bg-slate-50 border border-slate-100 rounded-xs p-5">
               <div className="flex items-center gap-3 mb-3">
                 <CalendarClock size={16} className="text-brand-primary" />
-                <h4 className="text-sm font-bold text-gray-900">Kerja Bakti Rutin Bulanan</h4>
+                <h4 className="text-sm font-bold text-slate-800">Kerja Bakti Rutin Bulanan</h4>
               </div>
               <p className="text-sm text-gray-600 leading-relaxed mb-4">
                 Dilaksanakan serentak di seluruh RT setiap{" "}
@@ -136,14 +136,14 @@ export default function KebersihanLingkungan() {
               </div>
             </div>
 
-            <div className="group bg-gray-50 border border-gray-200 rounded-xs p-5 hover:bg-white hover:shadow-sm transition-all duration-200">
+            <div className="group bg-white border border-slate-100 rounded-xs p-5 hover:shadow-md transition-shadow duration-300">
               <div className="flex items-start gap-3">
                 <div className="w-9 h-9 bg-brand-primary border border-brand-primary-hover rounded-xs flex items-center justify-center shrink-0 text-white shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200">
                   <Leaf size={15} />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-gray-900 mb-1.5">Program Penghijauan (KWT)</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed">
+                  <h4 className="text-sm font-bold text-slate-800 mb-1.5">Program Penghijauan (KWT)</h4>
+                  <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">
                     Ibu-ibu PKK dan Kelompok Wanita Tani (KWT) RW 12 mengelola bank sampah dan apotek hidup.
                     Warga dapat berpartisipasi setiap hari Jumat sore.
                   </p>
@@ -153,24 +153,24 @@ export default function KebersihanLingkungan() {
           </div>
 
           {/* Tata Tertib */}
-          <div className="bg-white rounded-xs border border-gray-200 shadow-sm p-8 flex flex-col gap-4">
+          <div className="bg-white rounded-xs border border-slate-100 shadow-sm p-8 flex flex-col gap-4">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-9 h-9 bg-brand-primary border border-brand-primary-hover rounded-xs flex items-center justify-center shrink-0 text-white shadow-sm">
                 <AlertOctagon size={16} />
               </div>
-              <p className="text-xs font-bold tracking-widest text-gray-400 uppercase">
+              <h2 className="text-lg font-bold text-slate-800">
                 Tata Tertib Lingkungan
-              </p>
+              </h2>
             </div>
 
             {TATA_TERTIB.map(({ icon: Icon, judul, desc}) => (
-              <div key={judul} className="group flex items-start gap-4 bg-gray-50 border border-gray-200 rounded-xs p-5 hover:bg-white hover:shadow-sm transition-all duration-200">
+              <div key={judul} className="group flex items-start gap-4 bg-white border border-slate-100 rounded-xs p-5 hover:shadow-md transition-shadow duration-300">
                 <div className={`w-9 h-9 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm`}>
                   <Icon size={15} />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-gray-900 mb-1">{judul}</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed">{desc}</p>
+                  <h4 className="text-sm font-bold text-slate-800 mb-1">{judul}</h4>
+                  <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">{desc}</p>
                 </div>
               </div>
             ))}

@@ -17,7 +17,7 @@ const MapComponent = dynamic(() => import("@/components/MapComponent"), {
 
 export default function PetaWilayahPage() {
   return (
-    <div className="min-h-screen bg-gray-50 pb-20 font-sans">
+    <div className="min-h-screen bg-slate-50 pb-20 font-sans">
       <PageHeader
         category="Profil Lingkungan"
         title="Peta Wilayah Interaktif"
@@ -25,11 +25,11 @@ export default function PetaWilayahPage() {
       />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10">
-        <div className="bg-white border border-gray-200 shadow-sm rounded-xs flex flex-col lg:flex-row min-h-[600px] overflow-hidden">
+        <div className="bg-white border border-slate-100 shadow-sm rounded-xs flex flex-col lg:flex-row min-h-[600px] overflow-hidden">
           
           {/* Sidebar Info */}
-          <div className="w-full lg:w-80 bg-gray-50 border-b lg:border-b-0 lg:border-r border-gray-200 p-6 flex flex-col shrink-0">
-            <h3 className="font-bold text-lg text-gray-900 mb-4 flex items-center gap-2">
+          <div className="w-full lg:w-80 bg-slate-50 border-b lg:border-b-0 lg:border-r border-slate-100 p-6 flex flex-col shrink-0">
+            <h3 className="font-bold text-lg text-slate-800 mb-4 flex items-center gap-2">
               <Info size={20} className="text-brand-primary" />
               Legenda Peta
             </h3>
@@ -41,7 +41,7 @@ export default function PetaWilayahPage() {
                   RW
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 text-sm m-0">Sekretariat RW 12</p>
+                  <p className="font-semibold text-slate-800 text-sm m-0">Sekretariat RW 12</p>
                   <p className="text-xs text-gray-500 mt-1">Pusat pelayanan warga dan kesekretariatan.</p>
                 </div>
               </div>
@@ -52,7 +52,7 @@ export default function PetaWilayahPage() {
                   P
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 text-sm m-0">Poskamling</p>
+                  <p className="font-semibold text-slate-800 text-sm m-0">Poskamling</p>
                   <p className="text-xs text-gray-500 mt-1">Titik pos keamanan di masing-masing RT.</p>
                 </div>
               </div>
@@ -61,16 +61,16 @@ export default function PetaWilayahPage() {
               <div className="flex items-start gap-3">
                 <MapPin size={32} className="text-blue-500 shrink-0 transform -translate-y-1" />
                 <div>
-                  <p className="font-semibold text-gray-900 text-sm m-0">Fasilitas Umum</p>
+                  <p className="font-semibold text-slate-800 text-sm m-0">Fasilitas Umum</p>
                   <p className="text-xs text-gray-500 mt-1">Taman, sarana olahraga, atau balai pertemuan.</p>
                 </div>
               </div>
               
               {/* Legenda Item 4 */}
-              <div className="flex items-start gap-3 mt-6 pt-4 border-t border-gray-200">
+              <div className="flex items-start gap-3 mt-6 pt-4 border-t border-slate-100">
                 <div className="w-8 h-4 border-2 border-brand-primary border-dashed bg-brand-primary/10 mt-1 shrink-0" />
                 <div>
-                  <p className="font-semibold text-gray-900 text-sm m-0">Batas Wilayah</p>
+                  <p className="font-semibold text-slate-800 text-sm m-0">Batas Wilayah</p>
                   <p className="text-xs text-gray-500 mt-1">Estimasi cakupan administratif RW 12.</p>
                 </div>
               </div>

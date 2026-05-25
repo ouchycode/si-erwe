@@ -22,7 +22,7 @@ export default function GaleriPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20 font-sans">
+    <div className="min-h-screen bg-slate-50 pb-20 font-sans">
       <PageHeader
         category="Dokumentasi"
         title="Galeri Kegiatan RW 12"
@@ -43,14 +43,14 @@ export default function GaleriPage() {
       />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10">
-        <div className="bg-white border border-gray-200 shadow-sm p-6 md:p-8 rounded-xs min-h-[500px]">
+        <div className="bg-white border border-slate-100 shadow-sm p-6 md:p-8 rounded-xs min-h-[500px]">
           
           {/* Masonry Grid */}
           <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 gap-6 space-y-6">
             {GALLERY_IMAGES.map((item) => (
               <div 
                 key={item.id} 
-                className="relative group overflow-hidden rounded-xs bg-gray-100 break-inside-avoid cursor-pointer border border-gray-200"
+                className="relative group overflow-hidden rounded-xs bg-gray-100 break-inside-avoid cursor-pointer border border-slate-100"
                 onClick={() => setSelectedImage(item.src)}
               >
                 <Image

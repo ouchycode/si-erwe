@@ -54,7 +54,7 @@ const DATA_RT = [
 
 export default function PengurusRT() {
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-slate-50 pb-20">
       <PageHeader
         category="Tentang Kami"
         title="Daftar Pengurus RT"
@@ -68,7 +68,7 @@ export default function PengurusRT() {
               <p className="text-xs text-blue-300/80 font-bold uppercase tracking-widest mb-0.5">
                 Total RT Aktif
               </p>
-              <p className="text-2xl font-extrabold text-white">8 Wilayah</p>
+              <p className="text-2xl font-bold text-white">8 Wilayah</p>
             </div>
           </div>
         }
@@ -80,11 +80,11 @@ export default function PengurusRT() {
           {DATA_RT.map((item) => (
             <div
               key={item.rt}
-              className="bg-white border border-gray-200 rounded-xs overflow-hidden transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 group"
+              className="bg-white border border-slate-100 rounded-xs overflow-hidden transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 group"
             >
               {/* Header */}
               <div className="bg-brand-primary px-5 py-4 flex items-center justify-between">
-                <h3 className="text-white font-extrabold text-base tracking-wide">
+                <h3 className="text-white font-bold text-base tracking-wide">
                   RT {item.rt}
                 </h3>
                 <span className="text-[10px] font-bold text-blue-300/80 uppercase tracking-widest">
@@ -103,7 +103,7 @@ export default function PengurusRT() {
                     <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-0.5">
                       Ketua RT
                     </p>
-                    <p className="text-sm font-bold text-gray-900 leading-tight">
+                    <p className="text-sm font-bold text-slate-800 leading-tight">
                       {item.ketua}
                     </p>
                   </div>

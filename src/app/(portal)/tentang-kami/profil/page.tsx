@@ -3,7 +3,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 
 export default function ProfilRW() {
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-slate-50 pb-20">
       <PageHeader
         category="Tentang Kami"
         title="Profil & Sejarah RW 12"
@@ -17,7 +17,7 @@ export default function ProfilRW() {
               <p className="text-xs text-blue-300/80 font-bold uppercase tracking-widest mb-0.5">
                 Periode Kepengurusan
               </p>
-              <p className="text-2xl font-extrabold text-white">2024 — 2027</p>
+              <p className="text-2xl font-bold text-white">2024 — 2027</p>
             </div>
           </div>
         }
@@ -31,12 +31,12 @@ export default function ProfilRW() {
           <div className="lg:col-span-2 flex flex-col gap-6">
 
             {/* Sejarah */}
-            <div className="group bg-white rounded-xs border border-gray-200 shadow-sm p-8 hover:shadow-md transition-all duration-300">
+            <div className="group bg-white rounded-xs border border-slate-100 shadow-sm p-8 hover:shadow-md transition-all duration-300">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm">
                   <BookOpen size={18} />
                 </div>
-                <h2 className="text-xl font-bold text-gray-900">Sejarah Singkat</h2>
+                <h2 className="text-xl font-bold text-slate-800">Sejarah Singkat</h2>
               </div>
               <div className="text-base text-gray-600 leading-relaxed flex flex-col gap-4">
                 <p>
@@ -74,7 +74,7 @@ export default function ProfilRW() {
               </div>
 
               {/* Misi */}
-              <div className="group bg-white rounded-xs border border-gray-200 p-8 flex flex-col gap-4 shadow-sm hover:shadow-md transition-all duration-300">
+              <div className="group bg-white rounded-xs border border-slate-100 p-8 flex flex-col gap-4 shadow-sm hover:shadow-md transition-all duration-300">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm">
                     <Target size={18} />
@@ -105,7 +105,7 @@ export default function ProfilRW() {
           {/* KANAN: Info Wilayah + Peta */}
           <div className="flex flex-col gap-6">
             {/* Info Wilayah */}
-            <div className="bg-white rounded-xs border border-gray-200 shadow-sm p-6">
+            <div className="bg-white rounded-xs border border-slate-100 shadow-sm p-6">
               <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-5">
                 Informasi Wilayah
               </p>
@@ -132,7 +132,7 @@ export default function ProfilRW() {
             </div>
 
             {/* Peta */}
-            <div className="bg-white rounded-xs border border-gray-200 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-xs border border-slate-100 shadow-sm overflow-hidden">
               <div className="w-full h-52 bg-gray-100 relative">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2!2d106.9!3d-6.15!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f4a!2sPegangsaan+Dua!5e0!3m2!1sid!2sid!4v1713456789012!5m2!1sid!2sid"

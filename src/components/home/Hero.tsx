@@ -17,7 +17,7 @@ export default function Hero() {
         
         {/* Hero Content */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 text-center -mt-16">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4 tracking-tight drop-shadow-md">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 tracking-tight drop-shadow-md">
             Sekretariat RW 12
           </h1>
           <p className="text-lg md:text-xl text-gray-200 font-medium max-w-2xl mx-auto leading-relaxed drop-shadow">
@@ -30,34 +30,34 @@ export default function Hero() {
       <div className="relative z-20 w-full px-4 md:px-8 max-w-7xl mx-auto -mt-20 mb-16">
         
         {/* Quick Links Card - Dashboard Shape */}
-        <div className="bg-white rounded-xs border border-gray-200 p-6 md:p-8 mb-6 shadow-sm">
+        <div className="bg-white rounded-xs border border-slate-100 p-6 md:p-8 mb-6 shadow-sm">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-            <Link href="/layanan/administrasi-kependudukan" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-gray-50/50">
-              <div className="w-12 h-12 w-12 h-12 rounded-xs flex items-center justify-center mb-3 icon-badge shadow-md">
+            <Link href="/layanan/administrasi-kependudukan" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-slate-50/50">
+              <div className="w-12 h-12 rounded-xs flex items-center justify-center mb-3 icon-badge shadow-md">
                 <FileText size={20} strokeWidth={2} />
               </div>
-              <span className="text-sm font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Surat Pengantar</span>
+              <span className="text-sm font-bold text-slate-800 group-hover:text-brand-primary transition-colors">Surat Pengantar</span>
             </Link>
             
-            <Link href="/informasi/statistik" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-gray-50/50">
-              <div className="w-12 h-12 w-12 h-12 rounded-xs flex items-center justify-center mb-3 icon-badge shadow-md">
+            <Link href="/informasi/statistik" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-slate-50/50">
+              <div className="w-12 h-12 rounded-xs flex items-center justify-center mb-3 icon-badge shadow-md">
                 <BarChart2 size={20} strokeWidth={2} />
               </div>
-              <span className="text-sm font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Statistik Warga</span>
+              <span className="text-sm font-bold text-slate-800 group-hover:text-brand-primary transition-colors">Statistik Warga</span>
             </Link>
             
-            <Link href="/layanan/keamanan-wilayah" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-gray-50/50">
-              <div className="w-12 h-12 w-12 h-12 rounded-xs flex items-center justify-center mb-3 icon-badge shadow-md">
+            <Link href="/layanan/keamanan-wilayah" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-slate-50/50">
+              <div className="w-12 h-12 rounded-xs flex items-center justify-center mb-3 icon-badge shadow-md">
                 <ShieldAlert size={20} strokeWidth={2} />
               </div>
-              <span className="text-sm font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Lapor Keamanan</span>
+              <span className="text-sm font-bold text-slate-800 group-hover:text-brand-primary transition-colors">Lapor Keamanan</span>
             </Link>
             
-            <Link href="/hubungi-kami" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-gray-50/50">
-              <div className="w-12 h-12 w-12 h-12 rounded-xs flex items-center justify-center mb-3 icon-badge shadow-md">
+            <Link href="/hubungi-kami" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-slate-50/50">
+              <div className="w-12 h-12 rounded-xs flex items-center justify-center mb-3 icon-badge shadow-md">
                 <PhoneCall size={20} strokeWidth={2} />
               </div>
-              <span className="text-sm font-bold text-gray-900 group-hover:text-brand-primary transition-colors">Pusat Bantuan</span>
+              <span className="text-sm font-bold text-slate-800 group-hover:text-brand-primary transition-colors">Pusat Bantuan</span>
             </Link>
           </div>
         </div>

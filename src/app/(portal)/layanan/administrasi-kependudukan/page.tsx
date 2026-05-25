@@ -46,7 +46,7 @@ const ALUR = [
 
 export default function AdministrasiKependudukan() {
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-slate-50 pb-20">
       <PageHeader
         category="Layanan Warga"
         title="Administrasi Kependudukan"
@@ -55,7 +55,7 @@ export default function AdministrasiKependudukan() {
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10 flex flex-col gap-8 pb-20">
         {/* ALUR */}
-        <div className="bg-white rounded-xs border border-gray-200 shadow-sm p-8">
+        <div className="bg-white rounded-xs border border-slate-100 shadow-sm p-8">
           <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-6">
             Alur Pengurusan
           </p>
@@ -65,13 +65,13 @@ export default function AdministrasiKependudukan() {
             {ALUR.map((item) => (
               <div
                 key={item.step}
-                className="relative z-10 flex flex-col gap-3 bg-gray-50 border border-gray-200 rounded-xs px-5 py-5"
+                className="relative z-10 flex flex-col gap-3 bg-slate-50 border border-slate-100 rounded-xs px-5 py-5"
               >
-                <span className="text-xs font-extrabold text-brand-primary tracking-widest">
+                <span className="text-xs font-bold text-brand-primary tracking-widest">
                   {item.step}
                 </span>
                 <div>
-                  <h3 className="text-sm font-bold text-gray-900 mb-1">{item.title}</h3>
+                  <h3 className="text-sm font-bold text-slate-800 mb-1">{item.title}</h3>
                   <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
@@ -87,18 +87,18 @@ export default function AdministrasiKependudukan() {
               <div className="w-9 h-9 bg-brand-primary border border-brand-primary-hover rounded-xs flex items-center justify-center shrink-0 shadow-sm text-white">
                 <FileSignature size={16} />
               </div>
-              <p className="text-xs font-bold tracking-widest text-gray-400 uppercase">
+              <h2 className="text-lg font-bold text-slate-800">
                 Persyaratan Dokumen
-              </p>
+              </h2>
             </div>
 
             {LAYANAN.map(({ icon: Icon, judul, syarat}) => (
-              <div key={judul} className="group bg-white border border-gray-200 rounded-xs p-6 shadow-sm hover:shadow-md transition-all duration-300">
+              <div key={judul} className="group bg-white border border-slate-100 rounded-xs p-6 shadow-sm hover:shadow-md transition-all duration-300">
                 <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
                   <div className={`w-10 h-10 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm`}>
                     <Icon size={18} />
                   </div>
-                  <h3 className="text-base font-bold text-gray-900">{judul}</h3>
+                  <h3 className="text-base font-bold text-slate-800">{judul}</h3>
                 </div>
                 <ul className="flex flex-col gap-3">
                   {syarat.map((s) => (

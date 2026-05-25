@@ -58,7 +58,7 @@ const RW_BOUNDARY: [number, number][] = [
 
 export default function MapComponent() {
   return (
-    <div className="w-full h-full rounded-xs overflow-hidden border border-gray-200 shadow-inner z-0 relative">
+    <div className="w-full h-full rounded-xs overflow-hidden border border-slate-100 shadow-inner z-0 relative">
       <MapContainer 
         center={CENTER} 
         zoom={15} 

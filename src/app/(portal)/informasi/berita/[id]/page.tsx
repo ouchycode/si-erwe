@@ -79,7 +79,7 @@ export default function DetailBerita() {
                 </span>
               </div>
 
-              <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight tracking-tight mb-6">
+              <h1 className="text-2xl md:text-3xl font-bold text-slate-800 leading-tight tracking-tight mb-6">
                 {DETAIL_BERITA.title}
               </h1>
 
@@ -91,7 +91,7 @@ export default function DetailBerita() {
                   <p className="text-[10.5px] text-gray-400 font-semibold uppercase tracking-widest mb-0.5">
                     Penulis / Editor
                   </p>
-                  <p className="text-[13.5px] font-bold text-gray-900">
+                  <p className="text-[13.5px] font-bold text-slate-800">
                     {DETAIL_BERITA.author}
                   </p>
                 </div>
@@ -111,7 +111,7 @@ export default function DetailBerita() {
 
             {/* Konten */}
             <div
-              className="p-6 md:p-8 prose prose-sm prose-gray max-w-none text-gray-600 prose-headings:text-gray-900 prose-headings:font-bold prose-a:text-brand-primary"
+              className="p-6 md:p-8 prose prose-sm prose-gray max-w-none text-gray-600 prose-headings:text-slate-800 prose-headings:font-bold prose-a:text-brand-primary"
               dangerouslySetInnerHTML={{ __html: DETAIL_BERITA.content }}
             />
 
@@ -154,7 +154,7 @@ export default function DetailBerita() {
             <div className="bg-white border border-gray-100 rounded-md p-6 sticky top-24">
               <div className="flex items-center gap-2.5 mb-5 pb-4 border-b border-gray-100">
                 <Tag size={14} className="text-brand-primary" />
-                <h3 className="text-[13px] font-bold text-gray-900">
+                <h3 className="text-[13px] font-bold text-slate-800">
                   Berita Lainnya
                 </h3>
               </div>

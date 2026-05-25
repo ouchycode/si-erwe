@@ -49,7 +49,7 @@ export default function IuranWargaPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20 font-sans">
+    <div className="min-h-screen bg-slate-50 pb-20 font-sans">
       <PageHeader
         category="Layanan Publik Digital"
         title="Pembayaran Iuran Warga"
@@ -63,7 +63,7 @@ export default function IuranWargaPage() {
               <p className="text-xs text-blue-300/80 font-bold uppercase tracking-widest mb-0.5">
                 Integrasi Pembayaran
               </p>
-              <p className="text-xl font-extrabold text-white leading-none">QRIS / Transfer</p>
+              <p className="text-xl font-bold text-white leading-none">QRIS / Transfer</p>
             </div>
           </div>
         }
@@ -72,7 +72,7 @@ export default function IuranWargaPage() {
       <div className="max-w-4xl mx-auto px-4 md:px-8 -mt-16 relative z-10 flex flex-col gap-6">
         
         {/* Search Bar Box */}
-        <div className="bg-white border border-gray-200 shadow-sm rounded-xs p-6 md:p-8">
+        <div className="bg-white border border-slate-100 shadow-sm rounded-xs p-6 md:p-8">
           <form onSubmit={handleSearch} className="flex flex-col md:flex-row items-end gap-4">
             <div className="flex-1 w-full space-y-2">
               <label className="text-xs font-bold text-gray-500 uppercase tracking-widest flex items-center gap-1.5">
@@ -88,7 +88,7 @@ export default function IuranWargaPage() {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type="text"
                   placeholder="Misal: Blok A1 atau A1/12"
-                  className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm font-medium"
+                  className="w-full pl-11 pr-4 py-3.5 bg-slate-50 border border-slate-100 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm font-medium"
                 />
               </div>
             </div>
@@ -103,14 +103,14 @@ export default function IuranWargaPage() {
 
         {/* Billing Info Box */}
         {bill && (
-          <div className="bg-white border border-gray-200 shadow-sm rounded-xs overflow-hidden animate-in slide-in-from-bottom-4 duration-500">
+          <div className="bg-white border border-slate-100 shadow-sm rounded-xs overflow-hidden animate-in slide-in-from-bottom-4 duration-500">
             <div className="bg-blue-50 border-b border-blue-100 p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm text-brand-primary shrink-0 border border-blue-100">
                   <Receipt size={24} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 m-0">Tagihan IPL Bulan {bill.bulan}</h3>
+                  <h3 className="text-lg font-bold text-slate-800 m-0">Tagihan IPL Bulan {bill.bulan}</h3>
                   <p className="text-sm text-gray-500 font-medium mt-1 mb-0">Rumah Blok <strong className="text-brand-primary">{bill.nomorRumah}</strong> &bull; {bill.namaPemilik}</p>
                 </div>
               </div>
@@ -129,23 +129,23 @@ export default function IuranWargaPage() {
                   {bill.rincian.map((item, idx) => (
                     <div key={idx} className="flex justify-between items-center text-sm">
                       <span className="text-gray-600 font-medium">{item.nama}</span>
-                      <span className="text-gray-900 font-bold">Rp {item.nominal.toLocaleString('id-ID')}</span>
+                      <span className="text-slate-800 font-bold">Rp {item.nominal.toLocaleString('id-ID')}</span>
                     </div>
                   ))}
                 </div>
-                <div className="pt-4 border-t border-dashed border-gray-200 flex justify-between items-center">
-                  <span className="text-gray-900 font-extrabold text-base">Total Tagihan</span>
-                  <span className="text-brand-primary font-extrabold text-xl">Rp {bill.total.toLocaleString('id-ID')}</span>
+                <div className="pt-4 border-t border-dashed border-slate-100 flex justify-between items-center">
+                  <span className="text-slate-800 font-bold text-base">Total Tagihan</span>
+                  <span className="text-brand-primary font-bold text-xl">Rp {bill.total.toLocaleString('id-ID')}</span>
                 </div>
               </div>
 
               {/* Action Kanan */}
-              <div className="w-full md:w-72 bg-gray-50 border border-gray-100 rounded-xs p-6 flex flex-col items-center justify-center text-center gap-4 shrink-0">
+              <div className="w-full md:w-72 bg-slate-50 border border-gray-100 rounded-xs p-6 flex flex-col items-center justify-center text-center gap-4 shrink-0">
                 {bill.status === "Lunas" ? (
                   <>
                     <CheckCircle2 size={48} className="text-green-500" />
                     <div>
-                      <p className="text-sm font-bold text-gray-900 mb-1 m-0">Tagihan Sudah Lunas</p>
+                      <p className="text-sm font-bold text-slate-800 mb-1 m-0">Tagihan Sudah Lunas</p>
                       <p className="text-xs text-gray-500 m-0">Terima kasih atas partisipasi Anda membangun lingkungan.</p>
                     </div>
                   </>
@@ -182,26 +182,26 @@ export default function IuranWargaPage() {
             
             {paymentStep === "SELECT_METHOD" && (
               <div className="flex flex-col">
-                <div className="bg-gray-50 p-5 border-b border-gray-200 text-center relative">
-                  <h3 className="font-bold text-gray-900 m-0">Pilih Metode Pembayaran</h3>
+                <div className="bg-slate-50 p-5 border-b border-slate-100 text-center relative">
+                  <h3 className="font-bold text-slate-800 m-0">Pilih Metode Pembayaran</h3>
                   <button onClick={() => setIsModalOpen(false)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-sm font-bold cursor-pointer border-none bg-transparent">Batal</button>
                 </div>
                 <div className="p-4 flex flex-col gap-3">
-                  <button onClick={() => setPaymentStep("QRIS")} className="flex items-center justify-between p-4 border border-gray-200 rounded-xs hover:border-brand-primary hover:bg-blue-50 transition-all cursor-pointer bg-white text-left group">
+                  <button onClick={() => setPaymentStep("QRIS")} className="flex items-center justify-between p-4 border border-slate-100 rounded-xs hover:border-brand-primary hover:bg-blue-50 transition-all cursor-pointer bg-white text-left group">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-blue-100 text-brand-primary rounded-xs flex items-center justify-center"><QrCode size={20}/></div>
                       <div>
-                        <p className="text-sm font-bold text-gray-900 m-0">QRIS</p>
+                        <p className="text-sm font-bold text-slate-800 m-0">QRIS</p>
                         <p className="text-[10px] text-gray-500 font-medium m-0">Gopay, OVO, Dana, M-Banking</p>
                       </div>
                     </div>
                     <ChevronRight size={18} className="text-gray-300 group-hover:text-brand-primary" />
                   </button>
-                  <button disabled className="flex items-center justify-between p-4 border border-gray-100 rounded-xs bg-gray-50 opacity-60 text-left">
+                  <button disabled className="flex items-center justify-between p-4 border border-gray-100 rounded-xs bg-slate-50 opacity-60 text-left">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-gray-200 text-gray-400 rounded-xs flex items-center justify-center"><Building2 size={20}/></div>
                       <div>
-                        <p className="text-sm font-bold text-gray-900 m-0">Virtual Account Bank</p>
+                        <p className="text-sm font-bold text-slate-800 m-0">Virtual Account Bank</p>
                         <p className="text-[10px] text-gray-500 font-medium m-0">Sedang dalam perbaikan</p>
                       </div>
                     </div>
@@ -212,7 +212,7 @@ export default function IuranWargaPage() {
 
             {paymentStep === "QRIS" && (
               <div className="flex flex-col text-center p-6">
-                <h3 className="font-bold text-gray-900 m-0 mb-1">Scan QRIS</h3>
+                <h3 className="font-bold text-slate-800 m-0 mb-1">Scan QRIS</h3>
                 <p className="text-xs text-gray-500 mb-6">Gunakan aplikasi e-wallet atau M-Banking Anda</p>
                 
                 <div className="w-48 h-48 mx-auto bg-gray-100 border-2 border-dashed border-gray-300 rounded-md flex items-center justify-center mb-6">
@@ -239,8 +239,8 @@ export default function IuranWargaPage() {
                 <div className="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-4">
                   <CheckCircle2 size={40} />
                 </div>
-                <h3 className="font-extrabold text-xl text-gray-900 m-0 mb-2">Pembayaran Berhasil!</h3>
-                <p className="text-sm text-gray-500 leading-relaxed mb-6">Terima kasih, pembayaran Iuran IPL untuk rumah Blok <strong className="text-gray-900">{bill?.nomorRumah}</strong> telah masuk ke sistem kami.</p>
+                <h3 className="font-bold text-xl text-slate-800 m-0 mb-2">Pembayaran Berhasil!</h3>
+                <p className="text-sm text-gray-500 leading-relaxed mb-6">Terima kasih, pembayaran Iuran IPL untuk rumah Blok <strong className="text-slate-800">{bill?.nomorRumah}</strong> telah masuk ke sistem kami.</p>
                 <button 
                   onClick={() => setIsModalOpen(false)} 
                   className="w-full bg-brand-primary text-white font-bold py-3.5 rounded-xs hover:bg-brand-primary-hover transition-colors cursor-pointer border-none shadow-sm"

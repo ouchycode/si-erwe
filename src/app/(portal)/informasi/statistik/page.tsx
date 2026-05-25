@@ -172,9 +172,9 @@ export default function StatistikPage() {
   const getSortIcon = (key: string) => {
     if (sortConfig?.key === key) {
       return sortConfig.direction === "asc" ? (
-        <ChevronUp size={12} className="text-gray-900" />
+        <ChevronUp size={12} className="text-slate-800" />
       ) : (
-        <ChevronDown size={12} className="text-gray-900" />
+        <ChevronDown size={12} className="text-slate-800" />
       );
     }
     return (
@@ -186,7 +186,7 @@ export default function StatistikPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20 font-sans">
+    <div className="min-h-screen bg-slate-50 pb-20 font-sans">
       <PageHeader
         category="Data Demografi"
         title="Statistik Warga RW 12"
@@ -219,7 +219,7 @@ export default function StatistikPage() {
               className={`px-4 py-2 text-xs font-semibold transition-all border ${
                 activeTab === tab
                   ? "border-brand-primary text-brand-primary bg-blue-50/50 shadow-sm"
-                  : "border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700 bg-white shadow-sm"
+                  : "border-slate-100 text-gray-500 hover:border-gray-300 hover:text-gray-700 bg-white shadow-sm"
               }`}
             >
               {tab}
@@ -230,11 +230,11 @@ export default function StatistikPage() {
         {/* Content Layout */}
         <div className="flex flex-col lg:flex-row gap-6 items-start">
           {/* Table Container */}
-          <div className="flex-1 w-full bg-white border border-gray-200 shadow-sm overflow-hidden rounded-xs">
+          <div className="flex-1 w-full bg-white border border-slate-100 shadow-sm overflow-hidden rounded-xs">
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-center">
                 <thead className="sticky top-0 shadow-sm z-10">
-                  <tr className="border-b border-gray-200 text-[10px] uppercase font-bold text-gray-600 bg-gray-50">
+                  <tr className="border-b border-slate-100 text-[10px] uppercase font-bold text-gray-600 bg-slate-50">
                     <th
                       className="py-4 px-4 cursor-pointer hover:bg-gray-100 transition-colors"
                       onClick={() => requestSort("rt")}
@@ -263,7 +263,7 @@ export default function StatistikPage() {
                     <tr
                       key={row.rt}
                       className={`${
-                        index % 2 === 0 ? "bg-white" : "bg-gray-50/50"
+                        index % 2 === 0 ? "bg-white" : "bg-slate-50/50"
                       } hover:bg-blue-50/50 transition-colors duration-150`}
                     >
                       <td className="py-3 px-4 font-medium text-gray-700">
@@ -277,8 +277,8 @@ export default function StatistikPage() {
                     </tr>
                   ))}
                   {/* Totals Row */}
-                  <tr className="border-t-2 border-gray-200 bg-gray-50 font-bold">
-                    <td className="py-4 px-4 text-gray-900">
+                  <tr className="border-t-2 border-slate-100 bg-slate-50 font-bold">
+                    <td className="py-4 px-4 text-slate-800">
                       TOTAL
                     </td>
                     {activeCategory.columns.map(col => (
@@ -293,7 +293,7 @@ export default function StatistikPage() {
           </div>
 
           {/* Chart Container */}
-          <div className="w-full lg:w-[350px] shrink-0 bg-white border border-gray-200 shadow-sm rounded-xs p-6 sticky top-24">
+          <div className="w-full lg:w-[350px] shrink-0 bg-white border border-slate-100 shadow-sm rounded-xs p-6 sticky top-24">
             <h3 className="text-sm font-bold text-center text-gray-800 mb-6 uppercase tracking-widest">
               {activeCategory.chartTitle}
             </h3>
@@ -333,7 +333,7 @@ export default function StatistikPage() {
                     <div className="w-3 h-3 rounded-full" style={{ backgroundColor: data.color }} />
                     <span className="text-gray-600">{data.name}</span>
                   </div>
-                  <span className="font-bold text-gray-900">{data.value}</span>
+                  <span className="font-bold text-slate-800">{data.value}</span>
                 </div>
               ))}
             </div>

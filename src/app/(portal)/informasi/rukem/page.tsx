@@ -43,7 +43,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 
 export default function RukunKematian() {
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-slate-50 pb-20">
       <PageHeader
         category="Sosial Kemanusiaan"
         title="Layanan Rukun Kematian"
@@ -52,13 +52,13 @@ export default function RukunKematian() {
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10 flex flex-col gap-8">
         {/* KONTAK DARURAT */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 bg-white border border-gray-200 rounded-xs p-6 shadow-sm">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 bg-white border border-slate-100 rounded-xs p-6 shadow-sm">
           <div className="flex items-start gap-4">
             <div className="w-10 h-10 bg-blue-50 border border-blue-100 rounded-xs flex items-center justify-center shrink-0">
               <Phone size={16} className="text-brand-primary" />
             </div>
             <div>
-              <h2 className="text-[14px] font-bold text-gray-900 mb-0.5">
+              <h2 className="text-[14px] font-bold text-slate-800 mb-0.5">
                 Layanan Kedukaan RW 12
               </h2>
               <p className="text-[12.5px] text-gray-400 leading-relaxed max-w-md">
@@ -77,7 +77,7 @@ export default function RukunKematian() {
             </a>
             <a
               href="https://wa.me/62812XXXXXXX"
-              className="inline-flex items-center justify-center gap-2 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 text-sm font-bold px-5 py-2.5 rounded-xs no-underline transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-white border border-slate-100 hover:bg-slate-50 text-gray-700 text-sm font-bold px-5 py-2.5 rounded-xs no-underline transition-colors"
             >
               WhatsApp Admin
             </a>
@@ -85,23 +85,23 @@ export default function RukunKematian() {
         </div>
 
         {/* ALUR PROSEDUR */}
-        <div className="bg-white rounded-xs border border-gray-200 shadow-sm p-8">
+        <div className="bg-white rounded-xs border border-slate-100 shadow-sm p-8">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-9 h-9 bg-blue-50 border border-blue-100 rounded-xs flex items-center justify-center shrink-0">
               <ClipboardList size={16} className="text-brand-primary" />
             </div>
-            <p className="text-xs font-bold tracking-widest text-gray-400 uppercase">
-              Prosedur Pelaporan Kematian
-            </p>
+            <h2 className="text-lg font-bold text-slate-800">
+                Prosedur Pelaporan Kematian
+              </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {ALUR.map(({ step, icon: Icon, title, desc }) => (
               <div
                 key={step}
-                className="bg-gray-50 border border-gray-200 rounded-xs p-6 flex flex-col gap-3"
+                className="bg-slate-50 border border-slate-100 rounded-xs p-6 flex flex-col gap-3"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 bg-white border border-gray-200 rounded-xs flex items-center justify-center shrink-0">
+                  <div className="w-9 h-9 bg-white border border-slate-100 rounded-xs flex items-center justify-center shrink-0">
                     <Icon size={16} className="text-brand-primary" />
                   </div>
                   <span className="text-[11px] font-bold text-gray-300 tracking-widest">
@@ -109,7 +109,7 @@ export default function RukunKematian() {
                   </span>
                 </div>
                 <div>
-                  <h4 className="text-[13.5px] font-bold text-gray-900 mb-1">
+                  <h4 className="text-[13.5px] font-bold text-slate-800 mb-1">
                     {title}
                   </h4>
                   <p className="text-[12px] text-gray-400 leading-relaxed">
@@ -124,10 +124,10 @@ export default function RukunKematian() {
         {/* MANFAAT + INFO */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Manfaat */}
-          <div className="bg-white border border-gray-200 rounded-xs p-6 shadow-sm">
+          <div className="bg-white border border-slate-100 rounded-xs p-6 shadow-sm">
             <div className="flex items-center gap-2.5 mb-5 pb-4 border-b border-gray-100">
               <CheckCircle2 size={15} className="text-brand-primary" />
-              <h3 className="text-[13px] font-bold text-gray-900">
+              <h3 className="text-[13px] font-bold text-slate-800">
                 Fasilitas & Manfaat Anggota
               </h3>
             </div>
@@ -135,7 +135,7 @@ export default function RukunKematian() {
               {MANFAAT.map((item) => (
                 <div
                   key={item}
-                  className="flex items-center gap-2.5 bg-gray-50 border border-gray-200 rounded-xs px-4 py-3 text-sm text-gray-700 font-medium"
+                  className="flex items-center gap-2.5 bg-slate-50 border border-slate-100 rounded-xs px-4 py-3 text-sm text-gray-700 font-medium"
                 >
                   <CheckCircle2
                     size={13}
@@ -148,10 +148,10 @@ export default function RukunKematian() {
           </div>
 
           {/* Info Keanggotaan */}
-          <div className="bg-white border border-gray-200 rounded-xs p-6 flex flex-col gap-5 shadow-sm">
+          <div className="bg-white border border-slate-100 rounded-xs p-6 flex flex-col gap-5 shadow-sm">
             <div className="flex items-center gap-2.5">
               <Info size={15} className="text-brand-primary" />
-              <h3 className="text-[13px] font-bold text-gray-900">
+              <h3 className="text-[13px] font-bold text-slate-800">
                 Informasi Keanggotaan
               </h3>
             </div>
@@ -161,7 +161,7 @@ export default function RukunKematian() {
             </p>
 
             {/* Iuran */}
-            <div className="bg-gray-50 border border-gray-200 rounded-xs p-5">
+            <div className="bg-slate-50 border border-slate-100 rounded-xs p-5">
               <p className="text-[10.5px] font-semibold tracking-widest text-gray-400 uppercase mb-2">
                 Iuran Anggota
               </p>

@@ -46,13 +46,13 @@ import { PageHeader } from "@/components/ui/PageHeader";
 
 export default function BeritaTerkini() {
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-slate-50 pb-20">
       <PageHeader
         category="Pusat Informasi"
         title="Lorem Ipsum Dolor"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         rightContent={
-          <div className="hidden md:flex items-center gap-0 bg-white rounded-xs overflow-hidden border border-gray-200 shrink-0 w-72 shadow-sm">
+          <div className="hidden md:flex items-center gap-0 bg-white rounded-xs overflow-hidden border border-slate-100 shrink-0 w-72 shadow-sm">
             <input
               type="text"
               placeholder="Cari berita..."
@@ -67,7 +67,7 @@ export default function BeritaTerkini() {
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10">
         {/* Search mobile */}
-        <div className="flex md:hidden items-center bg-white border border-gray-200 rounded-xs overflow-hidden mb-6 shadow-sm">
+        <div className="flex md:hidden items-center bg-white border border-slate-100 rounded-xs overflow-hidden mb-6 shadow-sm">
           <input
             type="text"
             placeholder="Cari berita..."
@@ -84,7 +84,7 @@ export default function BeritaTerkini() {
             <Link
               key={berita.id}
               href={`/informasi/berita/${berita.id}`}
-              className="group flex flex-col bg-white border border-gray-200 rounded-xs overflow-hidden no-underline transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+              className="group flex flex-col bg-white border border-slate-100 rounded-xs overflow-hidden no-underline transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5"
             >
               {/* Gambar */}
               <div className="relative w-full h-48 bg-gray-100 overflow-hidden border-b border-gray-100">
@@ -110,7 +110,7 @@ export default function BeritaTerkini() {
                   {berita.date}
                 </div>
 
-                <h3 className="text-base font-bold text-gray-900 leading-snug mb-3 group-hover:text-brand-primary transition-colors line-clamp-2 flex-1">
+                <h3 className="text-base font-bold text-slate-800 leading-snug mb-3 group-hover:text-brand-primary transition-colors line-clamp-2 flex-1">
                   {berita.title}
                 </h3>
 
@@ -129,16 +129,16 @@ export default function BeritaTerkini() {
 
         {/* PAGINATION */}
         <div className="flex justify-center mt-12 gap-1.5">
-          <button className="w-9 h-9 rounded-xs border border-gray-200 flex items-center justify-center text-gray-300 bg-white cursor-not-allowed">
+          <button className="w-9 h-9 rounded-xs border border-slate-100 flex items-center justify-center text-gray-300 bg-white cursor-not-allowed">
             <ChevronRight size={15} className="rotate-180" />
           </button>
           <button className="w-9 h-9 rounded-xs bg-brand-primary text-white font-bold text-sm">
             1
           </button>
-          <button className="w-9 h-9 rounded-xs border border-gray-200 bg-white text-gray-500 font-bold text-sm hover:bg-gray-50 transition-colors cursor-pointer">
+          <button className="w-9 h-9 rounded-xs border border-slate-100 bg-white text-gray-500 font-bold text-sm hover:bg-slate-50 transition-colors cursor-pointer">
             2
           </button>
-          <button className="w-9 h-9 rounded-xs border border-gray-200 bg-white flex items-center justify-center text-gray-500 hover:bg-gray-50 transition-colors cursor-pointer">
+          <button className="w-9 h-9 rounded-xs border border-slate-100 bg-white flex items-center justify-center text-gray-500 hover:bg-slate-50 transition-colors cursor-pointer">
             <ChevronRight size={15} />
           </button>
         </div>

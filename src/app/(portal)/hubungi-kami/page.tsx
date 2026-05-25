@@ -25,7 +25,7 @@ export default function HubungiKami() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20 font-sans">
+    <div className="min-h-screen bg-slate-50 pb-20 font-sans">
       <PageHeader
         category="Layanan Warga"
         title="Hubungi Kami"
@@ -35,10 +35,10 @@ export default function HubungiKami() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
           {/* FORM */}
-          <div className="lg:col-span-3 bg-white border border-gray-200 rounded-xs p-6 md:p-8 shadow-sm">
+          <div className="lg:col-span-3 bg-white border border-slate-100 rounded-xs p-6 md:p-8 shadow-sm">
             <div className="flex items-center gap-2.5 mb-7 pb-5 border-b border-gray-100">
               <Send size={15} className="text-brand-primary" />
-              <h2 className="text-[13.5px] font-bold text-gray-900">
+              <h2 className="text-[13.5px] font-bold text-slate-800">
                 Kirim Pesan / Aspirasi
               </h2>
             </div>
@@ -151,21 +151,21 @@ export default function HubungiKami() {
             </div>
 
             {/* Jam Operasional */}
-            <div className="bg-white border border-gray-200 rounded-xs p-6 shadow-sm">
+            <div className="bg-white border border-slate-100 rounded-xs p-6 shadow-sm">
               <div className="flex items-center gap-2.5 mb-4 pb-4 border-b border-gray-100">
                 <Clock size={14} className="text-brand-primary" />
-                <h3 className="text-[13px] font-bold text-gray-900">
+                <h3 className="text-[13px] font-bold text-slate-800">
                   Jam Operasional
                 </h3>
               </div>
               <div className="flex flex-col gap-2.5 text-[12.5px]">
                 <div className="flex justify-between items-center">
                   <span className="text-gray-500">Senin – Jumat</span>
-                  <span className="font-bold text-gray-900">19.00 – 22.00</span>
+                  <span className="font-bold text-slate-800">19.00 – 22.00</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-500">Sabtu – Minggu</span>
-                  <span className="font-bold text-gray-900">09.00 – 15.00</span>
+                  <span className="font-bold text-slate-800">09.00 – 15.00</span>
                 </div>
                 <div className="flex justify-between items-center pt-2.5 border-t border-gray-100">
                   <span className="text-gray-400">Hari Libur Nasional</span>

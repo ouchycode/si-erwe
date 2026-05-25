@@ -6,7 +6,7 @@ export default function AppsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
       <AppShellHeader />
       <main className="flex-1">{children}</main>
     </div>

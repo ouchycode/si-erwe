@@ -143,10 +143,13 @@ export default function AccessibilityWidget() {
       {/* Main Button (Sticks to the right edge) */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed top-1/2 -translate-y-1/2 right-0 z-[9999] w-12 h-14 bg-brand-primary text-white rounded-l-md flex items-center justify-center shadow-[-4px_0_15px_rgba(0,0,0,0.1)] hover:bg-brand-primary-hover hover:w-14 transition-all outline-none focus:ring-2 focus:ring-brand-light cursor-pointer border-none ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        className={`fixed top-1/2 -translate-y-1/2 right-0 z-[9999] w-12 py-4 bg-brand-primary text-white rounded-l-md flex flex-col items-center justify-center gap-2 shadow-[-4px_0_15px_rgba(0,0,0,0.1)] hover:bg-brand-primary-hover hover:w-14 transition-all outline-none focus:ring-2 focus:ring-brand-light cursor-pointer border-none ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
         aria-label="Buka Menu Aksesibilitas"
       >
         <Accessibility size={24} />
+        <span style={{ writingMode: "vertical-rl" }} className="text-[10px] font-bold tracking-widest uppercase">
+          Bantuan
+        </span>
       </button>
 
       {/* Sidebar Panel */}
@@ -175,7 +178,7 @@ export default function AccessibilityWidget() {
           </div>
 
           {/* Zoom */}
-          <div className="flex items-center justify-between bg-gray-50 p-3 rounded-md border border-gray-200">
+          <div className="flex items-center justify-between bg-slate-50 p-3 rounded-md border border-slate-100">
             <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
               <Type size={16} className="text-brand-primary" /> Ukuran Teks
             </div>
@@ -254,7 +257,7 @@ function A11yButton({ active, onClick, icon, label }: { active: boolean, onClick
       className={`flex flex-col items-center justify-center gap-2 p-4 rounded-md border-2 transition-all cursor-pointer outline-none ${
         active 
           ? "bg-brand-light border-brand-primary text-brand-primary shadow-sm" 
-          : "bg-white border-gray-100 text-gray-500 hover:border-gray-300 hover:bg-gray-50"
+          : "bg-white border-gray-100 text-gray-500 hover:border-gray-300 hover:bg-slate-50"
       }`}
     >
       <div className={active ? "text-brand-primary" : "text-gray-400"}>

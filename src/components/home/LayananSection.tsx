@@ -33,12 +33,12 @@ export default function LayananSection() {
   });
 
   return (
-    <section className="bg-gray-50 py-20 border-b border-gray-200">
+    <section className="bg-slate-50 py-20 border-b border-slate-100">
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
         
         {/* Header */}
         <div className="mb-12 text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">Layanan Publik</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4 tracking-tight">Layanan Publik</h2>
           <p className="text-base md:text-lg text-gray-600 max-w-2xl">
             Prosedur layanan administrasi maupun lingkungan terpadu untuk memudahkan warga.
           </p>
@@ -59,14 +59,14 @@ export default function LayananSection() {
                 key={item.id}
                 href={linkHref}
                 target={linkTarget}
-                className="group flex flex-col bg-white rounded-xs border border-gray-200 p-6 md:p-8 outline-none transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 no-underline relative overflow-hidden"
+                className="group flex flex-col bg-white rounded-xs border border-slate-100 p-6 md:p-8 outline-none transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 no-underline relative overflow-hidden"
               >
                 <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xs flex items-center justify-center mb-5 icon-badge shadow-sm`}>
                   <Icon size={24} strokeWidth={2} />
                 </div>
-                <h3 className={`text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-primary transition-colors`}>{item.nama}</h3>
-                <p className="text-gray-600 text-sm md:text-base mb-6 flex-1 leading-relaxed">{item.deskripsi}</p>
-                <div className={`flex items-center text-sm md:text-base font-bold text-gray-900 group-hover:text-brand-primary transition-colors`}>
+                <h3 className={`text-lg md:text-xl font-bold text-slate-800 mb-2 group-hover:text-brand-primary transition-colors`}>{item.nama}</h3>
+                <p className="text-gray-600 text-sm md:text-base mb-6 flex-1 leading-relaxed line-clamp-3">{item.deskripsi}</p>
+                <div className={`flex items-center text-sm md:text-base font-bold text-slate-800 group-hover:text-brand-primary transition-colors`}>
                   Akses Layanan <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>

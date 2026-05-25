@@ -29,10 +29,10 @@ export default function Footer() {
   const breadcrumbs = getBreadcrumbs();
 
   return (
-    <footer className="bg-gray-50 border-t border-gray-200 font-sans mt-auto">
+    <footer className="bg-slate-50 border-t border-slate-100 font-sans mt-auto">
       <div className="max-w-7xl mx-auto px-4 md:px-8 pt-8 pb-12">
         {/* Breadcrumb Area */}
-        <div className="flex items-center gap-2 mb-10 pb-6 border-b border-gray-200">
+        <div className="flex items-center gap-2 mb-10 pb-6 border-b border-slate-100">
           {breadcrumbs.map((crumb, index) => (
             <div key={crumb.href} className="flex items-center gap-2">
               {index === 0 ? (
@@ -43,7 +43,7 @@ export default function Footer() {
                 <Link
                   href={crumb.href}
                   className={`text-xs font-medium transition-colors hover:text-brand-primary ${
-                    index === breadcrumbs.length - 1 ? "text-gray-900" : "text-gray-500"
+                    index === breadcrumbs.length - 1 ? "text-slate-800" : "text-gray-500"
                   }`}
                 >
                   {crumb.label}
@@ -60,7 +60,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
           {/* Col 1 */}
           <div className="flex flex-col gap-4 lg:col-span-1">
-            <h4 className="text-sm font-bold text-gray-900">Sekretariat RW 12</h4>
+            <h4 className="text-sm font-bold text-slate-800">Sekretariat RW 12</h4>
             <div className="flex flex-col gap-1 text-xs text-gray-500 leading-relaxed">
               <p>Gedung Serbaguna RW 12</p>
               <p>Jl. Kutabumi Raya No.1A</p>
@@ -80,7 +80,7 @@ export default function Footer() {
                   <a
                     key={idx}
                     href={social.href}
-                    className="w-7 h-7 flex items-center justify-center rounded border border-gray-200 text-gray-500 hover:text-brand-primary hover:border-brand-primary hover:bg-blue-50 transition-all bg-white"
+                    className="w-7 h-7 flex items-center justify-center rounded border border-slate-100 text-gray-500 hover:text-brand-primary hover:border-brand-primary hover:bg-blue-50 transition-all bg-white"
                   >
                     <Icon size={12} />
                   </a>
@@ -91,7 +91,7 @@ export default function Footer() {
 
           {/* Col 2 */}
           <div className="flex flex-col gap-4">
-            <h4 className="text-sm font-bold text-gray-900">Tentang Kami</h4>
+            <h4 className="text-sm font-bold text-slate-800">Tentang Kami</h4>
             <div className="flex flex-col gap-3">
               <Link href="/tentang-kami/profil" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Profil</Link>
               <Link href="/tentang-kami/struktur-rw" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Struktur RW</Link>
@@ -102,7 +102,7 @@ export default function Footer() {
 
           {/* Col 3 */}
           <div className="flex flex-col gap-4">
-            <h4 className="text-sm font-bold text-gray-900">Layanan</h4>
+            <h4 className="text-sm font-bold text-slate-800">Layanan</h4>
             <div className="flex flex-col gap-3">
               <Link href="/layanan/administrasi-kependudukan" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Administrasi Kependudukan</Link>
               <Link href="/layanan/keamanan-wilayah" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Keamanan Wilayah</Link>
@@ -112,7 +112,7 @@ export default function Footer() {
 
           {/* Col 4 */}
           <div className="flex flex-col gap-4">
-            <h4 className="text-sm font-bold text-gray-900">Informasi</h4>
+            <h4 className="text-sm font-bold text-slate-800">Informasi</h4>
             <div className="flex flex-col gap-3">
               <Link href="/informasi/berita" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Berita</Link>
               <Link href="/informasi/statistik" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Statistik</Link>
@@ -123,7 +123,7 @@ export default function Footer() {
 
           {/* Col 5 */}
           <div className="flex flex-col gap-4">
-            <h4 className="text-sm font-bold text-gray-900">Lainnya</h4>
+            <h4 className="text-sm font-bold text-slate-800">Lainnya</h4>
             <div className="flex flex-col gap-3">
               <Link href="/hubungi-kami" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Hubungi Kami</Link>
               <Link href="#" className="text-xs text-gray-500 hover:text-brand-primary transition-colors w-fit">Kebijakan Privasi</Link>
@@ -134,7 +134,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-200">
+      <div className="border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-5">
           <p className="text-[10px] text-gray-400 text-center">
             &copy; {currentYear} Sekretariat RW 12 Kutabumi. All rights reserved.

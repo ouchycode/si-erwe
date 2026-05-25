@@ -37,7 +37,7 @@ export default function AdminDashboardLayout({
   if (!isClient) return null; // Prevent hydration mismatch during redirect
 
   return (
-    <div className="min-h-screen bg-gray-50 flex font-sans">
+    <div className="min-h-screen bg-slate-50 flex font-sans">
       
       {/* Sidebar */}
       <aside className="w-64 bg-brand-primary text-white flex flex-col hidden md:flex shrink-0">

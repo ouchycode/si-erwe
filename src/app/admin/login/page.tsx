@@ -31,7 +31,7 @@ export default function AdminLoginPage() {
             <Lock size={32} />
           </div>
           
-          <h1 className="text-2xl font-extrabold text-gray-900 mb-2">Back-Office RW 12</h1>
+          <h1 className="text-2xl font-bold text-slate-800 mb-2">Back-Office RW 12</h1>
           <p className="text-gray-500 text-sm mb-8">Sistem Manajemen Kelurahan Terpadu</p>
 
           <form onSubmit={handleLogin} className="space-y-5 text-left">
@@ -47,7 +47,7 @@ export default function AdminLoginPage() {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="admin"
-                  className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm"
+                  className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm"
                 />
               </div>
             </div>
@@ -64,7 +64,7 @@ export default function AdminLoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm"
+                  className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm"
                 />
               </div>
             </div>
@@ -79,7 +79,7 @@ export default function AdminLoginPage() {
           </form>
         </div>
         
-        <div className="bg-gray-50 p-4 text-center border-t border-gray-100">
+        <div className="bg-slate-50 p-4 text-center border-t border-gray-100">
           <p className="text-xs text-gray-400 font-medium">Hanya untuk Pengurus RT/RW yang sah.</p>
         </div>
       </div>

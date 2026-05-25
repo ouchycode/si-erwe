@@ -50,7 +50,7 @@ export default function ESuratPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20 font-sans">
+    <div className="min-h-screen bg-slate-50 pb-20 font-sans">
       <PageHeader
         category="Layanan Publik Digital"
         title="Pengajuan E-Surat"
@@ -64,17 +64,17 @@ export default function ESuratPage() {
               <p className="text-xs text-blue-300/80 font-bold uppercase tracking-widest mb-0.5">
                 Proses Terpadu
               </p>
-              <p className="text-xl font-extrabold text-white leading-none">Instant PDF</p>
+              <p className="text-xl font-bold text-white leading-none">Instant PDF</p>
             </div>
           </div>
         }
       />
 
       <div className="max-w-4xl mx-auto px-4 md:px-8 -mt-16 relative z-10">
-        <div className="bg-white border border-gray-200 shadow-sm rounded-xs overflow-hidden flex flex-col">
+        <div className="bg-white border border-slate-100 shadow-sm rounded-xs overflow-hidden flex flex-col">
           
           {/* Stepper Header */}
-          <div className="bg-gray-50 border-b border-gray-200 p-6 flex items-center justify-between">
+          <div className="bg-slate-50 border-b border-slate-100 p-6 flex items-center justify-between">
             {[
               { num: 1, title: "Data Diri" },
               { num: 2, title: "Keperluan" },
@@ -89,7 +89,7 @@ export default function ESuratPage() {
                   {s.num}
                 </div>
                 <span className={`hidden md:block text-sm font-bold ${
-                  step >= s.num ? "text-gray-900" : "text-gray-400"
+                  step >= s.num ? "text-slate-800" : "text-gray-400"
                 }`}>
                   {s.title}
                 </span>
@@ -107,7 +107,7 @@ export default function ESuratPage() {
               {/* STEP 1: Data Diri */}
               {step === 1 && (
                 <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
-                  <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2 m-0 mb-6">
+                  <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2 m-0 mb-6">
                     <User className="text-brand-primary" /> Lengkapi Data Diri
                   </h3>
                   
@@ -121,7 +121,7 @@ export default function ESuratPage() {
                         value={formData.nik}
                         onChange={updateForm}
                         placeholder="16 Digit NIK KTP"
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm"
                       />
                     </div>
                     <div className="space-y-2">
@@ -133,7 +133,7 @@ export default function ESuratPage() {
                         value={formData.nama}
                         onChange={updateForm}
                         placeholder="Misal: Budi Santoso"
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm"
                       />
                     </div>
                     <div className="space-y-2">
@@ -142,7 +142,7 @@ export default function ESuratPage() {
                         name="rt"
                         value={formData.rt}
                         onChange={updateForm}
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm"
                       >
                         {Array.from({ length: 8 }).map((_, i) => (
                           <option key={i} value={`0${i + 1}`}>RT 0{i + 1}</option>
@@ -158,7 +158,7 @@ export default function ESuratPage() {
                         value={formData.telepon}
                         onChange={updateForm}
                         placeholder="0812xxxx"
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm"
                       />
                     </div>
                   </div>
@@ -174,7 +174,7 @@ export default function ESuratPage() {
               {/* STEP 2: Keperluan */}
               {step === 2 && (
                 <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
-                  <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2 m-0 mb-6">
+                  <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2 m-0 mb-6">
                     <FileText className="text-brand-primary" /> Rincian Pengajuan
                   </h3>
                   
@@ -185,7 +185,7 @@ export default function ESuratPage() {
                         name="jenisSurat"
                         value={formData.jenisSurat}
                         onChange={updateForm}
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm font-medium"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm font-medium"
                       >
                         <option value="Pengantar Domisili">Surat Pengantar Pembuatan KTP/Domisili</option>
                         <option value="Pengantar SKCK">Surat Pengantar SKCK (Kepolisian)</option>
@@ -203,7 +203,7 @@ export default function ESuratPage() {
                         onChange={updateForm}
                         rows={4}
                         placeholder="Sebutkan secara spesifik alasan pembuatan surat ini. (Misal: Syarat pendaftaran melamar kerja di PT. XYZ)"
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm resize-none"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm resize-none"
                       />
                     </div>
                     
@@ -232,29 +232,29 @@ export default function ESuratPage() {
                   <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6 border-4 border-white shadow-sm">
                     <CheckCircle2 size={40} />
                   </div>
-                  <h3 className="text-2xl font-extrabold text-gray-900 mb-2 m-0">Pengajuan Berhasil Dibuat!</h3>
+                  <h3 className="text-2xl font-bold text-slate-800 mb-2 m-0">Pengajuan Berhasil Dibuat!</h3>
                   <p className="text-gray-500 max-w-md mx-auto mb-8 text-sm">
-                    Surat {formData.jenisSurat} atas nama <strong className="text-gray-900">{formData.nama}</strong> telah tercatat di sistem Sekretariat RW 12.
+                    Surat {formData.jenisSurat} atas nama <strong className="text-slate-800">{formData.nama}</strong> telah tercatat di sistem Sekretariat RW 12.
                   </p>
 
                   {/* PDF Receipt Mockup */}
-                  <div className="w-full max-w-sm bg-gray-50 border border-gray-200 rounded-xs p-6 mb-6 text-left relative overflow-hidden">
+                  <div className="w-full max-w-sm bg-slate-50 border border-slate-100 rounded-xs p-6 mb-6 text-left relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-1 h-full bg-brand-primary" />
-                    <div className="flex items-start justify-between mb-4 pb-4 border-b border-gray-200">
+                    <div className="flex items-start justify-between mb-4 pb-4 border-b border-slate-100">
                       <div>
                         <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Nomor Registrasi</p>
-                        <p className="text-xl font-mono font-extrabold text-brand-primary m-0">{registrationCode}</p>
+                        <p className="text-xl font-mono font-bold text-brand-primary m-0">{registrationCode}</p>
                       </div>
                       <Printer size={20} className="text-gray-300" />
                     </div>
                     <div className="space-y-3">
                       <div>
                         <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Pemohon</p>
-                        <p className="text-sm font-bold text-gray-900">{formData.nama}</p>
+                        <p className="text-sm font-bold text-slate-800">{formData.nama}</p>
                       </div>
                       <div>
                         <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Dokumen</p>
-                        <p className="text-sm font-bold text-gray-900">{formData.jenisSurat}</p>
+                        <p className="text-sm font-bold text-slate-800">{formData.jenisSurat}</p>
                       </div>
                     </div>
                   </div>

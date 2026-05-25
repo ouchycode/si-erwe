@@ -39,7 +39,7 @@ const BIDANG = [
 
 export default function StrukturRW() {
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-slate-50 pb-20">
       <PageHeader
         category="Tentang Kami"
         title="Struktur Organisasi RW 12"
@@ -53,7 +53,7 @@ export default function StrukturRW() {
               <p className="text-xs text-blue-300/80 font-bold uppercase tracking-widest mb-0.5">
                 Total Pengurus
               </p>
-              <p className="text-2xl font-extrabold text-white">7 Orang</p>
+              <p className="text-2xl font-bold text-white">7 Orang</p>
             </div>
           </div>
         }
@@ -66,7 +66,7 @@ export default function StrukturRW() {
           <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-5">
             Pimpinan
           </p>
-          <div className="group flex items-center gap-5 bg-white border border-gray-200 rounded-xs px-7 py-6 max-w-sm shadow-sm hover:shadow-md transition-all duration-300">
+          <div className="group flex items-center gap-5 bg-white border border-slate-100 rounded-xs px-7 py-6 max-w-sm shadow-sm hover:shadow-md transition-all duration-300">
             <div className="w-12 h-12 bg-brand-primary border border-brand-primary-hover rounded-xs flex items-center justify-center shrink-0 text-white shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200">
               <User size={22} />
             </div>
@@ -74,7 +74,7 @@ export default function StrukturRW() {
               <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-1">
                 Ketua RW 12
               </p>
-              <p className="text-lg font-extrabold text-gray-900">Lorem Ipsum Dolor</p>
+              <p className="text-lg font-bold text-slate-800">Lorem Ipsum Dolor</p>
             </div>
           </div>
         </div>
@@ -91,7 +91,7 @@ export default function StrukturRW() {
             ].map(({ jabatan, nama, icon: Icon}) => (
               <div
                 key={jabatan}
-                className="group flex items-center gap-4 bg-white border border-gray-200 rounded-xs px-6 py-5 shadow-sm hover:shadow-md transition-all duration-200"
+                className="group flex items-center gap-4 bg-white border border-slate-100 rounded-xs px-6 py-5 shadow-sm hover:shadow-md transition-all duration-200"
               >
                 <div className={`w-10 h-10 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm`}>
                   <Icon size={18} />
@@ -100,7 +100,7 @@ export default function StrukturRW() {
                   <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-0.5">
                     {jabatan}
                   </p>
-                  <p className="text-sm font-bold text-gray-900">{nama}</p>
+                  <p className="text-sm font-bold text-slate-800">{nama}</p>
                 </div>
               </div>
             ))}
@@ -121,13 +121,13 @@ export default function StrukturRW() {
               return (
                 <div
                   key={item.bidang}
-                  className="group bg-white border border-gray-200 rounded-xs p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-all duration-200"
+                  className="group bg-white border border-slate-100 rounded-xs p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-all duration-200"
                 >
                   <div className={`w-10 h-10 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm`}>
                     <Icon size={18} />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-gray-900 leading-snug mb-1">
+                    <h4 className="text-sm font-bold text-slate-800 leading-snug mb-1">
                       {item.bidang}
                     </h4>
                     <p className="text-xs text-gray-500 leading-relaxed">

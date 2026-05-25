@@ -47,9 +47,9 @@ export default function PengaturanSistemPage() {
 
       {/* Main Content Area */}
       <main className="flex-1 p-6 md:p-12 overflow-y-auto">
-        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 bg-white p-8 rounded-lg shadow-2xl max-w-6xl mx-auto border border-gray-200">
+        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 bg-white p-8 rounded-lg shadow-2xl max-w-6xl mx-auto border border-slate-100">
           <div>
-            <h2 className="text-2xl font-extrabold text-gray-900 mb-2 flex items-center gap-3">
+            <h2 className="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-3">
               <Settings className="text-brand-primary" /> Pengaturan Sistem (Feature Toggles)
             </h2>
             <p className="text-gray-500 text-sm">Pusat kendali untuk menghidupkan dan mematikan modul aplikasi publik.</p>
@@ -67,8 +67,8 @@ export default function PengaturanSistemPage() {
               const isActive = features[mod.id];
 
               return (
-                <div key={mod.id} className={`bg-gray-50 border shadow-sm rounded-xs overflow-hidden transition-all duration-300 ${isActive ? 'border-gray-200' : 'border-red-200 opacity-80'}`}>
-                  <div className={`p-5 flex items-center justify-between border-b ${isActive ? 'border-gray-200 bg-white' : 'border-red-100 bg-red-50'}`}>
+                <div key={mod.id} className={`bg-slate-50 border shadow-sm rounded-xs overflow-hidden transition-all duration-300 ${isActive ? 'border-slate-100' : 'border-red-200 opacity-80'}`}>
+                  <div className={`p-5 flex items-center justify-between border-b ${isActive ? 'border-slate-100 bg-white' : 'border-red-100 bg-red-50'}`}>
                     <div className="flex items-center gap-2">
                       <mod.icon size={18} className={isActive ? mod.color : 'text-red-500'} />
                       <span className={`text-xs font-bold uppercase tracking-widest ${isActive ? 'text-gray-500' : 'text-red-600'}`}>
@@ -89,7 +89,7 @@ export default function PengaturanSistemPage() {
                     </button>
                   </div>
                   <div className="p-5">
-                    <h3 className="text-lg font-bold text-gray-900 mb-2 m-0">{mod.name}</h3>
+                    <h3 className="text-lg font-bold text-slate-800 mb-2 m-0">{mod.name}</h3>
                     <p className="text-sm text-gray-500 m-0 leading-relaxed">{mod.desc}</p>
                   </div>
                 </div>
