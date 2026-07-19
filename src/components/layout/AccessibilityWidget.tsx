@@ -12,6 +12,11 @@ import {
   Volume2,
   RotateCcw,
   X,
+  Eye,
+  MousePointer2,
+  Space,
+  ImageOff,
+  SquareMinus
 } from "lucide-react";
 
 export default function AccessibilityWidget() {
@@ -25,19 +30,27 @@ export default function AccessibilityWidget() {
   const [dyslexiaFont, setDyslexiaFont] = useState(false);
   const [pauseAnimations, setPauseAnimations] = useState(false);
   const [readText, setReadText] = useState(false);
+  const [colorBlind, setColorBlind] = useState(false);
+  const [largeCursor, setLargeCursor] = useState(false);
+  const [readingGuide, setReadingGuide] = useState(false);
+  const [textSpacing, setTextSpacing] = useState(false);
+  const [hideImages, setHideImages] = useState(false);
+
+  const [mouseY, setMouseY] = useState(0);
 
   // Apply Zoom
   useEffect(() => {
     document.documentElement.style.fontSize = `${zoomLevel}%`;
   }, [zoomLevel]);
 
-  // Apply Grayscale & High Contrast
+  // Apply Grayscale, High Contrast, & Color Blind
   useEffect(() => {
     let filter = "";
     if (grayscale) filter += "grayscale(100%) ";
     if (highContrast) filter += "contrast(150%) saturate(150%) ";
+    if (colorBlind) filter += "sepia(50%) hue-rotate(-15deg) saturate(150%) ";
     document.documentElement.style.filter = filter.trim();
-  }, [grayscale, highContrast]);
+  }, [grayscale, highContrast, colorBlind]);
 
   // Apply Highlight Links
   useEffect(() => {
@@ -65,6 +78,32 @@ export default function AccessibilityWidget() {
       document.body.classList.remove("a11y-no-animations");
     }
   }, [pauseAnimations]);
+
+  // Apply Large Cursor
+  useEffect(() => {
+    if (largeCursor) document.body.classList.add("a11y-large-cursor");
+    else document.body.classList.remove("a11y-large-cursor");
+  }, [largeCursor]);
+
+  // Apply Text Spacing
+  useEffect(() => {
+    if (textSpacing) document.body.classList.add("a11y-text-spacing");
+    else document.body.classList.remove("a11y-text-spacing");
+  }, [textSpacing]);
+
+  // Apply Hide Images
+  useEffect(() => {
+    if (hideImages) document.body.classList.add("a11y-hide-images");
+    else document.body.classList.remove("a11y-hide-images");
+  }, [hideImages]);
+
+  // Reading Guide
+  useEffect(() => {
+    if (!readingGuide) return;
+    const handleMouseMove = (e: MouseEvent) => setMouseY(e.clientY);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [readingGuide]);
 
   // Text to Speech
   useEffect(() => {
@@ -115,6 +154,17 @@ export default function AccessibilityWidget() {
           transition: none !important;
           scroll-behavior: auto !important;
         }
+        .a11y-large-cursor, .a11y-large-cursor * {
+          cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="black" stroke-width="2"><polygon points="3,3 21,11 12,14 8,22" /></svg>') 0 0, auto !important;
+        }
+        .a11y-text-spacing * {
+          letter-spacing: 0.12em !important;
+          word-spacing: 0.16em !important;
+          line-height: 1.8 !important;
+        }
+        .a11y-hide-images img, .a11y-hide-images svg, .a11y-hide-images video, .a11y-hide-images iframe {
+          visibility: hidden !important;
+        }
       `;
       document.head.appendChild(style);
     }
@@ -128,6 +178,11 @@ export default function AccessibilityWidget() {
     setDyslexiaFont(false);
     setPauseAnimations(false);
     setReadText(false);
+    setColorBlind(false);
+    setLargeCursor(false);
+    setReadingGuide(false);
+    setTextSpacing(false);
+    setHideImages(false);
   };
 
   return (
@@ -137,6 +192,14 @@ export default function AccessibilityWidget() {
         <div
           className="fixed inset-0 bg-black/20 z-[9998] transition-opacity"
           onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* Reading Guide */}
+      {readingGuide && (
+        <div 
+          className="fixed left-0 right-0 h-10 border-y-4 border-brand-primary bg-black/10 z-[9997] pointer-events-none transition-transform duration-75 ease-out"
+          style={{ top: `${Math.max(0, mouseY - 20)}px` }}
         />
       )}
 
@@ -230,6 +293,12 @@ export default function AccessibilityWidget() {
               label="Sorot Tautan"
             />
             <A11yButton
+              active={colorBlind}
+              onClick={() => setColorBlind(!colorBlind)}
+              icon={<Eye size={20} />}
+              label="Ramah Buta Warna"
+            />
+            <A11yButton
               active={dyslexiaFont}
               onClick={() => setDyslexiaFont(!dyslexiaFont)}
               icon={<BookOpen size={20} />}
@@ -246,6 +315,30 @@ export default function AccessibilityWidget() {
               onClick={() => setReadText(!readText)}
               icon={<Volume2 size={20} />}
               label="Baca Teks"
+            />
+            <A11yButton
+              active={largeCursor}
+              onClick={() => setLargeCursor(!largeCursor)}
+              icon={<MousePointer2 size={20} />}
+              label="Kursor Besar"
+            />
+            <A11yButton
+              active={readingGuide}
+              onClick={() => setReadingGuide(!readingGuide)}
+              icon={<SquareMinus size={20} />}
+              label="Panduan Baca"
+            />
+            <A11yButton
+              active={textSpacing}
+              onClick={() => setTextSpacing(!textSpacing)}
+              icon={<Space size={20} />}
+              label="Jarak Teks"
+            />
+            <A11yButton
+              active={hideImages}
+              onClick={() => setHideImages(!hideImages)}
+              icon={<ImageOff size={20} />}
+              label="Sembunyikan Gambar"
             />
           </div>
 
