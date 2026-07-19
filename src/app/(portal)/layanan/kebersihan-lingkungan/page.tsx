@@ -51,8 +51,8 @@ export default function KebersihanLingkungan() {
     <div className="min-h-screen bg-slate-50 pb-20">
       <PageHeader
         category="Layanan Warga"
-        title="Kebersihan Lingkungan RW 12"
-        description="Jadwal pengangkutan sampah, program kerja bakti, dan tata tertib kebersihan lingkungan warga RW 12 Kutabumi, Kab. Tangerang."
+        title="Kebersihan Lingkungan RW 04"
+        description="Jadwal pengangkutan sampah, program kerja bakti, dan tata tertib kebersihan lingkungan warga RW 04 Pabuaran, Kota Tangerang."
       />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10 flex flex-col gap-8 pb-20">
@@ -65,17 +65,17 @@ export default function KebersihanLingkungan() {
             {/* Info Utama */}
             <div className="bg-brand-primary rounded-xs border border-brand-primary-hover p-6 text-white flex flex-col gap-4">
               <div className="w-10 h-10 bg-white/10 rounded-xs flex items-center justify-center">
-                <Truck size={20} className="text-blue-200" />
+                <Truck size={20} className="text-white/70" />
               </div>
               <div>
                 <h2 className="text-base font-bold mb-2">Pengangkutan Rutin</h2>
-                <p className="text-sm text-blue-100/70 leading-relaxed">
+                <p className="text-sm text-white/60 leading-relaxed">
                   Petugas beroperasi dengan gerobak motor (bentor) mengambil
                   sampah dari tong depan rumah warga.
                 </p>
               </div>
               <div className="mt-auto border-t border-white/10 pt-4">
-                <p className="text-[10px] text-blue-300/80 font-bold uppercase tracking-widest mb-1">
+                <p className="text-[10px] text-white/40 font-bold uppercase tracking-widest mb-1">
                   Iuran Kebersihan
                 </p>
                 <p className="text-lg font-bold">Rp 20.000 / Bulan</p>
@@ -144,7 +144,7 @@ export default function KebersihanLingkungan() {
                 <div>
                   <h4 className="text-sm font-bold text-slate-800 mb-1.5">Program Penghijauan (KWT)</h4>
                   <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">
-                    Ibu-ibu PKK dan Kelompok Wanita Tani (KWT) RW 12 mengelola bank sampah dan apotek hidup.
+                    Ibu-ibu PKK dan Kelompok Wanita Tani (KWT) RW 04 mengelola bank sampah dan apotek hidup.
                     Warga dapat berpartisipasi setiap hari Jumat sore.
                   </p>
                 </div>

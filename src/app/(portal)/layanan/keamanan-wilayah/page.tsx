@@ -12,14 +12,14 @@ import { PageHeader } from "@/components/ui/PageHeader";
 
 const KONTAK = [
   {
-    label: "Pos Keamanan RW 12",
-    sub: "Siaga 24 jam untuk wilayah Kutabumi",
+    label: "Pos Keamanan RW 04",
+    sub: "Siaga 24 jam untuk wilayah Pabuaran",
     telp: "0812-3456-7890",
     href: "tel:081234567890",
     icon: ShieldAlert,
   },
   {
-    label: "Polsek Pasar Kemis",
+    label: "Polsek Karawaci",
     sub: "Tindak kriminal & gangguan kamtibmas",
     telp: "110 / (021) 4527xxx",
     href: "tel:110",
@@ -48,7 +48,7 @@ const TATA_TERTIB = [
   {
     icon: Video,
     judul: "Pemantauan CCTV 24 Jam",
-    desc: "Lingkungan RW 12 dipantau kamera CCTV di titik-titik rawan. Permintaan rekaman dapat diajukan melalui petugas keamanan sesuai SOP.",
+    desc: "Lingkungan RW 04 dipantau kamera CCTV di titik-titik rawan. Permintaan rekaman dapat diajukan melalui petugas keamanan sesuai SOP.",
   },
 ];
 
@@ -67,7 +67,7 @@ export default function KeamananWilayah() {
     <div className="min-h-screen bg-slate-50 pb-20">
       <PageHeader
         category="Layanan Warga"
-        title="Keamanan Wilayah RW 12"
+        title="Keamanan Wilayah RW 04"
         description="Sistem informasi keamanan lingkungan terpadu. Hubungi kontak darurat jika terjadi gangguan keamanan, ketertiban, atau keadaan darurat medis."
       />
 
@@ -133,11 +133,11 @@ export default function KeamananWilayah() {
           <div className="bg-brand-primary rounded-xs border border-brand-primary-hover p-8 text-white shadow-sm">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-9 h-9 bg-white/10 rounded-xs flex items-center justify-center shrink-0">
-                <ShieldAlert size={16} className="text-blue-300" />
+                <ShieldAlert size={16} className="text-white/70" />
               </div>
               <h2 className="text-base font-bold tracking-wide">Jadwal Ronda / Siskamling</h2>
             </div>
-            <p className="text-sm text-blue-100/70 mb-6 leading-relaxed ml-12">
+            <p className="text-sm text-white/60 mb-6 leading-relaxed ml-12">
               Tugas ronda malam setiap blok/RT mulai pukul 23.00 – 04.00 WIB.
             </p>
 
@@ -147,7 +147,7 @@ export default function KeamananWilayah() {
                   key={item.hari}
                   className={`p-3 rounded-xs border border-white/10 bg-white/5 ${item.full ? "col-span-2 bg-white/10" : ""}`}
                 >
-                  <p className="text-[10px] text-blue-300/80 font-bold uppercase tracking-wider mb-0.5">
+                  <p className="text-[10px] text-white/40 font-bold uppercase tracking-wider mb-0.5">
                     {item.hari}
                   </p>
                   <p className="text-sm font-bold text-white">{item.rt}</p>

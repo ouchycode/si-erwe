@@ -6,15 +6,15 @@ export default function ProfilRW() {
     <div className="min-h-screen bg-slate-50 pb-20">
       <PageHeader
         category="Tentang Kami"
-        title="Profil & Sejarah RW 12"
-        description="Mengenal lebih dekat lingkungan RW 12 Kutabumi, Kab. Tangerang — bersama membangun kehidupan bertetangga yang rukun, aman, dan sejahtera."
+        title="Profil & Sejarah RW 04"
+        description="Mengenal lebih dekat lingkungan RW 04 Pabuaran, Kota Tangerang — bersama membangun kehidupan bertetangga yang rukun, aman, dan sejahtera."
         rightContent={
           <div className="flex items-center gap-4 bg-white/10 border border-white/20 rounded-xs px-6 py-4 shrink-0">
             <div className="w-10 h-10 bg-white/10 rounded-xs flex items-center justify-center">
-              <Building2 size={18} className="text-blue-200" />
+              <Building2 size={18} className="text-white/70" />
             </div>
             <div>
-              <p className="text-xs text-blue-300/80 font-bold uppercase tracking-widest mb-0.5">
+              <p className="text-xs text-white/40 font-bold uppercase tracking-widest mb-0.5">
                 Periode Kepengurusan
               </p>
               <p className="text-2xl font-bold text-white">2024 — 2027</p>
@@ -40,14 +40,14 @@ export default function ProfilRW() {
               </div>
               <div className="text-base text-gray-600 leading-relaxed flex flex-col gap-4">
                 <p>
-                  RW 12 Kutabumi, Kab. Tangerang, dibentuk seiring dengan
-                  perkembangan pesat pemukiman di wilayah Kabupaten Tangerang. Pada
+                  RW 04 Pabuaran, Kota Tangerang, dibentuk seiring dengan
+                  perkembangan pesat pemukiman di wilayah Kota Tangerang. Pada
                   awalnya, wilayah ini hanya terdiri dari beberapa Rukun Tetangga
                   yang terus berkembang hingga sekarang.
                 </p>
                 <p>
-                  Seiring bertambahnya jumlah penduduk, RW 12 kini menaungi 8 RT.
-                  Warga RW 12 dikenal dengan semangat kegotongroyongannya yang
+                  Seiring bertambahnya jumlah penduduk, RW 04 kini menaungi 8 RT.
+                  Warga RW 04 dikenal dengan semangat kegotongroyongannya yang
                   tinggi, multikultural, dan aktif dalam berbagai kegiatan sosial
                   kemasyarakatan.
                 </p>
@@ -60,14 +60,14 @@ export default function ProfilRW() {
               <div className="bg-brand-primary rounded-xs border border-brand-primary-hover p-8 text-white flex flex-col gap-4 shadow-sm">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-white/10 rounded-xs flex items-center justify-center shrink-0">
-                    <Eye size={18} className="text-blue-200" />
+                    <Eye size={18} className="text-white/70" />
                   </div>
-                  <h2 className="text-sm font-bold tracking-widest uppercase text-blue-200">
+                  <h2 className="text-sm font-bold tracking-widest uppercase text-white/70">
                     Visi
                   </h2>
                 </div>
-                <p className="text-base text-blue-50/90 leading-relaxed italic">
-                  &quot;Terwujudnya lingkungan RW 12 yang Aman, Bersih, Guyub, dan
+                <p className="text-base text-white/80 leading-relaxed italic">
+                  &quot;Terwujudnya lingkungan RW 04 yang Aman, Bersih, Guyub, dan
                   Sejahtera berlandaskan nilai-nilai Ketuhanan dan Gotong
                   Royong.&quot;
                 </p>
@@ -113,8 +113,8 @@ export default function ProfilRW() {
                 {[
                   { icon: Home, label: "Jumlah RT", value: "8 Rukun Tetangga", badgeStyle: "bg-brand-primary border border-brand-primary-hover text-white shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200" },
                   { icon: Users, label: "Total Kepala Keluarga", value: "± 350 KK", badgeStyle: "bg-brand-primary border border-brand-primary-hover text-white shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200" },
-                  { icon: MapPin, label: "Kelurahan", value: "Kutabumi", badgeStyle: "bg-brand-primary border border-brand-primary-hover text-white shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200" },
-                  { icon: Calendar, label: "Kecamatan", value: "Pasar Kemis", badgeStyle: "bg-brand-primary border border-brand-primary-hover text-white shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200" },
+                  { icon: MapPin, label: "Kelurahan", value: "Pabuaran", badgeStyle: "bg-brand-primary border border-brand-primary-hover text-white shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200" },
+                  { icon: Calendar, label: "Kecamatan", value: "Karawaci", badgeStyle: "bg-brand-primary border border-brand-primary-hover text-white shadow-sm group-hover:bg-brand-primary-hover transition-colors duration-200" },
                 ].map(({ icon: Icon, label, value}) => (
                   <div key={label} className="group flex items-center gap-4 py-4 first:pt-0 last:pb-0">
                     <div className={`w-10 h-10 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm`}>
@@ -135,16 +135,16 @@ export default function ProfilRW() {
             <div className="bg-white rounded-xs border border-slate-100 shadow-sm overflow-hidden">
               <div className="w-full h-52 bg-gray-100 relative">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2!2d106.9!3d-6.15!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f4a!2sPegangsaan+Dua!5e0!3m2!1sid!2sid!4v1713456789012!5m2!1sid!2sid"
+                  src="https://www.google.com/maps?q=Pabuaran%2C%20Karawaci%2C%20Kota%20Tangerang&output=embed"
                   className="absolute inset-0 w-full h-full border-0"
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Peta Kutabumi"
+                  title="Peta Pabuaran"
                 />
               </div>
               <p className="text-xs text-center text-gray-400 py-3 font-medium">
-                Peta Lokasi RW 12 Kutabumi, Kab. Tangerang
+                Peta Lokasi RW 04 Pabuaran, Kota Tangerang
               </p>
             </div>
           </div>

@@ -4,7 +4,6 @@ export interface Layanan {
   nama: string;
   deskripsi: string;
   slug: string;
-  modulType: "Standar" | "Premium";
 }
 
 export interface Berita {
@@ -24,7 +23,6 @@ export const LAYANAN_DUMMY: Layanan[] = [
     deskripsi:
       "Layanan pengurusan surat pengantar RT/RW untuk pembuatan KK, KTP, Akta Kelahiran, dan surat domisili.",
     slug: "administrasi-kependudukan",
-    modulType: "Standar",
   },
   {
     id: 2,
@@ -32,7 +30,6 @@ export const LAYANAN_DUMMY: Layanan[] = [
     deskripsi:
       "Sistem pelaporan tamu 1x24 jam, jadwal petugas Siskamling, dan koordinasi keamanan lingkungan.",
     slug: "keamanan-wilayah",
-    modulType: "Standar",
   },
   {
     id: 3,
@@ -40,31 +37,6 @@ export const LAYANAN_DUMMY: Layanan[] = [
     deskripsi:
       "Informasi jadwal pengangkutan sampah mingguan, pengelolaan limbah rumah tangga, dan kerja bakti.",
     slug: "kebersihan-lingkungan",
-    modulType: "Standar",
-  },
-  {
-    id: 4,
-    nama: "E-Surat Pengantar",
-    deskripsi:
-      "Otomatisasi pengajuan surat pengantar secara mandiri dengan integrasi cetak PDF instan.",
-    slug: "e-surat",
-    modulType: "Premium",
-  },
-  {
-    id: 5,
-    nama: "Lapor Warga",
-    deskripsi:
-      "Sistem ticketing pengaduan fasilitas lingkungan secara real-time yang langsung diterima pengurus.",
-    slug: "lapor-warga",
-    modulType: "Premium",
-  },
-  {
-    id: 6,
-    nama: "Pembayaran Iuran",
-    deskripsi:
-      "Pengecekan tagihan IPL dan simulasi pembayaran terintegrasi menggunakan Payment Gateway (QRIS).",
-    slug: "iuran-warga",
-    modulType: "Premium",
   },
 ];
 
@@ -83,7 +55,7 @@ export const BERITA_DUMMY: Berita[] = [
     judul: "Vaksinasi Booster Gratis di Balai Warga",
     tanggal: "12 April 2026",
     ringkasan:
-      "Bekerjasama dengan Puskesmas Kutabumi, RW 12 menyelenggarakan vaksinasi gratis akhir pekan ini.",
+      "Bekerjasama dengan Puskesmas Pabuaran, RW 04 menyelenggarakan vaksinasi gratis akhir pekan ini.",
     kategori: "Kesehatan",
     gambar: "/images/berita/vaksinasi.png",
   },
@@ -92,7 +64,7 @@ export const BERITA_DUMMY: Berita[] = [
     judul: "Kerja Bakti Serentak Seluruh RT",
     tanggal: "10 April 2026",
     ringkasan:
-      "Seluruh warga RW 12 bergotong royong membersihkan lingkungan dalam rangka menyambut bulan kebersihan.",
+      "Seluruh warga RW 04 bergotong royong membersihkan lingkungan dalam rangka menyambut bulan kebersihan.",
     kategori: "Kegiatan",
     gambar: "/images/berita/kerjabakti.png",
   },

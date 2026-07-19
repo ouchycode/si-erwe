@@ -17,7 +17,7 @@ export default function NotFound() {
           </div>
           <h2 className="text-2xl font-bold text-slate-800 mb-2">Waduh! Halaman Hilang</h2>
           <p className="text-gray-500 mb-8 max-w-md mx-auto">
-            Sepertinya alamat URL yang Anda masukkan salah, atau halamannya sudah tidak ada di sistem RW 12.
+            Sepertinya alamat URL yang Anda masukkan salah, atau halamannya sudah tidak ada di sistem RW 04.
           </p>
           <Link href="/" className="inline-flex items-center gap-2 bg-brand-primary text-white font-bold px-6 py-3 rounded-xs hover:bg-brand-primary-hover transition-colors no-underline">
             <Home size={18} />

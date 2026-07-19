@@ -20,7 +20,7 @@ export default function HubungiKami() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast.success("Pesan Terkirim", {
-      description: "Terima kasih! Pesan Anda telah terkirim ke sekretariat RW 12.",
+      description: "Terima kasih! Pesan Anda telah terkirim ke sekretariat RW 04.",
     });
   };
 
@@ -29,7 +29,7 @@ export default function HubungiKami() {
       <PageHeader
         category="Layanan Warga"
         title="Hubungi Kami"
-        description="Punya pertanyaan, keluhan, atau saran? Hubungi sekretariat RW 12 melalui formulir atau kontak di bawah ini."
+        description="Punya pertanyaan, keluhan, atau saran? Hubungi sekretariat RW 04 melalui formulir atau kontak di bawah ini."
       />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10">
@@ -102,11 +102,11 @@ export default function HubungiKami() {
                     label: "Alamat",
                     content: (
                       <p className="text-[13px] text-white/70 leading-relaxed">
-                        Gedung Serbaguna RW 12
+                        Gedung Serbaguna RW 04
                         <br />
-                        Kel. Kutabumi, Kec. Pasar Kemis
+                        Kel. Pabuaran, Kec. Karawaci
                         <br />
-                        Kab. Tangerang, Banten 15560
+                        Kota Tangerang, Banten 15114
                       </p>
                     ),
                   },
@@ -127,10 +127,10 @@ export default function HubungiKami() {
                     label: "Email",
                     content: (
                       <a
-                        href="mailto:admin@rw12kutabumi.id"
+                        href="mailto:admin@rw04pabuaran.id"
                         className="text-[13.5px] font-semibold text-white hover:text-white/70 no-underline transition-colors"
                       >
-                        admin@rw12kutabumi.id
+                        admin@rw04pabuaran.id
                       </a>
                     ),
                   },

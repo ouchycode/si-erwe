@@ -6,6 +6,9 @@ import {
   Clock,
   AlertCircle,
   FileSignature,
+  Send,
+  UserRound,
+  MapPin,
 } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 
@@ -44,13 +47,25 @@ const ALUR = [
   { step: "04", title: "Kelurahan", desc: "Bawa berkas lengkap ke kantor Kelurahan." },
 ];
 
+const JENIS_PENGAJUAN = [
+  "Surat Pengantar Domisili",
+  "Pengantar Pembuatan KTP",
+  "Pengantar Pembuatan KK",
+  "Surat Keterangan Usaha",
+  "Surat Keterangan Tidak Mampu",
+  "Surat Pindah / Datang",
+  "Lainnya",
+];
+
+const RT_LIST = ["RT 01", "RT 02", "RT 03", "RT 04", "RT 05", "RT 06", "RT 07", "RT 08"];
+
 export default function AdministrasiKependudukan() {
   return (
     <div className="min-h-screen bg-slate-50 pb-20">
       <PageHeader
         category="Layanan Warga"
         title="Administrasi Kependudukan"
-        description="Alur, persyaratan, dan panduan pengurusan dokumen kependudukan untuk warga RW 12 Kutabumi, Kab. Tangerang."
+        description="Alur, persyaratan, dan panduan pengurusan dokumen kependudukan untuk warga RW 04 Pabuaran, Kota Tangerang."
       />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10 flex flex-col gap-8 pb-20">
@@ -76,6 +91,134 @@ export default function AdministrasiKependudukan() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* FORM PENGAJUAN */}
+        <div className="bg-white rounded-xs border border-slate-100 shadow-sm overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.65fr]">
+            <div className="bg-brand-primary text-white p-6 md:p-8 flex flex-col justify-between gap-8">
+              <div>
+                <div className="w-10 h-10 bg-white/10 rounded-xs flex items-center justify-center mb-5">
+                  <FileSignature size={18} className="text-white/70" />
+                </div>
+                <p className="text-[11px] font-bold uppercase tracking-widest text-white/40 mb-3">
+                  Pengajuan Awal
+                </p>
+                <h2 className="text-2xl font-bold leading-tight mb-3">
+                  Form Administrasi Penduduk
+                </h2>
+                <p className="text-sm text-white/60 leading-relaxed">
+                  Isi data dasar pengajuan agar pengurus RT/RW bisa mengecek kebutuhan surat sebelum warga datang membawa berkas.
+                </p>
+              </div>
+              <div className="bg-white/10 border border-white/10 rounded-xs p-4">
+                <p className="text-xs font-semibold text-white/60 mb-1">RW Otomatis</p>
+                <p className="text-lg font-bold">RW 04 Pabuaran</p>
+              </div>
+            </div>
+
+            <form action="#" className="p-6 md:p-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <label className="flex flex-col gap-2">
+                  <span className="flex items-center gap-2 text-sm font-bold text-slate-700">
+                    <UserRound size={14} className="text-brand-primary" />
+                    Nama Kepala Keluarga
+                  </span>
+                  <input
+                    name="namaKepalaKeluarga"
+                    type="text"
+                    placeholder="Contoh: Bapak Ahmad"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm"
+                  />
+                </label>
+
+                <label className="flex flex-col gap-2">
+                  <span className="flex items-center gap-2 text-sm font-bold text-slate-700">
+                    <UserRound size={14} className="text-brand-primary" />
+                    Nama Pemohon
+                  </span>
+                  <input
+                    name="namaPemohon"
+                    type="text"
+                    placeholder="Nama warga yang mengajukan"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm"
+                  />
+                </label>
+
+                <label className="flex flex-col gap-2 md:col-span-2">
+                  <span className="flex items-center gap-2 text-sm font-bold text-slate-700">
+                    <FileText size={14} className="text-brand-primary" />
+                    Mau Mengajukan Apa?
+                  </span>
+                  <select
+                    name="jenisPengajuan"
+                    defaultValue=""
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm"
+                  >
+                    <option value="" disabled>Pilih jenis pengajuan</option>
+                    {JENIS_PENGAJUAN.map((item) => (
+                      <option key={item} value={item}>{item}</option>
+                    ))}
+                  </select>
+                </label>
+
+                <label className="flex flex-col gap-2">
+                  <span className="flex items-center gap-2 text-sm font-bold text-slate-700">
+                    <MapPin size={14} className="text-brand-primary" />
+                    Dari RT Mana?
+                  </span>
+                  <select
+                    name="rt"
+                    defaultValue=""
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm"
+                  >
+                    <option value="" disabled>Pilih RT</option>
+                    {RT_LIST.map((rt) => (
+                      <option key={rt} value={rt}>{rt}</option>
+                    ))}
+                  </select>
+                </label>
+
+                <label className="flex flex-col gap-2">
+                  <span className="flex items-center gap-2 text-sm font-bold text-slate-700">
+                    <MapPin size={14} className="text-brand-primary" />
+                    RW
+                  </span>
+                  <input type="hidden" name="rw" value="RW 04" />
+                  <input
+                    type="text"
+                    value="RW 04"
+                    readOnly
+                    disabled
+                    className="w-full px-4 py-3 bg-slate-100 border border-slate-100 rounded-xs text-sm font-bold text-slate-500"
+                  />
+                </label>
+
+                <label className="flex flex-col gap-2 md:col-span-2">
+                  <span className="text-sm font-bold text-slate-700">Keterangan Singkat</span>
+                  <textarea
+                    name="keterangan"
+                    rows={4}
+                    placeholder="Tulis keperluan singkat, misalnya untuk sekolah, kerja, pindah domisili, atau kebutuhan lainnya."
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xs focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all text-sm resize-none"
+                  />
+                </label>
+              </div>
+
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-6 pt-6 border-t border-slate-100">
+                <p className="text-xs text-gray-500 leading-relaxed max-w-md">
+                  Setelah data dikirim, pemohon tetap membawa dokumen asli dan fotokopi saat validasi di RT/RW.
+                </p>
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-primary-hover text-white text-sm font-bold px-6 py-3 rounded-xs border-none cursor-pointer transition-colors"
+                >
+                  <Send size={15} />
+                  Kirim Pengajuan
+                </button>
+              </div>
+            </form>
           </div>
         </div>
 
@@ -118,18 +261,18 @@ export default function AdministrasiKependudukan() {
             <div className="bg-brand-primary rounded-xs border border-brand-primary-hover p-6 text-white shadow-sm">
               <div className="flex items-center gap-3 mb-5 pb-4 border-b border-white/10">
                 <div className="w-9 h-9 bg-white/10 rounded-xs flex items-center justify-center shrink-0">
-                  <Clock size={16} className="text-blue-200" />
+                  <Clock size={16} className="text-white/70" />
                 </div>
                 <h3 className="text-sm font-bold tracking-wide">Jam Layanan Sekretariat RW</h3>
               </div>
-              <div className="flex flex-col gap-3 text-sm text-blue-100/80">
+              <div className="flex flex-col gap-3 text-sm text-white/80">
                 <div className="flex justify-between">
-                  <span>Senin – Jumat</span>
-                  <span className="font-bold text-white">19.00 – 22.00</span>
+                  <span>Senin - Jumat</span>
+                  <span className="font-bold text-white">19.00 - 22.00</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Sabtu – Minggu</span>
-                  <span className="font-bold text-white">09.00 – 15.00</span>
+                  <span>Sabtu - Minggu</span>
+                  <span className="font-bold text-white">09.00 - 15.00</span>
                 </div>
                 <div className="flex justify-between pt-3 border-t border-white/10 text-red-300">
                   <span>Hari Libur Nasional</span>

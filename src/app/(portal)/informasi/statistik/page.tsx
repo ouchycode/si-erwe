@@ -5,8 +5,14 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { ChevronUp, ChevronDown, BarChart2 } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 
-// Helper to generate 8 RTs of dummy data for each category
-const generateData = (config: Record<string, [number, number]>) => {
+// Simple seeded pseudo-random number generator (deterministic)
+function seededRandom(seed: number): number {
+  const x = Math.sin(seed * 9301 + 49297) * 49297;
+  return x - Math.floor(x);
+}
+
+// Helper to generate 8 RTs of dummy data for each category (deterministic)
+const generateData = (config: Record<string, [number, number]>, categorySeed: number) => {
   const data = [];
   const totals: Record<string, number> = {};
   
@@ -16,10 +22,13 @@ const generateData = (config: Record<string, [number, number]>) => {
     const rt = i.toString().padStart(3, "0");
     const row: Record<string, number | string> = { rt };
     
+    let keyIndex = 0;
     Object.entries(config).forEach(([key, [min, max]]) => {
-      const val = Math.floor(Math.random() * (max - min + 1)) + min;
+      const seed = categorySeed * 100 + i * 10 + keyIndex;
+      const val = Math.floor(seededRandom(seed) * (max - min + 1)) + min;
       row[key] = val;
       totals[key] += val;
+      keyIndex++;
     });
     
     // Auto-calculate "jumlah" if not explicitly defined but needed
@@ -43,7 +52,7 @@ const STATS_DATA = {
     ...generateData({
       tempatTinggal: [40, 90],
       tempatUsaha: [2, 10],
-    }),
+    }, 1),
     chartColors: ["#0f4c5c", "#e2e8f0"],
     chartTitle: "Komposisi Bangunan",
   },
@@ -56,7 +65,7 @@ const STATS_DATA = {
     ...generateData({
       lakiLaki: [50, 100],
       perempuan: [50, 105],
-    }),
+    }, 2),
     chartColors: ["#3b82f6", "#ec4899"],
     chartTitle: "Berdasarkan Jenis Kelamin",
   },
@@ -72,7 +81,7 @@ const STATS_DATA = {
       remaja: [20, 40],
       dewasa: [60, 120],
       lansia: [15, 30],
-    }),
+    }, 3),
     chartColors: ["#10b981", "#f59e0b", "#3b82f6", "#6366f1"],
     chartTitle: "Komposisi Usia",
   },
@@ -90,7 +99,7 @@ const STATS_DATA = {
       katolik: [5, 20],
       hindu: [0, 5],
       buddha: [0, 5],
-    }),
+    }, 4),
     chartColors: ["#10b981", "#3b82f6", "#6366f1", "#f59e0b", "#ef4444"],
     chartTitle: "Penganut Agama",
   },
@@ -106,7 +115,7 @@ const STATS_DATA = {
       smp: [15, 35],
       sma: [40, 80],
       sarjana: [20, 50],
-    }),
+    }, 5),
     chartColors: ["#ef4444", "#f59e0b", "#10b981", "#3b82f6"],
     chartTitle: "Tingkat Pendidikan",
   },
@@ -122,7 +131,7 @@ const STATS_DATA = {
       b: [20, 50],
       ab: [5, 20],
       o: [30, 70],
-    }),
+    }, 6),
     chartColors: ["#ef4444", "#3b82f6", "#8b5cf6", "#10b981"],
     chartTitle: "Golongan Darah",
   },
@@ -189,13 +198,13 @@ export default function StatistikPage() {
     <div className="min-h-screen bg-slate-50 pb-20 font-sans">
       <PageHeader
         category="Data Demografi"
-        title="Statistik Warga RW 12"
-        description="Visualisasi data kependudukan, demografi, dan persebaran warga di lingkungan RW 12 Kutabumi yang diperbarui secara berkala."
+        title="Statistik Warga RW 04"
+        description="Visualisasi data kependudukan, demografi, dan persebaran warga di lingkungan RW 04 Pabuaran yang diperbarui secara berkala."
         rightContent={
           <div className="flex items-center gap-3 bg-white/10 border border-white/20 rounded-xs px-5 py-4 shrink-0">
-            <BarChart2 size={16} className="text-green-300" />
+            <BarChart2 size={16} className="text-white/70" />
             <div>
-              <p className="text-[10.5px] text-blue-300/70 font-semibold uppercase tracking-widest mb-0.5">
+              <p className="text-[10.5px] text-white/40 font-semibold uppercase tracking-widest mb-0.5">
                 Periode Data
               </p>
               <p className="text-sm font-bold text-white leading-none">
@@ -218,7 +227,7 @@ export default function StatistikPage() {
               }}
               className={`px-4 py-2 text-xs font-semibold transition-all border ${
                 activeTab === tab
-                  ? "border-brand-primary text-brand-primary bg-blue-50/50 shadow-sm"
+                  ? "border-brand-primary text-brand-primary bg-brand-light shadow-sm"
                   : "border-slate-100 text-gray-500 hover:border-gray-300 hover:text-gray-700 bg-white shadow-sm"
               }`}
             >
@@ -264,7 +273,7 @@ export default function StatistikPage() {
                       key={row.rt}
                       className={`${
                         index % 2 === 0 ? "bg-white" : "bg-slate-50/50"
-                      } hover:bg-blue-50/50 transition-colors duration-150`}
+                      } hover:bg-brand-light/50 transition-colors duration-150`}
                     >
                       <td className="py-3 px-4 font-medium text-gray-700">
                         {row.rt}

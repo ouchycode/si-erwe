@@ -7,18 +7,20 @@ export default function BeritaSection() {
   return (
     <section className="bg-white py-20 border-b border-slate-100">
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
-        
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4 tracking-tight">Kabar Lingkungan</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4 tracking-tight">
+              Kabar Lingkungan
+            </h2>
             <p className="text-base md:text-lg text-gray-600 leading-relaxed">
-              Agenda kegiatan dan pengumuman terbaru dari pengurus lingkungan Rukun Warga 12.
+              Agenda kegiatan dan pengumuman terbaru dari pengurus lingkungan
+              Rukun Warga 04.
             </p>
           </div>
           <Link
             href="/informasi/berita"
-            className="hidden md:inline-flex items-center justify-center font-bold text-gray-700 bg-slate-50 hover:bg-gray-100 hover:text-brand-primary border border-slate-100 px-6 py-3 rounded-xs transition-colors duration-300 no-underline shadow-sm"
+            className="hidden md:inline-flex items-center justify-center font-bold text-gray-700 bg-slate-50 hover:bg-gray-100 hover:text-brand-primary border border-slate-100 px-6 py-3 rounded-xs transition-colors duration-300 no-underline"
           >
             Lihat Indeks
             <ArrowRight size={16} className="ml-2" />
@@ -31,7 +33,7 @@ export default function BeritaSection() {
             <Link
               key={news.id}
               href={`/informasi/berita/${news.id}`}
-              className="group bg-white rounded-xs border border-slate-100 outline-none transition-all duration-300 overflow-hidden no-underline flex flex-col shadow-sm hover:shadow-md hover:-translate-y-1"
+              className="group bg-white rounded-xs border border-slate-100 outline-none transition-colors duration-300 overflow-hidden no-underline flex flex-col"
             >
               {/* Image Container */}
               <div className="relative w-full h-52 bg-gray-100 overflow-hidden border-b border-slate-100">
@@ -49,22 +51,22 @@ export default function BeritaSection() {
                 )}
                 {/* Category Pill */}
                 <div className="absolute top-4 left-4 z-10">
-                  <span className="text-[10px] md:text-xs font-bold px-3 py-1.5 rounded-xs bg-brand-primary text-white border border-brand-primary-hover shadow-sm">
+                  <span className="text-[10px] md:text-xs font-bold px-3 py-1.5 rounded-xs bg-brand-primary text-white border border-brand-primary-hover">
                     {news.kategori}
                   </span>
                 </div>
               </div>
-              
+
               {/* Content */}
               <div className="p-6 md:p-8 flex flex-col flex-1">
                 <span className="text-xs font-mono text-gray-500 mb-3 block uppercase tracking-wider font-semibold">
                   {news.tanggal}
                 </span>
-                
+
                 <h3 className="text-lg md:text-xl font-bold text-slate-800 leading-snug mb-3 group-hover:text-brand-primary transition-colors line-clamp-2">
                   {news.judul}
                 </h3>
-                
+
                 <p className="text-sm md:text-base text-gray-600 line-clamp-2 md:line-clamp-3 leading-relaxed">
                   {news.ringkasan}
                 </p>
@@ -77,13 +79,12 @@ export default function BeritaSection() {
         <div className="text-center md:hidden">
           <Link
             href="/informasi/berita"
-            className="inline-flex w-full items-center justify-center font-bold text-gray-700 bg-slate-50 hover:bg-gray-100 hover:text-brand-primary border border-slate-100 px-6 py-3.5 rounded-xs transition-colors shadow-sm no-underline"
+            className="inline-flex w-full items-center justify-center font-bold text-gray-700 bg-slate-50 hover:bg-gray-100 hover:text-brand-primary border border-slate-100 px-6 py-3.5 rounded-xs transition-colors no-underline"
           >
             Lihat Indeks
             <ArrowRight size={16} className="ml-2" />
           </Link>
         </div>
-
       </div>
     </section>
   );

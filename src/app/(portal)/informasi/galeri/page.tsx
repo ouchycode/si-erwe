@@ -25,13 +25,13 @@ export default function GaleriPage() {
     <div className="min-h-screen bg-slate-50 pb-20 font-sans">
       <PageHeader
         category="Dokumentasi"
-        title="Galeri Kegiatan RW 12"
-        description="Kumpulan foto dan dokumentasi kegiatan warga, rapat pengurus, serta momen-momen penting di lingkungan RW 12."
+        title="Galeri Kegiatan RW 04"
+        description="Kumpulan foto dan dokumentasi kegiatan warga, rapat pengurus, serta momen-momen penting di lingkungan RW 04."
         rightContent={
           <div className="flex items-center gap-3 bg-white/10 border border-white/20 rounded-xs px-5 py-4 shrink-0">
-            <Camera size={16} className="text-blue-300" />
+            <Camera size={16} className="text-white/70" />
             <div>
-              <p className="text-[10.5px] text-blue-300/70 font-semibold uppercase tracking-widest mb-0.5">
+              <p className="text-[10.5px] text-white/40 font-semibold uppercase tracking-widest mb-0.5">
                 Total Album
               </p>
               <p className="text-sm font-bold text-white leading-none">
@@ -64,7 +64,7 @@ export default function GaleriPage() {
                 {/* Overlay Hover */}
                 <div className="absolute inset-0 bg-brand-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-4">
                   <ZoomIn size={32} className="mb-3 text-white/80 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" />
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-blue-200 mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-white/70 mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
                     {item.category}
                   </span>
                   <h3 className="text-center font-semibold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">

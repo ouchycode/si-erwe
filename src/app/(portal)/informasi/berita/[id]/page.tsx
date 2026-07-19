@@ -18,16 +18,16 @@ const DETAIL_BERITA = {
   author: "Panitia Yatsafest",
   image: "/images/berita/iuran.png",
   content: `
-    <p>Pengurus RW 12 bersama jajaran Karang Taruna resmi membuka pendaftaran turnamen e-sports Mobile Legends: Bang Bang (MLBB) antar RT. Kegiatan ini diselenggarakan sebagai wadah positif bagi pemuda di lingkungan Kutabumi untuk menyalurkan bakat dan mempererat tali silaturahmi.</p>
-    <p>Ketua pelaksana turnamen menyampaikan bahwa antusiasme warga, khususnya kelompok remaja dan dewasa muda, sangat tinggi terhadap dunia e-sports. "Melalui turnamen ini, kita ingin membuktikan bahwa pemuda RW 12 tidak hanya solid dalam kegiatan kerja bakti, tetapi juga punya semangat sportivitas yang tinggi di dunia digital," ungkapnya saat technical meeting hari Minggu lalu.</p>
+    <p>Pengurus RW 04 bersama jajaran Karang Taruna resmi membuka pendaftaran turnamen e-sports Mobile Legends: Bang Bang (MLBB) antar RT. Kegiatan ini diselenggarakan sebagai wadah positif bagi pemuda di lingkungan Pabuaran untuk menyalurkan bakat dan mempererat tali silaturahmi.</p>
+    <p>Ketua pelaksana turnamen menyampaikan bahwa antusiasme warga, khususnya kelompok remaja dan dewasa muda, sangat tinggi terhadap dunia e-sports. "Melalui turnamen ini, kita ingin membuktikan bahwa pemuda RW 04 tidak hanya solid dalam kegiatan kerja bakti, tetapi juga punya semangat sportivitas yang tinggi di dunia digital," ungkapnya saat technical meeting hari Minggu lalu.</p>
     <h3>Syarat dan Ketentuan Pendaftaran</h3>
     <ul>
       <li>Setiap RT berhak mengirimkan maksimal 2 tim (masing-masing tim berisi 5 pemain inti dan 1 pemain cadangan).</li>
-      <li>Peserta wajib berdomisili di RW 12, dibuktikan dengan fotokopi KTP atau KK saat pendaftaran.</li>
+      <li>Peserta wajib berdomisili di RW 04, dibuktikan dengan fotokopi KTP atau KK saat pendaftaran.</li>
       <li>Biaya pendaftaran (commitment fee) sebesar Rp 50.000 per tim.</li>
       <li>Pendaftaran ditutup pada tanggal 25 April 2026.</li>
     </ul>
-    <p>Pertandingan akan dilaksanakan secara offline di Gedung Serbaguna RW 12, menggunakan sistem gugur (Best of 3). Panitia telah menyiapkan infrastruktur berupa jaringan internet lokal khusus.</p>
+    <p>Pertandingan akan dilaksanakan secara offline di Gedung Serbaguna RW 04, menggunakan sistem gugur (Best of 3). Panitia telah menyiapkan infrastruktur berupa jaringan internet lokal khusus.</p>
     <p>Bagi tim yang ingin mendaftar, formulir pendaftaran fisik sudah bisa diambil di rumah masing-masing Ketua RT, atau mendaftar secara online melalui kontak WhatsApp panitia pendaftaran.</p>
   `,
 };
@@ -54,7 +54,7 @@ export default function DetailBerita() {
         <div className="max-w-6xl mx-auto">
           <Link
             href="/informasi/berita"
-            className="inline-flex items-center gap-2 text-blue-100/70 hover:text-white text-sm font-medium transition-colors no-underline"
+            className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium transition-colors no-underline"
           >
             <ArrowLeft size={16} />
             Kembali ke Indeks Berita

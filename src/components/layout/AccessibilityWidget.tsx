@@ -1,17 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { 
-  Accessibility, 
-  Type, 
-  Contrast, 
-  Palette, 
-  Link as LinkIcon, 
-  BookOpen, 
-  PauseCircle, 
-  Volume2, 
+import {
+  Accessibility,
+  Type,
+  Contrast,
+  Palette,
+  Link as LinkIcon,
+  BookOpen,
+  PauseCircle,
+  Volume2,
   RotateCcw,
-  X
+  X,
 } from "lucide-react";
 
 export default function AccessibilityWidget() {
@@ -90,7 +90,7 @@ export default function AccessibilityWidget() {
     return () => document.removeEventListener("mouseup", handleMouseUp);
   }, [readText]);
 
-  // Add Global Styles for A11y dynamically to avoid cluttering globals.css if possible, 
+  // Add Global Styles for A11y dynamically to avoid cluttering globals.css if possible,
   // but better to just inject a style tag for these specific overrides.
   useEffect(() => {
     const styleId = "a11y-styles";
@@ -105,7 +105,7 @@ export default function AccessibilityWidget() {
           text-decoration-thickness: 3px !important;
         }
         .a11y-dyslexia * {
-          font-family: "Comic Sans MS", "Arial", sans-serif !important;
+          font-family: "Arial", "Verdana", sans-serif !important;
           letter-spacing: 0.1em !important;
           word-spacing: 0.2em !important;
           line-height: 1.6 !important;
@@ -134,7 +134,7 @@ export default function AccessibilityWidget() {
     <>
       {/* Overlay (Optional) */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/20 z-[9998] transition-opacity"
           onClick={() => setIsOpen(false)}
         />
@@ -143,36 +143,44 @@ export default function AccessibilityWidget() {
       {/* Main Button (Sticks to the right edge) */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed top-1/2 -translate-y-1/2 right-0 z-[9999] w-12 py-4 bg-brand-primary text-white rounded-l-md flex flex-col items-center justify-center gap-2 shadow-[-4px_0_15px_rgba(0,0,0,0.1)] hover:bg-brand-primary-hover hover:w-14 transition-all outline-none focus:ring-2 focus:ring-brand-light cursor-pointer border-none ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        className={`fixed top-1/2 -translate-y-1/2 right-0 z-[9999] w-12 py-4 bg-brand-primary text-white rounded-l-md flex flex-col items-center justify-center gap-2 hover:bg-brand-primary-hover hover:w-14 transition-colors outline-none focus:ring-2 focus:ring-brand-light cursor-pointer border-none ${isOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
         aria-label="Buka Menu Aksesibilitas"
       >
         <Accessibility size={24} />
-        <span style={{ writingMode: "vertical-rl" }} className="text-[10px] font-bold tracking-widest uppercase">
+        <span
+          style={{ writingMode: "vertical-rl" }}
+          className="text-[10px] font-bold tracking-widest uppercase"
+        >
           Bantuan
         </span>
       </button>
 
       {/* Sidebar Panel */}
-      <div 
-        className={`fixed top-0 right-0 h-full w-[320px] bg-white shadow-[-10px_0_30px_rgba(0,0,0,0.15)] z-[10000] font-sans flex flex-col transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+      <div
+        className={`fixed top-0 right-0 h-full w-[320px] bg-white border-l border-slate-200 z-[10000] font-sans flex flex-col transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="bg-brand-primary text-white px-5 py-4 flex items-center justify-between shrink-0">
           <h3 className="font-bold text-lg flex items-center gap-2 m-0 leading-none">
             <Accessibility size={20} />
             Aksesibilitas
           </h3>
-          <button 
-            onClick={() => setIsOpen(false)} 
-            className="text-white hover:text-gray-200 cursor-pointer bg-transparent border-none outline-none"
+          <button
+            onClick={() => setIsOpen(false)}
+            className="text-white cursor-pointer bg-transparent border-none outline-none"
           >
             <X size={20} />
           </button>
         </div>
-        
+
         <div className="flex-1 overflow-y-auto p-5 flex flex-col gap-5">
           <div className="flex justify-between items-center pb-2 border-b border-gray-100">
-            <span className="text-sm font-semibold text-gray-600">Pengaturan</span>
-            <button onClick={resetAll} className="text-brand-primary hover:text-brand-primary-hover text-xs flex items-center gap-1 cursor-pointer bg-transparent border-none font-bold">
+            <span className="text-sm font-semibold text-gray-600">
+              Pengaturan
+            </span>
+            <button
+              onClick={resetAll}
+              className="text-brand-primary text-xs flex items-center gap-1 cursor-pointer bg-transparent border-none font-bold"
+            >
               <RotateCcw size={12} /> Reset Semua
             </button>
           </div>
@@ -183,14 +191,16 @@ export default function AccessibilityWidget() {
               <Type size={16} className="text-brand-primary" /> Ukuran Teks
             </div>
             <div className="flex items-center gap-2">
-              <button 
+              <button
                 onClick={() => setZoomLevel(Math.max(80, zoomLevel - 10))}
                 className="w-8 h-8 flex items-center justify-center bg-white border border-gray-300 rounded cursor-pointer hover:bg-gray-100"
               >
                 -
               </button>
-              <span className="text-xs font-bold w-8 text-center">{zoomLevel}%</span>
-              <button 
+              <span className="text-xs font-bold w-8 text-center">
+                {zoomLevel}%
+              </span>
+              <button
                 onClick={() => setZoomLevel(Math.min(150, zoomLevel + 10))}
                 className="w-8 h-8 flex items-center justify-center bg-white border border-gray-300 rounded cursor-pointer hover:bg-gray-100"
               >
@@ -201,47 +211,48 @@ export default function AccessibilityWidget() {
 
           <div className="grid grid-cols-2 gap-3">
             {/* Feature Buttons */}
-            <A11yButton 
-              active={highContrast} 
-              onClick={() => setHighContrast(!highContrast)} 
-              icon={<Contrast size={20} />} 
-              label="Kontras Tinggi" 
+            <A11yButton
+              active={highContrast}
+              onClick={() => setHighContrast(!highContrast)}
+              icon={<Contrast size={20} />}
+              label="Kontras Tinggi"
             />
-            <A11yButton 
-              active={grayscale} 
-              onClick={() => setGrayscale(!grayscale)} 
-              icon={<Palette size={20} />} 
-              label="Monokrom" 
+            <A11yButton
+              active={grayscale}
+              onClick={() => setGrayscale(!grayscale)}
+              icon={<Palette size={20} />}
+              label="Monokrom"
             />
-            <A11yButton 
-              active={highlightLinks} 
-              onClick={() => setHighlightLinks(!highlightLinks)} 
-              icon={<LinkIcon size={20} />} 
-              label="Sorot Tautan" 
+            <A11yButton
+              active={highlightLinks}
+              onClick={() => setHighlightLinks(!highlightLinks)}
+              icon={<LinkIcon size={20} />}
+              label="Sorot Tautan"
             />
-            <A11yButton 
-              active={dyslexiaFont} 
-              onClick={() => setDyslexiaFont(!dyslexiaFont)} 
-              icon={<BookOpen size={20} />} 
-              label="Font Disleksia" 
+            <A11yButton
+              active={dyslexiaFont}
+              onClick={() => setDyslexiaFont(!dyslexiaFont)}
+              icon={<BookOpen size={20} />}
+              label="Font Disleksia"
             />
-            <A11yButton 
-              active={pauseAnimations} 
-              onClick={() => setPauseAnimations(!pauseAnimations)} 
-              icon={<PauseCircle size={20} />} 
-              label="Hentikan Animasi" 
+            <A11yButton
+              active={pauseAnimations}
+              onClick={() => setPauseAnimations(!pauseAnimations)}
+              icon={<PauseCircle size={20} />}
+              label="Hentikan Animasi"
             />
-            <A11yButton 
-              active={readText} 
-              onClick={() => setReadText(!readText)} 
-              icon={<Volume2 size={20} />} 
-              label="Baca Teks" 
+            <A11yButton
+              active={readText}
+              onClick={() => setReadText(!readText)}
+              icon={<Volume2 size={20} />}
+              label="Baca Teks"
             />
           </div>
 
           {readText && (
             <div className="mt-auto bg-blue-50 p-4 rounded-md text-xs text-blue-800 text-center border border-blue-100 font-medium">
-              Mode Baca Teks Aktif: Blok (sorot) teks di halaman untuk mendengarkannya dibacakan.
+              Mode Baca Teks Aktif: Blok (sorot) teks di halaman untuk
+              mendengarkannya dibacakan.
             </div>
           )}
         </div>
@@ -250,13 +261,23 @@ export default function AccessibilityWidget() {
   );
 }
 
-function A11yButton({ active, onClick, icon, label }: { active: boolean, onClick: () => void, icon: React.ReactNode, label: string }) {
+function A11yButton({
+  active,
+  onClick,
+  icon,
+  label,
+}: {
+  active: boolean;
+  onClick: () => void;
+  icon: React.ReactNode;
+  label: string;
+}) {
   return (
     <button
       onClick={onClick}
       className={`flex flex-col items-center justify-center gap-2 p-4 rounded-md border-2 transition-all cursor-pointer outline-none ${
-        active 
-          ? "bg-brand-light border-brand-primary text-brand-primary shadow-sm" 
+        active
+          ? "bg-brand-light border-brand-primary text-brand-primary shadow-sm"
           : "bg-white border-gray-100 text-gray-500 hover:border-gray-300 hover:bg-slate-50"
       }`}
     >

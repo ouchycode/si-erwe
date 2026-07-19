@@ -7,12 +7,12 @@
 @theme {
   --font-sans: var(--font-figtree);
   --font-mono: var(--font-geist-mono);
-  
-  /* Pemerintahan Navy Blue (Biru Dongker) */
-  --color-brand-primary: #1B2B4C; /* Navy */
-  --color-brand-primary-hover: #243963; /* Lighter Navy */
-  --color-brand-light: #eff6ff; /* blue-50 */
-  
+
+  /* Pemerintahan Maroon */
+  --color-brand-primary: #7a1f2b; /* Maroon */
+  --color-brand-primary-hover: #5e1720; /* Darker Maroon */
+  --color-brand-light: #fef2f2; /* rose-50 */
+
   --radius-xs: 4px;
 }
 

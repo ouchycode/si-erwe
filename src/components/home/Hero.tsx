@@ -1,98 +1,47 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Users, Home, MapPin, FileText, PhoneCall, ShieldAlert, BarChart2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative w-full flex flex-col">
-      {/* Background Section */}
-      <div className="relative w-full min-h-[60vh] flex items-center justify-center bg-gray-900">
+    <section className="relative w-full overflow-hidden bg-stone-950">
+      <div className="absolute inset-0">
         <Image
           src="/images/lingkungan-rw.png"
-          alt="Lingkungan RW 12"
+          alt="Lingkungan RW 04"
           fill
-          className="object-cover opacity-50"
           priority
+          className="object-cover opacity-55"
         />
-        
-        {/* Hero Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 text-center -mt-16">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 tracking-tight drop-shadow-md">
-            Sekretariat RW 12
-          </h1>
-          <p className="text-lg md:text-xl text-gray-200 font-medium max-w-2xl mx-auto leading-relaxed drop-shadow">
-            Sistem informasi terpadu Kutabumi, Kab. Tangerang.
-          </p>
-        </div>
+        <div className="absolute inset-0 bg-[linear-gradient(135deg,_rgba(122,31,43,0.48),_rgba(0,0,0,0.34))]" />
       </div>
 
-      {/* Floating Section (Overlapping Hero and next section) */}
-      <div className="relative z-20 w-full px-4 md:px-8 max-w-7xl mx-auto -mt-20 mb-16">
-        
-        {/* Quick Links Card - Dashboard Shape */}
-        <div className="bg-white rounded-xs border border-slate-100 p-6 md:p-8 mb-6 shadow-sm">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-            <Link href="/layanan/administrasi-kependudukan" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-slate-50/50">
-              <div className="w-12 h-12 rounded-xs flex items-center justify-center mb-3 icon-badge shadow-md">
-                <FileText size={20} strokeWidth={2} />
-              </div>
-              <span className="text-sm font-bold text-slate-800 group-hover:text-brand-primary transition-colors">Surat Pengantar</span>
+      <div className="relative z-10 mx-auto flex min-h-[64vh] max-w-7xl items-center px-4 py-20 md:px-8 md:py-28">
+        <div className="max-w-3xl text-white">
+          <h1 className="max-w-2xl text-3xl font-medium leading-tight tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.30)] md:text-5xl">
+            Sekretariat RW 04, rapi dan mudah diakses.
+          </h1>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/85 drop-shadow-[0_1px_5px_rgba(0,0,0,0.22)] md:text-base">
+            Satu pintu untuk informasi warga, layanan administrasi, dan
+            komunikasi lingkungan yang lebih tertib.
+          </p>
+
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Link
+              href="/layanan/administrasi-kependudukan"
+              className="inline-flex items-center gap-2 rounded-xs bg-white px-4 py-2.5 text-sm font-semibold text-slate-950 no-underline transition-colors"
+            >
+              Administrasi Kependudukan
+              <ArrowRight size={16} />
             </Link>
-            
-            <Link href="/informasi/statistik" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-slate-50/50">
-              <div className="w-12 h-12 rounded-xs flex items-center justify-center mb-3 icon-badge shadow-md">
-                <BarChart2 size={20} strokeWidth={2} />
-              </div>
-              <span className="text-sm font-bold text-slate-800 group-hover:text-brand-primary transition-colors">Statistik Warga</span>
-            </Link>
-            
-            <Link href="/layanan/keamanan-wilayah" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-slate-50/50">
-              <div className="w-12 h-12 rounded-xs flex items-center justify-center mb-3 icon-badge shadow-md">
-                <ShieldAlert size={20} strokeWidth={2} />
-              </div>
-              <span className="text-sm font-bold text-slate-800 group-hover:text-brand-primary transition-colors">Lapor Keamanan</span>
-            </Link>
-            
-            <Link href="/hubungi-kami" className="group flex flex-col items-center text-center no-underline outline-none rounded-xs p-2 transition-colors hover:bg-slate-50/50">
-              <div className="w-12 h-12 rounded-xs flex items-center justify-center mb-3 icon-badge shadow-md">
-                <PhoneCall size={20} strokeWidth={2} />
-              </div>
-              <span className="text-sm font-bold text-slate-800 group-hover:text-brand-primary transition-colors">Pusat Bantuan</span>
+            <Link
+              href="/hubungi-kami"
+              className="inline-flex items-center gap-2 rounded-xs border border-white/20 bg-transparent px-4 py-2.5 text-sm font-semibold text-white no-underline transition-colors"
+            >
+              Hubungi Kami
             </Link>
           </div>
         </div>
-
-        {/* Demographics Bar - Dashboard Shape with Navy Theme */}
-        <div className="flex flex-wrap items-center justify-between md:justify-around bg-brand-primary text-white rounded-xs border border-brand-primary-hover p-8 shadow-sm">
-          <div className="flex items-center gap-4">
-            <MapPin className="text-brand-light opacity-80" size={28} strokeWidth={1.5} />
-            <div className="flex flex-col">
-              <span className="text-2xl font-bold leading-none mb-1">8</span>
-              <span className="text-xs text-brand-light opacity-90 uppercase tracking-wider font-semibold">Rukun Tetangga</span>
-            </div>
-          </div>
-          
-          <div className="hidden md:block w-px h-10 bg-brand-primary-hover"></div>
-          
-          <div className="flex items-center gap-4">
-            <Home className="text-brand-light opacity-80" size={28} strokeWidth={1.5} />
-            <div className="flex flex-col">
-              <span className="text-2xl font-bold leading-none mb-1">350+</span>
-              <span className="text-xs text-brand-light opacity-90 uppercase tracking-wider font-semibold">Kepala Keluarga</span>
-            </div>
-          </div>
-
-          <div className="hidden md:block w-px h-10 bg-brand-primary-hover"></div>
-          
-          <div className="flex items-center gap-4">
-            <Users className="text-brand-light opacity-80" size={28} strokeWidth={1.5} />
-            <div className="flex flex-col">
-              <span className="text-2xl font-bold leading-none mb-1">1.200+</span>
-              <span className="text-xs text-brand-light opacity-90 uppercase tracking-wider font-semibold">Total Warga</span>
-            </div>
-          </div>
-        </div>
-
       </div>
     </section>
   );
