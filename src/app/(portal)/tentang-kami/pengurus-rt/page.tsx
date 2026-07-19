@@ -8,51 +8,59 @@ import { PageHeader } from "@/components/ui/PageHeader";
 const DATA_RT = [
   {
     rt: "01",
-    ketua: "Lorem Ipsum",
+    ketua: "Ajib",
     lokasi: "Blok A, Dolor Sit Amet",
     telp: "0812-XXXX-XXXX",
+    foto: "/images/pengurus/AJIB.png",
   },
   {
     rt: "02",
-    ketua: "Consectetur Adipiscing",
+    ketua: "Anisa",
     lokasi: "Blok B, Elit Sed",
     telp: "0812-XXXX-XXXX",
+    foto: "/images/pengurus/ANISA.png",
   },
   {
     rt: "03",
-    ketua: "Do Eiusmod",
+    ketua: "Arthadena",
     lokasi: "Blok C, Tempor Incididunt",
     telp: "0812-XXXX-XXXX",
+    foto: "/images/pengurus/ARTHADENA.png",
   },
   {
     rt: "04",
-    ketua: "Ut Labore",
+    ketua: "Giska",
     lokasi: "Blok D, Et Dolore",
     telp: "0812-XXXX-XXXX",
+    foto: "/images/pengurus/GISKA.png",
   },
   {
     rt: "05",
-    ketua: "Magna Aliqua",
+    ketua: "Muhammad Lutfhi Nabhan",
     lokasi: "Blok E, Ut Enim",
     telp: "0812-XXXX-XXXX",
+    foto: "/images/pengurus/MUHAMMAD LUTFHI NABHAN.png",
   },
   {
     rt: "06",
-    ketua: "Ad Minim",
+    ketua: "Putri",
     lokasi: "Blok F, Veniam Quis",
     telp: "0812-XXXX-XXXX",
+    foto: "/images/pengurus/PUTRI.png",
   },
   {
     rt: "07",
-    ketua: "Nostrud Exercitation",
+    ketua: "Adin",
     lokasi: "Blok G, Ullamco Laboris",
     telp: "0812-XXXX-XXXX",
+    foto: "/images/pengurus/ADIN.png",
   },
   {
     rt: "08",
-    ketua: "Nisi Ut Aliquip",
+    ketua: "Tiara",
     lokasi: "Blok H, Ex Ea Commodo",
     telp: "0812-XXXX-XXXX",
+    foto: "/images/pengurus/TIARA.png",
   },
 ];
 
@@ -115,9 +123,13 @@ export default function PengurusRT() {
               {/* Card Body */}
               <div className="p-5 flex flex-col gap-4">
                 {/* Avatar + Name */}
-                <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-full bg-brand-light text-brand-primary flex items-center justify-center border border-brand-primary/10 shrink-0 font-bold text-sm">
-                    {getInitials(item.ketua)}
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 rounded-full bg-brand-light text-brand-primary flex items-center justify-center border border-brand-primary/10 shrink-0 font-bold text-sm overflow-hidden relative shadow-sm">
+                    {(item as any).foto ? (
+                      <img src={(item as any).foto} alt={item.ketua} className="w-full h-full object-cover object-top" />
+                    ) : (
+                      getInitials(item.ketua)
+                    )}
                   </div>
                   <div>
                     <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-0.5">

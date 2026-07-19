@@ -18,50 +18,57 @@ import { PageHeader } from "@/components/ui/PageHeader";
 
 const KETUA = {
   jabatan: "Ketua RW 04",
-  nama: "Lorem Ipsum Dolor",
+  nama: "Muhamad Fadli Husna Mubarok",
   deskripsi: "Pimpinan utama dan pengarah seluruh kegiatan RW 04 Pabuaran.",
   icon: Crown,
+  foto: "/images/pengurus/MUHAMAD FADLI HUSNA MUBAROK.png",
 };
 
 const WAKIL_INTI = [
   {
     jabatan: "Sekretaris",
-    nama: "Dolor Sit Amet",
+    nama: "Kevin Ardiansyah",
     deskripsi: "Administrasi, surat-menyurat, dan dokumentasi kegiatan.",
     icon: FileText,
+    foto: "/images/pengurus/KEVIN ARDIANSYAH.png",
   },
   {
     jabatan: "Bendahara",
-    nama: "Consectetur Adipiscing",
+    nama: "Fadhila",
     deskripsi: "Pencatatan dan pengelolaan keuangan RW.",
     icon: Wallet,
+    foto: "/images/pengurus/FADHILA .png",
   },
 ];
 
 const KOORDINATOR = [
   {
     jabatan: "Keamanan & Ketertiban",
-    nama: "Lorem Ipsum",
+    nama: "Bagus",
     deskripsi: "Koordinasi siskamling dan keamanan lingkungan.",
     icon: Shield,
+    foto: "/images/pengurus/BAGUS.png",
   },
   {
     jabatan: "Kebersihan & Lingkungan",
-    nama: "Dolor Sit Amet",
+    nama: "Soviyulloh",
     deskripsi: "Program kebersihan dan kerja bakti warga.",
     icon: Trash2,
+    foto: "/images/pengurus/SOVIYULLOH.png",
   },
   {
     jabatan: "Pembangunan & Sarana",
-    nama: "Consectetur Adipiscing",
+    nama: "Umam",
     deskripsi: "Perawatan fasilitas dan infrastruktur wilayah.",
     icon: HardHat,
+    foto: "/images/pengurus/UMAM.png",
   },
   {
     jabatan: "Sosial & Kerohanian",
-    nama: "Elit Sed Do",
+    nama: "Devina",
     deskripsi: "Kegiatan sosial, keagamaan, dan santunan.",
     icon: Heart,
+    foto: "/images/pengurus/Devina.png",
   },
 ];
 
@@ -93,12 +100,14 @@ function PersonCard({
   nama,
   deskripsi,
   icon: Icon,
+  foto,
   variant = "default",
 }: {
   jabatan: string;
   nama: string;
   deskripsi: string;
   icon: LucideIcon;
+  foto?: string;
   variant?: "highlight" | "default";
 }) {
   const isHighlight = variant === "highlight";
@@ -114,13 +123,17 @@ function PersonCard({
       <div className="p-6 flex flex-col items-center text-center gap-4">
         {/* Avatar */}
         <div
-          className={`w-16 h-16 rounded-full flex items-center justify-center text-lg font-bold tracking-wide ${
+          className={`w-24 h-24 rounded-full flex items-center justify-center text-lg font-bold tracking-wide overflow-hidden relative shadow-md ${
             isHighlight
               ? "bg-white/15 text-white border border-white/20"
               : "bg-brand-light text-brand-primary border border-brand-primary/10"
           }`}
         >
-          {getInitials(nama)}
+          {foto ? (
+            <img src={foto} alt={nama} className="w-full h-full object-cover object-top" />
+          ) : (
+            getInitials(nama)
+          )}
         </div>
 
         {/* Role badge */}
