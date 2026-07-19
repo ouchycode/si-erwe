@@ -44,6 +44,10 @@ const BERITA_DUMMY = [
 
 import { PageHeader } from "@/components/ui/PageHeader";
 
+export const metadata = { title: "Berita Terkini" };
+
+
+
 export default function BeritaTerkini() {
   return (
     <div className="min-h-screen bg-slate-50 pb-20">

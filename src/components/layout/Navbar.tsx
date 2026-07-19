@@ -76,6 +76,12 @@ const NAV_ITEMS = [
         icon: Home,
         description: "Jadwal kebersihan dan kerja bakti warga.",
       },
+      {
+        label: "Layanan Posyandu",
+        href: "/layanan/posyandu",
+        icon: User,
+        description: "Informasi jadwal posyandu balita dan lansia.",
+      },
     ],
   },
   {
@@ -134,10 +140,10 @@ export default function Navbar() {
             </div>
             <div className="flex flex-col">
               <span className="text-sm md:text-base font-bold text-brand-primary leading-tight">
-                Darma Bakti RW 04
+                DARMA BAKTI RW 04
               </span>
               <span className="text-[10px] md:text-xs text-gray-500 font-medium uppercase tracking-widest mt-0.5">
-                Pemerintah Kota Tangerang
+                Kota Tangerang
               </span>
             </div>
           </Link>

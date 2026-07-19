@@ -1,6 +1,10 @@
 import { Users, User, Phone, MapPin } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 
+export const metadata = { title: "Pengurus RT" };
+
+
+
 /* ------------------------------------------------------------------ */
 /*  DATA                                                               */
 /* ------------------------------------------------------------------ */
@@ -123,10 +127,10 @@ export default function PengurusRT() {
               {/* Card Body */}
               <div className="p-5 flex flex-col gap-4">
                 {/* Avatar + Name */}
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-brand-light text-brand-primary flex items-center justify-center border border-brand-primary/10 shrink-0 font-bold text-sm overflow-hidden relative shadow-sm">
-                    {(item as any).foto ? (
-                      <img src={(item as any).foto} alt={item.ketua} className="w-full h-full object-cover object-top" />
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                  <div className="w-24 h-24 rounded-full bg-brand-light text-brand-primary flex items-center justify-center border border-brand-primary/10 shrink-0 font-bold text-lg overflow-hidden relative shadow-md">
+                    {"foto" in item && item.foto ? (
+                      <img src={item.foto as string} alt={item.ketua} className="w-full h-full object-cover object-top" />
                     ) : (
                       getInitials(item.ketua)
                     )}

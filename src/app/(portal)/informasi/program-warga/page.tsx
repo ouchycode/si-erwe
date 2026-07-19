@@ -11,6 +11,10 @@ import {
 } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 
+export const metadata = { title: "Program Warga" };
+
+
+
 const PROGRAMS = [
   {
     icon: Sprout,
@@ -28,20 +32,11 @@ const PROGRAMS = [
     desc: "Wadah setoran sampah bernilai guna agar lingkungan lebih bersih dan warga terbiasa memilah dari rumah.",
     detail: ["Setor sampah anorganik", "Pencatatan saldo warga", "Edukasi pilah sampah"],
   },
-  {
-    icon: HeartPulse,
-    title: "Posyandu",
-    subtitle: "Layanan Kesehatan Warga",
-    image: "https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1200&auto=format&fit=crop",
-    desc: "Kegiatan kesehatan rutin untuk balita, ibu hamil, lansia, dan pemantauan gizi di lingkungan RW 04.",
-    detail: ["Timbang balita", "Pemeriksaan dasar", "Konsultasi kader"],
-  },
 ];
 
 const JADWAL = [
   { label: "KWT", waktu: "Sabtu pekan ke-1", tempat: "Kebun RW 04" },
   { label: "Bank Sampah", waktu: "Minggu pekan ke-2", tempat: "Balai Warga" },
-  { label: "Posyandu", waktu: "Rabu pekan ke-3", tempat: "Posyandu RW 04" },
 ];
 
 const ALUR = [
@@ -56,11 +51,11 @@ export default function ProgramWarga() {
       <PageHeader
         category="Informasi Publik"
         title="Program Warga RW 04"
-        description="Informasi kegiatan KWT, Bank Sampah, dan Posyandu sebagai ruang gotong royong warga RW 04 Pabuaran."
+        description="Informasi kegiatan KWT dan Bank Sampah sebagai ruang gotong royong warga RW 04 Pabuaran."
       />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10 flex flex-col gap-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-4xl mx-auto">
           {PROGRAMS.map(({ icon: Icon, title, subtitle, image, desc, detail }) => (
             <article
               key={title}

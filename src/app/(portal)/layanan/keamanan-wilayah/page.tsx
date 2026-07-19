@@ -10,6 +10,10 @@ import {
 } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 
+export const metadata = { title: "Keamanan Wilayah" };
+
+
+
 const KONTAK = [
   {
     label: "Pos Keamanan RW 04",

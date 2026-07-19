@@ -10,6 +10,8 @@ import {
   ChevronRight,
 } from "lucide-react";
 
+export const metadata = { title: "Detail Berita" };
+
 const DETAIL_BERITA = {
   id: 1,
   title: "Pendaftaran Turnamen E-Sports MLBB Antar RT Resmi Dibuka",

@@ -12,6 +12,10 @@ import {
 } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 
+export const metadata = { title: "Administrasi Kependudukan" };
+
+
+
 const LAYANAN = [
   {
     icon: FileText,

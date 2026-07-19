@@ -42,20 +42,12 @@ const generateData = (config: Record<string, [number, number]>, categorySeed: nu
   return { data, totals };
 };
 
-const STATS_DATA = {
-  "Rumah & Bangunan": {
-    columns: [
-      { key: "jumlah", label: "JUMLAH" },
-      { key: "tempatTinggal", label: "TEMPAT TINGGAL" },
-      { key: "tempatUsaha", label: "TEMPAT USAHA" },
-    ],
-    ...generateData({
-      tempatTinggal: [40, 90],
-      tempatUsaha: [2, 10],
-    }, 1),
-    chartColors: ["#0f4c5c", "#e2e8f0"],
-    chartTitle: "Komposisi Bangunan",
-  },
+const MONTHS = [
+  "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+  "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+];
+
+const getStatsData = (monthIndex: number) => ({
   "Penduduk": {
     columns: [
       { key: "jumlah", label: "TOTAL" },
@@ -65,9 +57,35 @@ const STATS_DATA = {
     ...generateData({
       lakiLaki: [50, 100],
       perempuan: [50, 105],
-    }, 2),
+    }, 2 + monthIndex),
     chartColors: ["#3b82f6", "#ec4899"],
     chartTitle: "Berdasarkan Jenis Kelamin",
+  },
+  "Status Penduduk": {
+    columns: [
+      { key: "jumlah", label: "TOTAL" },
+      { key: "wargaAsli", label: "WARGA ASLI" },
+      { key: "pendatang", label: "PENDATANG" },
+    ],
+    ...generateData({
+      wargaAsli: [70, 160],
+      pendatang: [10, 40],
+    }, 7 + monthIndex),
+    chartColors: ["#10b981", "#f59e0b"],
+    chartTitle: "Status Kependudukan",
+  },
+  "Mutasi Penduduk": {
+    columns: [
+      { key: "jumlah", label: "TOTAL MUTASI" },
+      { key: "lahir", label: "KELAHIRAN" },
+      { key: "meninggal", label: "KEMATIAN" },
+    ],
+    ...generateData({
+      lahir: [0, 6],
+      meninggal: [0, 3],
+    }, 8 + monthIndex),
+    chartColors: ["#3b82f6", "#ef4444"],
+    chartTitle: "Lahir & Meninggal",
   },
   "Kelompok Usia": {
     columns: [
@@ -81,7 +99,7 @@ const STATS_DATA = {
       remaja: [20, 40],
       dewasa: [60, 120],
       lansia: [15, 30],
-    }, 3),
+    }, 3 + monthIndex),
     chartColors: ["#10b981", "#f59e0b", "#3b82f6", "#6366f1"],
     chartTitle: "Komposisi Usia",
   },
@@ -99,7 +117,7 @@ const STATS_DATA = {
       katolik: [5, 20],
       hindu: [0, 5],
       buddha: [0, 5],
-    }, 4),
+    }, 4 + monthIndex),
     chartColors: ["#10b981", "#3b82f6", "#6366f1", "#f59e0b", "#ef4444"],
     chartTitle: "Penganut Agama",
   },
@@ -115,46 +133,35 @@ const STATS_DATA = {
       smp: [15, 35],
       sma: [40, 80],
       sarjana: [20, 50],
-    }, 5),
+    }, 5 + monthIndex),
     chartColors: ["#ef4444", "#f59e0b", "#10b981", "#3b82f6"],
     chartTitle: "Tingkat Pendidikan",
   },
-  "Golongan Darah": {
-    columns: [
-      { key: "a", label: "GOL A" },
-      { key: "b", label: "GOL B" },
-      { key: "ab", label: "GOL AB" },
-      { key: "o", label: "GOL O" },
-    ],
-    ...generateData({
-      a: [20, 50],
-      b: [20, 50],
-      ab: [5, 20],
-      o: [30, 70],
-    }, 6),
-    chartColors: ["#ef4444", "#3b82f6", "#8b5cf6", "#10b981"],
-    chartTitle: "Golongan Darah",
-  },
-};
-
-const TABS = Object.keys(STATS_DATA);
+});
 
 export default function StatistikPage() {
+  const currentMonthIndex = new Date().getMonth();
+  const [selectedMonthIndex, setSelectedMonthIndex] = useState(currentMonthIndex);
+  
+  const statsData = useMemo(() => getStatsData(selectedMonthIndex), [selectedMonthIndex]);
+  const TABS = useMemo(() => Object.keys(statsData), [statsData]);
+  
   const [activeTab, setActiveTab] = useState(TABS[0]);
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: "asc" | "desc";
   } | null>(null);
 
-  const activeCategory = STATS_DATA[activeTab as keyof typeof STATS_DATA];
+  // If the active tab somehow doesn't exist (shouldn't happen here), fallback to first tab
+  const activeCategory = (statsData as Record<string, typeof statsData.Penduduk>)[activeTab] || (statsData as Record<string, typeof statsData.Penduduk>)[TABS[0]];
   
   // Format chart data based on totals
   const chartData = useMemo(() => {
     return activeCategory.columns
-      .filter(col => col.key !== 'jumlah') // Exclude total column from chart
-      .map((col, index) => ({
+      .filter((col) => col.key !== 'jumlah') // Exclude total column from chart
+      .map((col, index: number) => ({
         name: col.label,
-        value: activeCategory.totals[col.key] || 0,
+        value: (activeCategory.totals as Record<string, number>)[col.key] || 0,
         color: activeCategory.chartColors[index % activeCategory.chartColors.length]
       }));
   }, [activeCategory]);
@@ -207,9 +214,17 @@ export default function StatistikPage() {
               <p className="text-[10.5px] text-white/40 font-semibold uppercase tracking-widest mb-0.5">
                 Periode Data
               </p>
-              <p className="text-sm font-bold text-white leading-none">
-                s.d. Desember 2025
-              </p>
+              <select
+                value={selectedMonthIndex}
+                onChange={(e) => setSelectedMonthIndex(Number(e.target.value))}
+                className="bg-transparent text-white font-bold text-sm outline-none cursor-pointer appearance-none border-b border-white/30 pb-0.5 hover:border-white transition-colors"
+              >
+                {MONTHS.map((m, idx) => (
+                  <option key={m} value={idx} className="text-slate-800">
+                    Bulan {m} 2025
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
         }
@@ -253,7 +268,7 @@ export default function StatistikPage() {
                         {getSortIcon("rt")}
                       </div>
                     </th>
-                    {activeCategory.columns.map(col => (
+                    {activeCategory.columns.map((col) => (
                       <th
                         key={col.key}
                         className="py-4 px-4 cursor-pointer hover:bg-gray-100 transition-colors border-l border-gray-100"
@@ -278,7 +293,7 @@ export default function StatistikPage() {
                       <td className="py-3 px-4 font-medium text-gray-700">
                         {row.rt}
                       </td>
-                      {activeCategory.columns.map(col => (
+                      {activeCategory.columns.map((col) => (
                         <td key={col.key} className="py-3 px-4 border-l border-gray-50 text-gray-600">
                           {row[col.key]}
                         </td>
@@ -290,9 +305,9 @@ export default function StatistikPage() {
                     <td className="py-4 px-4 text-slate-800">
                       TOTAL
                     </td>
-                    {activeCategory.columns.map(col => (
+                    {activeCategory.columns.map((col) => (
                       <td key={col.key} className="py-4 px-4 border-l border-gray-100 text-brand-primary">
-                        {activeCategory.totals[col.key] || Object.values(activeCategory.data).reduce((acc: number, r: Record<string, string | number>) => acc + (r[col.key] as number || 0), 0)}
+                        {(activeCategory.totals as Record<string, number>)[col.key] || Object.values(activeCategory.data).reduce((acc: number, r: Record<string, unknown>) => acc + ((r[col.key] as number) || 0), 0)}
                       </td>
                     ))}
                   </tr>
@@ -320,7 +335,7 @@ export default function StatistikPage() {
                     label={({ value }) => `${value}`}
                     labelLine={false}
                   >
-                    {chartData.map((entry, index) => (
+                    {chartData.map((entry, index: number) => (
                       <Cell
                         key={`cell-${index}`}
                         fill={entry.color}
@@ -328,7 +343,7 @@ export default function StatistikPage() {
                     ))}
                   </Pie>
                   <Tooltip
-                    formatter={(value) => [`${value} Jiwa/Unit`, "Jumlah"]}
+                    formatter={(value) => [`${value} Jiwa`, "Jumlah"]}
                     contentStyle={{ borderRadius: '4px', fontSize: '12px' }}
                   />
                 </PieChart>
@@ -336,7 +351,7 @@ export default function StatistikPage() {
             </div>
             
             <div className="flex flex-col gap-2 mt-6 border-t border-gray-100 pt-4">
-              {chartData.map((data, idx) => (
+              {chartData.map((data, idx: number) => (
                 <div key={idx} className="flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full" style={{ backgroundColor: data.color }} />

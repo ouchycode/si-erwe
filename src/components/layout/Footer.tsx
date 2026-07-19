@@ -2,7 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, ChevronRight } from "lucide-react";
+import {
+  Home,
+  ChevronRight,
+  Mail,
+  Camera,
+  MessageSquare,
+  Link as LinkIcon,
+} from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -61,8 +68,50 @@ export default function Footer() {
           })}
         </div>
 
-        {/* Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+        {/* Mobile Simplified Footer */}
+        <div className="flex md:hidden flex-col items-center text-center gap-4 pb-4">
+          <h4 className="text-base font-bold text-slate-800">
+            Sekretariat RW 04
+          </h4>
+          <div className="text-sm text-gray-500 leading-relaxed">
+            <p>Jl. Pabuaran Raya No.1A</p>
+            <p>Pabuaran, Kec. Karawaci</p>
+            <p>Kota Tangerang 15114</p>
+          </div>
+          <div className="flex items-center justify-center gap-3 mt-2">
+            <a
+              href="mailto:info@rw04pabuaran.id"
+              className="w-10 h-10 rounded-sm border border-slate-200 flex items-center justify-center text-gray-500 hover:text-brand-primary hover:border-brand-primary hover:bg-red-50 transition-colors"
+            >
+              <Mail size={18} />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-sm border border-slate-200 flex items-center justify-center text-gray-500 hover:text-brand-primary hover:border-brand-primary hover:bg-red-50 transition-colors"
+            >
+              <Camera size={18} />
+            </a>
+            <a
+              href="https://wa.me/6281200000000"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-sm border border-slate-200 flex items-center justify-center text-gray-500 hover:text-brand-primary hover:border-brand-primary hover:bg-red-50 transition-colors"
+            >
+              <MessageSquare size={18} />
+            </a>
+            <a
+              href="#"
+              className="w-10 h-10 rounded-sm border border-slate-200 flex items-center justify-center text-gray-500 hover:text-brand-primary hover:border-brand-primary hover:bg-red-50 transition-colors"
+            >
+              <LinkIcon size={18} />
+            </a>
+          </div>
+        </div>
+
+        {/* Desktop Footer Content */}
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
           {/* Col 1 */}
           <div className="flex flex-col gap-4 lg:col-span-1">
             <h4 className="text-sm font-bold uppercase tracking-wide text-slate-800">
@@ -73,6 +122,36 @@ export default function Footer() {
               <p>Jl. Pabuaran Raya No.1A</p>
               <p>Pabuaran, Kec. Karawaci</p>
               <p>Kota Tangerang 15114</p>
+            </div>
+            <div className="flex items-center gap-3 mt-1">
+              <a
+                href="mailto:info@rw04pabuaran.id"
+                className="w-9 h-9 rounded-sm border border-slate-200 flex items-center justify-center text-gray-500 hover:text-brand-primary hover:border-brand-primary hover:bg-red-50 transition-colors"
+              >
+                <Mail size={16} />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-sm border border-slate-200 flex items-center justify-center text-gray-500 hover:text-brand-primary hover:border-brand-primary hover:bg-red-50 transition-colors"
+              >
+                <Camera size={16} />
+              </a>
+              <a
+                href="https://wa.me/6281200000000"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-sm border border-slate-200 flex items-center justify-center text-gray-500 hover:text-brand-primary hover:border-brand-primary hover:bg-red-50 transition-colors"
+              >
+                <MessageSquare size={16} />
+              </a>
+              <a
+                href="#"
+                className="w-9 h-9 rounded-sm border border-slate-200 flex items-center justify-center text-gray-500 hover:text-brand-primary hover:border-brand-primary hover:bg-red-50 transition-colors"
+              >
+                <LinkIcon size={16} />
+              </a>
             </div>
           </div>
 
@@ -133,6 +212,12 @@ export default function Footer() {
               >
                 Kebersihan Lingkungan
               </Link>
+              <Link
+                href="/layanan/posyandu"
+                className="text-sm text-gray-500 w-fit hover:text-brand-primary transition-colors"
+              >
+                Layanan Posyandu
+              </Link>
             </div>
           </div>
 
@@ -176,10 +261,10 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-5">
-          <p className="text-xs text-gray-400 text-center">
-            &copy; {currentYear} Sekretariat RW 04 Pabuaran. All rights
-            reserved.
-          </p>
+          <div className="flex flex-col items-center justify-center gap-1.5 text-xs text-gray-400 text-center">
+            <p>&copy; 2026 Sekretariat RW 04 Pabuaran.</p>
+            <p>Developed by KKN UYM Threeverse Bytewizard Team 2026.</p>
+          </div>
         </div>
       </div>
     </footer>

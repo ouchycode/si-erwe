@@ -12,8 +12,11 @@ const figtree = Figtree({
 });
 
 export const metadata: Metadata = {
-  title: "SI-RW 04 Pabuaran",
-  description: "Sistem Informasi RW 04 Pabuaran Kota Tangerang",
+  title: {
+    template: "%s | Sekretariat RW 04 Pabuaran",
+    default: "Sekretariat RW 04 Pabuaran, Karawaci",
+  },
+  description: "Situs resmi Sekretariat RW 04 Pabuaran, Karawaci, Kota Tangerang.",
 };
 
 import { Toaster } from "@/components/ui/sonner";

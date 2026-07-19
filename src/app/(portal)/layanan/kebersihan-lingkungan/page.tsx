@@ -11,6 +11,10 @@ import {
 } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 
+export const metadata = { title: "Kebersihan Lingkungan" };
+
+
+
 const JADWAL_SAMPAH = [
   {
     icon: Sprout,

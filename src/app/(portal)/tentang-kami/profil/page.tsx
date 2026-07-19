@@ -1,6 +1,10 @@
 import { Target, Eye, BookOpen, MapPin, Users, Home, Building2, Calendar } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 
+export const metadata = { title: "Profil RW" };
+
+
+
 export default function ProfilRW() {
   return (
     <div className="min-h-screen bg-slate-50 pb-20">

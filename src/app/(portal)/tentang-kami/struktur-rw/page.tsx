@@ -12,6 +12,10 @@ import {
 } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 
+export const metadata = { title: "Struktur RW" };
+
+
+
 /* ------------------------------------------------------------------ */
 /*  DATA                                                               */
 /* ------------------------------------------------------------------ */
@@ -123,7 +127,7 @@ function PersonCard({
       <div className="p-6 flex flex-col items-center text-center gap-4">
         {/* Avatar */}
         <div
-          className={`w-24 h-24 rounded-full flex items-center justify-center text-lg font-bold tracking-wide overflow-hidden relative shadow-md ${
+          className={`w-32 h-32 rounded-full flex items-center justify-center text-2xl font-bold tracking-wide overflow-hidden relative shadow-lg ${
             isHighlight
               ? "bg-white/15 text-white border border-white/20"
               : "bg-brand-light text-brand-primary border border-brand-primary/10"
