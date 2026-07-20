@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { Figtree, Geist } from "next/font/google";
+import { Figtree } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
-
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
+import { Toaster } from "@/components/ui/sonner";
 
 const figtree = Figtree({
   subsets: ["latin"],
@@ -19,24 +17,13 @@ export const metadata: Metadata = {
   description: "Situs resmi Sekretariat RW 04 Pabuaran, Karawaci, Kota Tangerang.",
 };
 
-import { Toaster } from "@/components/ui/sonner";
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="id"
-      className={cn(
-        "h-full",
-        "antialiased",
-        figtree.variable,
-        "font-sans",
-        geist.variable,
-      )}
-    >
+    <html lang="id" className={`h-full antialiased ${figtree.variable} font-sans`}>
       <body className="min-h-full bg-gray-100 font-sans">
         {children}
         <Toaster position="top-right" richColors />

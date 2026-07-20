@@ -6,7 +6,7 @@
 
 @theme {
   --font-sans: var(--font-figtree);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: 'Courier New', 'Consolas', monospace;
 
   /* Pemerintahan Maroon */
   --color-brand-primary: #7a1f2b; /* Maroon */
@@ -138,6 +138,41 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+@layer a11y {
+  .a11y-highlight-links a {
+    background-color: yellow !important;
+    color: black !important;
+    text-decoration: underline !important;
+    text-decoration-thickness: 3px !important;
+  }
+  .a11y-dyslexia * {
+    font-family: "Arial", "Verdana", sans-serif !important;
+    letter-spacing: 0.1em !important;
+    word-spacing: 0.2em !important;
+    line-height: 1.6 !important;
+  }
+  .a11y-no-animations * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .a11y-large-cursor,
+  .a11y-large-cursor * {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="black" stroke-width="2"><polygon points="3,3 21,11 12,14 8,22" /></svg>') 0 0, auto !important;
+  }
+  .a11y-text-spacing * {
+    letter-spacing: 0.12em !important;
+    word-spacing: 0.16em !important;
+    line-height: 1.8 !important;
+  }
+  .a11y-hide-images img,
+  .a11y-hide-images svg,
+  .a11y-hide-images video,
+  .a11y-hide-images iframe {
+    visibility: hidden !important;
   }
 }
 

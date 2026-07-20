@@ -1,4 +1,7 @@
+import Image from "next/image";
 import type { LucideIcon } from "lucide-react";
+import { getInitials } from "@/lib/utils";
+import { ContentSection } from "@/components/ui/ContentSection";
 import {
   Heart,
   HardHat,
@@ -80,14 +83,7 @@ const KOORDINATOR = [
 /*  COMPONENTS                                                         */
 /* ------------------------------------------------------------------ */
 
-function getInitials(nama: string) {
-  return nama
-    .split(" ")
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase();
-}
+
 
 /** Hierarchy connector line */
 function ConnectorLine() {
@@ -134,7 +130,7 @@ function PersonCard({
           }`}
         >
           {foto ? (
-            <img src={foto} alt={nama} className="w-full h-full object-cover object-top" />
+            <Image src={foto} alt={nama} fill className="object-cover object-top" sizes="128px" />
           ) : (
             getInitials(nama)
           )}
@@ -208,9 +204,7 @@ export default function StrukturRW() {
       />
 
       {/* ═══ ORGANIZATIONAL CHART ═══ */}
-      <div className="relative z-10 -mt-16">
-        <section className="bg-white shadow-[0_-8px_30px_-15px_rgba(0,0,0,0.1)] pt-16 md:pt-24 pb-16 md:pb-24">
-          <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <ContentSection>
             <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-8 text-center">
               Bagan Organisasi Periode 2024 — 2027
             </p>
@@ -241,9 +235,7 @@ export default function StrukturRW() {
               <PersonCard key={p.jabatan} {...p} />
             ))}
           </div>
-          </div>
-        </section>
-      </div>
+      </ContentSection>
     </div>
   );
 }

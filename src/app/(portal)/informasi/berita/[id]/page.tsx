@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import {
   ArrowLeft,
   Calendar,
@@ -9,46 +10,14 @@ import {
   Link as LinkIcon,
   ChevronRight,
 } from "lucide-react";
+import { BERITA_DUMMY, DETAIL_MAP } from "@/lib/dummyData";
 
-export const metadata = { title: "Detail Berita" };
+export default async function DetailBerita({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const berita = DETAIL_MAP[Number(id)];
+  if (!berita) notFound();
 
-const DETAIL_BERITA = {
-  id: 1,
-  title: "Pendaftaran Turnamen E-Sports MLBB Antar RT Resmi Dibuka",
-  date: "15 April 2026",
-  category: "Karang Taruna",
-  author: "Panitia Yatsafest",
-  image: "/images/berita/iuran.png",
-  content: `
-    <p>Pengurus RW 04 bersama jajaran Karang Taruna resmi membuka pendaftaran turnamen e-sports Mobile Legends: Bang Bang (MLBB) antar RT. Kegiatan ini diselenggarakan sebagai wadah positif bagi pemuda di lingkungan Pabuaran untuk menyalurkan bakat dan mempererat tali silaturahmi.</p>
-    <p>Ketua pelaksana turnamen menyampaikan bahwa antusiasme warga, khususnya kelompok remaja dan dewasa muda, sangat tinggi terhadap dunia e-sports. "Melalui turnamen ini, kita ingin membuktikan bahwa pemuda RW 04 tidak hanya solid dalam kegiatan kerja bakti, tetapi juga punya semangat sportivitas yang tinggi di dunia digital," ungkapnya saat technical meeting hari Minggu lalu.</p>
-    <h3>Syarat dan Ketentuan Pendaftaran</h3>
-    <ul>
-      <li>Setiap RT berhak mengirimkan maksimal 2 tim (masing-masing tim berisi 5 pemain inti dan 1 pemain cadangan).</li>
-      <li>Peserta wajib berdomisili di RW 04, dibuktikan dengan fotokopi KTP atau KK saat pendaftaran.</li>
-      <li>Biaya pendaftaran (commitment fee) sebesar Rp 50.000 per tim.</li>
-      <li>Pendaftaran ditutup pada tanggal 25 April 2026.</li>
-    </ul>
-    <p>Pertandingan akan dilaksanakan secara offline di Gedung Serbaguna RW 04, menggunakan sistem gugur (Best of 3). Panitia telah menyiapkan infrastruktur berupa jaringan internet lokal khusus.</p>
-    <p>Bagi tim yang ingin mendaftar, formulir pendaftaran fisik sudah bisa diambil di rumah masing-masing Ketua RT, atau mendaftar secara online melalui kontak WhatsApp panitia pendaftaran.</p>
-  `,
-};
-
-const BERITA_TERKAIT = [
-  { id: 2, title: "Pelatihan Dasar Frontend Developer", date: "10 April 2026" },
-  {
-    id: 3,
-    title: "Kerja Bakti Massal Persiapan Musim Hujan",
-    date: "05 April 2026",
-  },
-  {
-    id: 4,
-    title: "Pembaruan Sistem Pembayaran Iuran Warga",
-    date: "28 Maret 2026",
-  },
-];
-
-export default function DetailBerita() {
+  const beritaLain = BERITA_DUMMY.filter((b) => b.id !== berita.id).slice(0, 3);
   return (
     <div className="min-h-screen bg-white font-sans pb-20">
       {/* BREADCRUMB */}
@@ -73,16 +42,16 @@ export default function DetailBerita() {
               <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-gray-500">
                 <span className="inline-flex items-center gap-2 font-semibold text-brand-primary">
                   <Tag size={14} />
-                  {DETAIL_BERITA.category}
+                  {berita.kategori}
                 </span>
                 <span className="flex items-center gap-2">
                   <Calendar size={14} />
-                  {DETAIL_BERITA.date}
+                  {berita.tanggal}
                 </span>
               </div>
 
               <h1 className="text-2xl md:text-3xl font-bold text-slate-800 leading-tight tracking-tight mb-6">
-                {DETAIL_BERITA.title}
+                {berita.judul}
               </h1>
 
               <div className="flex items-center gap-3 py-4 border-t border-b border-slate-200">
@@ -91,7 +60,7 @@ export default function DetailBerita() {
                 </div>
                 <div>
                   <p className="text-sm font-bold text-slate-800">
-                    {DETAIL_BERITA.author}
+                    {berita.author}
                   </p>
                 </div>
               </div>
@@ -100,8 +69,8 @@ export default function DetailBerita() {
             {/* Featured Image */}
             <div className="relative w-full aspect-video bg-gray-100">
               <Image
-                src={DETAIL_BERITA.image}
-                alt={DETAIL_BERITA.title}
+                src={berita.gambar}
+                alt={berita.judul}
                 fill
                 sizes="(max-width: 768px) 100vw, 66vw"
                 className="object-cover"
@@ -111,7 +80,7 @@ export default function DetailBerita() {
             {/* Konten */}
             <div
               className="p-6 md:p-8 prose prose-sm md:prose-base prose-slate max-w-none prose-headings:text-slate-800 prose-headings:font-bold prose-a:text-brand-primary leading-relaxed bg-white"
-              dangerouslySetInnerHTML={{ __html: DETAIL_BERITA.content }}
+              dangerouslySetInnerHTML={{ __html: berita.konten || "" }}
             />
 
             {/* Share */}
@@ -149,18 +118,18 @@ export default function DetailBerita() {
               </div>
 
               <div className="flex flex-col divide-y divide-slate-200">
-                {BERITA_TERKAIT.map((item) => (
+                {beritaLain.map((item) => (
                   <Link
                     key={item.id}
                     href={`/informasi/berita/${item.id}`}
                     className="group flex flex-col gap-1.5 py-4 first:pt-0 last:pb-0 no-underline"
                   >
                     <p className="text-sm font-semibold text-slate-700 group-hover:text-brand-primary transition-colors leading-snug line-clamp-2">
-                      {item.title}
+                      {item.judul}
                     </p>
                     <span className="flex items-center gap-1.5 text-xs text-slate-500">
                       <Calendar size={12} />
-                      {item.date}
+                      {item.tanggal}
                     </span>
                   </Link>
                 ))}

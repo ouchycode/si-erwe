@@ -6,7 +6,7 @@ export const metadata = { title: "Kebersihan Lingkungan - RW 04 Pabuaran, Kota T
 
 export default function KebersihanLingkungan() {
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white font-sans pb-20">
       <PageHeader
         category="Layanan Warga"
         title="Kebersihan Lingkungan"

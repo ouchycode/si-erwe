@@ -3,13 +3,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { ContentSection } from "@/components/ui/ContentSection";
 import { X, ZoomIn, Camera } from "lucide-react";
 
 // Dummy data for gallery
 const GALLERY_IMAGES = [
   { id: 1, src: "https://images.unsplash.com/photo-1596423735880-5f2a689b903e?q=80&w=800&auto=format&fit=crop", title: "Kerja Bakti Membersihkan Selokan", category: "Lingkungan" },
   { id: 2, src: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=800&auto=format&fit=crop", title: "Rapat Pengurus RW", category: "Administrasi" },
-  { id: 3, src: "https://images.unsplash.com/photo-1541890289-b86df5baff0c?q=80&w=800&auto=format&fit=crop", title: "Lomba 17 Agustus", category: "Acara" },
+  { id: 3, src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800&auto=format&fit=crop", title: "Lomba 17 Agustus", category: "Acara" },
   { id: 4, src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop", title: "Bazaar Warga", category: "Acara" },
   { id: 5, src: "https://images.unsplash.com/photo-1603513492128-ba7bc9b3e143?q=80&w=800&auto=format&fit=crop", title: "Posyandu Balita", category: "Kesehatan" },
   { id: 6, src: "https://images.unsplash.com/photo-1599839619722-39751411ea63?q=80&w=800&auto=format&fit=crop", title: "Siskamling Malam", category: "Keamanan" },
@@ -42,9 +43,7 @@ export default function GaleriPage() {
         }
       />
 
-      <div className="relative z-10 -mt-16">
-        <section className="bg-white shadow-[0_-8px_30px_-15px_rgba(0,0,0,0.1)] pt-16 md:pt-24 pb-16 md:pb-24 min-h-[500px]">
-          <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <ContentSection className="min-h-[500px]">
             
             {/* Masonry Grid */}
             <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 gap-6 space-y-6">
@@ -76,9 +75,7 @@ export default function GaleriPage() {
               ))}
             </div>
 
-          </div>
-        </section>
-      </div>
+      </ContentSection>
 
       {/* Lightbox Modal */}
       {selectedImage && (

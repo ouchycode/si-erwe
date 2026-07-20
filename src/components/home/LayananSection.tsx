@@ -1,22 +1,18 @@
-"use client";
-
-import { LAYANAN_DUMMY, Layanan } from "@/lib/dummyData";
-import { FileText, Shield, Trash2, ArrowRight } from "lucide-react";
+import { LAYANAN_DUMMY } from "@/lib/dummyData";
+import { FileText, Shield, Trash2, Heart, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const LAYANAN_ICON: Record<string, React.ElementType> = {
   "administrasi-kependudukan": FileText,
   "keamanan-wilayah": Shield,
   "kebersihan-lingkungan": Trash2,
+  "posyandu": Heart,
 };
 
 export default function LayananSection() {
-  const layananUtama = LAYANAN_DUMMY;
-
   return (
     <section className="bg-slate-50 py-20 border-b border-slate-100">
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
-        {/* Header */}
         <div className="mb-12 text-center md:text-left">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4 tracking-tight">
             Layanan Publik
@@ -27,9 +23,8 @@ export default function LayananSection() {
           </p>
         </div>
 
-        {/* Modul Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12">
-          {layananUtama.map((item: Layanan) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
+          {LAYANAN_DUMMY.map((item) => {
             const Icon = LAYANAN_ICON[item.slug] ?? FileText;
 
             return (

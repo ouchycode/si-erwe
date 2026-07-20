@@ -1,8 +1,9 @@
 "use client";
 
 import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
-
 import { PageHeader } from "@/components/ui/PageHeader";
+import { ContentSection } from "@/components/ui/ContentSection";
+import { ALAMAT, KONTAK, JAM_OPERASIONAL } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -32,9 +33,7 @@ export default function HubungiKami() {
         description="Punya pertanyaan, keluhan, atau saran? Hubungi sekretariat RW 04 melalui formulir atau kontak di bawah ini."
       />
 
-      <div className="relative z-10 -mt-16">
-        <section className="bg-white shadow-[0_-8px_30px_-15px_rgba(0,0,0,0.1)] pt-16 md:pt-24 pb-16 md:pb-24">
-          <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <ContentSection>
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
               {/* FORM */}
               <div className="lg:col-span-3 bg-slate-50 rounded-xs p-6 md:p-8 shadow-sm">
@@ -104,11 +103,11 @@ export default function HubungiKami() {
                         label: "Alamat",
                         content: (
                           <p className="text-[13px] text-white/70 leading-relaxed">
-                            Gedung Serbaguna RW 04
+                            {ALAMAT.tempat}
                             <br />
-                            Kel. Pabuaran, Kec. Karawaci
+                            {ALAMAT.kelurahan}, {ALAMAT.kecamatan}
                             <br />
-                            Kota Tangerang, Banten 15114
+                            {ALAMAT.kota}, {ALAMAT.provinsi} {ALAMAT.kodePos}
                           </p>
                         ),
                       },
@@ -117,10 +116,10 @@ export default function HubungiKami() {
                         label: "WhatsApp / Telepon",
                         content: (
                           <a
-                            href="tel:081122223333"
+                            href={`tel:${KONTAK.waTelp}`}
                             className="text-[13.5px] font-semibold text-white hover:text-white/70 no-underline transition-colors"
                           >
-                            +62 811-2222-3333
+                            {KONTAK.wa}
                           </a>
                         ),
                       },
@@ -129,10 +128,10 @@ export default function HubungiKami() {
                         label: "Email",
                         content: (
                           <a
-                            href="mailto:admin@rw04pabuaran.id"
+                            href={`mailto:${KONTAK.email}`}
                             className="text-[13.5px] font-semibold text-white hover:text-white/70 no-underline transition-colors"
                           >
-                            admin@rw04pabuaran.id
+                            {KONTAK.email}
                           </a>
                         ),
                       },
@@ -161,25 +160,17 @@ export default function HubungiKami() {
                     </h3>
                   </div>
                   <div className="flex flex-col gap-2.5 text-[12.5px]">
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-500">Senin – Jumat</span>
-                      <span className="font-bold text-slate-800">19.00 – 22.00</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-500">Sabtu – Minggu</span>
-                      <span className="font-bold text-slate-800">09.00 – 15.00</span>
-                    </div>
-                    <div className="flex justify-between items-center pt-2.5 border-t border-slate-200">
-                      <span className="text-gray-400">Hari Libur Nasional</span>
-                      <span className="font-bold text-red-400">Tutup</span>
-                    </div>
+                    {JAM_OPERASIONAL.map((item) => (
+                      <div key={item.hari} className={`flex justify-between items-center ${item.libur ? "pt-2.5 border-t border-slate-200" : ""}`}>
+                        <span className={item.libur ? "text-gray-400" : "text-gray-500"}>{item.hari}</span>
+                        <span className={`font-bold ${item.libur ? "text-red-400" : "text-slate-800"}`}>{item.jam}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      </div>
+      </ContentSection>
     </div>
   );
 }

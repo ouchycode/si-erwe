@@ -14,7 +14,7 @@ export function PageHeader({
   rightContent,
 }: PageHeaderProps) {
   return (
-    <div className="bg-brand-primary px-6 md:px-8 pt-16 md:pt-20 pb-28 md:pb-36 border-b border-brand-primary-hover">
+    <div className="bg-brand-primary px-6 md:px-8 pt-16 md:pt-20 pb-28 md:pb-36">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
         <div>
           {category && (

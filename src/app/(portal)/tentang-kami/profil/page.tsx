@@ -1,5 +1,7 @@
 import { Target, Eye, BookOpen, MapPin, Users, Home, Building2, Calendar } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { ContentSection } from "@/components/ui/ContentSection";
+import MapComponent from "@/components/MapComponent";
 
 export const metadata = { title: "Profil RW" };
 
@@ -26,9 +28,7 @@ export default function ProfilRW() {
       />
 
       {/* CONTENT — pulls up over the PageHeader */}
-      <div className="relative z-10 -mt-16">
-        <section className="bg-white shadow-[0_-8px_30px_-15px_rgba(0,0,0,0.1)] pt-16 md:pt-24 pb-16 md:pb-24">
-          <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <ContentSection>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
 
               {/* KIRI: Sejarah + Visi Misi */}
@@ -138,14 +138,7 @@ export default function ProfilRW() {
                 {/* Peta */}
                 <div className="rounded-xs overflow-hidden shadow-md">
                   <div className="w-full h-64 bg-gray-100 relative">
-                    <iframe
-                      src="https://www.google.com/maps?q=Pabuaran%2C%20Karawaci%2C%20Kota%20Tangerang&output=embed"
-                      className="absolute inset-0 w-full h-full border-0"
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title="Peta Pabuaran"
-                    />
+                    <MapComponent />
                   </div>
                   <div className="bg-slate-50 py-4">
                     <p className="text-sm text-center text-gray-500 font-medium">
@@ -155,9 +148,7 @@ export default function ProfilRW() {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      </div>
+      </ContentSection>
     </div>
   );
 }

@@ -4,147 +4,15 @@ import { useState, useMemo } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { ChevronUp, ChevronDown, BarChart2 } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
-
-// Simple seeded pseudo-random number generator (deterministic)
-function seededRandom(seed: number): number {
-  const x = Math.sin(seed * 9301 + 49297) * 49297;
-  return x - Math.floor(x);
-}
-
-// Helper to generate 8 RTs of dummy data for each category (deterministic)
-const generateData = (config: Record<string, [number, number]>, categorySeed: number) => {
-  const data = [];
-  const totals: Record<string, number> = {};
-  
-  Object.keys(config).forEach(k => totals[k] = 0);
-
-  for (let i = 1; i <= 8; i++) {
-    const rt = i.toString().padStart(3, "0");
-    const row: Record<string, number | string> = { rt };
-    
-    let keyIndex = 0;
-    Object.entries(config).forEach(([key, [min, max]]) => {
-      const seed = categorySeed * 100 + i * 10 + keyIndex;
-      const val = Math.floor(seededRandom(seed) * (max - min + 1)) + min;
-      row[key] = val;
-      totals[key] += val;
-      keyIndex++;
-    });
-    
-    // Auto-calculate "jumlah" if not explicitly defined but needed
-    if (!config.jumlah) {
-      row.jumlah = Object.entries(row).reduce((acc: number, [k, v]) => k !== 'rt' ? acc + (v as number) : acc, 0);
-    }
-    
-    data.push(row);
-  }
-  
-  return { data, totals };
-};
-
-const MONTHS = [
-  "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-  "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-];
-
-const getStatsData = (monthIndex: number) => ({
-  "Penduduk": {
-    columns: [
-      { key: "jumlah", label: "TOTAL" },
-      { key: "lakiLaki", label: "LAKI-LAKI" },
-      { key: "perempuan", label: "PEREMPUAN" },
-    ],
-    ...generateData({
-      lakiLaki: [50, 100],
-      perempuan: [50, 105],
-    }, 2 + monthIndex),
-    chartColors: ["#3b82f6", "#ec4899"],
-    chartTitle: "Berdasarkan Jenis Kelamin",
-  },
-  "Status Penduduk": {
-    columns: [
-      { key: "jumlah", label: "TOTAL" },
-      { key: "wargaAsli", label: "WARGA ASLI" },
-      { key: "pendatang", label: "PENDATANG" },
-    ],
-    ...generateData({
-      wargaAsli: [70, 160],
-      pendatang: [10, 40],
-    }, 7 + monthIndex),
-    chartColors: ["#10b981", "#f59e0b"],
-    chartTitle: "Status Kependudukan",
-  },
-  "Mutasi Penduduk": {
-    columns: [
-      { key: "jumlah", label: "TOTAL MUTASI" },
-      { key: "lahir", label: "KELAHIRAN" },
-      { key: "meninggal", label: "KEMATIAN" },
-    ],
-    ...generateData({
-      lahir: [0, 6],
-      meninggal: [0, 3],
-    }, 8 + monthIndex),
-    chartColors: ["#3b82f6", "#ef4444"],
-    chartTitle: "Lahir & Meninggal",
-  },
-  "Kelompok Usia": {
-    columns: [
-      { key: "balita", label: "BALITA" },
-      { key: "remaja", label: "REMAJA" },
-      { key: "dewasa", label: "DEWASA" },
-      { key: "lansia", label: "LANSIA" },
-    ],
-    ...generateData({
-      balita: [10, 25],
-      remaja: [20, 40],
-      dewasa: [60, 120],
-      lansia: [15, 30],
-    }, 3 + monthIndex),
-    chartColors: ["#10b981", "#f59e0b", "#3b82f6", "#6366f1"],
-    chartTitle: "Komposisi Usia",
-  },
-  "Agama": {
-    columns: [
-      { key: "islam", label: "ISLAM" },
-      { key: "kristen", label: "KRISTEN" },
-      { key: "katolik", label: "KATOLIK" },
-      { key: "hindu", label: "HINDU" },
-      { key: "buddha", label: "BUDDHA" },
-    ],
-    ...generateData({
-      islam: [80, 150],
-      kristen: [10, 30],
-      katolik: [5, 20],
-      hindu: [0, 5],
-      buddha: [0, 5],
-    }, 4 + monthIndex),
-    chartColors: ["#10b981", "#3b82f6", "#6366f1", "#f59e0b", "#ef4444"],
-    chartTitle: "Penganut Agama",
-  },
-  "Pendidikan": {
-    columns: [
-      { key: "sd", label: "SD/SEDERAJAT" },
-      { key: "smp", label: "SMP/SEDERAJAT" },
-      { key: "sma", label: "SMA/SEDERAJAT" },
-      { key: "sarjana", label: "D3/S1/S2" },
-    ],
-    ...generateData({
-      sd: [10, 30],
-      smp: [15, 35],
-      sma: [40, 80],
-      sarjana: [20, 50],
-    }, 5 + monthIndex),
-    chartColors: ["#ef4444", "#f59e0b", "#10b981", "#3b82f6"],
-    chartTitle: "Tingkat Pendidikan",
-  },
-});
+import { ContentSection } from "@/components/ui/ContentSection";
+import { MONTHS, getStatsData } from "@/lib/statisticsData";
 
 export default function StatistikPage() {
   const currentMonthIndex = new Date().getMonth();
   const [selectedMonthIndex, setSelectedMonthIndex] = useState(currentMonthIndex);
   
   const statsData = useMemo(() => getStatsData(selectedMonthIndex), [selectedMonthIndex]);
-  const TABS = useMemo(() => Object.keys(statsData), [statsData]);
+  const TABS = Object.keys(statsData);
   
   const [activeTab, setActiveTab] = useState(TABS[0]);
   const [sortConfig, setSortConfig] = useState<{
@@ -219,7 +87,7 @@ export default function StatistikPage() {
               >
                 {MONTHS.map((m, idx) => (
                   <option key={m} value={idx} className="text-slate-800">
-                    Bulan {m} 2025
+                    Bulan {m} 2026
                   </option>
                 ))}
               </select>
@@ -228,9 +96,7 @@ export default function StatistikPage() {
         }
       />
 
-      <div className="relative z-10 -mt-16">
-        <section className="bg-white shadow-[0_-8px_30px_-15px_rgba(0,0,0,0.1)] pt-16 md:pt-24 pb-16 md:pb-24">
-          <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <ContentSection>
             {/* Tabs */}
             <div className="flex flex-wrap gap-2 mb-8">
               {TABS.map((tab) => (
@@ -320,7 +186,7 @@ export default function StatistikPage() {
                   {activeCategory.chartTitle}
                 </h3>
                 <div className="h-[250px] w-full">
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={250}>
                     <PieChart>
                       <Pie
                         data={chartData}
@@ -358,9 +224,7 @@ export default function StatistikPage() {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      </div>
+      </ContentSection>
     </div>
   );
 }

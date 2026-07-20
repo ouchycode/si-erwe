@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Accessibility,
   Type,
@@ -18,176 +18,14 @@ import {
   ImageOff,
   SquareMinus
 } from "lucide-react";
+import { useAccessibility } from "@/lib/useAccessibility";
 
 export default function AccessibilityWidget() {
   const [isOpen, setIsOpen] = useState(false);
-
-  // States
-  const [zoomLevel, setZoomLevel] = useState(100);
-  const [highContrast, setHighContrast] = useState(false);
-  const [grayscale, setGrayscale] = useState(false);
-  const [highlightLinks, setHighlightLinks] = useState(false);
-  const [dyslexiaFont, setDyslexiaFont] = useState(false);
-  const [pauseAnimations, setPauseAnimations] = useState(false);
-  const [readText, setReadText] = useState(false);
-  const [colorBlind, setColorBlind] = useState(false);
-  const [largeCursor, setLargeCursor] = useState(false);
-  const [readingGuide, setReadingGuide] = useState(false);
-  const [textSpacing, setTextSpacing] = useState(false);
-  const [hideImages, setHideImages] = useState(false);
-
-  const [mouseY, setMouseY] = useState(0);
-
-  // Apply Zoom
-  useEffect(() => {
-    document.documentElement.style.fontSize = `${zoomLevel}%`;
-  }, [zoomLevel]);
-
-  // Apply Grayscale, High Contrast, & Color Blind
-  useEffect(() => {
-    let filter = "";
-    if (grayscale) filter += "grayscale(100%) ";
-    if (highContrast) filter += "contrast(150%) saturate(150%) ";
-    if (colorBlind) filter += "sepia(50%) hue-rotate(-15deg) saturate(150%) ";
-    document.documentElement.style.filter = filter.trim();
-  }, [grayscale, highContrast, colorBlind]);
-
-  // Apply Highlight Links
-  useEffect(() => {
-    if (highlightLinks) {
-      document.body.classList.add("a11y-highlight-links");
-    } else {
-      document.body.classList.remove("a11y-highlight-links");
-    }
-  }, [highlightLinks]);
-
-  // Apply Dyslexia Font
-  useEffect(() => {
-    if (dyslexiaFont) {
-      document.body.classList.add("a11y-dyslexia");
-    } else {
-      document.body.classList.remove("a11y-dyslexia");
-    }
-  }, [dyslexiaFont]);
-
-  // Apply Pause Animations
-  useEffect(() => {
-    if (pauseAnimations) {
-      document.body.classList.add("a11y-no-animations");
-    } else {
-      document.body.classList.remove("a11y-no-animations");
-    }
-  }, [pauseAnimations]);
-
-  // Apply Large Cursor
-  useEffect(() => {
-    if (largeCursor) document.body.classList.add("a11y-large-cursor");
-    else document.body.classList.remove("a11y-large-cursor");
-  }, [largeCursor]);
-
-  // Apply Text Spacing
-  useEffect(() => {
-    if (textSpacing) document.body.classList.add("a11y-text-spacing");
-    else document.body.classList.remove("a11y-text-spacing");
-  }, [textSpacing]);
-
-  // Apply Hide Images
-  useEffect(() => {
-    if (hideImages) document.body.classList.add("a11y-hide-images");
-    else document.body.classList.remove("a11y-hide-images");
-  }, [hideImages]);
-
-  // Reading Guide
-  useEffect(() => {
-    if (!readingGuide) return;
-    const handleMouseMove = (e: MouseEvent) => setMouseY(e.clientY);
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [readingGuide]);
-
-  // Text to Speech
-  useEffect(() => {
-    const handleMouseUp = () => {
-      if (!readText) return;
-      const selection = window.getSelection();
-      if (selection && selection.toString().trim()) {
-        const text = selection.toString();
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = "id-ID";
-        window.speechSynthesis.speak(utterance);
-      }
-    };
-
-    if (readText) {
-      document.addEventListener("mouseup", handleMouseUp);
-    } else {
-      window.speechSynthesis.cancel();
-      document.removeEventListener("mouseup", handleMouseUp);
-    }
-
-    return () => document.removeEventListener("mouseup", handleMouseUp);
-  }, [readText]);
-
-  // Add Global Styles for A11y dynamically to avoid cluttering globals.css if possible,
-  // but better to just inject a style tag for these specific overrides.
-  useEffect(() => {
-    const styleId = "a11y-styles";
-    if (!document.getElementById(styleId)) {
-      const style = document.createElement("style");
-      style.id = styleId;
-      style.innerHTML = `
-        .a11y-highlight-links a {
-          background-color: yellow !important;
-          color: black !important;
-          text-decoration: underline !important;
-          text-decoration-thickness: 3px !important;
-        }
-        .a11y-dyslexia * {
-          font-family: "Arial", "Verdana", sans-serif !important;
-          letter-spacing: 0.1em !important;
-          word-spacing: 0.2em !important;
-          line-height: 1.6 !important;
-        }
-        .a11y-no-animations * {
-          animation: none !important;
-          transition: none !important;
-          scroll-behavior: auto !important;
-        }
-        .a11y-large-cursor, .a11y-large-cursor * {
-          cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="black" stroke-width="2"><polygon points="3,3 21,11 12,14 8,22" /></svg>') 0 0, auto !important;
-        }
-        .a11y-text-spacing * {
-          letter-spacing: 0.12em !important;
-          word-spacing: 0.16em !important;
-          line-height: 1.8 !important;
-        }
-        .a11y-hide-images img, .a11y-hide-images svg, .a11y-hide-images video, .a11y-hide-images iframe {
-          visibility: hidden !important;
-        }
-      `;
-      document.head.appendChild(style);
-    }
-  }, []);
-
-  const resetAll = () => {
-    setZoomLevel(100);
-    setHighContrast(false);
-    setGrayscale(false);
-    setHighlightLinks(false);
-    setDyslexiaFont(false);
-    setPauseAnimations(false);
-    setReadText(false);
-    setColorBlind(false);
-    setLargeCursor(false);
-    setReadingGuide(false);
-    setTextSpacing(false);
-    setHideImages(false);
-  };
+  const a11y = useAccessibility();
 
   return (
     <>
-      {/* Overlay (Optional) */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/20 z-[9998] transition-opacity"
@@ -195,15 +33,13 @@ export default function AccessibilityWidget() {
         />
       )}
 
-      {/* Reading Guide */}
-      {readingGuide && (
-        <div 
+      {a11y.readingGuide && (
+        <div
           className="fixed left-0 right-0 h-10 border-y-4 border-brand-primary bg-black/10 z-[9997] pointer-events-none transition-transform duration-75 ease-out"
-          style={{ top: `${Math.max(0, mouseY - 20)}px` }}
+          style={{ top: `${Math.max(0, a11y.mouseY - 20)}px` }}
         />
       )}
 
-      {/* Main Button (Sticks to the right edge) */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`fixed top-1/2 -translate-y-1/2 right-0 z-[9999] w-12 py-4 bg-brand-primary text-white rounded-l-md flex flex-col items-center justify-center gap-2 hover:bg-brand-primary-hover hover:w-14 transition-colors outline-none focus:ring-2 focus:ring-brand-light cursor-pointer border-none ${isOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
@@ -218,7 +54,6 @@ export default function AccessibilityWidget() {
         </span>
       </button>
 
-      {/* Sidebar Panel */}
       <div
         className={`fixed top-0 right-0 h-full w-[320px] bg-white border-l border-slate-200 z-[10000] font-sans flex flex-col transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "translate-x-full"}`}
       >
@@ -237,115 +72,49 @@ export default function AccessibilityWidget() {
 
         <div className="flex-1 overflow-y-auto p-5 flex flex-col gap-5">
           <div className="flex justify-between items-center pb-2 border-b border-gray-100">
-            <span className="text-sm font-semibold text-gray-600">
-              Pengaturan
-            </span>
+            <span className="text-sm font-semibold text-gray-600">Pengaturan</span>
             <button
-              onClick={resetAll}
+              onClick={a11y.resetAll}
               className="text-brand-primary text-xs flex items-center gap-1 cursor-pointer bg-transparent border-none font-bold"
             >
               <RotateCcw size={12} /> Reset Semua
             </button>
           </div>
 
-          {/* Zoom */}
           <div className="flex items-center justify-between bg-slate-50 p-3 rounded-md border border-slate-100">
             <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
               <Type size={16} className="text-brand-primary" /> Ukuran Teks
             </div>
             <div className="flex items-center gap-2">
               <button
-                onClick={() => setZoomLevel(Math.max(80, zoomLevel - 10))}
+                onClick={() => a11y.set("zoomLevel", Math.max(80, a11y.zoomLevel - 10))}
                 className="w-8 h-8 flex items-center justify-center bg-white border border-gray-300 rounded cursor-pointer hover:bg-gray-100"
-              >
-                -
-              </button>
-              <span className="text-xs font-bold w-8 text-center">
-                {zoomLevel}%
-              </span>
+              >-</button>
+              <span className="text-xs font-bold w-8 text-center">{a11y.zoomLevel}%</span>
               <button
-                onClick={() => setZoomLevel(Math.min(150, zoomLevel + 10))}
+                onClick={() => a11y.set("zoomLevel", Math.min(150, a11y.zoomLevel + 10))}
                 className="w-8 h-8 flex items-center justify-center bg-white border border-gray-300 rounded cursor-pointer hover:bg-gray-100"
-              >
-                +
-              </button>
+              >+</button>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            {/* Feature Buttons */}
-            <A11yButton
-              active={highContrast}
-              onClick={() => setHighContrast(!highContrast)}
-              icon={<Contrast size={20} />}
-              label="Kontras Tinggi"
-            />
-            <A11yButton
-              active={grayscale}
-              onClick={() => setGrayscale(!grayscale)}
-              icon={<Palette size={20} />}
-              label="Monokrom"
-            />
-            <A11yButton
-              active={highlightLinks}
-              onClick={() => setHighlightLinks(!highlightLinks)}
-              icon={<LinkIcon size={20} />}
-              label="Sorot Tautan"
-            />
-            <A11yButton
-              active={colorBlind}
-              onClick={() => setColorBlind(!colorBlind)}
-              icon={<Eye size={20} />}
-              label="Ramah Buta Warna"
-            />
-            <A11yButton
-              active={dyslexiaFont}
-              onClick={() => setDyslexiaFont(!dyslexiaFont)}
-              icon={<BookOpen size={20} />}
-              label="Font Disleksia"
-            />
-            <A11yButton
-              active={pauseAnimations}
-              onClick={() => setPauseAnimations(!pauseAnimations)}
-              icon={<PauseCircle size={20} />}
-              label="Hentikan Animasi"
-            />
-            <A11yButton
-              active={readText}
-              onClick={() => setReadText(!readText)}
-              icon={<Volume2 size={20} />}
-              label="Baca Teks"
-            />
-            <A11yButton
-              active={largeCursor}
-              onClick={() => setLargeCursor(!largeCursor)}
-              icon={<MousePointer2 size={20} />}
-              label="Kursor Besar"
-            />
-            <A11yButton
-              active={readingGuide}
-              onClick={() => setReadingGuide(!readingGuide)}
-              icon={<SquareMinus size={20} />}
-              label="Panduan Baca"
-            />
-            <A11yButton
-              active={textSpacing}
-              onClick={() => setTextSpacing(!textSpacing)}
-              icon={<Space size={20} />}
-              label="Jarak Teks"
-            />
-            <A11yButton
-              active={hideImages}
-              onClick={() => setHideImages(!hideImages)}
-              icon={<ImageOff size={20} />}
-              label="Sembunyikan Gambar"
-            />
+            <A11yButton active={a11y.highContrast} onClick={() => a11y.toggle("highContrast")} icon={<Contrast size={20} />} label="Kontras Tinggi" />
+            <A11yButton active={a11y.grayscale} onClick={() => a11y.toggle("grayscale")} icon={<Palette size={20} />} label="Monokrom" />
+            <A11yButton active={a11y.highlightLinks} onClick={() => a11y.toggle("highlightLinks")} icon={<LinkIcon size={20} />} label="Sorot Tautan" />
+            <A11yButton active={a11y.colorBlind} onClick={() => a11y.toggle("colorBlind")} icon={<Eye size={20} />} label="Ramah Buta Warna" />
+            <A11yButton active={a11y.dyslexiaFont} onClick={() => a11y.toggle("dyslexiaFont")} icon={<BookOpen size={20} />} label="Font Disleksia" />
+            <A11yButton active={a11y.pauseAnimations} onClick={() => a11y.toggle("pauseAnimations")} icon={<PauseCircle size={20} />} label="Hentikan Animasi" />
+            <A11yButton active={a11y.readText} onClick={() => a11y.toggle("readText")} icon={<Volume2 size={20} />} label="Baca Teks" />
+            <A11yButton active={a11y.largeCursor} onClick={() => a11y.toggle("largeCursor")} icon={<MousePointer2 size={20} />} label="Kursor Besar" />
+            <A11yButton active={a11y.readingGuide} onClick={() => a11y.toggle("readingGuide")} icon={<SquareMinus size={20} />} label="Panduan Baca" />
+            <A11yButton active={a11y.textSpacing} onClick={() => a11y.toggle("textSpacing")} icon={<Space size={20} />} label="Jarak Teks" />
+            <A11yButton active={a11y.hideImages} onClick={() => a11y.toggle("hideImages")} icon={<ImageOff size={20} />} label="Sembunyikan Gambar" />
           </div>
 
-          {readText && (
+          {a11y.readText && (
             <div className="mt-auto bg-blue-50 p-4 rounded-md text-xs text-blue-800 text-center border border-blue-100 font-medium">
-              Mode Baca Teks Aktif: Blok (sorot) teks di halaman untuk
-              mendengarkannya dibacakan.
+              Mode Baca Teks Aktif: Blok (sorot) teks di halaman untuk mendengarkannya dibacakan.
             </div>
           )}
         </div>

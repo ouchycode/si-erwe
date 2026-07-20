@@ -3,12 +3,12 @@ import {
   CalendarDays,
   CheckCircle2,
   ClipboardList,
-  HeartPulse,
   MapPin,
   Recycle,
   Sprout,
   Users,
 } from "lucide-react";
+import { ContentSection } from "@/components/ui/ContentSection";
 import { PageHeader } from "@/components/ui/PageHeader";
 
 export const metadata = { title: "Program Warga" };
@@ -52,9 +52,8 @@ export default function ProgramWarga() {
         description="Informasi kegiatan KWT dan Bank Sampah sebagai ruang gotong royong warga RW 04 Pabuaran."
       />
 
-      <div className="relative z-10 -mt-16">
-        <section className="bg-white shadow-[0_-8px_30px_-15px_rgba(0,0,0,0.1)] pt-16 md:pt-24 pb-16 md:pb-24">
-          <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-col gap-12">
+      <ContentSection>
+        <div className="flex flex-col gap-12">
             {/* Program Cards */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-4xl mx-auto">
               {PROGRAMS.map(({ icon: Icon, title, subtitle, image, desc, detail }) => (
@@ -171,9 +170,8 @@ export default function ProgramWarga() {
                 Hubungi Kader
               </a>
             </div>
-          </div>
-        </section>
-      </div>
+        </div>
+      </ContentSection>
     </div>
   );
 }
