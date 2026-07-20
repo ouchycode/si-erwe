@@ -188,7 +188,7 @@ function PersonCard({
 
 export default function StrukturRW() {
   return (
-    <div className="min-h-screen bg-slate-50 pb-20">
+    <div className="min-h-screen bg-white font-sans">
       <PageHeader
         title="Struktur Organisasi RW 04"
         description="Sinergi pengurus dalam melayani dan mengelola lingkungan demi kenyamanan seluruh warga RW 04 Pabuaran periode 2024–2027."
@@ -208,11 +208,12 @@ export default function StrukturRW() {
       />
 
       {/* ═══ ORGANIZATIONAL CHART ═══ */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10">
-        <div className="bg-white border border-slate-100 rounded-xs shadow-sm p-6 md:p-10">
-          <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-8 text-center">
-            Bagan Organisasi Periode 2024 — 2027
-          </p>
+      <div className="relative z-10 -mt-16">
+        <section className="bg-white shadow-[0_-8px_30px_-15px_rgba(0,0,0,0.1)] pt-16 md:pt-24 pb-16 md:pb-24">
+          <div className="max-w-7xl mx-auto px-4 md:px-8">
+            <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-8 text-center">
+              Bagan Organisasi Periode 2024 — 2027
+            </p>
 
           {/* ── Level 1: Ketua ── */}
           <div className="flex justify-center">
@@ -240,7 +241,8 @@ export default function StrukturRW() {
               <PersonCard key={p.jabatan} {...p} />
             ))}
           </div>
-        </div>
+          </div>
+        </section>
       </div>
     </div>
   );

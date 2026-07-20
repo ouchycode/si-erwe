@@ -50,9 +50,9 @@ const BERITA_TERKAIT = [
 
 export default function DetailBerita() {
   return (
-    <div className="min-h-screen bg-slate-50 pb-20 font-sans">
+    <div className="min-h-screen bg-white font-sans pb-20">
       {/* BREADCRUMB */}
-      <div className="bg-brand-primary px-6 md:px-16 py-5 border-b border-white/10">
+      <div className="bg-brand-primary px-6 md:px-16 py-5">
         <div className="max-w-6xl mx-auto">
           <Link
             href="/informasi/berita"
@@ -67,7 +67,7 @@ export default function DetailBerita() {
       <div className="max-w-6xl mx-auto px-6 md:px-16 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* ARTIKEL UTAMA */}
-          <div className="lg:col-span-2 flex flex-col gap-0 bg-white border border-slate-100 rounded-xs overflow-hidden shadow-sm">
+          <div className="lg:col-span-2 flex flex-col gap-0 bg-slate-50 rounded-xs overflow-hidden shadow-sm">
             {/* Meta + Judul */}
             <div className="p-6 md:p-8">
               <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-gray-500">
@@ -85,8 +85,8 @@ export default function DetailBerita() {
                 {DETAIL_BERITA.title}
               </h1>
 
-              <div className="flex items-center gap-3 py-4 border-t border-b border-slate-100">
-                <div className="w-10 h-10 bg-slate-50 border border-slate-100 rounded-xs flex items-center justify-center shrink-0">
+              <div className="flex items-center gap-3 py-4 border-t border-b border-slate-200">
+                <div className="w-10 h-10 bg-white rounded-xs flex items-center justify-center shrink-0 shadow-sm">
                   <User size={18} className="text-brand-primary" />
                 </div>
                 <div>
@@ -110,38 +110,28 @@ export default function DetailBerita() {
 
             {/* Konten */}
             <div
-              className="p-6 md:p-8 prose prose-sm md:prose-base prose-slate max-w-none prose-headings:text-slate-800 prose-headings:font-bold prose-a:text-brand-primary leading-relaxed"
+              className="p-6 md:p-8 prose prose-sm md:prose-base prose-slate max-w-none prose-headings:text-slate-800 prose-headings:font-bold prose-a:text-brand-primary leading-relaxed bg-white"
               dangerouslySetInnerHTML={{ __html: DETAIL_BERITA.content }}
             />
 
             {/* Share */}
-            <div className="px-6 md:px-8 py-5 bg-slate-50 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="px-6 md:px-8 py-5 bg-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <p className="text-sm font-semibold text-slate-600 flex items-center gap-2">
                 <Share2 size={16} className="text-gray-400" />
                 Bagikan berita ini
               </p>
               <div className="flex items-center gap-2">
                 <button className="w-9 h-9 rounded-xs bg-[#1877F2] text-white flex items-center justify-center hover:opacity-80 transition-opacity border-none cursor-pointer shadow-sm">
-                  <svg
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
+                  <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                   </svg>
                 </button>
                 <button className="w-9 h-9 rounded-xs bg-black text-white flex items-center justify-center hover:opacity-80 transition-opacity border-none cursor-pointer shadow-sm">
-                  <svg
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
+                  <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.733-8.835L1.254 2.25H8.08l4.253 5.622 5.912-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                 </button>
-                <button className="w-9 h-9 rounded-xs bg-white border border-slate-200 text-gray-600 flex items-center justify-center hover:bg-slate-50 transition-colors cursor-pointer shadow-sm">
+                <button className="w-9 h-9 rounded-xs bg-white text-gray-600 flex items-center justify-center hover:bg-slate-50 transition-colors cursor-pointer shadow-sm border-none">
                   <LinkIcon size={16} />
                 </button>
               </div>
@@ -150,15 +140,15 @@ export default function DetailBerita() {
 
           {/* SIDEBAR */}
           <div className="flex flex-col gap-4">
-            <div className="bg-white border border-slate-100 rounded-xs p-6 shadow-sm sticky top-24">
-              <div className="flex items-center gap-2.5 mb-5 pb-4 border-b border-slate-100">
+            <div className="bg-slate-50 rounded-xs p-6 shadow-sm sticky top-24">
+              <div className="flex items-center gap-2.5 mb-5 pb-4 border-b border-slate-200">
                 <Tag size={16} className="text-brand-primary" />
                 <h3 className="text-base font-bold text-slate-800">
                   Berita Lainnya
                 </h3>
               </div>
 
-              <div className="flex flex-col divide-y divide-slate-100">
+              <div className="flex flex-col divide-y divide-slate-200">
                 {BERITA_TERKAIT.map((item) => (
                   <Link
                     key={item.id}
@@ -178,7 +168,7 @@ export default function DetailBerita() {
 
               <Link
                 href="/informasi/berita"
-                className="mt-6 flex items-center justify-center gap-2 w-full py-3 bg-brand-light hover:bg-brand-primary hover:text-white border border-brand-light text-brand-primary rounded-xs text-sm font-semibold transition-colors no-underline"
+                className="mt-6 flex items-center justify-center gap-2 w-full py-3 bg-brand-primary hover:bg-brand-primary-hover text-white rounded-xs text-sm font-semibold transition-colors no-underline"
               >
                 Lihat Semua Berita
                 <ChevronRight size={16} />

@@ -1,165 +1,114 @@
-import {
-  ShieldAlert,
-  PhoneCall,
-  Siren,
-  Clock,
-  Users,
-  AlertTriangle,
-  FileWarning,
-  Video,
-} from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { Video, MapPin, ShieldAlert } from "lucide-react";
+import Image from "next/image";
 
-export const metadata = { title: "Keamanan Wilayah" };
-
-
-
-const KONTAK = [
-  {
-    label: "Pos Keamanan RW 04",
-    sub: "Siaga 24 jam untuk wilayah Pabuaran",
-    telp: "0812-3456-7890",
-    href: "tel:081234567890",
-    icon: ShieldAlert,
-  },
-  {
-    label: "Polsek Karawaci",
-    sub: "Tindak kriminal & gangguan kamtibmas",
-    telp: "110 / (021) 4527xxx",
-    href: "tel:110",
-    icon: Siren,
-  },
-  {
-    label: "Ambulans & Damkar",
-    sub: "Kondisi darurat medis & kebakaran",
-    telp: "112 / 119",
-    href: "tel:112",
-    icon: AlertTriangle,
-  },
-];
-
-const TATA_TERTIB = [
-  {
-    icon: Users,
-    judul: "Tamu 1x24 Jam Wajib Lapor",
-    desc: "Warga yang menerima tamu atau kerabat menginap lebih dari 1x24 jam wajib melapor kepada Ketua RT setempat dengan membawa fotokopi KTP tamu.",
-  },
-  {
-    icon: Clock,
-    judul: "Jam Malam & Akses Portal",
-    desc: "Portal utama ditutup pukul 23.00 WIB. Akses di atas jam tersebut hanya melalui pintu utama yang dijaga petugas keamanan.",
-  },
-  {
-    icon: Video,
-    judul: "Pemantauan CCTV 24 Jam",
-    desc: "Lingkungan RW 04 dipantau kamera CCTV di titik-titik rawan. Permintaan rekaman dapat diajukan melalui petugas keamanan sesuai SOP.",
-  },
-];
-
-const JADWAL = [
-  { hari: "Senin", rt: "RT 01 & RT 02" },
-  { hari: "Selasa", rt: "RT 03 & RT 04" },
-  { hari: "Rabu", rt: "RT 05 & RT 06" },
-  { hari: "Kamis", rt: "RT 07 & RT 08" },
-  { hari: "Jumat", rt: "RT 01 – RT 08 (Giliran)" },
-  { hari: "Sabtu", rt: "Pemuda / Karang Taruna", full: true },
-  { hari: "Minggu", rt: "Petugas Keamanan Inti", full: true },
-];
+export const metadata = { title: "Keamanan Wilayah - RW 04 Pabuaran, Kota Tangerang" };
 
 export default function KeamananWilayah() {
   return (
-    <div className="min-h-screen bg-slate-50 pb-20">
+    <div className="min-h-screen bg-white font-sans">
       <PageHeader
         category="Layanan Warga"
-        title="Keamanan Wilayah RW 04"
-        description="Sistem informasi keamanan lingkungan terpadu. Hubungi kontak darurat jika terjadi gangguan keamanan, ketertiban, atau keadaan darurat medis."
+        title="Keamanan Wilayah"
+        description="Perangkat pengamanan wilayah RW 04 Pabuaran, Kota Tangerang"
       />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10 flex flex-col gap-8 pb-20">
-        {/* KONTAK DARURAT */}
-        <div className="bg-white rounded-xs border border-slate-100 shadow-sm p-8">
-          <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-6">
-            Kontak Darurat
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {KONTAK.map(({ label, sub, telp, href, icon: Icon}) => (
-              <div
-                key={label}
-                className="group bg-white border border-slate-100 rounded-xs p-6 flex flex-col gap-4 hover:shadow-md transition-all duration-300"
-              >
-                <div className={`w-11 h-11 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm`}>
-                  <Icon size={20} />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold text-slate-800 mb-1">{label}</h3>
-                  <p className="text-sm text-gray-500">{sub}</p>
-                </div>
-                <a
-                  href={href}
-                  className="flex items-center gap-2.5 bg-brand-primary hover:bg-brand-primary-hover text-white text-sm font-bold px-4 py-2.5 rounded-xs no-underline transition-colors mt-auto"
-                >
-                  <PhoneCall size={14} />
-                  {telp}
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* TATA TERTIB + JADWAL */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Tata Tertib */}
-          <div className="bg-white rounded-xs border border-slate-100 shadow-sm p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-9 h-9 bg-brand-primary border border-brand-primary-hover rounded-xs flex items-center justify-center shrink-0 shadow-sm text-white">
-                <FileWarning size={16} />
-              </div>
-              <h2 className="text-lg font-bold text-slate-800">
-                Tata Tertib Keamanan
-              </h2>
-            </div>
-            <div className="flex flex-col gap-4">
-              {TATA_TERTIB.map(({ icon: Icon, judul, desc}) => (
-                <div key={judul} className="group flex items-start gap-4 bg-white border border-slate-100 rounded-xs p-5 hover:shadow-md transition-shadow duration-300">
-                  <div className={`w-9 h-9 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm`}>
-                    <Icon size={16} />
+      <div className="relative z-10 -mt-16">
+        
+        {/* Section 1: Petugas Keamanan */}
+        <section className="bg-white shadow-[0_-8px_30px_-15px_rgba(0,0,0,0.1)] pt-16 md:pt-24 pb-16 md:pb-24">
+          <div className="max-w-7xl mx-auto px-4 md:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <div>
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 bg-brand-primary/10 rounded-xs flex items-center justify-center shrink-0 text-brand-primary">
+                    <ShieldAlert size={24} />
                   </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-slate-800 mb-1">{judul}</h4>
-                    <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">{desc}</p>
-                  </div>
+                  <h2 className="text-3xl font-bold text-slate-800">
+                    Petugas Keamanan
+                  </h2>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Jadwal Siskamling */}
-          <div className="bg-brand-primary rounded-xs border border-brand-primary-hover p-8 text-white shadow-sm">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-9 h-9 bg-white/10 rounded-xs flex items-center justify-center shrink-0">
-                <ShieldAlert size={16} className="text-white/70" />
-              </div>
-              <h2 className="text-base font-bold tracking-wide">Jadwal Ronda / Siskamling</h2>
-            </div>
-            <p className="text-sm text-white/60 mb-6 leading-relaxed ml-12">
-              Tugas ronda malam setiap blok/RT mulai pukul 23.00 – 04.00 WIB.
-            </p>
-
-            <div className="grid grid-cols-2 gap-2">
-              {JADWAL.map((item) => (
-                <div
-                  key={item.hari}
-                  className={`p-3 rounded-xs border border-white/10 bg-white/5 ${item.full ? "col-span-2 bg-white/10" : ""}`}
-                >
-                  <p className="text-[10px] text-white/40 font-bold uppercase tracking-wider mb-0.5">
-                    {item.hari}
+                <div className="text-gray-600 space-y-6 text-lg leading-relaxed">
+                  <p>
+                    Keamanan wilayah RW 04 Pabuaran dijaga oleh dua regu keamanan, yaitu <strong>Cakra</strong> dan <strong>Pasoepati</strong>, yang masing-masing beranggotakan 15 personel. Para petugas ini bertugas menjaga ketertiban dan keamanan lingkungan melalui penjagaan di tiga gerbang utama wilayah, serta melakukan patroli berkala di seluruh area pemukiman.
                   </p>
-                  <p className="text-sm font-bold text-white">{item.rt}</p>
+                  <p>
+                    Dengan jumlah personel yang memadai dan sistem kerja yang terstruktur, petugas keamanan selalu siap merespons permintaan warga apabila terjadi situasi yang membutuhkan bantuan atau penanganan cepat. Kehadiran dua regu keamanan ini menjadi garda terdepan dalam memastikan lingkungan RW 04 tetap aman, kondusif, dan tertib setiap hari.
+                  </p>
                 </div>
-              ))}
+              </div>
+              <div className="relative h-[400px] lg:h-[500px] w-full rounded-xs overflow-hidden shadow-xl">
+                <Image 
+                  src="https://images.unsplash.com/photo-1544922116-bb4d2bcf3db2?q=80&w=1000&auto=format&fit=crop" 
+                  alt="Petugas Keamanan" 
+                  fill 
+                  className="object-cover"
+                />
+              </div>
             </div>
           </div>
-        </div>
+        </section>
+
+        {/* Section 2: Sistem Pengawasan CCTV */}
+        <section className="bg-slate-50 py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-4 md:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <div className="relative h-[400px] lg:h-[500px] w-full rounded-xs overflow-hidden shadow-xl order-2 lg:order-1">
+                <Image 
+                  src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=1000&auto=format&fit=crop" 
+                  alt="Sistem Pengawasan CCTV" 
+                  fill 
+                  className="object-cover"
+                />
+              </div>
+              <div className="order-1 lg:order-2">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 bg-brand-primary/10 rounded-xs flex items-center justify-center shrink-0 text-brand-primary">
+                    <Video size={24} />
+                  </div>
+                  <h2 className="text-3xl font-bold text-slate-800">
+                    Sistem Pengawasan CCTV
+                  </h2>
+                </div>
+                <div className="text-gray-600 space-y-6 text-lg leading-relaxed">
+                  <p>
+                    Untuk meningkatkan keamanan, RW 04 Pabuaran telah dilengkapi dengan 145 titik kamera CCTV yang mencakup hampir seluruh sudut gang dan jalan. Pemantauan dilakukan secara terpusat melalui <strong>Central Control Room (CCR)</strong> oleh dua operator yang bekerja bergantian, memastikan setiap aktivitas terekam dan dapat diawasi secara <em>real-time</em>. Rekaman CCTV disimpan dengan durasi retensi hingga 30 hari terakhir, sehingga data video dapat ditinjau kembali jika diperlukan.
+                  </p>
+                  <p>
+                    Bagi warga yang membutuhkan akses rekaman untuk keperluan tertentu, Sekretariat RW 04 Pabuaran menyediakan prosedur resmi melalui formulir permohonan yang harus diisi terlebih dahulu. Dengan sistem pengawasan yang terintegrasi dan operasional yang profesional, fasilitas CCTV ini menjadi elemen penting dalam menjaga keamanan, mendeteksi potensi gangguan, serta memberikan rasa aman bagi seluruh warga RW 04 Pabuaran, Kota Tangerang.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 3: Map */}
+        <section className="bg-white py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-4 md:px-8">
+            <div className="flex flex-col items-center text-center mb-12">
+              <div className="w-16 h-16 bg-slate-100 rounded-xs flex items-center justify-center text-slate-600 mb-6">
+                <MapPin size={32} />
+              </div>
+              <h2 className="text-3xl font-bold text-slate-800 mb-4">
+                Peta Pengawasan Wilayah
+              </h2>
+              <p className="text-gray-600 text-lg max-w-2xl">
+                Area cakupan pengawasan petugas keamanan dan titik persebaran CCTV di lingkungan RW 04 Pabuaran.
+              </p>
+            </div>
+            <div className="w-full h-[500px] bg-slate-100 rounded-xs overflow-hidden relative shadow-xl">
+              <iframe 
+                src="https://maps.google.com/maps?q=Pabuaran,+Karawaci,+Tangerang+City,+Banten&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                className="w-full h-full border-0" 
+                allowFullScreen={false} 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+        </section>
+
       </div>
     </div>
   );

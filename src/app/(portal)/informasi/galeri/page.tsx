@@ -22,7 +22,7 @@ export default function GaleriPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-20 font-sans">
+    <div className="min-h-screen bg-white font-sans pb-20">
       <PageHeader
         category="Dokumentasi"
         title="Galeri Kegiatan RW 04"
@@ -42,40 +42,42 @@ export default function GaleriPage() {
         }
       />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10">
-        <div className="bg-white border border-slate-100 shadow-sm p-6 md:p-8 rounded-xs min-h-[500px]">
-          
-          {/* Masonry Grid */}
-          <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 gap-6 space-y-6">
-            {GALLERY_IMAGES.map((item) => (
-              <div 
-                key={item.id} 
-                className="relative group overflow-hidden rounded-xs bg-gray-100 break-inside-avoid cursor-pointer border border-slate-100"
-                onClick={() => setSelectedImage(item.src)}
-              >
-                <Image
-                  src={item.src}
-                  alt={item.title}
-                  width={800}
-                  height={600}
-                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                
-                {/* Overlay Hover */}
-                <div className="absolute inset-0 bg-brand-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-4">
-                  <ZoomIn size={32} className="mb-3 text-white/80 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" />
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-white/70 mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                    {item.category}
-                  </span>
-                  <h3 className="text-center font-semibold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
-                    {item.title}
-                  </h3>
+      <div className="relative z-10 -mt-16">
+        <section className="bg-white shadow-[0_-8px_30px_-15px_rgba(0,0,0,0.1)] pt-16 md:pt-24 pb-16 md:pb-24 min-h-[500px]">
+          <div className="max-w-7xl mx-auto px-4 md:px-8">
+            
+            {/* Masonry Grid */}
+            <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 gap-6 space-y-6">
+              {GALLERY_IMAGES.map((item) => (
+                <div 
+                  key={item.id} 
+                  className="relative group overflow-hidden rounded-xs bg-gray-100 break-inside-avoid cursor-pointer shadow-sm hover:shadow-md transition-shadow"
+                  onClick={() => setSelectedImage(item.src)}
+                >
+                  <Image
+                    src={item.src}
+                    alt={item.title}
+                    width={800}
+                    height={600}
+                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  
+                  {/* Overlay Hover */}
+                  <div className="absolute inset-0 bg-brand-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-4">
+                    <ZoomIn size={32} className="mb-3 text-white/80 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" />
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-white/70 mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                      {item.category}
+                    </span>
+                    <h3 className="text-center font-semibold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
+                      {item.title}
+                    </h3>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
 
-        </div>
+          </div>
+        </section>
       </div>
 
       {/* Lightbox Modal */}

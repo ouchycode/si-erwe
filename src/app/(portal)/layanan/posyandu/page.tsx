@@ -1,157 +1,90 @@
 import { PageHeader } from "@/components/ui/PageHeader";
-import { Calendar, MapPin, Clock, Users, Activity, HeartPulse } from "lucide-react";
+import { Users, HeartPulse } from "lucide-react";
+import Image from "next/image";
 
-export const metadata = { title: "Layanan Posyandu" };
-
-
+export const metadata = { title: "Pos Pelayanan Terpadu (Posyandu) - RW 04 Pabuaran, Kota Tangerang" };
 
 export default function PosyanduPage() {
   return (
-    <div className="min-h-screen bg-slate-50 pb-20 font-sans">
+    <div className="min-h-screen bg-white font-sans">
       <PageHeader
         category="Layanan Warga"
         title="Pos Pelayanan Terpadu (Posyandu)"
-        description="Fasilitas pelayanan kesehatan dasar bagi ibu, anak, balita, serta lanjut usia (lansia) di lingkungan RW 04."
+        description="Pos Pelayanan Terpadu kesehatan ibu, anak, dan lansia RW 04 Pabuaran, Kota Tangerang"
       />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="relative z-10 -mt-16">
+        
+        {/* Kader Posyandu & Pelayanan (Cardless Editorial) */}
+        <section className="bg-white shadow-[0_-8px_30px_-15px_rgba(0,0,0,0.1)] pt-16 md:pt-24 pb-16 md:pb-24 relative overflow-hidden">
+          {/* Decorative blob */}
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-50 rounded-full blur-[100px] opacity-60 pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
           
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-6">
-            
-            {/* Posyandu Balita */}
-            <div className="bg-white border border-slate-100 rounded-xs p-6 md:p-8 shadow-sm">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-pink-50 text-pink-500 rounded-full flex items-center justify-center shrink-0">
-                  <HeartPulse size={24} />
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold text-slate-800">Posyandu Balita & Ibu Hamil</h2>
-                  <p className="text-sm text-gray-500 mt-1">Layanan kesehatan dan pemantauan tumbuh kembang anak.</p>
-                </div>
+          <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+            <div className="flex flex-col lg:flex-row gap-16 items-center">
+              <div className="w-full lg:w-5/12 relative aspect-[4/5] rounded-xs overflow-hidden shadow-xl">
+                <Image 
+                  src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop" 
+                  alt="Kader Posyandu" 
+                  fill 
+                  className="object-cover"
+                />
               </div>
-
-              <div className="space-y-4 text-sm text-gray-600 leading-relaxed mb-6">
-                <p>
-                  Posyandu Balita RW 04 berfokus pada pemantauan gizi, penimbangan berat badan, pengukuran tinggi badan, serta pemberian imunisasi rutin bagi balita. Kami juga menyediakan konsultasi gizi dasar bagi ibu hamil dan menyusui.
-                </p>
-                <ul className="list-disc pl-5 space-y-2 text-gray-600">
-                  <li>Penimbangan BB dan pengukuran TB secara rutin.</li>
-                  <li>Pemberian makanan tambahan (PMT) bergizi.</li>
-                  <li>Pemberian Vitamin A (Februari & Agustus).</li>
-                  <li>Layanan imunisasi dasar lengkap sesuai jadwal.</li>
-                </ul>
-              </div>
-
-              <div className="bg-slate-50 rounded-xs p-4 flex flex-col md:flex-row gap-4 md:items-center justify-between border border-slate-100">
-                <div className="flex items-center gap-3">
-                  <Calendar size={18} className="text-brand-primary" />
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Jadwal Rutin</p>
-                    <p className="font-semibold text-slate-700 text-sm">Minggu ke-2 Setiap Bulan</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Clock size={18} className="text-brand-primary" />
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Waktu Pelayanan</p>
-                    <p className="font-semibold text-slate-700 text-sm">08:00 - 11:00 WIB</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Posyandu Lansia */}
-            <div className="bg-white border border-slate-100 rounded-xs p-6 md:p-8 shadow-sm">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center shrink-0">
-                  <Activity size={24} />
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold text-slate-800">Posyandu Lansia</h2>
-                  <p className="text-sm text-gray-500 mt-1">Pemeliharaan kesehatan khusus warga lanjut usia.</p>
-                </div>
-              </div>
-
-              <div className="space-y-4 text-sm text-gray-600 leading-relaxed mb-6">
-                <p>
-                  Posyandu Lansia RW 04 didedikasikan untuk memantau kesehatan para warga lanjut usia. Kader kami bekerjasama dengan puskesmas setempat untuk memberikan pengecekan dasar demi menjaga kualitas hidup lansia.
-                </p>
-                <ul className="list-disc pl-5 space-y-2 text-gray-600">
-                  <li>Pengecekan Tekanan Darah (Tensi).</li>
-                  <li>Cek Gula Darah, Asam Urat, dan Kolesterol (Terjadwal).</li>
-                  <li>Konsultasi kesehatan ringan.</li>
-                  <li>Senam lansia rutin untuk kebugaran.</li>
-                </ul>
-              </div>
-
-              <div className="bg-slate-50 rounded-xs p-4 flex flex-col md:flex-row gap-4 md:items-center justify-between border border-slate-100">
-                <div className="flex items-center gap-3">
-                  <Calendar size={18} className="text-brand-primary" />
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Jadwal Rutin</p>
-                    <p className="font-semibold text-slate-700 text-sm">Minggu ke-4 Setiap Bulan</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Clock size={18} className="text-brand-primary" />
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Waktu Pelayanan</p>
-                    <p className="font-semibold text-slate-700 text-sm">08:00 - 11:00 WIB</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            
-            {/* Location Info */}
-            <div className="bg-brand-primary text-white p-6 rounded-xs shadow-md">
-              <h3 className="font-bold text-lg mb-4">Informasi Lokasi</h3>
-              <div className="flex gap-3 mb-4">
-                <MapPin size={20} className="shrink-0 text-white/70" />
-                <div>
-                  <p className="font-semibold text-sm mb-1">Gedung Posyandu RW 04</p>
-                  <p className="text-xs text-white/70 leading-relaxed">Jl. Pabuaran Raya (Sebelah Lapangan Serbaguna), Kel. Pabuaran, Kec. Karawaci.</p>
-                </div>
-              </div>
-              <p className="text-[11px] text-white/60 leading-relaxed bg-black/10 p-3 rounded-xs border border-white/10">
-                Harap membawa Buku KIA (Kesehatan Ibu dan Anak) atau KMS (Kartu Menuju Sehat) saat datang ke posyandu.
-              </p>
-            </div>
-
-            {/* Kader Section */}
-            <div className="bg-white border border-slate-100 rounded-xs p-6 shadow-sm">
-              <div className="flex items-center gap-2 mb-4">
-                <Users size={18} className="text-brand-primary" />
-                <h3 className="font-bold text-slate-800">Kader Posyandu</h3>
-              </div>
-              <p className="text-xs text-gray-500 mb-4 leading-relaxed">
-                Silakan hubungi koordinator kader posyandu untuk informasi atau pertanyaan lebih lanjut.
-              </p>
               
-              <div className="space-y-3">
-                <div className="flex items-center justify-between p-3 border border-slate-100 rounded-xs">
-                  <div>
-                    <p className="text-sm font-semibold text-slate-800">Ibu Siti Aminah</p>
-                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Koordinator Balita</p>
+              <div className="w-full lg:w-7/12 flex flex-col justify-center">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-14 h-14 bg-brand-primary/10 rounded-xs flex items-center justify-center shrink-0 text-brand-primary">
+                    <Users size={28} />
                   </div>
+                  <h2 className="text-3xl font-bold text-slate-800">
+                    Kader Posyandu & Pelayanan
+                  </h2>
                 </div>
-                <div className="flex items-center justify-between p-3 border border-slate-100 rounded-xs">
-                  <div>
-                    <p className="text-sm font-semibold text-slate-800">Ibu Nurhayati</p>
-                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Koordinator Lansia</p>
-                  </div>
+                <div className="text-gray-600 space-y-6 text-lg leading-relaxed">
+                  <p>
+                    Layanan Posyandu RW 04 Pabuaran digerakkan oleh para kader kesehatan yang terlatih dan berdedikasi. Mereka bertugas memberikan pelayanan kesehatan dasar bagi ibu hamil, bayi, balita, serta warga lanjut usia (lansia) di lingkungan sekitar.
+                  </p>
+                  <blockquote className="pl-6 border-l-4 border-brand-primary text-slate-800 font-medium italic text-xl my-8 py-2">
+                    "Dengan jadwal rutin yang diadakan setiap bulan, kader Posyandu memantau tumbuh kembang balita melalui penimbangan berat badan, pengukuran tinggi badan, serta pemberian makanan tambahan (PMT) bergizi."
+                  </blockquote>
+                  <p>
+                    Kader juga memberikan edukasi kesehatan kepada masyarakat untuk meningkatkan kesadaran gizi dan kualitas hidup warga sejak usia dini.
+                  </p>
                 </div>
               </div>
             </div>
-
           </div>
-        </div>
+        </section>
+
+        {/* Fasilitas & Layanan Kesehatan (Cardless Center Heavy) */}
+        <section className="bg-slate-50">
+          <div className="max-w-4xl mx-auto px-4 md:px-8 pt-16 md:pt-24 pb-12 text-center">
+            <div className="w-16 h-16 bg-rose-500 rounded-xs flex items-center justify-center shadow-lg shadow-rose-200 text-white mb-8 mx-auto rotate-3">
+              <HeartPulse size={32} />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-8">
+              Fasilitas & Layanan Kesehatan
+            </h2>
+            <p className="text-gray-600 text-lg leading-relaxed mb-6">
+              Gedung Posyandu RW 04 Pabuaran dilengkapi dengan fasilitas yang memadai untuk menunjang kegiatan pelayanan kesehatan secara optimal. Bekerja sama dengan tenaga kesehatan dari Puskesmas setempat, kami menyediakan layanan imunisasi dasar lengkap, pemeriksaan ibu hamil, hingga pengecekan kesehatan preventif seperti tekanan darah dan gula darah bagi lansia.
+            </p>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              Partisipasi aktif warga sangat diharapkan dalam setiap kegiatan Posyandu yang diselenggarakan. Dengan fasilitas yang mudah dijangkau dan pelayanan yang ramah serta profesional, kami berkomitmen untuk mewujudkan generasi penerus yang sehat, kuat, dan cerdas, sekaligus menjaga kesejahteraan kesehatan para lansia di lingkungan RW 04 Pabuaran.
+            </p>
+          </div>
+          
+          <div className="w-full max-w-7xl mx-auto px-4 md:px-8 pb-16 md:pb-24">
+            <div className="relative h-[400px] md:h-[600px] w-full rounded-xs overflow-hidden shadow-xl">
+              <Image 
+                src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=1200&auto=format&fit=crop" 
+                alt="Fasilitas Layanan Kesehatan" 
+                fill 
+                className="object-cover object-center"
+              />
+            </div>
+          </div>
+        </section>
+
       </div>
     </div>
   );

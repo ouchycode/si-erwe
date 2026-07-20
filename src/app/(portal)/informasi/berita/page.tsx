@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, ChevronRight, Search, Tag } from "lucide-react";
+import { PageHeader } from "@/components/ui/PageHeader";
+
+export const metadata = { title: "Berita Terkini" };
 
 const BERITA_DUMMY = [
   {
@@ -41,111 +44,106 @@ const BERITA_DUMMY = [
   },
 ];
 
-
-import { PageHeader } from "@/components/ui/PageHeader";
-
-export const metadata = { title: "Berita Terkini" };
-
-
-
 export default function BeritaTerkini() {
   return (
-    <div className="min-h-screen bg-slate-50 pb-20">
+    <div className="min-h-screen bg-white font-sans pb-20">
       <PageHeader
         category="Pusat Informasi"
         title="Lorem Ipsum Dolor"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         rightContent={
-          <div className="hidden md:flex items-center gap-0 bg-white rounded-xs overflow-hidden border border-slate-100 shrink-0 w-72 shadow-sm">
+          <div className="hidden md:flex items-center gap-0 bg-white rounded-xs overflow-hidden shrink-0 w-72 shadow-sm">
             <input
               type="text"
               placeholder="Cari berita..."
               className="flex-1 px-4 py-2.5 text-sm text-gray-700 outline-none bg-transparent"
             />
-            <button className="bg-brand-primary border-l border-brand-primary-hover text-white px-3.5 py-2.5 hover:bg-brand-primary-hover transition-colors cursor-pointer">
+            <button className="bg-brand-primary text-white px-3.5 py-2.5 hover:bg-brand-primary-hover transition-colors cursor-pointer border-none">
               <Search size={15} />
             </button>
           </div>
         }
       />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10">
-        {/* Search mobile */}
-        <div className="flex md:hidden items-center bg-white border border-slate-100 rounded-xs overflow-hidden mb-6 shadow-sm">
-          <input
-            type="text"
-            placeholder="Cari berita..."
-            className="flex-1 px-4 py-2.5 text-sm text-gray-700 outline-none"
-          />
-          <button className="bg-brand-primary text-white px-3.5 py-2.5 hover:bg-brand-primary-hover transition-colors cursor-pointer border-none">
-            <Search size={15} />
-          </button>
-        </div>
+      <div className="relative z-10 -mt-16">
+        <section className="bg-white shadow-[0_-8px_30px_-15px_rgba(0,0,0,0.1)] pt-16 md:pt-24 pb-16 md:pb-24">
+          <div className="max-w-7xl mx-auto px-4 md:px-8">
+            {/* Search mobile */}
+            <div className="flex md:hidden items-center bg-slate-50 rounded-xs overflow-hidden mb-6 shadow-sm">
+              <input
+                type="text"
+                placeholder="Cari berita..."
+                className="flex-1 px-4 py-2.5 text-sm text-gray-700 outline-none bg-transparent"
+              />
+              <button className="bg-brand-primary text-white px-3.5 py-2.5 hover:bg-brand-primary-hover transition-colors cursor-pointer border-none">
+                <Search size={15} />
+              </button>
+            </div>
 
-        {/* GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {BERITA_DUMMY.map((berita) => (
-            <Link
-              key={berita.id}
-              href={`/informasi/berita/${berita.id}`}
-              className="group flex flex-col bg-white border border-slate-100 rounded-xs overflow-hidden no-underline transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5"
-            >
-              {/* Gambar */}
-              <div className="relative w-full h-48 bg-gray-100 overflow-hidden border-b border-gray-100">
-                <Image
-                  src={berita.image}
-                  alt={berita.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <span
-                  className={`absolute top-3 left-3 inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-xs bg-brand-primary text-white shadow-sm`}
+            {/* GRID */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {BERITA_DUMMY.map((berita) => (
+                <Link
+                  key={berita.id}
+                  href={`/informasi/berita/${berita.id}`}
+                  className="group flex flex-col bg-slate-50 rounded-xs overflow-hidden no-underline transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5"
                 >
-                  <Tag size={10} />
-                  {berita.category}
-                </span>
-              </div>
+                  {/* Gambar */}
+                  <div className="relative w-full h-48 bg-gray-100 overflow-hidden">
+                    <Image
+                      src={berita.image}
+                      alt={berita.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-xs bg-brand-primary text-white shadow-sm">
+                      <Tag size={10} />
+                      {berita.category}
+                    </span>
+                  </div>
 
-              {/* Konten */}
-              <div className="p-6 flex flex-col flex-1">
-                <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-3 font-mono uppercase tracking-wider">
-                  <Calendar size={12} />
-                  {berita.date}
-                </div>
+                  {/* Konten */}
+                  <div className="p-6 flex flex-col flex-1">
+                    <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-3 font-mono uppercase tracking-wider">
+                      <Calendar size={12} />
+                      {berita.date}
+                    </div>
 
-                <h3 className="text-base font-bold text-slate-800 leading-snug mb-3 group-hover:text-brand-primary transition-colors line-clamp-2 flex-1">
-                  {berita.title}
-                </h3>
+                    <h3 className="text-base font-bold text-slate-800 leading-snug mb-3 group-hover:text-brand-primary transition-colors line-clamp-2 flex-1">
+                      {berita.title}
+                    </h3>
 
-                <p className="text-sm text-gray-500 leading-relaxed line-clamp-2 mb-5">
-                  {berita.snippet}
-                </p>
+                    <p className="text-sm text-gray-500 leading-relaxed line-clamp-2 mb-5">
+                      {berita.snippet}
+                    </p>
 
-                <div className="flex items-center gap-1.5 text-sm font-bold text-brand-primary mt-auto">
-                  Baca Selengkapnya
-                  <ChevronRight size={14} />
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+                    <div className="flex items-center gap-1.5 text-sm font-bold text-brand-primary mt-auto">
+                      Baca Selengkapnya
+                      <ChevronRight size={14} />
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
 
-        {/* PAGINATION */}
-        <div className="flex justify-center mt-12 gap-1.5">
-          <button className="w-9 h-9 rounded-xs border border-slate-100 flex items-center justify-center text-gray-300 bg-white cursor-not-allowed">
-            <ChevronRight size={15} className="rotate-180" />
-          </button>
-          <button className="w-9 h-9 rounded-xs bg-brand-primary text-white font-bold text-sm">
-            1
-          </button>
-          <button className="w-9 h-9 rounded-xs border border-slate-100 bg-white text-gray-500 font-bold text-sm hover:bg-slate-50 transition-colors cursor-pointer">
-            2
-          </button>
-          <button className="w-9 h-9 rounded-xs border border-slate-100 bg-white flex items-center justify-center text-gray-500 hover:bg-slate-50 transition-colors cursor-pointer">
-            <ChevronRight size={15} />
-          </button>
-        </div>
+            {/* PAGINATION */}
+            <div className="flex justify-center mt-12 gap-1.5">
+              <button className="w-9 h-9 rounded-xs flex items-center justify-center text-gray-300 bg-slate-50 cursor-not-allowed">
+                <ChevronRight size={15} className="rotate-180" />
+              </button>
+              <button className="w-9 h-9 rounded-xs bg-brand-primary text-white font-bold text-sm">
+                1
+              </button>
+              <button className="w-9 h-9 rounded-xs bg-slate-50 text-gray-500 font-bold text-sm hover:bg-slate-100 transition-colors cursor-pointer">
+                2
+              </button>
+              <button className="w-9 h-9 rounded-xs bg-slate-50 flex items-center justify-center text-gray-500 hover:bg-slate-100 transition-colors cursor-pointer">
+                <ChevronRight size={15} />
+              </button>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

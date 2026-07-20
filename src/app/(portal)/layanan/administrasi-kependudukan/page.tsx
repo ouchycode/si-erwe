@@ -65,19 +65,22 @@ const RT_LIST = ["RT 01", "RT 02", "RT 03", "RT 04", "RT 05", "RT 06", "RT 07", 
 
 export default function AdministrasiKependudukan() {
   return (
-    <div className="min-h-screen bg-slate-50 pb-20">
+    <div className="min-h-screen bg-white font-sans">
       <PageHeader
         category="Layanan Warga"
         title="Administrasi Kependudukan"
         description="Alur, persyaratan, dan panduan pengurusan dokumen kependudukan untuk warga RW 04 Pabuaran, Kota Tangerang."
       />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-16 relative z-10 flex flex-col gap-8 pb-20">
+      <div className="relative z-10 -mt-16">
         {/* ALUR */}
-        <div className="bg-white rounded-xs border border-slate-100 shadow-sm p-8">
-          <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-6">
-            Alur Pengurusan
-          </p>
+        <section className="bg-white shadow-[0_-8px_30px_-15px_rgba(0,0,0,0.1)] pt-16 md:pt-24 pb-16 md:pb-24">
+          <div className="max-w-7xl mx-auto px-4 md:px-8">
+            <div className="flex items-center justify-center gap-3 mb-12">
+              <h2 className="text-3xl font-bold text-slate-800">
+                Alur Pengurusan
+              </h2>
+            </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
             {/* connector line */}
             <div className="hidden md:block absolute top-5 left-[12.5%] right-[12.5%] h-px bg-gray-100 z-0" />
@@ -96,11 +99,14 @@ export default function AdministrasiKependudukan() {
               </div>
             ))}
           </div>
-        </div>
+          </div>
+        </section>
 
         {/* FORM PENGAJUAN */}
-        <div className="bg-white rounded-xs border border-slate-100 shadow-sm overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.65fr]">
+        <section className="bg-slate-50 py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-4 md:px-8">
+            <div className="bg-white shadow-xl overflow-hidden rounded-xs">
+              <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.65fr]">
             <div className="bg-brand-primary text-white p-6 md:p-8 flex flex-col justify-between gap-8">
               <div>
                 <div className="w-10 h-10 bg-white/10 rounded-xs flex items-center justify-center mb-5">
@@ -224,12 +230,16 @@ export default function AdministrasiKependudukan() {
               </div>
             </form>
           </div>
-        </div>
+            </div>
+          </div>
+        </section>
 
         {/* PERSYARATAN + SIDEBAR */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Kiri: Persyaratan */}
-          <div className="lg:col-span-2 flex flex-col gap-4">
+        <section className="bg-white py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-4 md:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+              {/* Kiri: Persyaratan */}
+              <div className="lg:col-span-2 flex flex-col gap-6">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-9 h-9 bg-brand-primary border border-brand-primary-hover rounded-xs flex items-center justify-center shrink-0 shadow-sm text-white">
                 <FileSignature size={16} />
@@ -301,7 +311,9 @@ export default function AdministrasiKependudukan() {
               </div>
             </div>
           </div>
-        </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );
