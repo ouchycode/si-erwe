@@ -1,47 +1,116 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
-import { ChevronUp, ChevronDown, BarChart2 } from "lucide-react";
+import { ChevronUp, ChevronDown, BarChart2, TrendingUp, TrendingDown, Minus } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ContentSection } from "@/components/ui/ContentSection";
-import { MONTHS, getStatsData } from "@/lib/statisticsData";
+import { MONTHS } from "@/lib/statisticsData";
+import { api } from "@/lib/api";
+import type { StatistikResponse, StatistikCategory } from "@/lib/types";
 
 export default function StatistikPage() {
-  const currentMonthIndex = new Date().getMonth();
-  const [selectedMonthIndex, setSelectedMonthIndex] = useState(currentMonthIndex);
-  
-  const statsData = useMemo(() => getStatsData(selectedMonthIndex), [selectedMonthIndex]);
-  const TABS = Object.keys(statsData);
-  
-  const [activeTab, setActiveTab] = useState(TABS[0]);
+  const today = new Date();
+  const [year, setYear] = useState(today.getFullYear());
+  const [selectedMonthIndex, setSelectedMonthIndex] = useState(today.getMonth());
+  const [statsData, setStatsData] = useState<StatistikResponse | null>(null);
+  const [prevStatsData, setPrevStatsData] = useState<StatistikResponse | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const periode = useMemo(
+    () => `${year}-${String(selectedMonthIndex + 1).padStart(2, "0")}`,
+    [year, selectedMonthIndex]
+  );
+
+  const prevPeriode = useMemo(() => {
+    const prevMonth = selectedMonthIndex === 0 ? 11 : selectedMonthIndex - 1;
+    const prevYear = selectedMonthIndex === 0 ? year - 1 : year;
+    return `${prevYear}-${String(prevMonth + 1).padStart(2, "0")}`;
+  }, [selectedMonthIndex, year]);
+
+  const loadPeriode = useMemo(
+    () => ({ periode, prevPeriode }),
+    [periode, prevPeriode]
+  );
+
+  useEffect(() => {
+    let active = true;
+
+    Promise.all([
+      api.get<{ data: StatistikResponse }>(`/statistik?periode=${loadPeriode.periode}`),
+      api.get<{ data: StatistikResponse }>(`/statistik?periode=${loadPeriode.prevPeriode}`),
+    ])
+      .then(([cur, prev]) => {
+        if (!active) return;
+        setStatsData(cur.data);
+        setPrevStatsData(prev.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (!active) return;
+        setStatsData(null);
+        setPrevStatsData(null);
+        setLoading(false);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [loadPeriode]);
+
+  const TABS = Object.keys(statsData ?? {});
+
+  const [activeTab, setActiveTab] = useState<string | null>(null);
+  const effectiveTab = activeTab && TABS.includes(activeTab) ? activeTab : (TABS[0] ?? null);
+
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: "asc" | "desc";
   } | null>(null);
 
-  const activeCategory = (statsData as Record<string, typeof statsData.Penduduk>)[activeTab] || (statsData as Record<string, typeof statsData.Penduduk>)[TABS[0]];
-  
+  const activeCategory: StatistikCategory | null = effectiveTab
+    ? statsData?.[effectiveTab] ?? null
+    : null;
+
+  const prevCategory: StatistikCategory | null = effectiveTab
+    ? prevStatsData?.[effectiveTab] ?? null
+    : null;
+
+  const comparison = useMemo(() => {
+    if (!activeCategory || !prevCategory) return [];
+    return activeCategory.columns.map((col) => {
+      const cur = activeCategory.totals[col.key] ?? 0;
+      const prev = prevCategory.totals[col.key] ?? 0;
+      const delta = cur - prev;
+      const pct = prev === 0 ? (delta === 0 ? 0 : 100) : (delta / prev) * 100;
+      return { label: col.label, cur, prev, delta, pct };
+    });
+  }, [activeCategory, prevCategory]);
+
   const chartData = useMemo(() => {
+    if (!activeCategory) return [];
     return activeCategory.columns
-      .filter((col) => col.key !== 'jumlah')
-      .map((col, index: number) => ({
+      .filter((col) => col.key !== "jumlah")
+      .map((col, index) => ({
         name: col.label,
-        value: (activeCategory.totals as Record<string, number>)[col.key] || 0,
-        color: activeCategory.chartColors[index % activeCategory.chartColors.length]
+        value: activeCategory.totals[col.key] ?? 0,
+        color: activeCategory.chartColors[index % activeCategory.chartColors.length],
       }));
   }, [activeCategory]);
 
-  const sortedData = [...activeCategory.data].sort((a: Record<string, string | number>, b: Record<string, string | number>) => {
-    if (!sortConfig) return 0;
+  const sortedData = useMemo(() => {
+    if (!activeCategory) return [];
+    const rows = [...activeCategory.data];
+    if (!sortConfig) return rows;
     const { key, direction } = sortConfig;
-    const aValue = a[key];
-    const bValue = b[key];
-
-    if (aValue < bValue) return direction === "asc" ? -1 : 1;
-    if (aValue > bValue) return direction === "asc" ? 1 : -1;
-    return 0;
-  });
+    return rows.sort((a, b) => {
+      const aValue = a[key] ?? 0;
+      const bValue = b[key] ?? 0;
+      if (aValue < bValue) return direction === "asc" ? -1 : 1;
+      if (aValue > bValue) return direction === "asc" ? 1 : -1;
+      return 0;
+    });
+  }, [activeCategory, sortConfig]);
 
   const requestSort = (key: string) => {
     let direction: "asc" | "desc" = "asc";
@@ -76,10 +145,18 @@ export default function StatistikPage() {
         rightContent={
           <div className="flex items-center gap-3 bg-white/10 border border-white/20 rounded-xs px-5 py-4 shrink-0">
             <BarChart2 size={16} className="text-white/70" />
-            <div>
-              <p className="text-[10.5px] text-white/40 font-semibold uppercase tracking-widest mb-0.5">
-                Periode Data
-              </p>
+            <div className="flex items-center gap-2">
+              <select
+                value={year}
+                onChange={(e) => setYear(Number(e.target.value))}
+                className="bg-transparent text-white font-bold text-sm outline-none cursor-pointer appearance-none border-b border-white/30 pb-0.5 hover:border-white transition-colors"
+              >
+                {[today.getFullYear(), today.getFullYear() - 1].map((y) => (
+                  <option key={y} value={y} className="text-slate-800">
+                    {y}
+                  </option>
+                ))}
+              </select>
               <select
                 value={selectedMonthIndex}
                 onChange={(e) => setSelectedMonthIndex(Number(e.target.value))}
@@ -87,7 +164,7 @@ export default function StatistikPage() {
               >
                 {MONTHS.map((m, idx) => (
                   <option key={m} value={idx} className="text-slate-800">
-                    Bulan {m} 2026
+                    {m}
                   </option>
                 ))}
               </select>
@@ -97,6 +174,18 @@ export default function StatistikPage() {
       />
 
       <ContentSection>
+        {loading ? (
+          <div className="text-center py-20">
+            <p className="text-gray-400 font-medium">Memuat data statistik...</p>
+          </div>
+        ) : !activeCategory ? (
+          <div className="text-center py-20">
+            <p className="text-gray-400 font-medium">
+              Belum ada data statistik untuk periode {periode}.
+            </p>
+          </div>
+        ) : (
+          <>
             {/* Tabs */}
             <div className="flex flex-wrap gap-2 mb-8">
               {TABS.map((tab) => (
@@ -106,8 +195,8 @@ export default function StatistikPage() {
                     setActiveTab(tab);
                     setSortConfig(null);
                   }}
-                  className={`px-4 py-2 text-xs font-semibold transition-all rounded-xs ${
-                    activeTab === tab
+                  className={`px-4 py-2 text-xs font-semibold transition-all rounded-xs cursor-pointer border-none ${
+                    effectiveTab === tab
                       ? "text-brand-primary bg-brand-light shadow-sm"
                       : "text-gray-500 hover:text-gray-700 bg-slate-50 shadow-sm"
                   }`}
@@ -116,6 +205,66 @@ export default function StatistikPage() {
                 </button>
               ))}
             </div>
+
+            {/* Perbandingan Bulan Ini vs Bulan Kemarin */}
+            {comparison.length > 0 && (
+              <div className="mb-6 rounded-xs border border-slate-200 bg-slate-50 p-5">
+                <div className="flex items-center gap-2 mb-4">
+                  <BarChart2 size={16} className="text-brand-primary" />
+                  <h3 className="text-sm font-bold text-slate-800 uppercase tracking-widest">
+                    Analisis: {MONTHS[selectedMonthIndex]} {year} vs {MONTHS[selectedMonthIndex === 0 ? 11 : selectedMonthIndex - 1]} {selectedMonthIndex === 0 ? year - 1 : year}
+                  </h3>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {comparison.map((c) => {
+                    const stable = c.delta === 0;
+                    return (
+                      <div
+                        key={c.label}
+                        className={`rounded-xs border p-3 ${
+                          stable
+                            ? "bg-white border-slate-200"
+                            : c.delta > 0
+                              ? "bg-emerald-50 border-emerald-200"
+                              : "bg-rose-50 border-rose-200"
+                        }`}
+                      >
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-gray-500">
+                          {c.label}
+                        </p>
+                        <p className="text-xl font-bold text-slate-800 mt-1">
+                          {c.cur}{" "}
+                          <span className="text-[10px] font-medium text-gray-400">/ {c.prev}</span>
+                        </p>
+                        <p
+                          className={`mt-1 inline-flex items-center gap-1 text-xs font-semibold ${
+                            stable
+                              ? "text-gray-500"
+                              : c.delta > 0
+                                ? "text-emerald-600"
+                                : "text-rose-600"
+                          }`}
+                        >
+                          {stable ? (
+                            <>
+                              <Minus size={12} /> Tetap
+                            </>
+                          ) : c.delta > 0 ? (
+                            <>
+                              <TrendingUp size={12} /> +{c.delta} ({c.pct.toFixed(0)}%)
+                            </>
+                          ) : (
+                            <>
+                              <TrendingDown size={12} /> {c.delta} ({c.pct.toFixed(0)}%)
+                            </>
+                          )}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             {/* Content Layout */}
             <div className="flex flex-col lg:flex-row gap-6 items-start">
@@ -149,6 +298,16 @@ export default function StatistikPage() {
                       </tr>
                     </thead>
                     <tbody>
+                      {sortedData.length === 0 && (
+                        <tr>
+                          <td
+                            colSpan={activeCategory.columns.length + 1}
+                            className="py-16 text-center text-gray-400 font-medium"
+                          >
+                            Tidak ada data untuk periode ini.
+                          </td>
+                        </tr>
+                      )}
                       {sortedData.map((row, index) => (
                         <tr
                           key={row.rt}
@@ -166,15 +325,16 @@ export default function StatistikPage() {
                           ))}
                         </tr>
                       ))}
-                      {/* Totals Row */}
-                      <tr className="border-t-2 border-slate-200 bg-slate-100 font-bold">
-                        <td className="py-4 px-4 text-slate-800">TOTAL</td>
-                        {activeCategory.columns.map((col) => (
-                          <td key={col.key} className="py-4 px-4 border-l border-slate-200 text-brand-primary">
-                            {(activeCategory.totals as Record<string, number>)[col.key] || Object.values(activeCategory.data).reduce((acc: number, r: Record<string, unknown>) => acc + ((r[col.key] as number) || 0), 0)}
-                          </td>
-                        ))}
-                      </tr>
+                      {sortedData.length > 0 && (
+                        <tr className="border-t-2 border-slate-200 bg-slate-100 font-bold">
+                          <td className="py-4 px-4 text-slate-800">TOTAL</td>
+                          {activeCategory.columns.map((col) => (
+                            <td key={col.key} className="py-4 px-4 border-l border-slate-200 text-brand-primary">
+                              {activeCategory.totals[col.key] ?? 0}
+                            </td>
+                          ))}
+                        </tr>
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -199,20 +359,20 @@ export default function StatistikPage() {
                         label={({ value }) => `${value}`}
                         labelLine={false}
                       >
-                        {chartData.map((entry, index: number) => (
+                        {chartData.map((entry, index) => (
                           <Cell key={`cell-${index}`} fill={entry.color} />
                         ))}
                       </Pie>
                       <Tooltip
                         formatter={(value) => [`${value} Jiwa`, "Jumlah"]}
-                        contentStyle={{ borderRadius: '4px', fontSize: '12px' }}
+                        contentStyle={{ borderRadius: "4px", fontSize: "12px" }}
                       />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
-                
+
                 <div className="flex flex-col gap-2 mt-6 border-t border-gray-200 pt-4">
-                  {chartData.map((data, idx: number) => (
+                  {chartData.map((data, idx) => (
                     <div key={idx} className="flex items-center justify-between text-xs">
                       <div className="flex items-center gap-2">
                         <div className="w-3 h-3 rounded-full" style={{ backgroundColor: data.color }} />
@@ -224,6 +384,8 @@ export default function StatistikPage() {
                 </div>
               </div>
             </div>
+          </>
+        )}
       </ContentSection>
     </div>
   );

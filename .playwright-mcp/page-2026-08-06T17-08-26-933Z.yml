@@ -1,0 +1,168 @@
+- generic [active] [ref=f91e1]:
+  - generic [ref=f91e2]:
+    - navigation [ref=f91e3]:
+      - link "DARMA BAKTI RW 04 Kota Tangerang" [ref=f91e6] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f91e12]:
+          - generic [ref=f91e13]: DARMA BAKTI RW 04
+          - generic [ref=f91e14]: Kota Tangerang
+      - generic [ref=f91e16]:
+        - link "Beranda" [ref=f91e17] [cursor=pointer]:
+          - /url: /
+        - button "Profil" [ref=f91e22] [cursor=pointer]
+        - button "Layanan Publik" [ref=f91e29] [cursor=pointer]
+        - button "Informasi Publik" [ref=f91e36] [cursor=pointer]
+        - link "Hubungi Kami" [ref=f91e42] [cursor=pointer]:
+          - /url: /hubungi-kami
+    - main [ref=f91e45]:
+      - generic [ref=f91e46]:
+        - generic [ref=f91e48]:
+          - generic [ref=f91e49]:
+            - paragraph [ref=f91e50]: Tentang Kami
+            - heading "Profil & Sejarah RW 04" [level=1] [ref=f91e51]
+            - paragraph [ref=f91e52]: Mengenal lebih dekat lingkungan RW 04 Pabuaran, Kota Tangerang — bersama membangun kehidupan bertetangga yang rukun, aman, dan sejahtera.
+          - generic [ref=f91e60]:
+            - paragraph [ref=f91e61]: Periode Kepengurusan
+            - paragraph [ref=f91e62]: 2024 — 2027
+        - generic [ref=f91e66]:
+          - generic [ref=f91e67]:
+            - generic [ref=f91e68]:
+              - heading "Sejarah Singkat" [level=2] [ref=f91e73]
+              - generic [ref=f91e74]:
+                - paragraph [ref=f91e75]: RW 04 Pabuaran, Kota Tangerang, dibentuk seiring dengan perkembangan pesat pemukiman di wilayah Kota Tangerang. Pada awalnya, wilayah ini hanya terdiri dari beberapa Rukun Tetangga yang terus berkembang hingga sekarang.
+                - paragraph [ref=f91e76]: Seiring bertambahnya jumlah penduduk, RW 04 kini menaungi 8 RT. Warga RW 04 dikenal dengan semangat kegotongroyongannya yang tinggi, multikultural, dan aktif dalam berbagai kegiatan sosial kemasyarakatan.
+            - generic [ref=f91e77]:
+              - generic [ref=f91e78]:
+                - heading "Visi" [level=2] [ref=f91e84]
+                - paragraph [ref=f91e85]: "\"Terwujudnya lingkungan RW 04 yang Aman, Bersih, Guyub, dan Sejahtera berlandaskan nilai-nilai Ketuhanan dan Gotong Royong.\""
+              - generic [ref=f91e86]:
+                - heading "Misi" [level=2] [ref=f91e93]
+                - list [ref=f91e94]:
+                  - listitem [ref=f91e95]:
+                    - generic [ref=f91e96]: "1."
+                    - text: Meningkatkan sistem keamanan lingkungan terpadu.
+                  - listitem [ref=f91e97]:
+                    - generic [ref=f91e98]: "2."
+                    - text: Menggalakkan program kebersihan dan penghijauan.
+                  - listitem [ref=f91e99]:
+                    - generic [ref=f91e100]: "3."
+                    - text: Mendorong partisipasi aktif warga dalam kegiatan sosial.
+                  - listitem [ref=f91e101]:
+                    - generic [ref=f91e102]: "4."
+                    - text: Mengoptimalkan pelayanan administrasi warga berbasis digital.
+          - generic [ref=f91e103]:
+            - generic [ref=f91e104]:
+              - paragraph [ref=f91e105]: Informasi Wilayah
+              - generic [ref=f91e106]:
+                - generic [ref=f91e112]:
+                  - paragraph [ref=f91e113]: Jumlah RT
+                  - paragraph [ref=f91e114]: 8 Rukun Tetangga
+                - generic [ref=f91e122]:
+                  - paragraph [ref=f91e123]: Total Kepala Keluarga
+                  - paragraph [ref=f91e124]: ± 350 KK
+                - generic [ref=f91e130]:
+                  - paragraph [ref=f91e131]: Kelurahan
+                  - paragraph [ref=f91e132]: Pabuaran
+                - generic [ref=f91e137]:
+                  - paragraph [ref=f91e138]: Kecamatan
+                  - paragraph [ref=f91e139]: Karawaci
+            - generic [ref=f91e140]:
+              - iframe [ref=f91e143]:
+                - generic [ref=f92e1]:
+                  - link "Buka di Maps (terbuka di tab baru)" [ref=f92e4] [cursor=pointer]:
+                    - /url: about:invalid#zClosurez
+                    - text: Buka di Maps
+                  - generic [ref=f92e9]:
+                    - region "Peta" [ref=f92e10]
+                    - iframe [ref=f92e24]:
+                      
+              - paragraph [ref=f91e145]: Peta Lokasi RW 04 Pabuaran
+    - contentinfo [ref=f91e146]:
+      - generic [ref=f91e147]:
+        - generic [ref=f91e148]:
+          - link [ref=f91e150] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f91e156]: Tentang kami
+          - generic [ref=f91e160]: Profil
+        - generic [ref=f91e162]:
+          - generic [ref=f91e163]:
+            - heading "Sekretariat RW 04" [level=4] [ref=f91e164]
+            - generic [ref=f91e165]:
+              - paragraph [ref=f91e166]: Gedung Serbaguna RW 04
+              - paragraph [ref=f91e167]: Jl. Pabuaran Raya No.1A
+              - paragraph [ref=f91e168]: Pabuaran, Karawaci
+              - paragraph [ref=f91e169]: Kota Tangerang 15114
+            - generic [ref=f91e170]:
+              - link [ref=f91e171] [cursor=pointer]:
+                - /url: mailto:info@rw04pabuaran.id
+              - link [ref=f91e175] [cursor=pointer]:
+                - /url: https://www.instagram.com
+              - link [ref=f91e179] [cursor=pointer]:
+                - /url: https://wa.me/6281200000000
+          - generic [ref=f91e182]:
+            - heading "Tentang Kami" [level=4] [ref=f91e183]
+            - generic [ref=f91e184]:
+              - link "Profil RW" [ref=f91e185] [cursor=pointer]:
+                - /url: /tentang-kami/profil
+              - link "Struktur RW" [ref=f91e186] [cursor=pointer]:
+                - /url: /tentang-kami/struktur-rw
+              - link "Pengurus RT" [ref=f91e187] [cursor=pointer]:
+                - /url: /tentang-kami/pengurus-rt
+              - link "Peta Wilayah" [ref=f91e188] [cursor=pointer]:
+                - /url: /tentang-kami/peta-wilayah
+          - generic [ref=f91e189]:
+            - heading "Layanan" [level=4] [ref=f91e190]
+            - generic [ref=f91e191]:
+              - link "Administrasi Kependudukan" [ref=f91e192] [cursor=pointer]:
+                - /url: /layanan/administrasi-kependudukan
+              - link "Keamanan Wilayah" [ref=f91e193] [cursor=pointer]:
+                - /url: /layanan/keamanan-wilayah
+              - link "Kebersihan Lingkungan" [ref=f91e194] [cursor=pointer]:
+                - /url: /layanan/kebersihan-lingkungan
+              - link "Layanan Posyandu" [ref=f91e195] [cursor=pointer]:
+                - /url: /layanan/posyandu
+          - generic [ref=f91e196]:
+            - heading "Informasi" [level=4] [ref=f91e197]
+            - generic [ref=f91e198]:
+              - link "Berita Terkini" [ref=f91e199] [cursor=pointer]:
+                - /url: /informasi/berita
+              - link "Statistik Warga" [ref=f91e200] [cursor=pointer]:
+                - /url: /informasi/statistik
+              - link "Program Warga" [ref=f91e201] [cursor=pointer]:
+                - /url: /informasi/program-warga
+              - link "Galeri Kegiatan" [ref=f91e202] [cursor=pointer]:
+                - /url: /informasi/galeri
+      - generic [ref=f91e205]:
+        - paragraph [ref=f91e206]: © 2026 Sekretariat RW 04 Pabuaran.
+        - paragraph [ref=f91e207]: Developed by KKN UYM Threeverse Bytewizard Team 2026.
+    - button "Buka Menu Aksesibilitas" [ref=f91e208] [cursor=pointer]:
+      - generic [ref=f91e215]: Bantuan
+    - generic [ref=f91e216]:
+      - generic [ref=f91e217]:
+        - heading "Aksesibilitas" [level=3] [ref=f91e218]
+        - button [ref=f91e225] [cursor=pointer]
+      - generic [ref=f91e229]:
+        - generic [ref=f91e230]:
+          - generic [ref=f91e231]: Pengaturan
+          - button "Reset Semua" [ref=f91e232] [cursor=pointer]
+        - generic [ref=f91e236]:
+          - generic [ref=f91e237]: Ukuran Teks
+          - generic [ref=f91e240]:
+            - button "-" [ref=f91e241] [cursor=pointer]
+            - generic [ref=f91e242]: 100%
+            - button "+" [ref=f91e243] [cursor=pointer]
+        - generic [ref=f91e244]:
+          - button "Kontras Tinggi" [ref=f91e245] [cursor=pointer]
+          - button "Monokrom" [ref=f91e251] [cursor=pointer]
+          - button "Sorot Tautan" [ref=f91e260] [cursor=pointer]
+          - button "Ramah Buta Warna" [ref=f91e266] [cursor=pointer]
+          - button "Font Disleksia" [ref=f91e272] [cursor=pointer]
+          - button "Hentikan Animasi" [ref=f91e277] [cursor=pointer]
+          - button "Baca Teks" [ref=f91e282] [cursor=pointer]
+          - button "Kursor Besar" [ref=f91e289] [cursor=pointer]
+          - button "Panduan Baca" [ref=f91e294] [cursor=pointer]
+          - button "Jarak Teks" [ref=f91e299] [cursor=pointer]
+          - button "Sembunyikan Gambar" [ref=f91e304] [cursor=pointer]
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f91e319] [cursor=pointer]
+  - alert [ref=f91e323]

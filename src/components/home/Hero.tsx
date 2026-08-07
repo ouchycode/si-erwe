@@ -1,18 +1,43 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { api, resolveImageUrl } from "@/lib/api";
 
 export default function Hero() {
+  const [heroImage, setHeroImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    api
+      .get<{ data: { hero?: { gambar?: string } } }>("/settings")
+      .then((res) => {
+        if (!active) return;
+        const gambar = res.data?.hero?.gambar;
+        setHeroImage(resolveImageUrl(gambar) ?? null);
+      })
+      .catch(() => {
+        // biarkan tanpa gambar
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
   return (
     <section className="relative w-full overflow-hidden bg-stone-950">
       <div className="absolute inset-0">
-        <Image
-          src="/images/lingkungan-rw.png"
-          alt="Lingkungan RW 04"
-          fill
-          priority
-          className="object-cover opacity-55"
-        />
+        {heroImage ? (
+          <Image
+            src={heroImage}
+            alt="Lingkungan RW 04"
+            fill
+            priority
+            className="object-cover opacity-55"
+          />
+        ) : null}
         <div className="absolute inset-0 bg-[linear-gradient(135deg,_rgba(122,31,43,0.48),_rgba(0,0,0,0.34))]" />
       </div>
 
@@ -29,7 +54,7 @@ export default function Hero() {
           <div className="mt-7 flex flex-wrap gap-3">
             <Link
               href="/layanan/administrasi-kependudukan"
-              className="inline-flex items-center gap-2 rounded-xs bg-white px-4 py-2.5 text-sm font-semibold text-slate-950 no-underline transition-colors"
+              className="inline-flex items-center gap-2 rounded-xs bg-card px-4 py-2.5 text-sm font-semibold text-foreground no-underline transition-colors"
             >
               Administrasi Kependudukan
               <ArrowRight size={16} />

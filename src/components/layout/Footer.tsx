@@ -3,8 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import { NAV_ITEMS, SOCIAL_LINKS } from "@/lib/navigation";
 import { ALAMAT } from "@/lib/constants";
+import { api } from "@/lib/api";
+import type { SettingGroups, SekretariatAlamat } from "@/lib/types";
 
 const FOOTER_COLUMNS = [
   { header: "Tentang Kami", items: NAV_ITEMS[0].children },
@@ -14,6 +17,19 @@ const FOOTER_COLUMNS = [
 
 export default function Footer() {
   const pathname = usePathname();
+  const [alamat, setAlamat] = useState<SekretariatAlamat>(ALAMAT);
+
+  useEffect(() => {
+    api
+      .get<{ data: SettingGroups }>("/settings")
+      .then((res) => {
+        const s = res.data?.alamat?.sekretariat as SekretariatAlamat | undefined;
+        if (s) {
+          setAlamat({ ...ALAMAT, ...s });
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const getBreadcrumbs = () => {
     if (!pathname || pathname === "/") return [{ label: "Beranda", href: "/" }];
@@ -61,9 +77,9 @@ export default function Footer() {
         <div className="flex md:hidden flex-col items-center text-center gap-4 pb-4">
           <h4 className="text-base font-bold text-slate-800">Sekretariat RW 04</h4>
           <div className="text-sm text-gray-500 leading-relaxed">
-            <p>{ALAMAT.jalan}</p>
-            <p>{ALAMAT.kelurahan}, {ALAMAT.kecamatan}</p>
-            <p>{ALAMAT.kota} {ALAMAT.kodePos}</p>
+            <p>{alamat.jalan}</p>
+            <p>{alamat.kelurahan}, {alamat.kecamatan}</p>
+            <p>{alamat.kota} {alamat.kodePos}</p>
           </div>
           <div className="flex items-center justify-center gap-3 mt-2">
             {SOCIAL_LINKS.map((link) => (
@@ -84,10 +100,10 @@ export default function Footer() {
           <div className="flex flex-col gap-4 lg:col-span-1">
             <h4 className="text-sm font-bold uppercase tracking-wide text-slate-800">Sekretariat RW 04</h4>
             <div className="flex flex-col gap-1 text-sm text-gray-500 leading-relaxed">
-              <p>{ALAMAT.tempat}</p>
-              <p>{ALAMAT.jalan}</p>
-              <p>{ALAMAT.kelurahan}, {ALAMAT.kecamatan}</p>
-              <p>{ALAMAT.kota} {ALAMAT.kodePos}</p>
+              <p>{alamat.tempat}</p>
+              <p>{alamat.jalan}</p>
+              <p>{alamat.kelurahan}, {alamat.kecamatan}</p>
+              <p>{alamat.kota} {alamat.kodePos}</p>
             </div>
             <div className="flex items-center gap-3 mt-1">
               {SOCIAL_LINKS.map((link) => (

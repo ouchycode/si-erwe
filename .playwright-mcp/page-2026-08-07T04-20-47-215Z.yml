@@ -1,0 +1,246 @@
+- generic [active] [ref=f118e1]:
+  - generic [ref=f118e2]:
+    - navigation [ref=f118e3]:
+      - generic [ref=f118e5]:
+        - link "DARMA BAKTI RW 04 Kota Tangerang" [ref=f118e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f118e12]:
+            - generic [ref=f118e13]: DARMA BAKTI RW 04
+            - generic [ref=f118e14]: Kota Tangerang
+        - button "Aktifkan mode gelap" [ref=f118e16] [cursor=pointer]
+      - generic [ref=f118e20]:
+        - link "Beranda" [ref=f118e21] [cursor=pointer]:
+          - /url: /
+        - button "Profil" [ref=f118e26] [cursor=pointer]
+        - button "Layanan Publik" [ref=f118e33] [cursor=pointer]
+        - button "Informasi Publik" [ref=f118e40] [cursor=pointer]
+        - link "Hubungi Kami" [ref=f118e46] [cursor=pointer]:
+          - /url: /hubungi-kami
+    - main [ref=f118e49]:
+      - generic [ref=f118e50]:
+        - generic [ref=f118e52]:
+          - generic [ref=f118e53]:
+            - heading "Daftar Pengurus RT" [level=1] [ref=f118e54]
+            - paragraph [ref=f118e55]: Para ujung tombak pelayanan warga di lingkungan RW 04 Pabuaran — mengelola 8 wilayah RT dengan semangat gotong royong.
+          - generic [ref=f118e64]:
+            - paragraph [ref=f118e65]: Total RT Aktif
+            - paragraph [ref=f118e66]: 7 Wilayah
+        - generic [ref=f118e70]:
+          - generic [ref=f118e71]:
+            - generic [ref=f118e72]:
+              - heading "RT 01" [level=3] [ref=f118e73]
+              - generic [ref=f118e74]: RW 04
+            - generic [ref=f118e75]:
+              - generic [ref=f118e76]:
+                - img "Ajib" [ref=f118e78]
+                - generic [ref=f118e79]:
+                  - paragraph [ref=f118e80]: Ketua RT
+                  - paragraph [ref=f118e81]: Ajib
+              - generic [ref=f118e83]:
+                - generic [ref=f118e89]:
+                  - paragraph [ref=f118e90]: Wilayah
+                  - paragraph [ref=f118e91]: Blok A
+                - generic [ref=f118e96]:
+                  - paragraph [ref=f118e97]: Kontak
+                  - paragraph [ref=f118e98]: 0812-9000-0001
+          - generic [ref=f118e99]:
+            - generic [ref=f118e100]:
+              - heading "RT 02" [level=3] [ref=f118e101]
+              - generic [ref=f118e102]: RW 04
+            - generic [ref=f118e103]:
+              - generic [ref=f118e104]:
+                - img "Anisa" [ref=f118e106]
+                - generic [ref=f118e107]:
+                  - paragraph [ref=f118e108]: Ketua RT
+                  - paragraph [ref=f118e109]: Anisa
+              - generic [ref=f118e111]:
+                - generic [ref=f118e117]:
+                  - paragraph [ref=f118e118]: Wilayah
+                  - paragraph [ref=f118e119]: Blok B
+                - generic [ref=f118e124]:
+                  - paragraph [ref=f118e125]: Kontak
+                  - paragraph [ref=f118e126]: 0812-9000-0002
+          - generic [ref=f118e127]:
+            - generic [ref=f118e128]:
+              - heading "RT 03" [level=3] [ref=f118e129]
+              - generic [ref=f118e130]: RW 04
+            - generic [ref=f118e131]:
+              - generic [ref=f118e132]:
+                - img "Arthadena" [ref=f118e134]
+                - generic [ref=f118e135]:
+                  - paragraph [ref=f118e136]: Ketua RT
+                  - paragraph [ref=f118e137]: Arthadena
+              - generic [ref=f118e139]:
+                - generic [ref=f118e145]:
+                  - paragraph [ref=f118e146]: Wilayah
+                  - paragraph [ref=f118e147]: Blok C
+                - generic [ref=f118e152]:
+                  - paragraph [ref=f118e153]: Kontak
+                  - paragraph [ref=f118e154]: 0812-9000-0003
+          - generic [ref=f118e155]:
+            - generic [ref=f118e156]:
+              - heading "RT 04" [level=3] [ref=f118e157]
+              - generic [ref=f118e158]: RW 04
+            - generic [ref=f118e159]:
+              - generic [ref=f118e160]:
+                - img "Giska" [ref=f118e162]
+                - generic [ref=f118e163]:
+                  - paragraph [ref=f118e164]: Ketua RT
+                  - paragraph [ref=f118e165]: Giska
+              - generic [ref=f118e167]:
+                - generic [ref=f118e173]:
+                  - paragraph [ref=f118e174]: Wilayah
+                  - paragraph [ref=f118e175]: Blok D
+                - generic [ref=f118e180]:
+                  - paragraph [ref=f118e181]: Kontak
+                  - paragraph [ref=f118e182]: 0812-9000-0004
+          - generic [ref=f118e183]:
+            - generic [ref=f118e184]:
+              - heading "RT 05" [level=3] [ref=f118e185]
+              - generic [ref=f118e186]: RW 04
+            - generic [ref=f118e187]:
+              - generic [ref=f118e188]:
+                - img "Muhammad Lutfhi Nabhan" [ref=f118e190]
+                - generic [ref=f118e191]:
+                  - paragraph [ref=f118e192]: Ketua RT
+                  - paragraph [ref=f118e193]: Muhammad Lutfhi Nabhan
+              - generic [ref=f118e195]:
+                - generic [ref=f118e201]:
+                  - paragraph [ref=f118e202]: Wilayah
+                  - paragraph [ref=f118e203]: Blok E
+                - generic [ref=f118e208]:
+                  - paragraph [ref=f118e209]: Kontak
+                  - paragraph [ref=f118e210]: 0812-9000-0005
+          - generic [ref=f118e211]:
+            - generic [ref=f118e212]:
+              - heading "RT 06" [level=3] [ref=f118e213]
+              - generic [ref=f118e214]: RW 04
+            - generic [ref=f118e215]:
+              - generic [ref=f118e216]:
+                - img "Putri" [ref=f118e218]
+                - generic [ref=f118e219]:
+                  - paragraph [ref=f118e220]: Ketua RT
+                  - paragraph [ref=f118e221]: Putri
+              - generic [ref=f118e223]:
+                - generic [ref=f118e229]:
+                  - paragraph [ref=f118e230]: Wilayah
+                  - paragraph [ref=f118e231]: Blok F
+                - generic [ref=f118e236]:
+                  - paragraph [ref=f118e237]: Kontak
+                  - paragraph [ref=f118e238]: 0812-9000-0006
+          - generic [ref=f118e239]:
+            - generic [ref=f118e240]:
+              - heading "RT 07" [level=3] [ref=f118e241]
+              - generic [ref=f118e242]: RW 04
+            - generic [ref=f118e243]:
+              - generic [ref=f118e244]:
+                - img "Adin" [ref=f118e246]
+                - generic [ref=f118e247]:
+                  - paragraph [ref=f118e248]: Ketua RT
+                  - paragraph [ref=f118e249]: Adin
+              - generic [ref=f118e251]:
+                - generic [ref=f118e257]:
+                  - paragraph [ref=f118e258]: Wilayah
+                  - paragraph [ref=f118e259]: Blok G
+                - generic [ref=f118e264]:
+                  - paragraph [ref=f118e265]: Kontak
+                  - paragraph [ref=f118e266]: 0812-9000-0007
+        - generic [ref=f118e269]:
+          - generic [ref=f118e275]:
+            - heading "Periode Kepengurusan 2024 — 2027" [level=3] [ref=f118e276]
+            - paragraph [ref=f118e277]: Seluruh Ketua RT berada di bawah koordinasi langsung Ketua RW 04 Pabuaran.
+          - generic [ref=f118e278]:
+            - generic [ref=f118e279]:
+              - paragraph [ref=f118e280]: "7"
+              - paragraph [ref=f118e281]: RT Aktif
+            - generic [ref=f118e283]:
+              - paragraph [ref=f118e284]: ±350
+              - paragraph [ref=f118e285]: Kepala Keluarga
+    - contentinfo [ref=f118e286]:
+      - generic [ref=f118e287]:
+        - generic [ref=f118e288]:
+          - link [ref=f118e290] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f118e296]: Tentang kami
+          - generic [ref=f118e300]: Pengurus rt
+        - generic [ref=f118e302]:
+          - generic [ref=f118e303]:
+            - heading "Sekretariat RW 04" [level=4] [ref=f118e304]
+            - generic [ref=f118e305]:
+              - paragraph [ref=f118e306]: Gedung Serbaguna RW 04
+              - paragraph [ref=f118e307]: Jl. Pabuaran Raya No.1A
+              - paragraph [ref=f118e308]: Pabuaran, Karawaci
+              - paragraph [ref=f118e309]: Kota Tangerang 15114
+            - generic [ref=f118e310]:
+              - link [ref=f118e311] [cursor=pointer]:
+                - /url: mailto:info@rw04pabuaran.id
+              - link [ref=f118e315] [cursor=pointer]:
+                - /url: https://www.instagram.com
+              - link [ref=f118e319] [cursor=pointer]:
+                - /url: https://wa.me/6281200000000
+          - generic [ref=f118e322]:
+            - heading "Tentang Kami" [level=4] [ref=f118e323]
+            - generic [ref=f118e324]:
+              - link "Profil RW" [ref=f118e325] [cursor=pointer]:
+                - /url: /tentang-kami/profil
+              - link "Struktur RW" [ref=f118e326] [cursor=pointer]:
+                - /url: /tentang-kami/struktur-rw
+              - link "Pengurus RT" [ref=f118e327] [cursor=pointer]:
+                - /url: /tentang-kami/pengurus-rt
+              - link "Peta Wilayah" [ref=f118e328] [cursor=pointer]:
+                - /url: /tentang-kami/peta-wilayah
+          - generic [ref=f118e329]:
+            - heading "Layanan" [level=4] [ref=f118e330]
+            - generic [ref=f118e331]:
+              - link "Administrasi Kependudukan" [ref=f118e332] [cursor=pointer]:
+                - /url: /layanan/administrasi-kependudukan
+              - link "Keamanan Wilayah" [ref=f118e333] [cursor=pointer]:
+                - /url: /layanan/keamanan-wilayah
+              - link "Kebersihan Lingkungan" [ref=f118e334] [cursor=pointer]:
+                - /url: /layanan/kebersihan-lingkungan
+              - link "Layanan Posyandu" [ref=f118e335] [cursor=pointer]:
+                - /url: /layanan/posyandu
+          - generic [ref=f118e336]:
+            - heading "Informasi" [level=4] [ref=f118e337]
+            - generic [ref=f118e338]:
+              - link "Berita Terkini" [ref=f118e339] [cursor=pointer]:
+                - /url: /informasi/berita
+              - link "Statistik Warga" [ref=f118e340] [cursor=pointer]:
+                - /url: /informasi/statistik
+              - link "Program Warga" [ref=f118e341] [cursor=pointer]:
+                - /url: /informasi/program-warga
+              - link "Galeri Kegiatan" [ref=f118e342] [cursor=pointer]:
+                - /url: /informasi/galeri
+      - generic [ref=f118e345]:
+        - paragraph [ref=f118e346]: © 2026 Sekretariat RW 04 Pabuaran.
+        - paragraph [ref=f118e347]: Developed by KKN UYM Threeverse Bytewizard Team 2026.
+    - button "Buka Menu Aksesibilitas" [ref=f118e348] [cursor=pointer]:
+      - generic [ref=f118e355]: Bantuan
+    - generic [ref=f118e356]:
+      - generic [ref=f118e357]:
+        - heading "Aksesibilitas" [level=3] [ref=f118e358]
+        - button [ref=f118e365] [cursor=pointer]
+      - generic [ref=f118e369]:
+        - generic [ref=f118e370]:
+          - generic [ref=f118e371]: Pengaturan
+          - button "Reset Semua" [ref=f118e372] [cursor=pointer]
+        - generic [ref=f118e376]:
+          - generic [ref=f118e377]: Ukuran Teks
+          - generic [ref=f118e380]:
+            - button "-" [ref=f118e381] [cursor=pointer]
+            - generic [ref=f118e382]: 100%
+            - button "+" [ref=f118e383] [cursor=pointer]
+        - generic [ref=f118e384]:
+          - button "Kontras Tinggi" [ref=f118e385] [cursor=pointer]
+          - button "Monokrom" [ref=f118e391] [cursor=pointer]
+          - button "Sorot Tautan" [ref=f118e400] [cursor=pointer]
+          - button "Ramah Buta Warna" [ref=f118e406] [cursor=pointer]
+          - button "Font Disleksia" [ref=f118e412] [cursor=pointer]
+          - button "Hentikan Animasi" [ref=f118e417] [cursor=pointer]
+          - button "Baca Teks" [ref=f118e422] [cursor=pointer]
+          - button "Kursor Besar" [ref=f118e429] [cursor=pointer]
+          - button "Panduan Baca" [ref=f118e434] [cursor=pointer]
+          - button "Jarak Teks" [ref=f118e439] [cursor=pointer]
+          - button "Sembunyikan Gambar" [ref=f118e444] [cursor=pointer]
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f118e459] [cursor=pointer]

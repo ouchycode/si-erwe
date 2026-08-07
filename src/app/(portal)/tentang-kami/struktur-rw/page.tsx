@@ -14,76 +14,23 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { api, resolveImageUrl } from "@/lib/api";
+import { getSettings, getGroup } from "@/lib/settings";
+import type { Pengurus, ProfilUmum } from "@/lib/types";
 
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Struktur RW" };
 
-
-
-/* ------------------------------------------------------------------ */
-/*  DATA                                                               */
-/* ------------------------------------------------------------------ */
-
-const KETUA = {
-  jabatan: "Ketua RW 04",
-  nama: "Muhamad Fadli Husna Mubarok",
-  deskripsi: "Pimpinan utama dan pengarah seluruh kegiatan RW 04 Pabuaran.",
-  icon: Crown,
-  foto: "/images/pengurus/MUHAMAD FADLI HUSNA MUBAROK.png",
-};
-
-const WAKIL_INTI = [
-  {
-    jabatan: "Sekretaris",
-    nama: "Kevin Ardiansyah",
-    deskripsi: "Administrasi, surat-menyurat, dan dokumentasi kegiatan.",
-    icon: FileText,
-    foto: "/images/pengurus/KEVIN ARDIANSYAH.png",
-  },
-  {
-    jabatan: "Bendahara",
-    nama: "Fadhila",
-    deskripsi: "Pencatatan dan pengelolaan keuangan RW.",
-    icon: Wallet,
-    foto: "/images/pengurus/FADHILA .png",
-  },
-];
-
-const KOORDINATOR = [
-  {
-    jabatan: "Keamanan & Ketertiban",
-    nama: "Bagus",
-    deskripsi: "Koordinasi siskamling dan keamanan lingkungan.",
-    icon: Shield,
-    foto: "/images/pengurus/BAGUS.png",
-  },
-  {
-    jabatan: "Kebersihan & Lingkungan",
-    nama: "Soviyulloh",
-    deskripsi: "Program kebersihan dan kerja bakti warga.",
-    icon: Trash2,
-    foto: "/images/pengurus/SOVIYULLOH.png",
-  },
-  {
-    jabatan: "Pembangunan & Sarana",
-    nama: "Umam",
-    deskripsi: "Perawatan fasilitas dan infrastruktur wilayah.",
-    icon: HardHat,
-    foto: "/images/pengurus/UMAM.png",
-  },
-  {
-    jabatan: "Sosial & Kerohanian",
-    nama: "Devina",
-    deskripsi: "Kegiatan sosial, keagamaan, dan santunan.",
-    icon: Heart,
-    foto: "/images/pengurus/Devina.png",
-  },
-];
-
-/* ------------------------------------------------------------------ */
-/*  COMPONENTS                                                         */
-/* ------------------------------------------------------------------ */
-
-
+function iconFor(jabatan: string): LucideIcon {
+  if (/ketua/i.test(jabatan)) return Crown;
+  if (/sekretaris/i.test(jabatan)) return FileText;
+  if (/bendahara/i.test(jabatan)) return Wallet;
+  if (/keamanan/i.test(jabatan)) return Shield;
+  if (/kebersihan|lingkungan/i.test(jabatan)) return Trash2;
+  if (/pembangunan|sarana/i.test(jabatan)) return HardHat;
+  if (/sosial|kerohanian/i.test(jabatan)) return Heart;
+  return User;
+}
 
 /** Hierarchy connector line */
 function ConnectorLine() {
@@ -105,12 +52,13 @@ function PersonCard({
 }: {
   jabatan: string;
   nama: string;
-  deskripsi: string;
+  deskripsi: string | null;
   icon: LucideIcon;
-  foto?: string;
+  foto?: string | null;
   variant?: "highlight" | "default";
 }) {
   const isHighlight = variant === "highlight";
+  const fotoUrl = resolveImageUrl(foto);
 
   return (
     <div
@@ -129,8 +77,8 @@ function PersonCard({
               : "bg-brand-light text-brand-primary border border-brand-primary/10"
           }`}
         >
-          {foto ? (
-            <Image src={foto} alt={nama} fill className="object-cover object-top" sizes="128px" />
+          {fotoUrl ? (
+            <Image src={fotoUrl} alt={nama} fill className="object-cover object-top" sizes="128px" />
           ) : (
             getInitials(nama)
           )}
@@ -178,16 +126,25 @@ function PersonCard({
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  PAGE                                                               */
-/* ------------------------------------------------------------------ */
+export default async function StrukturRW() {
+  const settings = await getSettings();
+  const umum = getGroup<ProfilUmum>(settings, "profil", "umum");
+  const periode = umum?.periode ?? "2024 — 2027";
 
-export default function StrukturRW() {
+  const res = await api
+    .get<{ data: Pengurus[] }>("/pengurus")
+    .catch(() => ({ data: [] as Pengurus[] }));
+
+  const list = res.data;
+  const ketua = list.filter((p) => p.level === "ketua");
+  const inti = list.filter((p) => p.level === "inti");
+  const koordinator = list.filter((p) => p.level === "koordinator");
+
   return (
     <div className="min-h-screen bg-white font-sans">
       <PageHeader
         title="Struktur Organisasi RW 04"
-        description="Sinergi pengurus dalam melayani dan mengelola lingkungan demi kenyamanan seluruh warga RW 04 Pabuaran periode 2024–2027."
+        description={`Sinergi pengurus dalam melayani dan mengelola lingkungan demi kenyamanan seluruh warga RW 04 Pabuaran periode ${periode}.`}
         rightContent={
           <div className="flex items-center gap-4 bg-white/10 border border-white/20 rounded-xs px-6 py-4 shrink-0">
             <div className="w-10 h-10 bg-white/10 rounded-xs flex items-center justify-center">
@@ -197,7 +154,7 @@ export default function StrukturRW() {
               <p className="text-xs text-white/40 font-bold uppercase tracking-widest mb-0.5">
                 Total Pengurus
               </p>
-              <p className="text-2xl font-bold text-white">7 Orang</p>
+              <p className="text-2xl font-bold text-white">{list.length} Orang</p>
             </div>
           </div>
         }
@@ -205,38 +162,72 @@ export default function StrukturRW() {
 
       {/* ═══ ORGANIZATIONAL CHART ═══ */}
       <ContentSection>
-            <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-8 text-center">
-              Bagan Organisasi Periode 2024 — 2027
-            </p>
+        <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-8 text-center">
+          Bagan Organisasi Periode {periode}
+        </p>
 
-          {/* ── Level 1: Ketua ── */}
+        {/* ── Level 1: Ketua ── */}
+        {ketua[0] && (
           <div className="flex justify-center">
             <div className="w-full max-w-sm">
-              <PersonCard {...KETUA} variant="highlight" />
+              <PersonCard
+                jabatan={ketua[0].jabatan}
+                nama={ketua[0].nama}
+                deskripsi={ketua[0].deskripsi}
+                icon={iconFor(ketua[0].jabatan)}
+                foto={ketua[0].foto}
+                variant="highlight"
+              />
             </div>
           </div>
+        )}
 
-          <ConnectorLine />
+        {inti.length > 0 && (
+          <>
+            <ConnectorLine />
+            {/* ── Level 2: Sekretaris & Bendahara ── */}
+            <div className="flex justify-center">
+              <div className="w-full max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-4">
+                {inti.map((p) => (
+                  <PersonCard
+                    key={p.id}
+                    jabatan={p.jabatan}
+                    nama={p.nama}
+                    deskripsi={p.deskripsi}
+                    icon={iconFor(p.jabatan)}
+                    foto={p.foto}
+                  />
+                ))}
+              </div>
+            </div>
+          </>
+        )}
 
-          {/* ── Level 2: Sekretaris & Bendahara ── */}
-          <div className="flex justify-center">
-            <div className="w-full max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-4">
-              {WAKIL_INTI.map((p) => (
-                <PersonCard key={p.jabatan} {...p} />
+        {koordinator.length > 0 && (
+          <>
+            <ConnectorLine />
+            {/* ── Level 3: Koordinator Bidang ── */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {koordinator.map((p) => (
+                <PersonCard
+                  key={p.id}
+                  jabatan={p.jabatan}
+                  nama={p.nama}
+                  deskripsi={p.deskripsi}
+                  icon={iconFor(p.jabatan)}
+                  foto={p.foto}
+                />
               ))}
             </div>
-          </div>
+          </>
+        )}
 
-          <ConnectorLine />
-
-          {/* ── Level 3: Koordinator Bidang ── */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {KOORDINATOR.map((p) => (
-              <PersonCard key={p.jabatan} {...p} />
-            ))}
+        {list.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-gray-400 font-medium">Belum ada data pengurus.</p>
           </div>
+        )}
       </ContentSection>
     </div>
   );
 }
-

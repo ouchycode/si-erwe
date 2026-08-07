@@ -1,0 +1,119 @@
+- generic [active] [ref=f123e1]:
+  - generic [ref=f123e2]:
+    - navigation [ref=f123e3]:
+      - generic [ref=f123e5]:
+        - link "DARMA BAKTI RW 04 Kota Tangerang" [ref=f123e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f123e12]:
+            - generic [ref=f123e13]: DARMA BAKTI RW 04
+            - generic [ref=f123e14]: Kota Tangerang
+        - button "Aktifkan mode gelap" [ref=f123e16] [cursor=pointer]
+      - generic [ref=f123e20]:
+        - link "Beranda" [ref=f123e21] [cursor=pointer]:
+          - /url: /
+        - button "Profil" [ref=f123e26] [cursor=pointer]
+        - button "Layanan Publik" [ref=f123e33] [cursor=pointer]
+        - button "Informasi Publik" [ref=f123e40] [cursor=pointer]
+        - link "Hubungi Kami" [ref=f123e46] [cursor=pointer]:
+          - /url: /hubungi-kami
+    - main [ref=f123e49]:
+      - generic [ref=f123e50]:
+        - generic [ref=f123e52]:
+          - generic [ref=f123e53]:
+            - paragraph [ref=f123e54]: Dokumentasi
+            - heading "Galeri Kegiatan RW 04" [level=1] [ref=f123e55]
+            - paragraph [ref=f123e56]: Kumpulan foto dan dokumentasi kegiatan warga, rapat pengurus, serta momen-momen penting di lingkungan RW 04.
+          - generic [ref=f123e62]:
+            - paragraph [ref=f123e63]: Total Album
+            - paragraph [ref=f123e64]: 0 Foto Tersedia
+        - generic [ref=f123e67]:
+          - button "Semua" [ref=f123e69] [cursor=pointer]
+          - paragraph [ref=f123e71]: Memuat galeri...
+    - contentinfo [ref=f123e72]:
+      - generic [ref=f123e73]:
+        - generic [ref=f123e74]:
+          - link [ref=f123e76] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f123e82]: Informasi
+          - generic [ref=f123e86]: Galeri
+        - generic [ref=f123e88]:
+          - generic [ref=f123e89]:
+            - heading "Sekretariat RW 04" [level=4] [ref=f123e90]
+            - generic [ref=f123e91]:
+              - paragraph [ref=f123e92]: Gedung Serbaguna RW 04
+              - paragraph [ref=f123e93]: Jl. Pabuaran Raya No.1A
+              - paragraph [ref=f123e94]: Pabuaran, Karawaci
+              - paragraph [ref=f123e95]: Kota Tangerang 15114
+            - generic [ref=f123e96]:
+              - link [ref=f123e97] [cursor=pointer]:
+                - /url: mailto:info@rw04pabuaran.id
+              - link [ref=f123e101] [cursor=pointer]:
+                - /url: https://www.instagram.com
+              - link [ref=f123e105] [cursor=pointer]:
+                - /url: https://wa.me/6281200000000
+          - generic [ref=f123e108]:
+            - heading "Tentang Kami" [level=4] [ref=f123e109]
+            - generic [ref=f123e110]:
+              - link "Profil RW" [ref=f123e111] [cursor=pointer]:
+                - /url: /tentang-kami/profil
+              - link "Struktur RW" [ref=f123e112] [cursor=pointer]:
+                - /url: /tentang-kami/struktur-rw
+              - link "Pengurus RT" [ref=f123e113] [cursor=pointer]:
+                - /url: /tentang-kami/pengurus-rt
+              - link "Peta Wilayah" [ref=f123e114] [cursor=pointer]:
+                - /url: /tentang-kami/peta-wilayah
+          - generic [ref=f123e115]:
+            - heading "Layanan" [level=4] [ref=f123e116]
+            - generic [ref=f123e117]:
+              - link "Administrasi Kependudukan" [ref=f123e118] [cursor=pointer]:
+                - /url: /layanan/administrasi-kependudukan
+              - link "Keamanan Wilayah" [ref=f123e119] [cursor=pointer]:
+                - /url: /layanan/keamanan-wilayah
+              - link "Kebersihan Lingkungan" [ref=f123e120] [cursor=pointer]:
+                - /url: /layanan/kebersihan-lingkungan
+              - link "Layanan Posyandu" [ref=f123e121] [cursor=pointer]:
+                - /url: /layanan/posyandu
+          - generic [ref=f123e122]:
+            - heading "Informasi" [level=4] [ref=f123e123]
+            - generic [ref=f123e124]:
+              - link "Berita Terkini" [ref=f123e125] [cursor=pointer]:
+                - /url: /informasi/berita
+              - link "Statistik Warga" [ref=f123e126] [cursor=pointer]:
+                - /url: /informasi/statistik
+              - link "Program Warga" [ref=f123e127] [cursor=pointer]:
+                - /url: /informasi/program-warga
+              - link "Galeri Kegiatan" [ref=f123e128] [cursor=pointer]:
+                - /url: /informasi/galeri
+      - generic [ref=f123e131]:
+        - paragraph [ref=f123e132]: © 2026 Sekretariat RW 04 Pabuaran.
+        - paragraph [ref=f123e133]: Developed by KKN UYM Threeverse Bytewizard Team 2026.
+    - button "Buka Menu Aksesibilitas" [ref=f123e134] [cursor=pointer]:
+      - generic [ref=f123e141]: Bantuan
+    - generic [ref=f123e142]:
+      - generic [ref=f123e143]:
+        - heading "Aksesibilitas" [level=3] [ref=f123e144]
+        - button [ref=f123e151] [cursor=pointer]
+      - generic [ref=f123e155]:
+        - generic [ref=f123e156]:
+          - generic [ref=f123e157]: Pengaturan
+          - button "Reset Semua" [ref=f123e158] [cursor=pointer]
+        - generic [ref=f123e162]:
+          - generic [ref=f123e163]: Ukuran Teks
+          - generic [ref=f123e166]:
+            - button "-" [ref=f123e167] [cursor=pointer]
+            - generic [ref=f123e168]: 100%
+            - button "+" [ref=f123e169] [cursor=pointer]
+        - generic [ref=f123e170]:
+          - button "Kontras Tinggi" [ref=f123e171] [cursor=pointer]
+          - button "Monokrom" [ref=f123e177] [cursor=pointer]
+          - button "Sorot Tautan" [ref=f123e186] [cursor=pointer]
+          - button "Ramah Buta Warna" [ref=f123e192] [cursor=pointer]
+          - button "Font Disleksia" [ref=f123e198] [cursor=pointer]
+          - button "Hentikan Animasi" [ref=f123e203] [cursor=pointer]
+          - button "Baca Teks" [ref=f123e208] [cursor=pointer]
+          - button "Kursor Besar" [ref=f123e215] [cursor=pointer]
+          - button "Panduan Baca" [ref=f123e220] [cursor=pointer]
+          - button "Jarak Teks" [ref=f123e225] [cursor=pointer]
+          - button "Sembunyikan Gambar" [ref=f123e230] [cursor=pointer]
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f123e245] [cursor=pointer]

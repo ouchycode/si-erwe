@@ -58,7 +58,7 @@ export const BERITA_DUMMY: Berita[] = [
     kategori: "Kegiatan",
     gambar: "/images/berita/musyawarah.png",
     author: "Sekretariat RW 04",
-    konten: "<p>Pengurus RW 04 menggelar musyawarah warga yang dihadiri oleh perwakilan dari 8 RT untuk membahas rencana perbaikan drainase di Blok A. Kegiatan ini merupakan tindak lanjut dari aspirasi warga yang disampaikan pada pertemuan sebelumnya.</p><p>Ketua RW 04 menyampaikan bahwa perbaikan drainase menjadi prioritas utama mengingat musim hujan yang akan segera tiba. Anggaran perbaikan akan diambil dari dana iuran warga yang telah terkumpul.</p><p>Hasil musyawarah menyepakati bahwa pengerjaan akan dimulai pada minggu pertama Mei 2026 dan ditargetkan selesai dalam waktu dua minggu. Setiap RT diminta mengirimkan perwakilan untuk gotong royong.</p>",
+    konten: "<p>Pengurus RW 04 menggelar musyawarah warga yang dihadiri oleh perwakilan dari 5 RT untuk membahas rencana perbaikan drainase di Blok A. Kegiatan ini merupakan tindak lanjut dari aspirasi warga yang disampaikan pada pertemuan sebelumnya.</p><p>Ketua RW 04 menyampaikan bahwa perbaikan drainase menjadi prioritas utama mengingat musim hujan yang akan segera tiba. Anggaran perbaikan akan diambil dari dana iuran warga yang telah terkumpul.</p><p>Hasil musyawarah menyepakati bahwa pengerjaan akan dimulai pada minggu pertama Mei 2026 dan ditargetkan selesai dalam waktu dua minggu. Setiap RT diminta mengirimkan perwakilan untuk gotong royong.</p>",
   },
   {
     id: 2,
@@ -78,7 +78,7 @@ export const BERITA_DUMMY: Berita[] = [
     kategori: "Kegiatan",
     gambar: "/images/berita/kerjabakti.png",
     author: "Sekretariat RW 04",
-    konten: "<p>Kegiatan kerja bakti serentak di seluruh lingkungan RW 04 berjalan dengan lancar. Warga dari 8 RT bahu-membahu membersihkan selokan, memotong rumput liar, dan merapikan taman lingkungan.</p><p>Ketua RW 04 mengapresiasi partisipasi aktif warga yang mencapai 80% dari total kepala keluarga. Kegiatan ini juga dimanfaatkan untuk pengecekan rutin fasilitas umum seperti penerangan jalan dan pos kamling.</p><p>Kerja bakti akan dijadwalkan secara rutin setiap hari Minggu pertama di setiap bulan.</p>",
+    konten: "<p>Kegiatan kerja bakti serentak di seluruh lingkungan RW 04 berjalan dengan lancar. Warga dari 5 RT bahu-membahu membersihkan selokan, memotong rumput liar, dan merapikan taman lingkungan.</p><p>Ketua RW 04 mengapresiasi partisipasi aktif warga yang mencapai 80% dari total kepala keluarga. Kegiatan ini juga dimanfaatkan untuk pengecekan rutin fasilitas umum seperti penerangan jalan dan pos kamling.</p><p>Kerja bakti akan dijadwalkan secara rutin setiap hari Minggu pertama di setiap bulan.</p>",
   },
   {
     id: 4,

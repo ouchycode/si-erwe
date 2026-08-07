@@ -42,6 +42,7 @@ export default function KeamananWilayah() {
               src="https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?q=80&w=1000&auto=format&fit=crop" 
               alt="Petugas Keamanan" 
               fill 
+              loading="eager"
               className="object-cover"
             />
           </div>

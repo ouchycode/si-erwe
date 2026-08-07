@@ -1,11 +1,19 @@
 import { FileText, CreditCard, FileBadge, CheckCircle2, Clock, AlertCircle, FileSignature, MapPin } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ContentSection } from "@/components/ui/ContentSection";
-import { PengajuanForm } from "@/components/forms/PengajuanForm";
+import { PengajuanForm, CekStatusPengajuan } from "@/components/forms/PengajuanForm";
+import { getSettings, getGroup } from "@/lib/settings";
+import type { LayananAdministrasi, LayananAlur } from "@/lib/types";
 
 export const metadata = { title: "Administrasi Kependudukan" };
 
-const LAYANAN = [
+const LAYANAN_ICON: Record<string, React.ElementType> = {
+  "surat-pengantar": FileText,
+  "surat-domisili": FileBadge,
+  "ktp-kk-baru": CreditCard,
+};
+
+const DEFAULT_LAYANAN: { icon: React.ElementType; judul: string; syarat: string[] }[] = [
   {
     icon: FileText,
     judul: "Surat Pengantar RT/RW",
@@ -23,7 +31,7 @@ const LAYANAN = [
   },
 ];
 
-const ALUR = [
+const DEFAULT_ALUR: LayananAlur[] = [
   {
     step: "01",
     title: "Siapkan Berkas",
@@ -46,7 +54,22 @@ const ALUR = [
   },
 ];
 
-export default function AdministrasiKependudukan() {
+export default async function AdministrasiKependudukan() {
+  const settings = await getSettings();
+
+  const administrasi = getGroup<LayananAdministrasi[]>(settings, "layanan", "administrasi");
+  const alurSetting = getGroup<LayananAlur[]>(settings, "layanan", "alur");
+
+  const LAYANAN = administrasi && administrasi.length > 0
+    ? administrasi.map((l) => ({
+        icon: LAYANAN_ICON[l.slug] ?? FileText,
+        judul: l.judul,
+        syarat: l.syarat,
+      }))
+    : DEFAULT_LAYANAN;
+
+  const ALUR = alurSetting && alurSetting.length > 0 ? alurSetting : DEFAULT_ALUR;
+
   return (
     <div className="min-h-screen bg-white font-sans pb-20">
       <PageHeader
@@ -117,6 +140,10 @@ export default function AdministrasiKependudukan() {
 
               <PengajuanForm />
             </div>
+          </div>
+
+          <div className="bg-white shadow-xl overflow-hidden rounded-xs mt-8">
+            <CekStatusPengajuan />
           </div>
         </div>
       </section>

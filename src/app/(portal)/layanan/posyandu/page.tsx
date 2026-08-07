@@ -26,6 +26,7 @@ export default function PosyanduPage() {
                 src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop" 
                 alt="Kader Posyandu" 
                 fill 
+                loading="eager"
                 className="object-cover"
               />
             </div>
@@ -44,7 +45,7 @@ export default function PosyanduPage() {
                   Layanan Posyandu RW 04 Pabuaran digerakkan oleh para kader kesehatan yang terlatih dan berdedikasi. Mereka bertugas memberikan pelayanan kesehatan dasar bagi ibu hamil, bayi, balita, serta warga lanjut usia (lansia) di lingkungan sekitar.
                 </p>
                 <blockquote className="pl-6 border-l-4 border-brand-primary text-slate-800 font-medium italic text-xl my-8 py-2">
-                  "Dengan jadwal rutin yang diadakan setiap bulan, kader Posyandu memantau tumbuh kembang balita melalui penimbangan berat badan, pengukuran tinggi badan, serta pemberian makanan tambahan (PMT) bergizi."
+                  &ldquo;Dengan jadwal rutin yang diadakan setiap bulan, kader Posyandu memantau tumbuh kembang balita melalui penimbangan berat badan, pengukuran tinggi badan, serta pemberian makanan tambahan (PMT) bergizi.&rdquo;
                 </blockquote>
                 <p>
                   Kader juga memberikan edukasi kesehatan kepada masyarakat untuk meningkatkan kesadaran gizi dan kualitas hidup warga sejak usia dini.

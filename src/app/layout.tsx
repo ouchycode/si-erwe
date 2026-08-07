@@ -23,7 +23,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className={`h-full antialiased ${figtree.variable} font-sans`}>
+    <html lang="id" suppressHydrationWarning className={`h-full antialiased ${figtree.variable} font-sans`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+(function () {
+  try {
+    var t = localStorage.getItem('rw_theme');
+    var dark = t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (dark) document.documentElement.classList.add('dark');
+  } catch (e) {}
+})();`,
+          }}
+        />
+      </head>
       <body className="min-h-full bg-gray-100 font-sans">
         {children}
         <Toaster position="top-right" richColors />

@@ -96,20 +96,28 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
+  /* Palet gelap RW 04 */
+  --bg: #111111;
+  --bg-nav: #111111d9;
+  --bg-1: #1a1a1a;
+  --bg-2: #222222;
+  --bg-3: #2a2a2a;
+  --bg-hover: #333333;
+
+  --background: var(--bg);
+  --foreground: oklch(0.95 0 0);
+  --card: var(--bg-1);
+  --card-foreground: oklch(0.95 0 0);
+  --popover: var(--bg-2);
+  --popover-foreground: oklch(0.95 0 0);
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --secondary: var(--bg-2);
+  --secondary-foreground: oklch(0.95 0 0);
+  --muted: var(--bg-2);
+  --muted-foreground: oklch(0.7 0 0);
+  --accent: var(--bg-3);
+  --accent-foreground: oklch(0.95 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
@@ -119,14 +127,149 @@
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar: var(--bg-1);
+  --sidebar-foreground: oklch(0.95 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-accent: var(--bg-3);
+  --sidebar-accent-foreground: oklch(0.95 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+html {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
+}
+
+/* Overtide utilitas warna terang standar saat mode gelap aktif.
+   Rule tanpa layer ini menang atas utility Tailwind. */
+.dark .bg-white {
+  background-color: var(--bg-1);
+}
+.dark .bg-slate-50,
+.dark .bg-gray-100 {
+  background-color: var(--bg-3);
+}
+.dark .bg-slate-100,
+.dark .bg-slate-200 {
+  background-color: var(--bg-3);
+}
+.dark .bg-gray-200 {
+  background-color: var(--bg-3);
+}
+.dark .bg-gray-300,
+.dark .bg-slate-300 {
+  background-color: var(--bg-hover);
+}
+.dark .bg-gray-400,
+.dark .bg-slate-400 {
+  background-color: var(--bg-hover);
+}
+.dark .bg-gray-50,
+.dark .bg-slate-50\/50 {
+  background-color: var(--bg-3);
+}
+
+.dark .bg-red-50,
+.dark .bg-emerald-50,
+.dark .bg-rose-50,
+.dark .bg-amber-50,
+.dark .bg-sky-50,
+.dark .bg-blue-50,
+.dark .bg-brand-light {
+  background-color: oklch(1 0 0 / 0.04);
+}
+.dark .border-red-200,
+.dark .border-emerald-200,
+.dark .border-rose-200,
+.dark .border-amber-200,
+.dark .border-sky-200,
+.dark .border-blue-200 {
+  border-color: oklch(1 0 0 / 10%);
+}
+.dark .text-red-600,
+.dark .text-emerald-600,
+.dark .text-rose-600,
+.dark .text-amber-600,
+.dark .text-sky-600,
+.dark .text-blue-600 {
+  color: oklch(0.75 0.12 230);
+}
+
+.dark .text-slate-800,
+.dark .text-slate-900,
+.dark .text-slate-950 {
+  color: #ececec;
+}
+.dark .text-slate-700,
+.dark .text-gray-800 {
+  color: #d8d8d8;
+}
+.dark .text-slate-600,
+.dark .text-gray-700 {
+  color: #c0c0c0;
+}
+.dark .text-slate-500,
+.dark .text-gray-600,
+.dark .text-gray-500 {
+  color: #a3a3a3;
+}
+.dark .text-slate-400,
+.dark .text-gray-400,
+.dark .text-gray-300 {
+  color: #858585;
+}
+
+.dark .text-brand-primary {
+  color: #f2a9ad;
+}
+.dark .text-brand-primary-hover {
+  color: #f6c2c5;
+}
+.dark .brand-primary,
+.dark .hover\:text-brand-primary:hover,
+.dark .group-hover\:text-brand-primary {
+  color: #f2a9ad;
+}
+
+.dark .border-slate-200,
+.dark .border-slate-100,
+.dark .border-gray-200,
+.dark .border-gray-100,
+.dark .border-slate-300 {
+  border-color: oklch(1 0 0 / 10%);
+}
+.dark .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
+.dark .divide-gray-100 > :not([hidden]) ~ :not([hidden]) {
+  border-color: oklch(1 0 0 / 10%);
+}
+
+.dark .bg-gray-100\/50,
+.dark .bg-slate-50\/50 {
+  background-color: var(--bg-3);
+}
+
+.dark .shadow-sm,
+.dark .shadow,
+.dark .shadow-md,
+.dark .shadow-lg {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.5);
+}
+
+.dark .prose-slate {
+  color: #cfcfcf;
+}
+.dark .prose-slate :where(h1, h2, h3, h4, h5, h6) {
+  color: #e8e8e8;
 }
 
 @layer base {

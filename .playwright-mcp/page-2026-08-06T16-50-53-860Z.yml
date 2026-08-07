@@ -1,0 +1,66 @@
+- generic [active] [ref=f76e1]:
+  - generic [ref=f76e212]:
+    - complementary [ref=f76e213]:
+      - generic [ref=f76e214]:
+        - generic [ref=f76e215]:
+          - paragraph [ref=f76e220]: Admin RW 04
+          - button "Tutup menu samping" [ref=f76e221]
+        - navigation [ref=f76e225]:
+          - generic [ref=f76e226]:
+            - link "Dashboard" [ref=f76e227] [cursor=pointer]:
+              - /url: /admin/dashboard
+            - link "Berita" [ref=f76e233] [cursor=pointer]:
+              - /url: /admin/berita
+            - link "Galeri" [ref=f76e237] [cursor=pointer]:
+              - /url: /admin/galeri
+            - link "Pengurus RW" [ref=f76e243] [cursor=pointer]:
+              - /url: /admin/pengurus
+            - link "Pengurus RT" [ref=f76e249] [cursor=pointer]:
+              - /url: /admin/pengurus-rt
+            - link "Statistik" [ref=f76e253] [cursor=pointer]:
+              - /url: /admin/statistik
+            - link "Pengajuan" [ref=f76e256] [cursor=pointer]:
+              - /url: /admin/pengajuan
+            - link "Pesan" [ref=f76e260] [cursor=pointer]:
+              - /url: /admin/pesan
+            - link "Pengaturan" [ref=f76e263] [cursor=pointer]:
+              - /url: /admin/pengaturan
+        - generic [ref=f76e268]:
+          - generic [ref=f76e269]:
+            - generic [ref=f76e270]: SR
+            - paragraph [ref=f76e271]: Sekretariat RW 04
+          - button "Keluar" [ref=f76e272]
+    - main [ref=f76e277]:
+      - generic [ref=f76e278]:
+        - generic [ref=f76e279]:
+          - generic [ref=f76e280]:
+            - paragraph [ref=f76e281]: Selamat datang kembali,
+            - heading "Sekretariat RW 04" [level=1] [ref=f76e282]
+            - paragraph [ref=f76e283]: Ringkasan konten dan aktivitas pengelolaan Sekretariat RW 04.
+          - button "Lihat Situs" [ref=f76e284] [cursor=pointer]
+        - generic [ref=f76e285]:
+          - link [ref=f76e286] [cursor=pointer]:
+            - /url: /admin/berita
+            - paragraph [ref=f76e293]: Berita
+          - link [ref=f76e295] [cursor=pointer]:
+            - /url: /admin/galeri
+            - paragraph [ref=f76e304]: Foto Galeri
+          - link [ref=f76e306] [cursor=pointer]:
+            - /url: /admin/pengurus
+            - paragraph [ref=f76e315]: Pengurus
+          - link [ref=f76e317] [cursor=pointer]:
+            - /url: /admin/pengajuan
+            - paragraph [ref=f76e324]: Pengajuan
+          - link [ref=f76e326] [cursor=pointer]:
+            - /url: /admin/pesan
+            - paragraph [ref=f76e332]: Pesan Masuk
+        - generic [ref=f76e334]:
+          - generic [ref=f76e336]:
+            - heading "Pengajuan Terbaru" [level=2] [ref=f76e337]
+            - button "Lihat semua" [ref=f76e338] [cursor=pointer]
+          - generic [ref=f76e345]:
+            - heading "Pesan Terbaru" [level=2] [ref=f76e346]
+            - button "Lihat semua" [ref=f76e347] [cursor=pointer]
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f76e148] [cursor=pointer]
+  - alert [ref=f76e190]

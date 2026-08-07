@@ -1,0 +1,214 @@
+- generic [ref=f78e1]:
+  - generic [ref=f78e2]:
+    - complementary [ref=f78e3]:
+      - generic [ref=f78e4]:
+        - generic [ref=f78e5]:
+          - paragraph [ref=f78e10]: Admin RW 04
+          - button "Tutup menu samping" [ref=f78e11]
+        - navigation [ref=f78e15]:
+          - generic [ref=f78e16]:
+            - link "Dashboard" [ref=f78e17] [cursor=pointer]:
+              - /url: /admin/dashboard
+            - link "Berita" [ref=f78e23] [cursor=pointer]:
+              - /url: /admin/berita
+            - link "Galeri" [ref=f78e27] [cursor=pointer]:
+              - /url: /admin/galeri
+            - link "Pengurus RW" [ref=f78e33] [cursor=pointer]:
+              - /url: /admin/pengurus
+            - link "Pengurus RT" [ref=f78e39] [cursor=pointer]:
+              - /url: /admin/pengurus-rt
+            - link "Statistik" [ref=f78e43] [cursor=pointer]:
+              - /url: /admin/statistik
+            - link "Pengajuan" [ref=f78e46] [cursor=pointer]:
+              - /url: /admin/pengajuan
+            - link "Pesan" [ref=f78e50] [cursor=pointer]:
+              - /url: /admin/pesan
+            - link "Pengaturan" [ref=f78e53] [cursor=pointer]:
+              - /url: /admin/pengaturan
+        - generic [ref=f78e58]:
+          - generic [ref=f78e59]:
+            - generic [ref=f78e60]: SR
+            - paragraph [ref=f78e61]: Sekretariat RW 04
+          - button "Keluar" [ref=f78e62]
+    - main [ref=f78e67]:
+      - generic [ref=f78e68]:
+        - generic [ref=f78e70]:
+          - generic [ref=f78e71]:
+            - heading "Pengaturan" [level=1] [ref=f78e72]
+            - paragraph [ref=f78e73]: Kelola konten pengaturan situs seperti alamat, kontak, dan layanan.
+          - button "Muat Ulang" [ref=f78e87]
+        - generic [ref=f78e74]:
+          - generic [ref=f78e88]:
+            - generic [ref=f78e89]:
+              - heading "Alamat" [level=2] [ref=f78e93]
+              - generic [ref=f78e94]: 1 item
+            - generic [ref=f78e96]:
+              - generic [ref=f78e97]:
+                - generic [ref=f78e98]:
+                  - generic [ref=f78e99]: Sekretariat
+                  - paragraph [ref=f78e100]: Alamat kantor/sekretariat RW 04 yang tampil di situs.
+                - button "JSON (Lanjutan)" [active] [ref=f78e306]
+              - generic [ref=f78e307]:
+                - generic [ref=f78e308]:
+                  - generic [ref=f78e309]: Full
+                  - textbox [ref=f78e310]: Gedung Serbaguna RW 04, Jl. Pabuaran Raya No.1A, Pabuaran, Kec. Karawaci, Kota Tangerang, Banten 15114
+                - generic [ref=f78e311]:
+                  - generic [ref=f78e312]: Kota
+                  - textbox [ref=f78e313]: Kota Tangerang
+                - generic [ref=f78e314]:
+                  - generic [ref=f78e315]: Jalan
+                  - textbox [ref=f78e316]: Jl. Pabuaran Raya No.1A
+                - generic [ref=f78e317]:
+                  - generic [ref=f78e318]: Tempat
+                  - textbox [ref=f78e319]: Gedung Serbaguna RW 04
+                - generic [ref=f78e320]:
+                  - generic [ref=f78e321]: Kode Pos
+                  - textbox [ref=f78e322]: "15114"
+                - generic [ref=f78e323]:
+                  - generic [ref=f78e324]: Singkat
+                  - textbox [ref=f78e325]: Sekretariat RW 04 Pabuaran, Karawaci, Kota Tangerang
+                - generic [ref=f78e326]:
+                  - generic [ref=f78e327]: Provinsi
+                  - textbox [ref=f78e328]: Banten
+                - generic [ref=f78e329]:
+                  - generic [ref=f78e330]: Kecamatan
+                  - textbox [ref=f78e331]: Karawaci
+                - generic [ref=f78e332]:
+                  - generic [ref=f78e333]: Kelurahan
+                  - textbox [ref=f78e334]: Pabuaran
+          - generic [ref=f78e133]:
+            - generic [ref=f78e134]:
+              - heading "Hero" [level=2] [ref=f78e138]
+              - generic [ref=f78e139]: 1 item
+            - generic [ref=f78e141]:
+              - generic [ref=f78e142]:
+                - generic [ref=f78e143]:
+                  - generic [ref=f78e144]: Gambar
+                  - paragraph [ref=f78e145]: Gambar latar banner utama halaman depan. Kosongkan untuk memakai gambar bawaan.
+                - button "JSON (Lanjutan)" [ref=f78e146]
+              - generic [ref=f78e147]:
+                - generic [ref=f78e148]:
+                  - img "Pratinjau gambar hero" [ref=f78e150]
+                  - generic [ref=f78e151]:
+                    - generic [ref=f78e152] [cursor=pointer]: Pilih Gambar
+                    - button "Hapus Gambar" [ref=f78e156]
+                - paragraph [ref=f78e157]: Format PNG/JPG/WebP, maksimal 4 MB.
+          - generic [ref=f78e158]:
+            - generic [ref=f78e159]:
+              - heading "Jam operasional" [level=2] [ref=f78e163]
+              - generic [ref=f78e164]: 1 item
+            - generic [ref=f78e166]:
+              - generic [ref=f78e167]:
+                - generic [ref=f78e168]:
+                  - generic [ref=f78e169]: Sekretariat
+                  - paragraph [ref=f78e170]: Jadwal buka layanan administrasi.
+                - button "JSON (Lanjutan)" [ref=f78e171]
+              - paragraph [ref=f78e172]: Data ini memiliki struktur khusus. Gunakan tab JSON (Lanjutan) untuk mengubahnya.
+          - generic [ref=f78e173]:
+            - generic [ref=f78e174]:
+              - heading "Kontak" [level=2] [ref=f78e178]
+              - generic [ref=f78e179]: 1 item
+            - generic [ref=f78e181]:
+              - generic [ref=f78e182]:
+                - generic [ref=f78e183]:
+                  - generic [ref=f78e184]: Sekretariat
+                  - paragraph [ref=f78e185]: Nomor WhatsApp dan email pengurus.
+                - button "JSON (Lanjutan)" [ref=f78e186]
+              - generic [ref=f78e187]:
+                - generic [ref=f78e188]:
+                  - generic [ref=f78e189]: Wa
+                  - textbox [ref=f78e190]: +62 811-2222-3333
+                - generic [ref=f78e191]:
+                  - generic [ref=f78e192]: Email
+                  - textbox [ref=f78e193]: admin@rw04pabuaran.id
+                - generic [ref=f78e194]:
+                  - generic [ref=f78e195]: Wa Telp
+                  - textbox [ref=f78e196]: "628112223333"
+          - generic [ref=f78e197]:
+            - generic [ref=f78e198]:
+              - heading "Layanan" [level=2] [ref=f78e202]
+              - generic [ref=f78e203]: 3 item
+            - generic [ref=f78e204]:
+              - generic [ref=f78e205]:
+                - generic [ref=f78e206]:
+                  - generic [ref=f78e207]:
+                    - generic [ref=f78e208]: Administrasi
+                    - paragraph [ref=f78e209]: Surat dan persyaratan administrasi. Gunakan tab JSON untuk mengubah detailnya.
+                  - button "JSON (Lanjutan)" [ref=f78e210]
+                - paragraph [ref=f78e211]: Data ini memiliki struktur khusus. Gunakan tab JSON (Lanjutan) untuk mengubahnya.
+              - generic [ref=f78e212]:
+                - generic [ref=f78e213]:
+                  - generic [ref=f78e214]:
+                    - generic [ref=f78e215]: Alur
+                    - paragraph [ref=f78e216]: Tahapan pengurusan layanan. Gunakan tab JSON untuk mengubah detailnya.
+                  - button "JSON (Lanjutan)" [ref=f78e217]
+                - paragraph [ref=f78e218]: Data ini memiliki struktur khusus. Gunakan tab JSON (Lanjutan) untuk mengubahnya.
+              - generic [ref=f78e219]:
+                - generic [ref=f78e220]:
+                  - generic [ref=f78e221]:
+                    - generic [ref=f78e222]: Kartu
+                    - paragraph [ref=f78e223]: Daftar layanan warga. Gunakan tab JSON untuk mengubah detailnya.
+                  - button "JSON (Lanjutan)" [ref=f78e224]
+                - paragraph [ref=f78e225]: Data ini memiliki struktur khusus. Gunakan tab JSON (Lanjutan) untuk mengubahnya.
+          - generic [ref=f78e226]:
+            - generic [ref=f78e227]:
+              - heading "Profil" [level=2] [ref=f78e231]
+              - generic [ref=f78e232]: 4 item
+            - generic [ref=f78e233]:
+              - generic [ref=f78e234]:
+                - generic [ref=f78e235]:
+                  - generic [ref=f78e236]:
+                    - generic [ref=f78e237]: Umum
+                    - paragraph [ref=f78e238]: Periode kepengurusan dan jumlah RT/KK.
+                  - button "JSON (Lanjutan)" [ref=f78e239]
+                - generic [ref=f78e240]:
+                  - generic [ref=f78e241]:
+                    - generic [ref=f78e242]: Periode
+                    - textbox [ref=f78e243]: 2024 — 2027
+                  - generic [ref=f78e244]:
+                    - generic [ref=f78e245]: Jumlah KK
+                    - spinbutton [ref=f78e246]: "350"
+                  - generic [ref=f78e247]:
+                    - generic [ref=f78e248]: Jumlah RT
+                    - spinbutton [ref=f78e249]: "8"
+                  - generic [ref=f78e250]:
+                    - generic [ref=f78e251]: Kecamatan
+                    - textbox [ref=f78e252]: Karawaci
+                  - generic [ref=f78e253]:
+                    - generic [ref=f78e254]: Kelurahan
+                    - textbox [ref=f78e255]: Pabuaran
+              - generic [ref=f78e256]:
+                - generic [ref=f78e257]:
+                  - generic [ref=f78e258]:
+                    - generic [ref=f78e259]: Visi
+                    - paragraph [ref=f78e260]: Visi RW 04.
+                  - button "JSON (Lanjutan)" [ref=f78e261]
+                - textbox [ref=f78e262]: Terwujudnya lingkungan RW 04 yang Aman, Bersih, Guyub, dan Sejahtera berlandaskan nilai-nilai Ketuhanan dan Gotong Royong.
+              - generic [ref=f78e263]:
+                - generic [ref=f78e264]:
+                  - generic [ref=f78e265]:
+                    - generic [ref=f78e266]: Misi
+                    - paragraph [ref=f78e267]: Misi RW 04, tulis satu misi per baris.
+                  - button "JSON (Lanjutan)" [ref=f78e268]
+                - textbox [ref=f78e269]: Meningkatkan sistem keamanan lingkungan terpadu. Menggalakkan program kebersihan dan penghijauan. Mendorong partisipasi aktif warga dalam kegiatan sosial. Mengoptimalkan pelayanan administrasi warga berbasis digital.
+              - generic [ref=f78e270]:
+                - generic [ref=f78e271]:
+                  - generic [ref=f78e272]:
+                    - generic [ref=f78e273]: Sejarah
+                    - paragraph [ref=f78e274]: Sejarah RW 04, tulis satu paragraf per baris.
+                  - button "JSON (Lanjutan)" [ref=f78e275]
+                - textbox [ref=f78e276]: RW 04 Pabuaran, Kota Tangerang, dibentuk seiring dengan perkembangan pesat pemukiman di wilayah Kota Tangerang. Pada awalnya, wilayah ini hanya terdiri dari beberapa Rukun Tetangga yang terus berkembang hingga sekarang. Seiring bertambahnya jumlah penduduk, RW 04 kini menaungi 8 RT. Warga RW 04 dikenal dengan semangat kegotongroyongannya yang tinggi, multikultural, dan aktif dalam berbagai kegiatan sosial kemasyarakatan.
+          - generic [ref=f78e277]:
+            - generic [ref=f78e278]:
+              - heading "Program warga" [level=2] [ref=f78e282]
+              - generic [ref=f78e283]: 1 item
+            - generic [ref=f78e285]:
+              - generic [ref=f78e286]:
+                - generic [ref=f78e287]:
+                  - generic [ref=f78e288]: Daftar
+                  - paragraph [ref=f78e289]: Program KWT dan Bank Sampah. Gunakan tab JSON untuk mengubah detailnya.
+                - button "JSON (Lanjutan)" [ref=f78e290]
+              - paragraph [ref=f78e291]: Data ini memiliki struktur khusus. Gunakan tab JSON (Lanjutan) untuk mengubahnya.
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f78e82] [cursor=pointer]
+  - alert [ref=f78e292]

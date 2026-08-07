@@ -1,0 +1,195 @@
+- generic [active] [ref=f85e1]:
+  - generic [ref=f85e2]:
+    - navigation [ref=f85e3]:
+      - link "DARMA BAKTI RW 04 Kota Tangerang" [ref=f85e6] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f85e12]:
+          - generic [ref=f85e13]: DARMA BAKTI RW 04
+          - generic [ref=f85e14]: Kota Tangerang
+      - generic [ref=f85e16]:
+        - link "Beranda" [ref=f85e17] [cursor=pointer]:
+          - /url: /
+        - button "Profil" [ref=f85e22] [cursor=pointer]
+        - button "Layanan Publik" [ref=f85e29] [cursor=pointer]
+        - button "Informasi Publik" [ref=f85e36] [cursor=pointer]
+        - link "Hubungi Kami" [ref=f85e42] [cursor=pointer]:
+          - /url: /hubungi-kami
+    - main [ref=f85e45]:
+      - generic [ref=f85e46]:
+        - generic [ref=f85e49]:
+          - paragraph [ref=f85e50]: Layanan Warga
+          - heading "Administrasi Kependudukan" [level=1] [ref=f85e51]
+          - paragraph [ref=f85e52]: Alur, persyaratan, dan panduan pengurusan dokumen kependudukan untuk warga RW 04 Pabuaran, Kota Tangerang.
+        - generic [ref=f85e55]:
+          - heading "Alur Pengurusan" [level=2] [ref=f85e57]
+          - generic [ref=f85e58]:
+            - generic [ref=f85e60]:
+              - generic [ref=f85e61]: "01"
+              - generic [ref=f85e62]:
+                - heading "Siapkan Berkas" [level=3] [ref=f85e63]
+                - paragraph [ref=f85e64]: Siapkan fotokopi KK, KTP, dan dokumen pendukung lainnya sesuai layanan yang dibutuhkan.
+            - generic [ref=f85e65]:
+              - generic [ref=f85e66]: "02"
+              - generic [ref=f85e67]:
+                - heading "Lapor Ketua RT" [level=3] [ref=f85e68]
+                - paragraph [ref=f85e69]: Temui Ketua RT di wilayah domisili Anda untuk mendapatkan tanda tangan pengantar.
+            - generic [ref=f85e70]:
+              - generic [ref=f85e71]: "03"
+              - generic [ref=f85e72]:
+                - heading "Validasi RW" [level=3] [ref=f85e73]
+                - paragraph [ref=f85e74]: Bawa surat yang sudah ditandatangani RT ke Sekretariat RW 04 untuk validasi stempel.
+            - generic [ref=f85e75]:
+              - generic [ref=f85e76]: "04"
+              - generic [ref=f85e77]:
+                - heading "Lanjut ke Kelurahan" [level=3] [ref=f85e78]
+                - paragraph [ref=f85e79]: Bawa berkas lengkap ke Kantor Kelurahan Pabuaran untuk proses selanjutnya.
+        - generic [ref=f85e81]:
+          - generic [ref=f85e83]:
+            - generic [ref=f85e84]:
+              - generic [ref=f85e85]:
+                - paragraph [ref=f85e91]: Pengajuan Awal
+                - heading "Mulai Proses Administrasi Anda" [level=3] [ref=f85e92]
+                - paragraph [ref=f85e93]: Kini Anda bisa memulai pengajuan surat pengantar secara online sebelum mengambil dokumen fisik di pos RT/RW.
+              - generic [ref=f85e94]:
+                - paragraph [ref=f85e99]: Ambil di Sekretariat RW
+                - paragraph [ref=f85e104]: Proses 1x24 Jam
+            - generic [ref=f85e105]:
+              - generic [ref=f85e106]:
+                - generic [ref=f85e107]:
+                  - generic [ref=f85e108]: Nomor Induk Kependudukan (NIK)
+                  - textbox "Nomor Induk Kependudukan (NIK)" [ref=f85e109]:
+                    - /placeholder: 16 Digit NIK Anda
+                - generic [ref=f85e110]:
+                  - generic [ref=f85e111]: Nama Lengkap Pemohon
+                  - textbox "Nama Lengkap Pemohon" [ref=f85e112]:
+                    - /placeholder: Sesuai KTP
+              - generic [ref=f85e113]:
+                - generic [ref=f85e114]: Jenis Layanan
+                - combobox "Jenis Layanan" [ref=f85e115]:
+                  - generic [ref=f85e116]: Pilih jenis layanan...
+                  - img: ▼
+                - textbox [ref=f85e117]
+              - generic [ref=f85e118]:
+                - generic [ref=f85e119]: Keperluan
+                - textbox "Keperluan" [ref=f85e120]:
+                  - /placeholder: Jelaskan keperluan pembuatan surat secara singkat...
+              - button "Kirim Pengajuan" [ref=f85e121] [cursor=pointer]
+          - generic [ref=f85e123]:
+            - heading "Lacak Status Pengajuan" [level=3] [ref=f85e128]
+            - generic [ref=f85e129]:
+              - generic [ref=f85e130]:
+                - generic [ref=f85e131]: Kode Pengajuan
+                - textbox "Kode Pengajuan" [ref=f85e132]:
+                  - /placeholder: "Contoh: PRW-260806-AB12C"
+              - button "Cek Status" [disabled]
+        - generic [ref=f85e134]:
+          - heading "Syarat & Ketentuan Layanan" [level=2] [ref=f85e136]
+          - generic [ref=f85e137]:
+            - generic [ref=f85e138]:
+              - heading "Surat Pengantar RT/RW" [level=3] [ref=f85e145]
+              - generic [ref=f85e146]:
+                - generic [ref=f85e147]: Fotokopi Kartu Keluarga (KK)
+                - generic [ref=f85e152]: Fotokopi KTP Pemohon
+            - generic [ref=f85e157]:
+              - heading "Surat Domisili" [level=3] [ref=f85e166]
+              - generic [ref=f85e167]:
+                - generic [ref=f85e168]: Surat Pengantar RT/RW
+                - generic [ref=f85e173]: Fotokopi KTP
+                - generic [ref=f85e178]: Pas Foto 3x4 (2 lembar)
+            - generic [ref=f85e183]:
+              - heading "Pengurusan KTP/KK Baru" [level=3] [ref=f85e189]
+              - generic [ref=f85e190]:
+                - generic [ref=f85e191]: Surat Pengantar RT/RW
+                - generic [ref=f85e196]: KK Lama asli (untuk KK baru)
+                - generic [ref=f85e201]: Fotokopi Buku Nikah (jika ada)
+          - generic [ref=f85e210]:
+            - heading "Catatan Penting" [level=4] [ref=f85e211]
+            - paragraph [ref=f85e212]: Pengurusan surat pengantar TIDAK DIPUNGUT BIAYA. Warga dihimbau mengurus secara langsung demi kelancaran validasi data kependudukan.
+    - contentinfo [ref=f85e213]:
+      - generic [ref=f85e214]:
+        - generic [ref=f85e215]:
+          - link [ref=f85e217] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f85e223]: Layanan
+          - generic [ref=f85e227]: Administrasi kependudukan
+        - generic [ref=f85e229]:
+          - generic [ref=f85e230]:
+            - heading "Sekretariat RW 04" [level=4] [ref=f85e231]
+            - generic [ref=f85e232]:
+              - paragraph [ref=f85e233]: Gedung Serbaguna RW 04
+              - paragraph [ref=f85e234]: Jl. Pabuaran Raya No.1A
+              - paragraph [ref=f85e235]: Pabuaran, Karawaci
+              - paragraph [ref=f85e236]: Kota Tangerang 15114
+            - generic [ref=f85e237]:
+              - link [ref=f85e238] [cursor=pointer]:
+                - /url: mailto:info@rw04pabuaran.id
+              - link [ref=f85e242] [cursor=pointer]:
+                - /url: https://www.instagram.com
+              - link [ref=f85e246] [cursor=pointer]:
+                - /url: https://wa.me/6281200000000
+          - generic [ref=f85e249]:
+            - heading "Tentang Kami" [level=4] [ref=f85e250]
+            - generic [ref=f85e251]:
+              - link "Profil RW" [ref=f85e252] [cursor=pointer]:
+                - /url: /tentang-kami/profil
+              - link "Struktur RW" [ref=f85e253] [cursor=pointer]:
+                - /url: /tentang-kami/struktur-rw
+              - link "Pengurus RT" [ref=f85e254] [cursor=pointer]:
+                - /url: /tentang-kami/pengurus-rt
+              - link "Peta Wilayah" [ref=f85e255] [cursor=pointer]:
+                - /url: /tentang-kami/peta-wilayah
+          - generic [ref=f85e256]:
+            - heading "Layanan" [level=4] [ref=f85e257]
+            - generic [ref=f85e258]:
+              - link "Administrasi Kependudukan" [ref=f85e259] [cursor=pointer]:
+                - /url: /layanan/administrasi-kependudukan
+              - link "Keamanan Wilayah" [ref=f85e260] [cursor=pointer]:
+                - /url: /layanan/keamanan-wilayah
+              - link "Kebersihan Lingkungan" [ref=f85e261] [cursor=pointer]:
+                - /url: /layanan/kebersihan-lingkungan
+              - link "Layanan Posyandu" [ref=f85e262] [cursor=pointer]:
+                - /url: /layanan/posyandu
+          - generic [ref=f85e263]:
+            - heading "Informasi" [level=4] [ref=f85e264]
+            - generic [ref=f85e265]:
+              - link "Berita Terkini" [ref=f85e266] [cursor=pointer]:
+                - /url: /informasi/berita
+              - link "Statistik Warga" [ref=f85e267] [cursor=pointer]:
+                - /url: /informasi/statistik
+              - link "Program Warga" [ref=f85e268] [cursor=pointer]:
+                - /url: /informasi/program-warga
+              - link "Galeri Kegiatan" [ref=f85e269] [cursor=pointer]:
+                - /url: /informasi/galeri
+      - generic [ref=f85e272]:
+        - paragraph [ref=f85e273]: © 2026 Sekretariat RW 04 Pabuaran.
+        - paragraph [ref=f85e274]: Developed by KKN UYM Threeverse Bytewizard Team 2026.
+    - button "Buka Menu Aksesibilitas" [ref=f85e275] [cursor=pointer]:
+      - generic [ref=f85e282]: Bantuan
+    - generic [ref=f85e283]:
+      - generic [ref=f85e284]:
+        - heading "Aksesibilitas" [level=3] [ref=f85e285]
+        - button [ref=f85e292] [cursor=pointer]
+      - generic [ref=f85e296]:
+        - generic [ref=f85e297]:
+          - generic [ref=f85e298]: Pengaturan
+          - button "Reset Semua" [ref=f85e299] [cursor=pointer]
+        - generic [ref=f85e303]:
+          - generic [ref=f85e304]: Ukuran Teks
+          - generic [ref=f85e307]:
+            - button "-" [ref=f85e308] [cursor=pointer]
+            - generic [ref=f85e309]: 100%
+            - button "+" [ref=f85e310] [cursor=pointer]
+        - generic [ref=f85e311]:
+          - button "Kontras Tinggi" [ref=f85e312] [cursor=pointer]
+          - button "Monokrom" [ref=f85e318] [cursor=pointer]
+          - button "Sorot Tautan" [ref=f85e327] [cursor=pointer]
+          - button "Ramah Buta Warna" [ref=f85e333] [cursor=pointer]
+          - button "Font Disleksia" [ref=f85e339] [cursor=pointer]
+          - button "Hentikan Animasi" [ref=f85e344] [cursor=pointer]
+          - button "Baca Teks" [ref=f85e349] [cursor=pointer]
+          - button "Kursor Besar" [ref=f85e356] [cursor=pointer]
+          - button "Panduan Baca" [ref=f85e361] [cursor=pointer]
+          - button "Jarak Teks" [ref=f85e366] [cursor=pointer]
+          - button "Sembunyikan Gambar" [ref=f85e371] [cursor=pointer]
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f85e386] [cursor=pointer]

@@ -10,14 +10,28 @@ import {
   Link as LinkIcon,
   ChevronRight,
 } from "lucide-react";
-import { BERITA_DUMMY, DETAIL_MAP } from "@/lib/dummyData";
+import { api, resolveImageUrl } from "@/lib/api";
+import type { Berita, ApiMessage } from "@/lib/types";
 
-export default async function DetailBerita({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const berita = DETAIL_MAP[Number(id)];
+export const dynamic = "force-dynamic";
+
+export default async function DetailBerita({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+
+  const res = await api
+    .get<ApiMessage<Berita>>(`/berita/${encodeURIComponent(slug)}`)
+    .catch(() => null);
+
+  const berita = res?.data;
   if (!berita) notFound();
 
-  const beritaLain = BERITA_DUMMY.filter((b) => b.id !== berita.id).slice(0, 3);
+  const indeks = await api
+    .get<{ data: Berita[] }>(`/berita?per_page=9`)
+    .catch(() => ({ data: [] as Berita[] }));
+  const beritaLain = indeks.data.filter((b) => b.slug !== berita.slug).slice(0, 3);
+
+  const gambar = resolveImageUrl(berita.gambar);
+
   return (
     <div className="min-h-screen bg-white font-sans pb-20">
       {/* BREADCRUMB */}
@@ -60,22 +74,25 @@ export default async function DetailBerita({ params }: { params: Promise<{ id: s
                 </div>
                 <div>
                   <p className="text-sm font-bold text-slate-800">
-                    {berita.author}
+                    {berita.author ?? "Sekretariat RW 04"}
                   </p>
+                  <p className="text-xs text-gray-400">{berita.views} kali dibaca</p>
                 </div>
               </div>
             </div>
 
             {/* Featured Image */}
-            <div className="relative w-full aspect-video bg-gray-100">
-              <Image
-                src={berita.gambar}
-                alt={berita.judul}
-                fill
-                sizes="(max-width: 768px) 100vw, 66vw"
-                className="object-cover"
-              />
-            </div>
+            {gambar && (
+              <div className="relative w-full aspect-video bg-gray-100">
+                <Image
+                  src={gambar}
+                  alt={berita.judul}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 66vw"
+                  className="object-cover"
+                />
+              </div>
+            )}
 
             {/* Konten */}
             <div
@@ -100,7 +117,10 @@ export default async function DetailBerita({ params }: { params: Promise<{ id: s
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.733-8.835L1.254 2.25H8.08l4.253 5.622 5.912-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                 </button>
-                <button className="w-9 h-9 rounded-xs bg-white text-gray-600 flex items-center justify-center hover:bg-slate-50 transition-colors cursor-pointer shadow-sm border-none">
+                <button
+                  className="w-9 h-9 rounded-xs bg-white text-gray-600 flex items-center justify-center hover:bg-slate-50 transition-colors cursor-pointer shadow-sm border-none"
+                  type="button"
+                >
                   <LinkIcon size={16} />
                 </button>
               </div>
@@ -112,16 +132,14 @@ export default async function DetailBerita({ params }: { params: Promise<{ id: s
             <div className="bg-slate-50 rounded-xs p-6 shadow-sm sticky top-24">
               <div className="flex items-center gap-2.5 mb-5 pb-4 border-b border-slate-200">
                 <Tag size={16} className="text-brand-primary" />
-                <h3 className="text-base font-bold text-slate-800">
-                  Berita Lainnya
-                </h3>
+                <h3 className="text-base font-bold text-slate-800">Berita Lainnya</h3>
               </div>
 
               <div className="flex flex-col divide-y divide-slate-200">
                 {beritaLain.map((item) => (
                   <Link
                     key={item.id}
-                    href={`/informasi/berita/${item.id}`}
+                    href={`/informasi/berita/${item.slug}`}
                     className="group flex flex-col gap-1.5 py-4 first:pt-0 last:pb-0 no-underline"
                   >
                     <p className="text-sm font-semibold text-slate-700 group-hover:text-brand-primary transition-colors leading-snug line-clamp-2">

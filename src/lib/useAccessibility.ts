@@ -66,11 +66,28 @@ export function useAccessibility() {
     document.documentElement.style.filter = filter.trim();
   }, [state.grayscale, state.highContrast, state.colorBlind]);
 
+  const {
+    highlightLinks,
+    dyslexiaFont,
+    pauseAnimations,
+    largeCursor,
+    textSpacing,
+    hideImages,
+  } = state;
+
   useEffect(() => {
+    const flags = {
+      highlightLinks,
+      dyslexiaFont,
+      pauseAnimations,
+      largeCursor,
+      textSpacing,
+      hideImages,
+    } as Record<(typeof CLASS_TOGGLES)[number]["key"], boolean>;
     CLASS_TOGGLES.forEach(({ key, className }) =>
-      toggleBodyClass(state[key] as boolean, className)
+      toggleBodyClass(flags[key], className)
     );
-  }, [state.highlightLinks, state.dyslexiaFont, state.pauseAnimations, state.largeCursor, state.textSpacing, state.hideImages]);
+  }, [highlightLinks, dyslexiaFont, pauseAnimations, largeCursor, textSpacing, hideImages]);
 
   useEffect(() => {
     if (!state.readingGuide) return;

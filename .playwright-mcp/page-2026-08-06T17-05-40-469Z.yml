@@ -1,0 +1,169 @@
+- generic [active] [ref=f81e1]:
+  - generic [ref=f81e2]:
+    - navigation [ref=f81e3]:
+      - link "DARMA BAKTI RW 04 Kota Tangerang" [ref=f81e6] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f81e12]:
+          - generic [ref=f81e13]: DARMA BAKTI RW 04
+          - generic [ref=f81e14]: Kota Tangerang
+      - generic [ref=f81e16]:
+        - link "Beranda" [ref=f81e17] [cursor=pointer]:
+          - /url: /
+        - button "Profil" [ref=f81e22] [cursor=pointer]
+        - button "Layanan Publik" [ref=f81e29] [cursor=pointer]
+        - button "Informasi Publik" [ref=f81e36] [cursor=pointer]
+        - link "Hubungi Kami" [ref=f81e42] [cursor=pointer]:
+          - /url: /hubungi-kami
+    - main [ref=f81e45]:
+      - generic [ref=f81e46]:
+        - generic [ref=f81e49]:
+          - paragraph [ref=f81e50]: Informasi Publik
+          - heading "Program Warga RW 04" [level=1] [ref=f81e51]
+          - paragraph [ref=f81e52]: Informasi kegiatan KWT dan Bank Sampah sebagai ruang gotong royong warga RW 04 Pabuaran.
+        - generic [ref=f81e56]:
+          - generic [ref=f81e57]:
+            - article [ref=f81e58]:
+              - generic [ref=f81e59]:
+                - img "Kegiatan KWT" [ref=f81e60]
+                - generic [ref=f81e67]:
+                  - paragraph [ref=f81e68]: Kelompok Wanita Tani
+                  - heading "KWT" [level=2] [ref=f81e69]
+              - generic [ref=f81e70]:
+                - paragraph [ref=f81e71]: Mengelola kebun lingkungan, bibit tanaman, dan kegiatan pangan keluarga bersama ibu-ibu warga RW 04.
+                - generic [ref=f81e72]:
+                  - generic [ref=f81e73]: Kebun sayur bersama
+                  - generic [ref=f81e78]: Pembibitan tanaman
+                  - generic [ref=f81e83]: Edukasi pangan keluarga
+            - article [ref=f81e88]:
+              - generic [ref=f81e89]:
+                - img "Kegiatan Bank Sampah" [ref=f81e90]
+                - generic [ref=f81e101]:
+                  - paragraph [ref=f81e102]: Pengelolaan Sampah Terpilah
+                  - heading "Bank Sampah" [level=2] [ref=f81e103]
+              - generic [ref=f81e104]:
+                - paragraph [ref=f81e105]: Wadah setoran sampah bernilai guna agar lingkungan lebih bersih dan warga terbiasa memilah dari rumah.
+                - generic [ref=f81e106]:
+                  - generic [ref=f81e107]: Setor sampah anorganik
+                  - generic [ref=f81e112]: Pencatatan saldo warga
+                  - generic [ref=f81e117]: Edukasi pilah sampah
+          - generic [ref=f81e122]:
+            - generic [ref=f81e123]:
+              - generic [ref=f81e128]:
+                - paragraph [ref=f81e129]: Jadwal Rutin
+                - heading "Agenda Program" [level=3] [ref=f81e130]
+              - generic [ref=f81e131]:
+                - generic [ref=f81e132]:
+                  - generic [ref=f81e133]: KWT
+                  - generic [ref=f81e134]: Sabtu pekan ke-1
+                  - generic [ref=f81e137]: Kebun RW 04
+                - generic [ref=f81e141]:
+                  - generic [ref=f81e142]: Bank Sampah
+                  - generic [ref=f81e143]: Minggu pekan ke-2
+                  - generic [ref=f81e146]: Balai Warga
+            - complementary [ref=f81e150]:
+              - heading "Cara Ikut Program" [level=3] [ref=f81e156]
+              - generic [ref=f81e157]:
+                - generic [ref=f81e158]:
+                  - generic [ref=f81e159]: "1"
+                  - paragraph [ref=f81e160]: Hubungi kader atau Ketua RT setempat.
+                - generic [ref=f81e161]:
+                  - generic [ref=f81e162]: "2"
+                  - paragraph [ref=f81e163]: Isi data warga yang ingin ikut kegiatan.
+                - generic [ref=f81e164]:
+                  - generic [ref=f81e165]: "3"
+                  - paragraph [ref=f81e166]: Datang sesuai jadwal program di lokasi RW 04.
+          - generic [ref=f81e167]:
+            - generic [ref=f81e175]:
+              - heading "Koordinator Program Warga" [level=3] [ref=f81e176]
+              - paragraph [ref=f81e177]: Untuk pendaftaran dan informasi jadwal terbaru, warga dapat menghubungi kader melalui Ketua RT masing-masing.
+            - link "Hubungi Kader" [ref=f81e178] [cursor=pointer]:
+              - /url: https://wa.me/628112223333
+    - contentinfo [ref=f81e179]:
+      - generic [ref=f81e180]:
+        - generic [ref=f81e181]:
+          - link [ref=f81e183] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f81e189]: Informasi
+          - generic [ref=f81e193]: Program warga
+        - generic [ref=f81e195]:
+          - generic [ref=f81e196]:
+            - heading "Sekretariat RW 04" [level=4] [ref=f81e197]
+            - generic [ref=f81e198]:
+              - paragraph [ref=f81e199]: Gedung Serbaguna RW 04
+              - paragraph [ref=f81e200]: Jl. Pabuaran Raya No.1A
+              - paragraph [ref=f81e201]: Pabuaran, Karawaci
+              - paragraph [ref=f81e202]: Kota Tangerang 15114
+            - generic [ref=f81e203]:
+              - link [ref=f81e204] [cursor=pointer]:
+                - /url: mailto:info@rw04pabuaran.id
+              - link [ref=f81e208] [cursor=pointer]:
+                - /url: https://www.instagram.com
+              - link [ref=f81e212] [cursor=pointer]:
+                - /url: https://wa.me/6281200000000
+          - generic [ref=f81e215]:
+            - heading "Tentang Kami" [level=4] [ref=f81e216]
+            - generic [ref=f81e217]:
+              - link "Profil RW" [ref=f81e218] [cursor=pointer]:
+                - /url: /tentang-kami/profil
+              - link "Struktur RW" [ref=f81e219] [cursor=pointer]:
+                - /url: /tentang-kami/struktur-rw
+              - link "Pengurus RT" [ref=f81e220] [cursor=pointer]:
+                - /url: /tentang-kami/pengurus-rt
+              - link "Peta Wilayah" [ref=f81e221] [cursor=pointer]:
+                - /url: /tentang-kami/peta-wilayah
+          - generic [ref=f81e222]:
+            - heading "Layanan" [level=4] [ref=f81e223]
+            - generic [ref=f81e224]:
+              - link "Administrasi Kependudukan" [ref=f81e225] [cursor=pointer]:
+                - /url: /layanan/administrasi-kependudukan
+              - link "Keamanan Wilayah" [ref=f81e226] [cursor=pointer]:
+                - /url: /layanan/keamanan-wilayah
+              - link "Kebersihan Lingkungan" [ref=f81e227] [cursor=pointer]:
+                - /url: /layanan/kebersihan-lingkungan
+              - link "Layanan Posyandu" [ref=f81e228] [cursor=pointer]:
+                - /url: /layanan/posyandu
+          - generic [ref=f81e229]:
+            - heading "Informasi" [level=4] [ref=f81e230]
+            - generic [ref=f81e231]:
+              - link "Berita Terkini" [ref=f81e232] [cursor=pointer]:
+                - /url: /informasi/berita
+              - link "Statistik Warga" [ref=f81e233] [cursor=pointer]:
+                - /url: /informasi/statistik
+              - link "Program Warga" [ref=f81e234] [cursor=pointer]:
+                - /url: /informasi/program-warga
+              - link "Galeri Kegiatan" [ref=f81e235] [cursor=pointer]:
+                - /url: /informasi/galeri
+      - generic [ref=f81e238]:
+        - paragraph [ref=f81e239]: © 2026 Sekretariat RW 04 Pabuaran.
+        - paragraph [ref=f81e240]: Developed by KKN UYM Threeverse Bytewizard Team 2026.
+    - button "Buka Menu Aksesibilitas" [ref=f81e241] [cursor=pointer]:
+      - generic [ref=f81e248]: Bantuan
+    - generic [ref=f81e249]:
+      - generic [ref=f81e250]:
+        - heading "Aksesibilitas" [level=3] [ref=f81e251]
+        - button [ref=f81e258] [cursor=pointer]
+      - generic [ref=f81e262]:
+        - generic [ref=f81e263]:
+          - generic [ref=f81e264]: Pengaturan
+          - button "Reset Semua" [ref=f81e265] [cursor=pointer]
+        - generic [ref=f81e269]:
+          - generic [ref=f81e270]: Ukuran Teks
+          - generic [ref=f81e273]:
+            - button "-" [ref=f81e274] [cursor=pointer]
+            - generic [ref=f81e275]: 100%
+            - button "+" [ref=f81e276] [cursor=pointer]
+        - generic [ref=f81e277]:
+          - button "Kontras Tinggi" [ref=f81e278] [cursor=pointer]
+          - button "Monokrom" [ref=f81e284] [cursor=pointer]
+          - button "Sorot Tautan" [ref=f81e293] [cursor=pointer]
+          - button "Ramah Buta Warna" [ref=f81e299] [cursor=pointer]
+          - button "Font Disleksia" [ref=f81e305] [cursor=pointer]
+          - button "Hentikan Animasi" [ref=f81e310] [cursor=pointer]
+          - button "Baca Teks" [ref=f81e315] [cursor=pointer]
+          - button "Kursor Besar" [ref=f81e322] [cursor=pointer]
+          - button "Panduan Baca" [ref=f81e327] [cursor=pointer]
+          - button "Jarak Teks" [ref=f81e332] [cursor=pointer]
+          - button "Sembunyikan Gambar" [ref=f81e337] [cursor=pointer]
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f81e352] [cursor=pointer]
+  - alert [ref=f81e356]

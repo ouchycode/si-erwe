@@ -1,0 +1,68 @@
+- generic [active] [ref=f66e1]:
+  - generic [ref=f66e2]:
+    - complementary [ref=f66e3]:
+      - generic [ref=f66e4]:
+        - generic [ref=f66e5]:
+          - paragraph [ref=f66e10]: Admin RW 04
+          - button "Tutup menu samping" [ref=f66e11]
+        - navigation [ref=f66e15]:
+          - generic [ref=f66e16]:
+            - link "Dashboard" [ref=f66e17] [cursor=pointer]:
+              - /url: /admin/dashboard
+            - link "Berita" [ref=f66e23] [cursor=pointer]:
+              - /url: /admin/berita
+            - link "Galeri" [ref=f66e27] [cursor=pointer]:
+              - /url: /admin/galeri
+            - link "Pengurus RW" [ref=f66e33] [cursor=pointer]:
+              - /url: /admin/pengurus
+            - link "Pengurus RT" [ref=f66e39] [cursor=pointer]:
+              - /url: /admin/pengurus-rt
+            - link "Statistik" [ref=f66e43] [cursor=pointer]:
+              - /url: /admin/statistik
+            - link "Pengajuan" [ref=f66e46] [cursor=pointer]:
+              - /url: /admin/pengajuan
+            - link "Pesan" [ref=f66e50] [cursor=pointer]:
+              - /url: /admin/pesan
+            - link "Pengaturan" [ref=f66e53] [cursor=pointer]:
+              - /url: /admin/pengaturan
+        - generic [ref=f66e58]:
+          - generic [ref=f66e59]: AD
+          - paragraph [ref=f66e60]: Admin
+          - button "Keluar" [ref=f66e61]
+    - main [ref=f66e66]:
+      - generic [ref=f66e67]:
+        - generic [ref=f66e70]:
+          - heading "Kelola Pengajuan" [level=1] [ref=f66e71]
+          - paragraph [ref=f66e72]: Kelola dan perbarui status pengajuan warga.
+        - generic [ref=f66e73]:
+          - generic [ref=f66e74]:
+            - generic [ref=f66e75]:
+              - textbox "Cari nama, NIK, atau kode..." [ref=f66e80]
+              - button "Cari" [ref=f66e81]
+            - combobox [ref=f66e82]:
+              - generic [ref=f66e83]: all
+              - img: ▼
+            - textbox [ref=f66e84]: all
+          - table [ref=f66e87]:
+            - rowgroup [ref=f66e88]:
+              - row [ref=f66e89]:
+                - columnheader "Kode" [ref=f66e90]
+                - columnheader "Nama" [ref=f66e91]
+                - columnheader "NIK" [ref=f66e92]
+                - columnheader "Layanan" [ref=f66e93]
+                - columnheader "Status" [ref=f66e94]
+                - columnheader "Diajukan" [ref=f66e95]
+                - columnheader "Detail" [ref=f66e96]
+            - rowgroup [ref=f66e97]:
+              - row [ref=f66e98]:
+                - cell [ref=f66e99]
+              - row [ref=f66e101]:
+                - cell [ref=f66e102]
+              - row [ref=f66e104]:
+                - cell [ref=f66e105]
+              - row [ref=f66e107]:
+                - cell [ref=f66e108]
+              - row [ref=f66e110]:
+                - cell [ref=f66e111]
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f66e118] [cursor=pointer]

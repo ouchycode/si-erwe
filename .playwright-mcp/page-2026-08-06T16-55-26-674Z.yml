@@ -1,0 +1,38 @@
+- generic [active] [ref=f78e1]:
+  - generic [ref=f78e2]:
+    - complementary [ref=f78e3]:
+      - generic [ref=f78e4]:
+        - generic [ref=f78e5]:
+          - paragraph [ref=f78e10]: Admin RW 04
+          - button "Tutup menu samping" [ref=f78e11]
+        - navigation [ref=f78e15]:
+          - generic [ref=f78e16]:
+            - link "Dashboard" [ref=f78e17] [cursor=pointer]:
+              - /url: /admin/dashboard
+            - link "Berita" [ref=f78e23] [cursor=pointer]:
+              - /url: /admin/berita
+            - link "Galeri" [ref=f78e27] [cursor=pointer]:
+              - /url: /admin/galeri
+            - link "Pengurus RW" [ref=f78e33] [cursor=pointer]:
+              - /url: /admin/pengurus
+            - link "Pengurus RT" [ref=f78e39] [cursor=pointer]:
+              - /url: /admin/pengurus-rt
+            - link "Statistik" [ref=f78e43] [cursor=pointer]:
+              - /url: /admin/statistik
+            - link "Pengajuan" [ref=f78e46] [cursor=pointer]:
+              - /url: /admin/pengajuan
+            - link "Pesan" [ref=f78e50] [cursor=pointer]:
+              - /url: /admin/pesan
+            - link "Pengaturan" [ref=f78e53] [cursor=pointer]:
+              - /url: /admin/pengaturan
+        - generic [ref=f78e58]:
+          - generic [ref=f78e59]:
+            - generic [ref=f78e60]: AD
+            - paragraph [ref=f78e61]: Admin
+          - button "Keluar" [ref=f78e62]
+    - main [ref=f78e67]:
+      - generic [ref=f78e71]:
+        - heading "Pengaturan" [level=1] [ref=f78e72]
+        - paragraph [ref=f78e73]: Kelola konten pengaturan situs.
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f78e82] [cursor=pointer]

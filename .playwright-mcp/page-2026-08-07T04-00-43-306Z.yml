@@ -1,0 +1,19 @@
+- generic [active] [ref=f105e1]:
+  - generic [ref=f105e3]:
+    - generic [ref=f105e4]:
+      - heading "Admin RW 04" [level=1] [ref=f105e8]
+      - paragraph [ref=f105e9]: Masuk untuk mengelola konten situs Sekretariat RW 04
+    - generic [ref=f105e10]:
+      - generic [ref=f105e11]:
+        - generic [ref=f105e12]: Email / Username
+        - textbox "Email / Username" [ref=f105e13]:
+          - /placeholder: admin@example.com atau username
+      - generic [ref=f105e14]:
+        - generic [ref=f105e15]: Password
+        - generic [ref=f105e16]:
+          - textbox "Password" [ref=f105e17]:
+            - /placeholder: ••••••••
+          - button "Tampilkan password" [ref=f105e18]
+      - button "Masuk" [ref=f105e22]
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f105e28] [cursor=pointer]

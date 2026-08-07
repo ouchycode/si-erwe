@@ -1,6 +1,7 @@
-import { LAYANAN_DUMMY } from "@/lib/dummyData";
+import { api } from "@/lib/api";
 import { FileText, Shield, Trash2, Heart, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import type { Layanan } from "@/lib/types";
 
 const LAYANAN_ICON: Record<string, React.ElementType> = {
   "administrasi-kependudukan": FileText,
@@ -9,7 +10,11 @@ const LAYANAN_ICON: Record<string, React.ElementType> = {
   "posyandu": Heart,
 };
 
-export default function LayananSection() {
+export default async function LayananSection() {
+  const res = await api
+    .get<{ data: Layanan[] }>("/layanan")
+    .catch(() => ({ data: [] as Layanan[] }));
+  const layananList = res.data;
   return (
     <section className="bg-slate-50 py-20 border-b border-slate-100">
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
@@ -24,7 +29,7 @@ export default function LayananSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
-          {LAYANAN_DUMMY.map((item) => {
+          {layananList.map((item) => {
             const Icon = LAYANAN_ICON[item.slug] ?? FileText;
 
             return (

@@ -22,6 +22,7 @@ export default function KebersihanLingkungan() {
               src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=1200&auto=format&fit=crop" 
               alt="Petugas Kebersihan" 
               fill 
+              loading="eager"
               className="object-cover"
             />
             {/* Gradient overlay and title */}

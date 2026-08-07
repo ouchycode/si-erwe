@@ -1,0 +1,131 @@
+- generic [active] [ref=f109e1]:
+  - generic [ref=f109e2]:
+    - navigation [ref=f109e3]:
+      - generic [ref=f109e5]:
+        - link "DARMA BAKTI RW 04 Kota Tangerang" [ref=f109e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f109e12]:
+            - generic [ref=f109e13]: DARMA BAKTI RW 04
+            - generic [ref=f109e14]: Kota Tangerang
+        - button "Aktifkan mode gelap" [ref=f109e16] [cursor=pointer]
+      - generic [ref=f109e20]:
+        - link "Beranda" [ref=f109e21] [cursor=pointer]:
+          - /url: /
+        - button "Profil" [ref=f109e26] [cursor=pointer]
+        - button "Layanan Publik" [ref=f109e33] [cursor=pointer]
+        - button "Informasi Publik" [ref=f109e40] [cursor=pointer]
+        - link "Hubungi Kami" [ref=f109e46] [cursor=pointer]:
+          - /url: /hubungi-kami
+    - main [ref=f109e49]:
+      - generic [ref=f109e50]:
+        - generic [ref=f109e52]:
+          - generic [ref=f109e53]:
+            - paragraph [ref=f109e54]: Data Demografi
+            - heading "Statistik Warga RW 04" [level=1] [ref=f109e55]
+            - paragraph [ref=f109e56]: Visualisasi data kependudukan, demografi, dan persebaran warga di lingkungan RW 04 Pabuaran yang diperbarui secara berkala.
+          - generic [ref=f109e60]:
+            - combobox [ref=f109e61] [cursor=pointer]:
+              - option "2026" [selected]
+              - option "2025"
+            - combobox [ref=f109e62] [cursor=pointer]:
+              - option "Januari"
+              - option "Februari"
+              - option "Maret"
+              - option "April"
+              - option "Mei"
+              - option "Juni"
+              - option "Juli"
+              - option "Agustus" [selected]
+              - option "September"
+              - option "Oktober"
+              - option "November"
+              - option "Desember"
+        - paragraph [ref=f109e67]: Memuat data statistik...
+    - contentinfo [ref=f109e68]:
+      - generic [ref=f109e69]:
+        - generic [ref=f109e70]:
+          - link [ref=f109e72] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f109e78]: Informasi
+          - generic [ref=f109e82]: Statistik
+        - generic [ref=f109e84]:
+          - generic [ref=f109e85]:
+            - heading "Sekretariat RW 04" [level=4] [ref=f109e86]
+            - generic [ref=f109e87]:
+              - paragraph [ref=f109e88]: Gedung Serbaguna RW 04
+              - paragraph [ref=f109e89]: Jl. Pabuaran Raya No.1A
+              - paragraph [ref=f109e90]: Pabuaran, Karawaci
+              - paragraph [ref=f109e91]: Kota Tangerang 15114
+            - generic [ref=f109e92]:
+              - link [ref=f109e93] [cursor=pointer]:
+                - /url: mailto:info@rw04pabuaran.id
+              - link [ref=f109e97] [cursor=pointer]:
+                - /url: https://www.instagram.com
+              - link [ref=f109e101] [cursor=pointer]:
+                - /url: https://wa.me/6281200000000
+          - generic [ref=f109e104]:
+            - heading "Tentang Kami" [level=4] [ref=f109e105]
+            - generic [ref=f109e106]:
+              - link "Profil RW" [ref=f109e107] [cursor=pointer]:
+                - /url: /tentang-kami/profil
+              - link "Struktur RW" [ref=f109e108] [cursor=pointer]:
+                - /url: /tentang-kami/struktur-rw
+              - link "Pengurus RT" [ref=f109e109] [cursor=pointer]:
+                - /url: /tentang-kami/pengurus-rt
+              - link "Peta Wilayah" [ref=f109e110] [cursor=pointer]:
+                - /url: /tentang-kami/peta-wilayah
+          - generic [ref=f109e111]:
+            - heading "Layanan" [level=4] [ref=f109e112]
+            - generic [ref=f109e113]:
+              - link "Administrasi Kependudukan" [ref=f109e114] [cursor=pointer]:
+                - /url: /layanan/administrasi-kependudukan
+              - link "Keamanan Wilayah" [ref=f109e115] [cursor=pointer]:
+                - /url: /layanan/keamanan-wilayah
+              - link "Kebersihan Lingkungan" [ref=f109e116] [cursor=pointer]:
+                - /url: /layanan/kebersihan-lingkungan
+              - link "Layanan Posyandu" [ref=f109e117] [cursor=pointer]:
+                - /url: /layanan/posyandu
+          - generic [ref=f109e118]:
+            - heading "Informasi" [level=4] [ref=f109e119]
+            - generic [ref=f109e120]:
+              - link "Berita Terkini" [ref=f109e121] [cursor=pointer]:
+                - /url: /informasi/berita
+              - link "Statistik Warga" [ref=f109e122] [cursor=pointer]:
+                - /url: /informasi/statistik
+              - link "Program Warga" [ref=f109e123] [cursor=pointer]:
+                - /url: /informasi/program-warga
+              - link "Galeri Kegiatan" [ref=f109e124] [cursor=pointer]:
+                - /url: /informasi/galeri
+      - generic [ref=f109e127]:
+        - paragraph [ref=f109e128]: © 2026 Sekretariat RW 04 Pabuaran.
+        - paragraph [ref=f109e129]: Developed by KKN UYM Threeverse Bytewizard Team 2026.
+    - button "Buka Menu Aksesibilitas" [ref=f109e130] [cursor=pointer]:
+      - generic [ref=f109e137]: Bantuan
+    - generic [ref=f109e138]:
+      - generic [ref=f109e139]:
+        - heading "Aksesibilitas" [level=3] [ref=f109e140]
+        - button [ref=f109e147] [cursor=pointer]
+      - generic [ref=f109e151]:
+        - generic [ref=f109e152]:
+          - generic [ref=f109e153]: Pengaturan
+          - button "Reset Semua" [ref=f109e154] [cursor=pointer]
+        - generic [ref=f109e158]:
+          - generic [ref=f109e159]: Ukuran Teks
+          - generic [ref=f109e162]:
+            - button "-" [ref=f109e163] [cursor=pointer]
+            - generic [ref=f109e164]: 100%
+            - button "+" [ref=f109e165] [cursor=pointer]
+        - generic [ref=f109e166]:
+          - button "Kontras Tinggi" [ref=f109e167] [cursor=pointer]
+          - button "Monokrom" [ref=f109e173] [cursor=pointer]
+          - button "Sorot Tautan" [ref=f109e182] [cursor=pointer]
+          - button "Ramah Buta Warna" [ref=f109e188] [cursor=pointer]
+          - button "Font Disleksia" [ref=f109e194] [cursor=pointer]
+          - button "Hentikan Animasi" [ref=f109e199] [cursor=pointer]
+          - button "Baca Teks" [ref=f109e204] [cursor=pointer]
+          - button "Kursor Besar" [ref=f109e211] [cursor=pointer]
+          - button "Panduan Baca" [ref=f109e216] [cursor=pointer]
+          - button "Jarak Teks" [ref=f109e221] [cursor=pointer]
+          - button "Sembunyikan Gambar" [ref=f109e226] [cursor=pointer]
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f109e241] [cursor=pointer]

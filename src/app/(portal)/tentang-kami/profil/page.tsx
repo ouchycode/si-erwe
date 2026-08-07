@@ -2,10 +2,49 @@ import { Target, Eye, BookOpen, MapPin, Users, Home, Building2, Calendar } from 
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ContentSection } from "@/components/ui/ContentSection";
 import MapComponent from "@/components/MapComponent";
+import { getSettings, getGroup } from "@/lib/settings";
+import type { ProfilUmum } from "@/lib/types";
 
 export const metadata = { title: "Profil RW" };
 
-export default function ProfilRW() {
+const DEFAULT_UMUM: ProfilUmum = {
+  periode: "2024 — 2027",
+  jumlahKk: 350,
+  jumlahRt: 5,
+  kecamatan: "Karawaci",
+  kelurahan: "Pabuaran",
+};
+
+const DEFAULT_SEJARAH = [
+  "RW 04 Pabuaran, Kota Tangerang, dibentuk seiring dengan perkembangan pesat pemukiman di wilayah Kota Tangerang. Pada awalnya, wilayah ini hanya terdiri dari beberapa Rukun Tetangga yang terus berkembang hingga sekarang.",
+  "Seiring bertambahnya jumlah penduduk, RW 04 kini menaungi 5 RT. Warga RW 04 dikenal dengan semangat kegotongroyongannya yang tinggi, multikultural, dan aktif dalam berbagai kegiatan sosial kemasyarakatan.",
+];
+
+const DEFAULT_VISI =
+  "Terwujudnya lingkungan RW 04 yang Aman, Bersih, Guyub, dan Sejahtera berlandaskan nilai-nilai Ketuhanan dan Gotong Royong.";
+
+const DEFAULT_MISI = [
+  "Meningkatkan sistem keamanan lingkungan terpadu.",
+  "Menggalakkan program kebersihan dan penghijauan.",
+  "Mendorong partisipasi aktif warga dalam kegiatan sosial.",
+  "Mengoptimalkan pelayanan administrasi warga berbasis digital.",
+];
+
+export default async function ProfilRW() {
+  const settings = await getSettings();
+
+  const umum = (getGroup<ProfilUmum>(settings, "profil", "umum") ?? DEFAULT_UMUM) as ProfilUmum;
+  const visi = (getGroup<string>(settings, "profil", "visi") || DEFAULT_VISI) as string;
+  const misi = (getGroup<string[]>(settings, "profil", "misi") ?? DEFAULT_MISI) as string[];
+  const sejarah = (getGroup<string[]>(settings, "profil", "sejarah") ?? DEFAULT_SEJARAH) as string[];
+
+  const wilayah = [
+    { icon: Home, label: "Jumlah RT", value: `${umum.jumlahRt} Rukun Tetangga` },
+    { icon: Users, label: "Total Kepala Keluarga", value: `± ${umum.jumlahKk} KK` },
+    { icon: MapPin, label: "Kelurahan", value: umum.kelurahan },
+    { icon: Calendar, label: "Kecamatan", value: umum.kecamatan },
+  ];
+
   return (
     <div className="min-h-screen bg-white font-sans pb-20">
       <PageHeader
@@ -21,7 +60,7 @@ export default function ProfilRW() {
               <p className="text-xs text-white/40 font-bold uppercase tracking-widest mb-0.5">
                 Periode Kepengurusan
               </p>
-              <p className="text-2xl font-bold text-white">2024 — 2027</p>
+              <p className="text-2xl font-bold text-white">{umum.periode}</p>
             </div>
           </div>
         }
@@ -43,18 +82,9 @@ export default function ProfilRW() {
                     <h2 className="text-2xl md:text-3xl font-bold text-slate-800">Sejarah Singkat</h2>
                   </div>
                   <div className="text-lg text-gray-600 leading-relaxed flex flex-col gap-6">
-                    <p>
-                      RW 04 Pabuaran, Kota Tangerang, dibentuk seiring dengan
-                      perkembangan pesat pemukiman di wilayah Kota Tangerang. Pada
-                      awalnya, wilayah ini hanya terdiri dari beberapa Rukun Tetangga
-                      yang terus berkembang hingga sekarang.
-                    </p>
-                    <p>
-                      Seiring bertambahnya jumlah penduduk, RW 04 kini menaungi 8 RT.
-                      Warga RW 04 dikenal dengan semangat kegotongroyongannya yang
-                      tinggi, multikultural, dan aktif dalam berbagai kegiatan sosial
-                      kemasyarakatan.
-                    </p>
+                    {sejarah.map((p, i) => (
+                      <p key={i}>{p}</p>
+                    ))}
                   </div>
                 </div>
 
@@ -71,9 +101,7 @@ export default function ProfilRW() {
                       </h2>
                     </div>
                     <p className="text-lg text-white/90 leading-relaxed italic">
-                      &quot;Terwujudnya lingkungan RW 04 yang Aman, Bersih, Guyub, dan
-                      Sejahtera berlandaskan nilai-nilai Ketuhanan dan Gotong
-                      Royong.&quot;
+                      &quot;{visi}&quot;
                     </p>
                   </div>
 
@@ -88,17 +116,12 @@ export default function ProfilRW() {
                       </h2>
                     </div>
                     <ul className="flex flex-col gap-4 text-base text-gray-600 leading-relaxed">
-                      {[
-                        "Meningkatkan sistem keamanan lingkungan terpadu.",
-                        "Menggalakkan program kebersihan dan penghijauan.",
-                        "Mendorong partisipasi aktif warga dalam kegiatan sosial.",
-                        "Mengoptimalkan pelayanan administrasi warga berbasis digital.",
-                      ].map((misi, i) => (
+                      {misi.map((m, i) => (
                         <li key={i} className="flex items-start gap-3">
                           <span className="text-brand-primary font-bold mt-0.5 shrink-0 w-5">
                             {i + 1}.
                           </span>
-                          {misi}
+                          {m}
                         </li>
                       ))}
                     </ul>
@@ -114,14 +137,9 @@ export default function ProfilRW() {
                     Informasi Wilayah
                   </p>
                   <div className="flex flex-col gap-6">
-                    {[
-                      { icon: Home, label: "Jumlah RT", value: "8 Rukun Tetangga", badgeStyle: "bg-brand-primary/10 text-brand-primary" },
-                      { icon: Users, label: "Total Kepala Keluarga", value: "± 350 KK", badgeStyle: "bg-brand-primary/10 text-brand-primary" },
-                      { icon: MapPin, label: "Kelurahan", value: "Pabuaran", badgeStyle: "bg-brand-primary/10 text-brand-primary" },
-                      { icon: Calendar, label: "Kecamatan", value: "Karawaci", badgeStyle: "bg-brand-primary/10 text-brand-primary" },
-                    ].map(({ icon: Icon, label, value, badgeStyle}) => (
+                    {wilayah.map(({ icon: Icon, label, value }) => (
                       <div key={label} className="flex items-center gap-5">
-                        <div className={`w-12 h-12 rounded-xs flex items-center justify-center shrink-0 ${badgeStyle}`}>
+                        <div className={`w-12 h-12 rounded-xs flex items-center justify-center shrink-0 bg-brand-primary/10 text-brand-primary`}>
                           <Icon size={20} />
                         </div>
                         <div>

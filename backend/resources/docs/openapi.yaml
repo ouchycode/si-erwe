@@ -1,0 +1,1667 @@
+openapi: 3.0.3
+info:
+  title: API Sekretariat RW 04 Pabuaran
+  description: |
+    REST API untuk aplikasi Sistem Informasi Sekretariat RW 04 Pabuaran, Kecamatan Karawaci, Kota Tangerang.
+
+    - Base URL: `http://127.0.0.1:8000/api`
+    - Format: `application/json`, kecuali unggah berkas menggunakan `multipart/form-data`.
+    - Otentikasi: bearer token (`Authorization: Bearer {token}`) yang diperoleh dari `POST /auth/login`.
+    - Seluruh endpoint publik dibatasi oleh `throttle` (60 permintaan/menit). Endpoint `POST /pengajuan` dan `POST /pesan` dibatasi 10 permintaan/menit.
+  version: 1.0.0
+  contact:
+    name: Sekretariat RW 04 Pabuaran
+    email: admin@rw04pabuaran.id
+servers:
+  - url: http://127.0.0.1:8000/api
+    description: Lokal (Laravel artisan serve)
+tags:
+  - name: Autentikasi
+    description: Login, logout, dan informasi pengguna admin.
+  - name: Berita
+    description: Artikel dan pengumuman publik.
+  - name: Galeri
+    description: Galeri foto kegiatan.
+  - name: Pengurus
+    description: Struktur pengurus RW dan ketua RT.
+  - name: Layanan
+    description: Katalog layanan yang dikelola via pengaturan.
+  - name: Statistik
+    description: Data statistik warga per RT dan periode.
+  - name: Pengajuan
+    description: Pengajuan surat oleh warga beserta pelacakan status.
+  - name: Pesan
+    description: Kotak pesan masuk dari halaman Hubungi Kami.
+  - name: Pengaturan
+    description: Konten pengaturan situs (alamat, kontak, layanan, dll).
+  - name: Admin
+    description: Operasi CRUD administratif. Membutuhkan token + peran admin.
+
+paths:
+  /auth/login:
+    post:
+      tags: [Autentikasi]
+      summary: Login admin
+      description: Berhasil login akan mengembalikan token bearer untuk akses endpoint admin.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: admin@rw04pabuaran.id
+                password:
+                  type: string
+                  format: password
+                  example: admin123
+      responses:
+        '200':
+          description: Login berhasil.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    required: [token, user]
+                    properties:
+                      token:
+                        type: string
+                        description: Bearer token untuk otentikasi.
+                        example: 1|abcdefghijklmnopqrstuvwxyz
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          name:
+                            type: string
+                          email:
+                            type: string
+                          role:
+                            type: string
+                            example: admin
+        '401':
+          description: Email atau password salah.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '422':
+          description: Validasi gagal (email/password tidak diisi).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+
+  /auth/logout:
+    post:
+      tags: [Autentikasi]
+      summary: Logout admin
+      description: Mencabut token yang sedang dipakai.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Logout berhasil.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/me:
+    get:
+      tags: [Autentikasi]
+      summary: Informasi pengguna yang sedang login
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Data pengguna aktif.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /berita:
+    get:
+      tags: [Berita]
+      summary: Daftar berita terbit
+      parameters:
+        - name: q
+          in: query
+          description: Pencarian berdasarkan judul.
+          schema:
+            type: string
+        - name: kategori
+          in: query
+          description: Filter kategori.
+          schema:
+            type: string
+            enum: [Kegiatan, Kesehatan, Pengumuman, Lainnya]
+        - name: per_page
+          in: query
+          description: Jumlah item per halaman (default 9).
+          schema:
+            type: integer
+            default: 9
+      responses:
+        '200':
+          description: Daftar berita (paginated).
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Pagination'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Berita'
+
+  /berita/{slug}:
+    get:
+      tags: [Berita]
+      summary: Detail berita
+      description: Menambah jumlah dilihat (views) dan menyertakan kolom `konten`.
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detail berita.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/BeritaDetail'
+        '404':
+          description: Berita tidak ditemukan atau belum diterbitkan.
+
+  /galeri:
+    get:
+      tags: [Galeri]
+      summary: Daftar foto galeri terbit
+      parameters:
+        - name: kategori
+          in: query
+          schema:
+            type: string
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 30
+      responses:
+        '200':
+          description: Daftar foto galeri (paginated).
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Pagination'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Galeri'
+
+  /pengurus:
+    get:
+      tags: [Pengurus]
+      summary: Daftar pengurus RW aktif
+      responses:
+        '200':
+          description: Daftar pengurus.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pengurus'
+
+  /pengurus-rt:
+    get:
+      tags: [Pengurus]
+      summary: Daftar ketua RT aktif
+      responses:
+        '200':
+          description: Daftar ketua RT.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PengurusRt'
+
+  /layanan:
+    get:
+      tags: [Layanan]
+      summary: Katalog layanan
+      description: Daftar kartu layanan yang bersumber dari pengaturan `layanan.kartu`.
+      responses:
+        '200':
+          description: Daftar layanan.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        nama:
+                          type: string
+                        deskripsi:
+                          type: string
+                        slug:
+                          type: string
+
+  /statistik:
+    get:
+      tags: [Statistik]
+      summary: Data statistik warga
+      description: Mengembalikan seluruh kategori statistik untuk periode tertentu. Nilai kosong bernilai 0 dan `jumlah` dihitung dari penjumlahan kolom nilai.
+      parameters:
+        - name: periode
+          in: query
+          description: Periode dalam format `Y-m` (default bulan berjalan).
+          schema:
+            type: string
+            example: '2026-08'
+      responses:
+        '200':
+          description: Data statistik per kategori.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/StatistikKategori'
+                  periode:
+                    type: string
+                    example: '2026-08'
+
+  /settings:
+    get:
+      tags: [Pengaturan]
+      summary: Seluruh pengaturan publik
+      description: Pengaturan dikelompokkan per `group` dengan nilai JSON.
+      responses:
+        '200':
+          description: Objek pengaturan.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    example:
+                      alamat:
+                        sekretariat:
+                          full: Gedung Serbaguna RW 04
+                      layanan:
+                        administrasi: []
+
+  /pengajuan:
+    post:
+      tags: [Pengajuan]
+      summary: Ajukan pengajuan
+      description: Membuat pengajuan baru berstatus `menunggu` dan mengembalikan kode pelacakan.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [nik, nama, jenis_layanan, keperluan]
+              properties:
+                nik:
+                  type: string
+                  description: NIK 16 digit.
+                  example: '3204012345678901'
+                nama:
+                  type: string
+                  example: Budi Santoso
+                jenis_layanan:
+                  type: string
+                  enum: [surat-pengantar, surat-domisili, ktp-kk-baru, lainnya]
+                  example: surat-domisili
+                keperluan:
+                  type: string
+                  maxLength: 1000
+                  example: Pengurusan surat domisili untuk keperluan kerja.
+      responses:
+        '201':
+          description: Pengajuan berhasil dibuat.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/Pengajuan'
+        '422':
+          description: Validasi gagal.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+
+  /pengajuan/{kode}/status:
+    get:
+      tags: [Pengajuan]
+      summary: Lacak status pengajuan
+      parameters:
+        - name: kode
+          in: path
+          required: true
+          description: Kode pengajuan, contoh `PRW-260806-ABCDE`.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Status pengajuan.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Pengajuan'
+        '404':
+          description: Kode tidak ditemukan.
+
+  /pesan:
+    post:
+      tags: [Pesan]
+      summary: Kirim pesan dari Hubungi Kami
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [nama, kontak, kategori, pesan]
+              properties:
+                nama:
+                  type: string
+                  example: Siti
+                kontak:
+                  type: string
+                  description: Nomor telepon atau email.
+                  example: '0812345678'
+                kategori:
+                  type: string
+                  enum: [pertanyaan, laporan, saran, lainnya]
+                  example: saran
+                pesan:
+                  type: string
+                  maxLength: 2000
+                  example: Mohon jadwal posyandu diunggah rutin.
+      responses:
+        '201':
+          description: Pesan terkirim.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/Pesan'
+        '422':
+          description: Validasi gagal.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+
+  /admin/berita:
+    get:
+      tags: [Admin]
+      summary: Daftar berita (termasuk belum terbit)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          description: 'Filter status terbit (`1`/`0`).'
+          schema:
+            type: boolean
+        - name: q
+          in: query
+          schema:
+            type: string
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 15
+      responses:
+        '200':
+          description: Daftar berita (paginated).
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Pagination'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Berita'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      tags: [Admin]
+      summary: Buat berita baru
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [judul, kategori]
+              properties:
+                judul:
+                  type: string
+                  maxLength: 255
+                  example: Kerja Bakti Minggu Ini
+                ringkasan:
+                  type: string
+                konten:
+                  type: string
+                kategori:
+                  type: string
+                  enum: [Kegiatan, Kesehatan, Pengumuman, Lainnya]
+                gambar:
+                  type: string
+                  format: binary
+                  description: Maks. 3 MB (jpeg, png, jpg, webp).
+                author:
+                  type: string
+                is_published:
+                  type: string
+                  description: 'Gunakan `1` untuk terbit, `0` untuk draft.'
+                  example: '1'
+      responses:
+        '201':
+          description: Berita dibuat.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/Berita'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+
+  /admin/berita/{berita}:
+    parameters:
+      - name: berita
+        in: path
+        required: true
+        schema:
+          type: integer
+    put:
+      tags: [Admin]
+      summary: Perbarui berita
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                judul:
+                  type: string
+                ringkasan:
+                  type: string
+                konten:
+                  type: string
+                kategori:
+                  type: string
+                  enum: [Kegiatan, Kesehatan, Pengumuman, Lainnya]
+                gambar:
+                  type: string
+                  format: binary
+                author:
+                  type: string
+                is_published:
+                  type: string
+                  description: 'Gunakan `1` untuk terbit, `0` untuk draft.'
+      responses:
+        '200':
+          description: Berita diperbarui.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/Berita'
+        '404':
+          description: Berita tidak ditemukan.
+    delete:
+      tags: [Admin]
+      summary: Hapus berita
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Berita dihapus.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /admin/galeri:
+    get:
+      tags: [Admin]
+      summary: Daftar foto galeri (termasuk tidak terbit)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: boolean
+        - name: q
+          in: query
+          schema:
+            type: string
+        - name: kategori
+          in: query
+          schema:
+            type: string
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 15
+      responses:
+        '200':
+          description: Daftar galeri (paginated).
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Pagination'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Galeri'
+    post:
+      tags: [Admin]
+      summary: Tambah foto galeri
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [title, category, image]
+              properties:
+                title:
+                  type: string
+                  maxLength: 255
+                category:
+                  type: string
+                  maxLength: 100
+                  example: Kegiatan
+                image:
+                  type: string
+                  format: binary
+                  description: Wajib, maks. 5 MB (jpeg, png, jpg, webp).
+                is_published:
+                  type: string
+                  description: '`1` atau `0`. Default `1`.'
+                sort_order:
+                  type: string
+                  description: 'Urutan tampil, default `0`.'
+      responses:
+        '201':
+          description: Foto ditambahkan.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/Galeri'
+
+  /admin/galeri/{galeri}:
+    parameters:
+      - name: galeri
+        in: path
+        required: true
+        schema:
+          type: integer
+    put:
+      tags: [Admin]
+      summary: Perbarui foto galeri
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                category:
+                  type: string
+                image:
+                  type: string
+                  format: binary
+                is_published:
+                  type: string
+                sort_order:
+                  type: string
+      responses:
+        '200':
+          description: Foto diperbarui.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/Galeri'
+    delete:
+      tags: [Admin]
+      summary: Hapus foto galeri
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Foto dihapus.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /admin/pengurus:
+    get:
+      tags: [Admin]
+      summary: Daftar pengurus RW
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: boolean
+        - name: q
+          in: query
+          schema:
+            type: string
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 15
+      responses:
+        '200':
+          description: Daftar pengurus (paginated).
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Pagination'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Pengurus'
+    post:
+      tags: [Admin]
+      summary: Tambah pengurus
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [nama, jabatan, level]
+              properties:
+                nama:
+                  type: string
+                  maxLength: 255
+                jabatan:
+                  type: string
+                  maxLength: 255
+                  example: Ketua RW
+                level:
+                  type: string
+                  enum: [ketua, inti, koordinator]
+                deskripsi:
+                  type: string
+                  maxLength: 500
+                foto:
+                  type: string
+                  format: binary
+                  description: Maks. 3 MB.
+                telp:
+                  type: string
+                  maxLength: 30
+                urutan:
+                  type: string
+                  description: 'Urutan tampil, default `0`.'
+                is_active:
+                  type: string
+                  description: '`1` atau `0`. Default `1`.'
+      responses:
+        '201':
+          description: Pengurus ditambahkan.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/Pengurus'
+
+  /admin/pengurus/{pengurus}:
+    parameters:
+      - name: pengurus
+        in: path
+        required: true
+        schema:
+          type: integer
+    put:
+      tags: [Admin]
+      summary: Perbarui pengurus
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                nama:
+                  type: string
+                jabatan:
+                  type: string
+                level:
+                  type: string
+                  enum: [ketua, inti, koordinator]
+                deskripsi:
+                  type: string
+                foto:
+                  type: string
+                  format: binary
+                telp:
+                  type: string
+                urutan:
+                  type: string
+                is_active:
+                  type: string
+      responses:
+        '200':
+          description: Pengurus diperbarui.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/Pengurus'
+    delete:
+      tags: [Admin]
+      summary: Hapus pengurus
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Pengurus dihapus.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /admin/pengurus-rt:
+    get:
+      tags: [Admin]
+      summary: Daftar ketua RT
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: boolean
+        - name: q
+          in: query
+          description: Cari berdasarkan nama atau nomor RT.
+          schema:
+            type: string
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 15
+      responses:
+        '200':
+          description: Daftar ketua RT (paginated).
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Pagination'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/PengurusRt'
+    post:
+      tags: [Admin]
+      summary: Tambah ketua RT
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [rt_number, nama]
+              properties:
+                rt_number:
+                  type: string
+                  maxLength: 3
+                  example: '01'
+                nama:
+                  type: string
+                  maxLength: 255
+                blok:
+                  type: string
+                  maxLength: 100
+                  example: Blok A
+                telp:
+                  type: string
+                  maxLength: 30
+                foto:
+                  type: string
+                  format: binary
+                  description: Maks. 3 MB.
+                urutan:
+                  type: string
+                  description: 'Urutan tampil, default `0`.'
+                is_active:
+                  type: string
+                  description: '`1` atau `0`. Default `1`.'
+      responses:
+        '201':
+          description: Ketua RT ditambahkan.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/PengurusRt'
+
+  /admin/pengurus-rt/{pengurusRt}:
+    parameters:
+      - name: pengurusRt
+        in: path
+        required: true
+        schema:
+          type: integer
+    put:
+      tags: [Admin]
+      summary: Perbarui ketua RT
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                rt_number:
+                  type: string
+                nama:
+                  type: string
+                blok:
+                  type: string
+                telp:
+                  type: string
+                foto:
+                  type: string
+                  format: binary
+                urutan:
+                  type: string
+                is_active:
+                  type: string
+      responses:
+        '200':
+          description: Ketua RT diperbarui.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/PengurusRt'
+    delete:
+      tags: [Admin]
+      summary: Hapus ketua RT
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Ketua RT dihapus.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /admin/statistik:
+    get:
+      tags: [Admin]
+      summary: Data statistik (sama dengan endpoint publik)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: periode
+          in: query
+          schema:
+            type: string
+            example: '2026-08'
+      responses:
+        '200':
+          description: Data statistik.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/StatistikKategori'
+                  periode:
+                    type: string
+    post:
+      tags: [Admin]
+      summary: Simpan (upsert) data statistik per RT
+      description: Menyimpan atau memperbarui satu baris data berdasarkan `category_id`, `rt`, dan `periode`.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [category_id, rt, periode, values]
+              properties:
+                category_id:
+                  type: integer
+                  example: 1
+                rt:
+                  type: string
+                  example: '001'
+                periode:
+                  type: string
+                  format: Y-m
+                  example: '2026-08'
+                values:
+                  type: object
+                  description: 'Kolom nilai sesuai kategori (contoh kategori Penduduk: `lakiLaki`, `perempuan`).'
+                  additionalProperties:
+                    type: integer
+                    minimum: 0
+                  example:
+                    lakiLaki: 94
+                    perempuan: 65
+      responses:
+        '201':
+          description: Data disimpan.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: object
+        '422':
+          description: Validasi gagal.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+
+  /admin/statistik/{statistikDatum}:
+    parameters:
+      - name: statistikDatum
+        in: path
+        required: true
+        schema:
+          type: integer
+    delete:
+      tags: [Admin]
+      summary: Hapus satu baris data statistik
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Data dihapus.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /admin/pengajuan:
+    get:
+      tags: [Admin]
+      summary: Daftar pengajuan
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [menunggu, diproses, selesai, ditolak]
+        - name: q
+          in: query
+          description: Cari berdasarkan nama, NIK, atau kode.
+          schema:
+            type: string
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 15
+      responses:
+        '200':
+          description: Daftar pengajuan (paginated).
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Pagination'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Pengajuan'
+
+  /admin/pengajuan/{pengajuan}:
+    parameters:
+      - name: pengajuan
+        in: path
+        required: true
+        schema:
+          type: integer
+    put:
+      tags: [Admin]
+      summary: Perbarui status pengajuan
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [status]
+              properties:
+                status:
+                  type: string
+                  enum: [menunggu, diproses, selesai, ditolak]
+                  example: diproses
+                catatan:
+                  type: string
+                  maxLength: 1000
+                  example: Sedang diproses pengurus.
+      responses:
+        '200':
+          description: Status diperbarui.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/Pengajuan'
+
+  /admin/pengajuan/{pengajuan}/read:
+    parameters:
+      - name: pengajuan
+        in: path
+        required: true
+        schema:
+          type: integer
+    put:
+      tags: [Admin]
+      summary: Tandai pengajuan sudah dibaca
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Ditandai sudah dibaca.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /admin/pesan:
+    get:
+      tags: [Admin]
+      summary: Daftar pesan masuk
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          description: 'Filter status dibaca (`1`/`0`).'
+          schema:
+            type: boolean
+        - name: kategori
+          in: query
+          schema:
+            type: string
+            enum: [pertanyaan, laporan, saran, lainnya]
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 15
+      responses:
+        '200':
+          description: Daftar pesan (paginated).
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Pagination'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Pesan'
+
+  /admin/pesan/{pesan}/read:
+    parameters:
+      - name: pesan
+        in: path
+        required: true
+        schema:
+          type: integer
+    put:
+      tags: [Admin]
+      summary: Tandai pesan sudah dibaca
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Ditandai sudah dibaca.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /admin/pesan/{pesan}:
+    parameters:
+      - name: pesan
+        in: path
+        required: true
+        schema:
+          type: integer
+    delete:
+      tags: [Admin]
+      summary: Hapus pesan
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Pesan dihapus.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /admin/settings:
+    get:
+      tags: [Admin]
+      summary: Seluruh pengaturan (termasuk yang sensitif)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Objek pengaturan.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+    post:
+      tags: [Admin]
+      summary: Simpan (upsert) satu nilai pengaturan
+      description: Nilai `value` disimpan sebagai JSON.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [group, key, value]
+              properties:
+                group:
+                  type: string
+                  maxLength: 100
+                  example: kontak
+                key:
+                  type: string
+                  maxLength: 100
+                  example: sekretariat
+                value:
+                  description: 'Bebas (string, angka, boolean, objek, atau array JSON).'
+                  example:
+                    wa: '+62 811-2222-3333'
+                    email: admin@rw04pabuaran.id
+      responses:
+        '201':
+          description: Pengaturan disimpan.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: object
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: token
+      description: Token diperoleh dari `POST /auth/login`.
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+        active:
+          type: boolean
+    Berita:
+      type: object
+      properties:
+        id:
+          type: integer
+        judul:
+          type: string
+        slug:
+          type: string
+        ringkasan:
+          type: string
+          nullable: true
+        kategori:
+          type: string
+        gambar:
+          type: string
+          nullable: true
+          description: URL lengkap gambar.
+        author:
+          type: string
+          nullable: true
+        tanggal:
+          type: string
+          nullable: true
+          description: Tanggal terbit dalam format Indonesia.
+        views:
+          type: integer
+    BeritaDetail:
+      allOf:
+        - $ref: '#/components/schemas/Berita'
+        - type: object
+          properties:
+            konten:
+              type: string
+              nullable: true
+    Galeri:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        category:
+          type: string
+        image:
+          type: string
+        is_published:
+          type: boolean
+        sort_order:
+          type: integer
+    Pengurus:
+      type: object
+      properties:
+        id:
+          type: integer
+        nama:
+          type: string
+        jabatan:
+          type: string
+        level:
+          type: string
+          enum: [ketua, inti, koordinator]
+        deskripsi:
+          type: string
+          nullable: true
+        foto:
+          type: string
+          nullable: true
+        telp:
+          type: string
+          nullable: true
+        urutan:
+          type: integer
+        is_active:
+          type: boolean
+    PengurusRt:
+      type: object
+      properties:
+        id:
+          type: integer
+        rt:
+          type: string
+          description: Nomor RT.
+        ketua:
+          type: string
+        lokasi:
+          type: string
+          nullable: true
+        telp:
+          type: string
+          nullable: true
+        foto:
+          type: string
+          nullable: true
+        urutan:
+          type: integer
+        is_active:
+          type: boolean
+    Pengajuan:
+      type: object
+      properties:
+        id:
+          type: integer
+        kode:
+          type: string
+        nik:
+          type: string
+        nama:
+          type: string
+        jenis_layanan:
+          type: string
+          enum: [surat-pengantar, surat-domisili, ktp-kk-baru, lainnya]
+        keperluan:
+          type: string
+        status:
+          type: string
+          enum: [menunggu, diproses, selesai, ditolak]
+        catatan:
+          type: string
+          nullable: true
+        is_read:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+    Pesan:
+      type: object
+      properties:
+        id:
+          type: integer
+        nama:
+          type: string
+        kontak:
+          type: string
+        kategori:
+          type: string
+          enum: [pertanyaan, laporan, saran, lainnya]
+        pesan:
+          type: string
+        is_read:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+    StatistikKategori:
+      type: object
+      properties:
+        id:
+          type: integer
+        keys:
+          type: array
+          items:
+            type: string
+        columns:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              label:
+                type: string
+        chartTitle:
+          type: string
+        chartColors:
+          type: array
+          items:
+            type: string
+        totals:
+          type: object
+          additionalProperties:
+            type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              rt:
+                type: string
+            additionalProperties:
+              type: integer
+    Pagination:
+      type: object
+      properties:
+        current_page:
+          type: integer
+        first_page_url:
+          type: string
+        from:
+          type: integer
+          nullable: true
+        last_page:
+          type: integer
+        last_page_url:
+          type: string
+        next_page_url:
+          type: string
+          nullable: true
+        path:
+          type: string
+        per_page:
+          type: integer
+        prev_page_url:
+          type: string
+          nullable: true
+        to:
+          type: integer
+          nullable: true
+        total:
+          type: integer
+    ValidationError:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+  responses:
+    Unauthorized:
+      description: Token tidak valid atau tidak disertakan.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Unauthenticated.
+    Forbidden:
+      description: Token valid tetapi pengguna bukan admin.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+    ValidationError:
+      description: Validasi gagal (422).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'

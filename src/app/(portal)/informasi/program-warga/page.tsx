@@ -10,31 +10,36 @@ import {
 } from "lucide-react";
 import { ContentSection } from "@/components/ui/ContentSection";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { getSettings, getGroup } from "@/lib/settings";
+import type { ProgramWargaItem, SekretariatKontak } from "@/lib/types";
 
 export const metadata = { title: "Program Warga" };
 
-const PROGRAMS = [
-  {
-    icon: Sprout,
-    title: "KWT",
-    subtitle: "Kelompok Wanita Tani",
-    image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1200&auto=format&fit=crop",
-    desc: "Mengelola kebun lingkungan, bibit tanaman, dan kegiatan pangan keluarga bersama ibu-ibu warga RW 04.",
-    detail: ["Kebun sayur bersama", "Pembibitan tanaman", "Edukasi pangan keluarga"],
-  },
-  {
-    icon: Recycle,
-    title: "Bank Sampah",
-    subtitle: "Pengelolaan Sampah Terpilah",
-    image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=1200&auto=format&fit=crop",
-    desc: "Wadah setoran sampah bernilai guna agar lingkungan lebih bersih dan warga terbiasa memilah dari rumah.",
-    detail: ["Setor sampah anorganik", "Pencatatan saldo warga", "Edukasi pilah sampah"],
-  },
-];
+const PROGRAM_ICON: Record<string, React.ElementType> = {
+  KWT: Sprout,
+  "Bank Sampah": Recycle,
+};
 
-const JADWAL = [
-  { label: "KWT", waktu: "Sabtu pekan ke-1", tempat: "Kebun RW 04" },
-  { label: "Bank Sampah", waktu: "Minggu pekan ke-2", tempat: "Balai Warga" },
+const PROGRAM_IMAGES: Record<string, string> = {
+  KWT: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1200&auto=format&fit=crop",
+  "Bank Sampah": "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=1200&auto=format&fit=crop",
+};
+
+const DEFAULT_PROGRAMS: ProgramWargaItem[] = [
+  {
+    nama: "KWT",
+    subtitle: "Kelompok Wanita Tani",
+    deskripsi: "Mengelola kebun lingkungan, bibit tanaman, dan kegiatan pangan keluarga bersama ibu-ibu warga RW 04.",
+    detail: ["Kebun sayur bersama", "Pembibitan tanaman", "Edukasi pangan keluarga"],
+    jadwal: { waktu: "Sabtu pekan ke-1", tempat: "Kebun RW 04" },
+  },
+  {
+    nama: "Bank Sampah",
+    subtitle: "Pengelolaan Sampah Terpilah",
+    deskripsi: "Wadah setoran sampah bernilai guna agar lingkungan lebih bersih dan warga terbiasa memilah dari rumah.",
+    detail: ["Setor sampah anorganik", "Pencatatan saldo warga", "Edukasi pilah sampah"],
+    jadwal: { waktu: "Minggu pekan ke-2", tempat: "Balai Warga" },
+  },
 ];
 
 const ALUR = [
@@ -43,7 +48,30 @@ const ALUR = [
   "Datang sesuai jadwal program di lokasi RW 04.",
 ];
 
-export default function ProgramWarga() {
+export default async function ProgramWarga() {
+  const settings = await getSettings();
+
+  const daftar = getGroup<ProgramWargaItem[]>(settings, "program_warga", "daftar");
+  const programList = daftar && daftar.length > 0 ? daftar : DEFAULT_PROGRAMS;
+  const fallbackImages = Object.values(PROGRAM_IMAGES);
+  const programs = programList.map((p, i) => ({
+    icon: PROGRAM_ICON[p.nama] ?? Sprout,
+    title: p.nama,
+    subtitle: p.subtitle,
+    image: PROGRAM_IMAGES[p.nama] ?? fallbackImages[i % fallbackImages.length],
+    desc: p.deskripsi,
+    detail: p.detail,
+  }));
+
+  const JADWAL = programList.map((p) => ({
+    label: p.nama,
+    waktu: p.jadwal?.waktu ?? "-",
+    tempat: p.jadwal?.tempat ?? "-",
+  }));
+
+  const kontak = (settings?.kontak?.sekretariat as SekretariatKontak | undefined);
+  const waUrl = kontak?.waTelp ? `https://wa.me/${kontak.waTelp}` : "https://wa.me/62812XXXXXXX";
+
   return (
     <div className="min-h-screen bg-white font-sans pb-20">
       <PageHeader
@@ -56,7 +84,7 @@ export default function ProgramWarga() {
         <div className="flex flex-col gap-12">
             {/* Program Cards */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-4xl mx-auto">
-              {PROGRAMS.map(({ icon: Icon, title, subtitle, image, desc, detail }) => (
+              {programs.map(({ icon: Icon, title, subtitle, image, desc, detail }) => (
                 <article
                   key={title}
                   className="bg-slate-50 rounded-xs shadow-sm overflow-hidden flex flex-col"
@@ -164,7 +192,7 @@ export default function ProgramWarga() {
                 </div>
               </div>
               <a
-                href="https://wa.me/62812XXXXXXX"
+                href={waUrl}
                 className="inline-flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-primary-hover text-white text-sm font-bold px-5 py-3 rounded-xs no-underline transition-colors shrink-0"
               >
                 Hubungi Kader

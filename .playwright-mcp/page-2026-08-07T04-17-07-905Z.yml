@@ -1,0 +1,148 @@
+- generic [active] [ref=f114e1]:
+  - generic [ref=f114e2]:
+    - navigation [ref=f114e3]:
+      - generic [ref=f114e5]:
+        - link "DARMA BAKTI RW 04 Kota Tangerang" [ref=f114e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f114e12]:
+            - generic [ref=f114e13]: DARMA BAKTI RW 04
+            - generic [ref=f114e14]: Kota Tangerang
+        - button "Aktifkan mode gelap" [ref=f114e16] [cursor=pointer]
+      - generic [ref=f114e20]:
+        - link "Beranda" [ref=f114e21] [cursor=pointer]:
+          - /url: /
+        - button "Profil" [ref=f114e26] [cursor=pointer]
+        - button "Layanan Publik" [ref=f114e33] [cursor=pointer]
+        - button "Informasi Publik" [ref=f114e40] [cursor=pointer]
+        - link "Hubungi Kami" [ref=f114e46] [cursor=pointer]:
+          - /url: /hubungi-kami
+    - main [ref=f114e49]:
+      - generic [ref=f114e50]:
+        - generic [ref=f114e52]:
+          - generic [ref=f114e53]:
+            - heading "Struktur Organisasi RW 04" [level=1] [ref=f114e54]
+            - paragraph [ref=f114e55]: Sinergi pengurus dalam melayani dan mengelola lingkungan demi kenyamanan seluruh warga RW 04 Pabuaran periode 2024 — 2027.
+          - generic [ref=f114e62]:
+            - paragraph [ref=f114e63]: Total Pengurus
+            - paragraph [ref=f114e64]: 5 Orang
+        - generic [ref=f114e67]:
+          - paragraph [ref=f114e68]: Bagan Organisasi Periode 2024 — 2027
+          - generic [ref=f114e75]:
+            - img "Fadhila" [ref=f114e77]
+            - generic [ref=f114e78]: Bendahara
+            - generic [ref=f114e84]:
+              - paragraph [ref=f114e85]: Fadhila
+              - paragraph [ref=f114e86]: Pencatatan dan pengelolaan keuangan RW.
+          - generic [ref=f114e90]:
+            - generic [ref=f114e92]:
+              - img "Bagus" [ref=f114e94]
+              - generic [ref=f114e95]: Keamanan & Ketertiban
+              - generic [ref=f114e100]:
+                - paragraph [ref=f114e101]: Bagus
+                - paragraph [ref=f114e102]: Koordinasi siskamling dan keamanan lingkungan.
+            - generic [ref=f114e104]:
+              - img "Soviyulloh" [ref=f114e106]
+              - generic [ref=f114e107]: Kebersihan & Lingkungan
+              - generic [ref=f114e113]:
+                - paragraph [ref=f114e114]: Soviyulloh
+                - paragraph [ref=f114e115]: Program kebersihan dan kerja bakti warga.
+            - generic [ref=f114e117]:
+              - img "Umam" [ref=f114e119]
+              - generic [ref=f114e120]: Pembangunan & Sarana
+              - generic [ref=f114e128]:
+                - paragraph [ref=f114e129]: Umam
+                - paragraph [ref=f114e130]: Perawatan fasilitas dan infrastruktur wilayah.
+            - generic [ref=f114e132]:
+              - img "Devina" [ref=f114e134]
+              - generic [ref=f114e135]: Sosial & Kerohanian
+              - generic [ref=f114e140]:
+                - paragraph [ref=f114e141]: Devina
+                - paragraph [ref=f114e142]: Kegiatan sosial, keagamaan, dan santunan.
+    - contentinfo [ref=f114e143]:
+      - generic [ref=f114e144]:
+        - generic [ref=f114e145]:
+          - link [ref=f114e147] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f114e153]: Tentang kami
+          - generic [ref=f114e157]: Struktur rw
+        - generic [ref=f114e159]:
+          - generic [ref=f114e160]:
+            - heading "Sekretariat RW 04" [level=4] [ref=f114e161]
+            - generic [ref=f114e162]:
+              - paragraph [ref=f114e163]: Gedung Serbaguna RW 04
+              - paragraph [ref=f114e164]: Jl. Pabuaran Raya No.1A
+              - paragraph [ref=f114e165]: Pabuaran, Karawaci
+              - paragraph [ref=f114e166]: Kota Tangerang 15114
+            - generic [ref=f114e167]:
+              - link [ref=f114e168] [cursor=pointer]:
+                - /url: mailto:info@rw04pabuaran.id
+              - link [ref=f114e172] [cursor=pointer]:
+                - /url: https://www.instagram.com
+              - link [ref=f114e176] [cursor=pointer]:
+                - /url: https://wa.me/6281200000000
+          - generic [ref=f114e179]:
+            - heading "Tentang Kami" [level=4] [ref=f114e180]
+            - generic [ref=f114e181]:
+              - link "Profil RW" [ref=f114e182] [cursor=pointer]:
+                - /url: /tentang-kami/profil
+              - link "Struktur RW" [ref=f114e183] [cursor=pointer]:
+                - /url: /tentang-kami/struktur-rw
+              - link "Pengurus RT" [ref=f114e184] [cursor=pointer]:
+                - /url: /tentang-kami/pengurus-rt
+              - link "Peta Wilayah" [ref=f114e185] [cursor=pointer]:
+                - /url: /tentang-kami/peta-wilayah
+          - generic [ref=f114e186]:
+            - heading "Layanan" [level=4] [ref=f114e187]
+            - generic [ref=f114e188]:
+              - link "Administrasi Kependudukan" [ref=f114e189] [cursor=pointer]:
+                - /url: /layanan/administrasi-kependudukan
+              - link "Keamanan Wilayah" [ref=f114e190] [cursor=pointer]:
+                - /url: /layanan/keamanan-wilayah
+              - link "Kebersihan Lingkungan" [ref=f114e191] [cursor=pointer]:
+                - /url: /layanan/kebersihan-lingkungan
+              - link "Layanan Posyandu" [ref=f114e192] [cursor=pointer]:
+                - /url: /layanan/posyandu
+          - generic [ref=f114e193]:
+            - heading "Informasi" [level=4] [ref=f114e194]
+            - generic [ref=f114e195]:
+              - link "Berita Terkini" [ref=f114e196] [cursor=pointer]:
+                - /url: /informasi/berita
+              - link "Statistik Warga" [ref=f114e197] [cursor=pointer]:
+                - /url: /informasi/statistik
+              - link "Program Warga" [ref=f114e198] [cursor=pointer]:
+                - /url: /informasi/program-warga
+              - link "Galeri Kegiatan" [ref=f114e199] [cursor=pointer]:
+                - /url: /informasi/galeri
+      - generic [ref=f114e202]:
+        - paragraph [ref=f114e203]: © 2026 Sekretariat RW 04 Pabuaran.
+        - paragraph [ref=f114e204]: Developed by KKN UYM Threeverse Bytewizard Team 2026.
+    - button "Buka Menu Aksesibilitas" [ref=f114e205] [cursor=pointer]:
+      - generic [ref=f114e212]: Bantuan
+    - generic [ref=f114e213]:
+      - generic [ref=f114e214]:
+        - heading "Aksesibilitas" [level=3] [ref=f114e215]
+        - button [ref=f114e222] [cursor=pointer]
+      - generic [ref=f114e226]:
+        - generic [ref=f114e227]:
+          - generic [ref=f114e228]: Pengaturan
+          - button "Reset Semua" [ref=f114e229] [cursor=pointer]
+        - generic [ref=f114e233]:
+          - generic [ref=f114e234]: Ukuran Teks
+          - generic [ref=f114e237]:
+            - button "-" [ref=f114e238] [cursor=pointer]
+            - generic [ref=f114e239]: 100%
+            - button "+" [ref=f114e240] [cursor=pointer]
+        - generic [ref=f114e241]:
+          - button "Kontras Tinggi" [ref=f114e242] [cursor=pointer]
+          - button "Monokrom" [ref=f114e248] [cursor=pointer]
+          - button "Sorot Tautan" [ref=f114e257] [cursor=pointer]
+          - button "Ramah Buta Warna" [ref=f114e263] [cursor=pointer]
+          - button "Font Disleksia" [ref=f114e269] [cursor=pointer]
+          - button "Hentikan Animasi" [ref=f114e274] [cursor=pointer]
+          - button "Baca Teks" [ref=f114e279] [cursor=pointer]
+          - button "Kursor Besar" [ref=f114e286] [cursor=pointer]
+          - button "Panduan Baca" [ref=f114e291] [cursor=pointer]
+          - button "Jarak Teks" [ref=f114e296] [cursor=pointer]
+          - button "Sembunyikan Gambar" [ref=f114e301] [cursor=pointer]
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f114e316] [cursor=pointer]

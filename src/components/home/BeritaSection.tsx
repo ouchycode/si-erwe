@@ -1,9 +1,15 @@
-import { BERITA_DUMMY } from "@/lib/dummyData";
+import { api, resolveImageUrl } from "@/lib/api";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import type { Berita } from "@/lib/types";
 
-export default function BeritaSection() {
+export default async function BeritaSection() {
+  const res = await api
+    .get<{ data: Berita[] }>("/berita?per_page=3")
+    .catch(() => ({ data: [] as Berita[] }));
+  const beritaList = res.data;
+
   return (
     <section className="bg-white py-20 border-b border-slate-100">
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
@@ -29,19 +35,20 @@ export default function BeritaSection() {
 
         {/* 3 Column Minimal Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
-          {BERITA_DUMMY.slice(0, 3).map((news) => (
+          {beritaList.map((news) => (
             <Link
               key={news.id}
-              href={`/informasi/berita/${news.id}`}
+              href={`/informasi/berita/${news.slug}`}
               className="group bg-white rounded-xs border border-slate-100 outline-none transition-colors duration-300 overflow-hidden no-underline flex flex-col"
             >
               {/* Image Container */}
               <div className="relative w-full h-52 bg-gray-100 overflow-hidden border-b border-slate-100">
                 {news.gambar ? (
                   <Image
-                    src={news.gambar}
+                    src={resolveImageUrl(news.gambar) ?? ""}
                     alt={news.judul}
                     fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
                 ) : (
@@ -74,6 +81,12 @@ export default function BeritaSection() {
             </Link>
           ))}
         </div>
+
+        {beritaList.length === 0 && (
+          <div className="text-center py-10">
+            <p className="text-gray-400 font-medium">Belum ada berita.</p>
+          </div>
+        )}
 
         {/* Mobile Action Button */}
         <div className="text-center md:hidden">

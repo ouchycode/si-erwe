@@ -1,26 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ContentSection } from "@/components/ui/ContentSection";
 import { X, ZoomIn, Camera } from "lucide-react";
-
-// Dummy data for gallery
-const GALLERY_IMAGES = [
-  { id: 1, src: "https://images.unsplash.com/photo-1596423735880-5f2a689b903e?q=80&w=800&auto=format&fit=crop", title: "Kerja Bakti Membersihkan Selokan", category: "Lingkungan" },
-  { id: 2, src: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=800&auto=format&fit=crop", title: "Rapat Pengurus RW", category: "Administrasi" },
-  { id: 3, src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800&auto=format&fit=crop", title: "Lomba 17 Agustus", category: "Acara" },
-  { id: 4, src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop", title: "Bazaar Warga", category: "Acara" },
-  { id: 5, src: "https://images.unsplash.com/photo-1603513492128-ba7bc9b3e143?q=80&w=800&auto=format&fit=crop", title: "Posyandu Balita", category: "Kesehatan" },
-  { id: 6, src: "https://images.unsplash.com/photo-1599839619722-39751411ea63?q=80&w=800&auto=format&fit=crop", title: "Siskamling Malam", category: "Keamanan" },
-  { id: 7, src: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=800&auto=format&fit=crop", title: "Penyuluhan Kesehatan", category: "Kesehatan" },
-  { id: 8, src: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop", title: "Rapat Karang Taruna", category: "Pemuda" },
-  { id: 9, src: "https://images.unsplash.com/photo-1526399232581-2ab5608b6336?q=80&w=800&auto=format&fit=crop", title: "Penanaman Pohon", category: "Lingkungan" },
-];
+import { api, resolveImageUrl } from "@/lib/api";
+import type { GaleriItem, Paginated } from "@/lib/types";
 
 export default function GaleriPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [items, setItems] = useState<GaleriItem[] | null>(null);
+  const [total, setTotal] = useState(0);
+  const [kategori, setKategori] = useState<string | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    const params = new URLSearchParams({ per_page: "60" });
+    if (kategori) params.set("kategori", kategori);
+
+    api
+      .get<Paginated<GaleriItem>>(`/galeri?${params.toString()}`)
+      .then((res) => {
+        if (!active) return;
+        setItems(res.data);
+        setTotal(res.meta.total);
+      })
+      .catch(() => {
+        if (!active) return;
+        setItems([]);
+        setTotal(0);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [kategori]);
+
+  const loading = items === null;
+  const kategoris = Array.from(new Set((items ?? []).map((i) => i.category).filter(Boolean)));
 
   return (
     <div className="min-h-screen bg-white font-sans pb-20">
@@ -36,7 +54,7 @@ export default function GaleriPage() {
                 Total Album
               </p>
               <p className="text-sm font-bold text-white leading-none">
-                {GALLERY_IMAGES.length} Foto Tersedia
+                {total} Foto Tersedia
               </p>
             </div>
           </div>
@@ -44,24 +62,58 @@ export default function GaleriPage() {
       />
 
       <ContentSection className="min-h-[500px]">
-            
-            {/* Masonry Grid */}
-            <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 gap-6 space-y-6">
-              {GALLERY_IMAGES.map((item) => (
-                <div 
-                  key={item.id} 
+        <div className="flex flex-wrap gap-2 mb-8">
+          <button
+            onClick={() => setKategori(null)}
+            className={`px-4 py-2 text-xs font-semibold transition-all rounded-xs cursor-pointer border-none ${
+              !kategori
+                ? "text-brand-primary bg-brand-light shadow-sm"
+                : "text-gray-500 hover:text-gray-700 bg-slate-50 shadow-sm"
+            }`}
+          >
+            Semua
+          </button>
+          {kategoris.map((k) => (
+            <button
+              key={k}
+              onClick={() => setKategori(k)}
+              className={`px-4 py-2 text-xs font-semibold transition-all rounded-xs cursor-pointer border-none ${
+                kategori === k
+                  ? "text-brand-primary bg-brand-light shadow-sm"
+                  : "text-gray-500 hover:text-gray-700 bg-slate-50 shadow-sm"
+              }`}
+            >
+              {k}
+            </button>
+          ))}
+        </div>
+
+        {loading ? (
+          <div className="text-center py-20">
+            <p className="text-gray-400 font-medium">Memuat galeri...</p>
+          </div>
+        ) : items.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="text-gray-400 font-medium">Belum ada foto untuk kategori ini.</p>
+          </div>
+        ) : (
+          <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 gap-6 space-y-6">
+            {items.map((item) => {
+              const src = resolveImageUrl(item.image) ?? "";
+              return (
+                <div
+                  key={item.id}
                   className="relative group overflow-hidden rounded-xs bg-gray-100 break-inside-avoid cursor-pointer shadow-sm hover:shadow-md transition-shadow"
-                  onClick={() => setSelectedImage(item.src)}
+                  onClick={() => setSelectedImage(src)}
                 >
                   <Image
-                    src={item.src}
+                    src={src}
                     alt={item.title}
                     width={800}
                     height={600}
                     className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  
-                  {/* Overlay Hover */}
+
                   <div className="absolute inset-0 bg-brand-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-4">
                     <ZoomIn size={32} className="mb-3 text-white/80 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" />
                     <span className="text-[10px] font-bold uppercase tracking-widest text-white/70 mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
@@ -72,25 +124,25 @@ export default function GaleriPage() {
                     </h3>
                   </div>
                 </div>
-              ))}
-            </div>
-
+              );
+            })}
+          </div>
+        )}
       </ContentSection>
 
-      {/* Lightbox Modal */}
       {selectedImage && (
-        <div 
+        <div
           className="fixed inset-0 z-[99999] bg-black/95 flex items-center justify-center p-4 animate-in fade-in duration-200"
           onClick={() => setSelectedImage(null)}
         >
-          <button 
+          <button
             className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors bg-transparent border-none cursor-pointer p-2"
             onClick={() => setSelectedImage(null)}
           >
             <X size={32} />
           </button>
-          
-          <div 
+
+          <div
             className="relative w-full max-w-5xl max-h-[90vh] flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >

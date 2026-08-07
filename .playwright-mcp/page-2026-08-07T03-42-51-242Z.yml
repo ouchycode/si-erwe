@@ -1,0 +1,150 @@
+- generic [ref=f99e1]:
+  - generic [ref=f99e2]:
+    - navigation [ref=f99e3]:
+      - generic [ref=f99e5]:
+        - link "DARMA BAKTI RW 04 Kota Tangerang" [ref=f99e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f99e12]:
+            - generic [ref=f99e13]: DARMA BAKTI RW 04
+            - generic [ref=f99e14]: Kota Tangerang
+        - button "Toggle menu" [active] [ref=f99e15] [cursor=pointer]
+      - generic [ref=f99e276]:
+        - link "Beranda" [ref=f99e277] [cursor=pointer]:
+          - /url: /
+        - button "Profil" [ref=f99e282] [cursor=pointer]
+        - button "Layanan Publik" [ref=f99e290] [cursor=pointer]
+        - button "Informasi Publik" [ref=f99e298] [cursor=pointer]
+        - link "Hubungi Kami" [ref=f99e305] [cursor=pointer]:
+          - /url: /hubungi-kami
+    - main [ref=f99e17]:
+      - generic [ref=f99e18]:
+        - generic [ref=f99e19]:
+          - img "Lingkungan RW 04" [ref=f99e21]
+          - generic [ref=f99e24]:
+            - heading "Sekretariat RW 04, rapi dan mudah diakses." [level=1] [ref=f99e25]
+            - paragraph [ref=f99e26]: Satu pintu untuk informasi warga, layanan administrasi, dan komunikasi lingkungan yang lebih tertib.
+            - generic [ref=f99e27]:
+              - link "Administrasi Kependudukan" [ref=f99e28] [cursor=pointer]:
+                - /url: /layanan/administrasi-kependudukan
+              - link "Hubungi Kami" [ref=f99e31] [cursor=pointer]:
+                - /url: /hubungi-kami
+        - generic [ref=f99e33]:
+          - generic [ref=f99e34]:
+            - heading "Layanan Publik" [level=2] [ref=f99e35]
+            - paragraph [ref=f99e36]: Prosedur layanan administrasi maupun lingkungan terpadu untuk memudahkan warga.
+          - generic [ref=f99e37]:
+            - link [ref=f99e38] [cursor=pointer]:
+              - /url: /layanan/administrasi-kependudukan
+              - heading "Administrasi Kependudukan" [level=3] [ref=f99e43]
+              - paragraph [ref=f99e44]: Layanan pengurusan surat pengantar RT/RW untuk pembuatan KK, KTP, Akta Kelahiran, dan surat domisili.
+              - generic [ref=f99e45]: Akses Layanan
+            - link [ref=f99e48] [cursor=pointer]:
+              - /url: /layanan/keamanan-wilayah
+              - heading "Keamanan Wilayah" [level=3] [ref=f99e52]
+              - paragraph [ref=f99e53]: Sistem pelaporan tamu 1x24 jam, jadwal petugas Siskamling, dan koordinasi keamanan lingkungan.
+              - generic [ref=f99e54]: Akses Layanan
+            - link [ref=f99e57] [cursor=pointer]:
+              - /url: /layanan/kebersihan-lingkungan
+              - heading "Kebersihan Lingkungan" [level=3] [ref=f99e62]
+              - paragraph [ref=f99e63]: Informasi jadwal pengangkutan sampah mingguan, pengelolaan limbah rumah tangga, dan kerja bakti.
+              - generic [ref=f99e64]: Akses Layanan
+            - link [ref=f99e67] [cursor=pointer]:
+              - /url: /layanan/posyandu
+              - heading "Layanan Posyandu" [level=3] [ref=f99e71]
+              - paragraph [ref=f99e72]: Jadwal posyandu balita dan lansia, imunisasi, serta pelayanan kesehatan dasar gratis.
+              - generic [ref=f99e73]: Akses Layanan
+        - generic [ref=f99e77]:
+          - generic [ref=f99e79]:
+            - heading "Kabar Lingkungan" [level=2] [ref=f99e80]
+            - paragraph [ref=f99e81]: Agenda kegiatan dan pengumuman terbaru dari pengurus lingkungan Rukun Warga 04.
+          - generic [ref=f99e82]:
+            - 'link "Musyawarah Warga: Perbaikan Drainase Blok A Kegiatan 5 Agustus 2026 Musyawarah Warga: Perbaikan Drainase Blok A Pertemuan warga membahas anggaran dan teknis perbaikan saluran air untuk mengantisipasi musim hujan." [ref=f99e83] [cursor=pointer]':
+              - /url: /informasi/berita/musyawarah-warga-perbaikan-drainase-blok-a-202608061422480
+              - generic [ref=f99e84]:
+                - 'img "Musyawarah Warga: Perbaikan Drainase Blok A" [ref=f99e85]'
+                - generic [ref=f99e86]: Kegiatan
+              - generic [ref=f99e87]:
+                - generic [ref=f99e88]: 5 Agustus 2026
+                - 'heading "Musyawarah Warga: Perbaikan Drainase Blok A" [level=3] [ref=f99e89]'
+                - paragraph [ref=f99e90]: Pertemuan warga membahas anggaran dan teknis perbaikan saluran air untuk mengantisipasi musim hujan.
+            - link "Vaksinasi Booster Gratis di Balai Warga Kesehatan 2 Agustus 2026 Vaksinasi Booster Gratis di Balai Warga Bekerjasama dengan Puskesmas Pabuaran, RW 04 menyelenggarakan vaksinasi gratis akhir pekan ini." [ref=f99e91] [cursor=pointer]:
+              - /url: /informasi/berita/vaksinasi-booster-gratis-di-balai-warga-202608061422481
+              - generic [ref=f99e92]:
+                - img "Vaksinasi Booster Gratis di Balai Warga" [ref=f99e93]
+                - generic [ref=f99e94]: Kesehatan
+              - generic [ref=f99e95]:
+                - generic [ref=f99e96]: 2 Agustus 2026
+                - heading "Vaksinasi Booster Gratis di Balai Warga" [level=3] [ref=f99e97]
+                - paragraph [ref=f99e98]: Bekerjasama dengan Puskesmas Pabuaran, RW 04 menyelenggarakan vaksinasi gratis akhir pekan ini.
+            - link "Kerja Bakti Serentak Seluruh RT Kegiatan 30 Juli 2026 Kerja Bakti Serentak Seluruh RT Seluruh warga RW 04 bergotong royong membersihkan lingkungan dalam rangka menyambut bulan kebersihan." [ref=f99e99] [cursor=pointer]:
+              - /url: /informasi/berita/kerja-bakti-serentak-seluruh-rt-202608061422482
+              - generic [ref=f99e100]:
+                - img "Kerja Bakti Serentak Seluruh RT" [ref=f99e101]
+                - generic [ref=f99e102]: Kegiatan
+              - generic [ref=f99e103]:
+                - generic [ref=f99e104]: 30 Juli 2026
+                - heading "Kerja Bakti Serentak Seluruh RT" [level=3] [ref=f99e105]
+                - paragraph [ref=f99e106]: Seluruh warga RW 04 bergotong royong membersihkan lingkungan dalam rangka menyambut bulan kebersihan.
+          - link "Lihat Indeks" [ref=f99e108] [cursor=pointer]:
+            - /url: /informasi/berita
+        - generic [ref=f99e113]:
+          - generic [ref=f99e114]:
+            - paragraph [ref=f99e115]: Butuh Bantuan?
+            - heading "Ada pertanyaan atau butuh layanan administrasi?" [level=2] [ref=f99e116]
+            - paragraph [ref=f99e117]: Hubungi sekretariat RW 04 atau kunjungi halaman layanan untuk informasi prosedur lengkap.
+          - generic [ref=f99e118]:
+            - link "Hubungi Kami" [ref=f99e119] [cursor=pointer]:
+              - /url: /hubungi-kami
+            - link "Layanan Administrasi" [ref=f99e122] [cursor=pointer]:
+              - /url: /layanan/administrasi-kependudukan
+    - contentinfo [ref=f99e125]:
+      - generic [ref=f99e126]:
+        - link [ref=f99e129] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f99e133]:
+          - heading "Sekretariat RW 04" [level=4] [ref=f99e134]
+          - generic [ref=f99e135]:
+            - paragraph [ref=f99e136]: Jl. Pabuaran Raya No.1A
+            - paragraph [ref=f99e137]: Pabuaran, Karawaci
+            - paragraph [ref=f99e138]: Kota Tangerang 15114
+          - generic [ref=f99e139]:
+            - link [ref=f99e140] [cursor=pointer]:
+              - /url: mailto:info@rw04pabuaran.id
+            - link [ref=f99e144] [cursor=pointer]:
+              - /url: https://www.instagram.com
+            - link [ref=f99e148] [cursor=pointer]:
+              - /url: https://wa.me/6281200000000
+      - generic [ref=f99e153]:
+        - paragraph [ref=f99e154]: © 2026 Sekretariat RW 04 Pabuaran.
+        - paragraph [ref=f99e155]: Developed by KKN UYM Threeverse Bytewizard Team 2026.
+    - button "Buka Menu Aksesibilitas" [ref=f99e156] [cursor=pointer]:
+      - generic [ref=f99e163]: Bantuan
+    - generic [ref=f99e164]:
+      - generic [ref=f99e165]:
+        - heading "Aksesibilitas" [level=3] [ref=f99e166]
+        - button [ref=f99e173] [cursor=pointer]
+      - generic [ref=f99e177]:
+        - generic [ref=f99e178]:
+          - generic [ref=f99e179]: Pengaturan
+          - button "Reset Semua" [ref=f99e180] [cursor=pointer]
+        - generic [ref=f99e184]:
+          - generic [ref=f99e185]: Ukuran Teks
+          - generic [ref=f99e188]:
+            - button "-" [ref=f99e189] [cursor=pointer]
+            - generic [ref=f99e190]: 100%
+            - button "+" [ref=f99e191] [cursor=pointer]
+        - generic [ref=f99e192]:
+          - button "Kontras Tinggi" [ref=f99e193] [cursor=pointer]
+          - button "Monokrom" [ref=f99e199] [cursor=pointer]
+          - button "Sorot Tautan" [ref=f99e208] [cursor=pointer]
+          - button "Ramah Buta Warna" [ref=f99e214] [cursor=pointer]
+          - button "Font Disleksia" [ref=f99e220] [cursor=pointer]
+          - button "Hentikan Animasi" [ref=f99e225] [cursor=pointer]
+          - button "Baca Teks" [ref=f99e230] [cursor=pointer]
+          - button "Kursor Besar" [ref=f99e237] [cursor=pointer]
+          - button "Panduan Baca" [ref=f99e242] [cursor=pointer]
+          - button "Jarak Teks" [ref=f99e247] [cursor=pointer]
+          - button "Sembunyikan Gambar" [ref=f99e252] [cursor=pointer]
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f99e267] [cursor=pointer]
+  - alert [ref=f99e271]

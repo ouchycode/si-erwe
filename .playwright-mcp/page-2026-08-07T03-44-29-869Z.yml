@@ -1,0 +1,172 @@
+- generic [ref=f101e1]:
+  - generic [ref=f101e2]:
+    - complementary [ref=f101e3]:
+      - generic [ref=f101e4]:
+        - generic [ref=f101e5]:
+          - paragraph [ref=f101e10]: Admin RW 04
+          - button [ref=f101e193]
+        - navigation [ref=f101e15]:
+          - generic [ref=f101e16]:
+            - link [ref=f101e194] [cursor=pointer]:
+              - /url: /admin/dashboard
+              - text: Dashboard
+            - link [ref=f101e195] [cursor=pointer]:
+              - /url: /admin/berita
+              - text: Berita
+            - link [ref=f101e196] [cursor=pointer]:
+              - /url: /admin/galeri
+              - text: Galeri
+            - link [ref=f101e197] [cursor=pointer]:
+              - /url: /admin/pengurus
+              - text: Pengurus RW
+            - link [ref=f101e198] [cursor=pointer]:
+              - /url: /admin/pengurus-rt
+              - text: Pengurus RT
+            - link [ref=f101e199] [cursor=pointer]:
+              - /url: /admin/statistik
+              - text: Statistik
+            - link [ref=f101e200] [cursor=pointer]:
+              - /url: /admin/pengajuan
+              - text: Pengajuan
+            - link [ref=f101e201] [cursor=pointer]:
+              - /url: /admin/pesan
+              - text: Pesan
+            - link [ref=f101e202] [cursor=pointer]:
+              - /url: /admin/pengaturan
+              - text: Pengaturan
+        - generic [ref=f101e58]:
+          - generic [ref=f101e59]:
+            - generic [ref=f101e60]: SR
+            - paragraph [ref=f101e61]: Sekretariat RW 04
+          - button [ref=f101e203]: Keluar
+    - main [ref=f101e67]:
+      - generic [ref=f101e68]:
+        - generic [ref=f101e70]:
+          - generic [ref=f101e71]:
+            - heading [level=1] [ref=f101e204]: Kelola Berita
+            - paragraph [ref=f101e73]: Kelola artikel, pengumuman, dan informasi kegiatan.
+          - button [ref=f101e205]: Tambah Berita
+        - generic [ref=f101e76]:
+          - generic [ref=f101e77]:
+            - generic [ref=f101e78]:
+              - textbox [ref=f101e206]:
+                - /placeholder: Cari judul berita...
+              - button [ref=f101e207]: Cari
+            - combobox [ref=f101e85]:
+              - generic [ref=f101e86]: Semua status
+              - img: ▼
+            - textbox [ref=f101e87]
+          - table [ref=f101e90]:
+            - rowgroup [ref=f101e91]:
+              - row [ref=f101e208]:
+                - columnheader [ref=f101e209]: Judul
+                - columnheader [ref=f101e210]: Kategori
+                - columnheader [ref=f101e211]: Author
+                - columnheader [ref=f101e212]: Tanggal
+                - columnheader [ref=f101e213]: Status
+                - columnheader [ref=f101e214]: Views
+                - columnheader [ref=f101e215]: Aksi
+            - rowgroup [ref=f101e100]:
+              - row [ref=f101e216]:
+                - cell [ref=f101e217]:
+                  - generic [ref=f101e127]: Pengumuman Iuran Bulanan Periode Mei 2026
+                - cell [ref=f101e219]:
+                  - generic [ref=f101e131]: Pengumuman
+                - cell [ref=f101e220]: Bendahara RW 04
+                - cell [ref=f101e221]: 27 Juli 2026
+                - cell [ref=f101e222]:
+                  - generic [ref=f101e135]: Draft
+                - cell [ref=f101e223]: "0"
+                - cell [ref=f101e224]:
+                  - generic [ref=f101e138]:
+                    - button [ref=f101e225]: Ubah
+                    - button [ref=f101e226]
+              - row [ref=f101e227]:
+                - cell [ref=f101e228]:
+                  - generic [ref=f101e143]: Kerja Bakti Serentak Seluruh RT
+                - cell [ref=f101e230]:
+                  - generic [ref=f101e147]: Kegiatan
+                - cell [ref=f101e231]: Sekretariat RW 04
+                - cell [ref=f101e232]: 30 Juli 2026
+                - cell [ref=f101e233]:
+                  - generic [ref=f101e151]: Draft
+                - cell [ref=f101e234]: "0"
+                - cell [ref=f101e235]:
+                  - generic [ref=f101e154]:
+                    - button [ref=f101e236]: Ubah
+                    - button [ref=f101e237]
+              - row [ref=f101e238]:
+                - cell [ref=f101e239]:
+                  - generic [ref=f101e159]: Vaksinasi Booster Gratis di Balai Warga
+                - cell [ref=f101e241]:
+                  - generic [ref=f101e163]: Kesehatan
+                - cell [ref=f101e242]: Sekretariat RW 04
+                - cell [ref=f101e243]: 2 Agustus 2026
+                - cell [ref=f101e244]:
+                  - generic [ref=f101e167]: Draft
+                - cell [ref=f101e245]: "0"
+                - cell [ref=f101e246]:
+                  - generic [ref=f101e170]:
+                    - button [ref=f101e247]: Ubah
+                    - button [ref=f101e248]
+              - row [ref=f101e249]:
+                - cell [ref=f101e250]:
+                  - generic [ref=f101e175]: "Musyawarah Warga: Perbaikan Drainase Blok A"
+                - cell [ref=f101e252]:
+                  - generic [ref=f101e179]: Kegiatan
+                - cell [ref=f101e253]: Sekretariat RW 04
+                - cell [ref=f101e254]: 5 Agustus 2026
+                - cell [ref=f101e255]:
+                  - generic [ref=f101e183]: Draft
+                - cell [ref=f101e256]: "3"
+                - cell [ref=f101e257]:
+                  - generic [ref=f101e186]:
+                    - button [ref=f101e258]: Ubah
+                    - button [ref=f101e259]
+          - generic [ref=f101e189]:
+            - paragraph [ref=f101e190]: Halaman 1 dari 1
+            - generic [ref=f101e191]:
+              - button [disabled]: Sebelumnya
+              - button [disabled]: Berikutnya
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f101e121] [cursor=pointer]
+  - alert [ref=f101e192]
+  - dialog [ref=f101e263]:
+    - generic [ref=f101e264]:
+      - heading "Tambah Berita" [level=2] [ref=f101e265]
+      - paragraph [ref=f101e266]: Isi informasi berita di bawah ini.
+    - generic [ref=f101e267]:
+      - generic [ref=f101e268]:
+        - generic [ref=f101e269]: Judul *
+        - textbox "Judul *" [active] [ref=f101e270]
+      - generic [ref=f101e271]:
+        - generic [ref=f101e272]: Kategori *
+        - combobox "Kategori *" [ref=f101e273]:
+          - generic [ref=f101e274]: Kegiatan
+          - img: ▼
+        - textbox [ref=f101e275]: Kegiatan
+      - generic [ref=f101e276]:
+        - generic [ref=f101e277]: Ringkasan
+        - textbox "Ringkasan" [ref=f101e278]
+      - generic [ref=f101e279]:
+        - generic [ref=f101e280]: Konten
+        - textbox "Konten" [ref=f101e281]:
+          - /placeholder: Isi konten berita...
+      - generic [ref=f101e282]:
+        - generic [ref=f101e283]: Author
+        - textbox "Author" [ref=f101e284]:
+          - /placeholder: Nama penulis
+      - generic [ref=f101e285]:
+        - generic [ref=f101e286]: Gambar
+        - button "Gambar" [ref=f101e287]
+        - paragraph [ref=f101e288]: Maks. 3 MB (JPEG, PNG, JPG, WEBP).
+      - generic [ref=f101e289]:
+        - generic [ref=f101e290]:
+          - paragraph [ref=f101e291]: Publikasikan
+          - paragraph [ref=f101e292]: Tampilkan di situs publik.
+        - switch [checked] [ref=f101e293] [cursor=pointer]
+        - checkbox [checked] [ref=f101e294]
+      - generic [ref=f101e295]:
+        - button "Batal" [ref=f101e296]
+        - button "Simpan" [ref=f101e297]
+    - button "Tutup" [ref=f101e298]
