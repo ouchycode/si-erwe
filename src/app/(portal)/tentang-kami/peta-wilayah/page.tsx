@@ -13,7 +13,7 @@ export default function PetaWilayahPage() {
 
       <ContentSection className="pt-0 md:pt-0 pb-0 md:pb-0">
         {/* Map Area */}
-        <div className="w-full bg-gray-200 h-[600px] md:h-[700px] relative z-0">
+        <div className="w-full bg-gray-200 h-[600px] md:h-[700px] relative z-0" data-aos="fade-up">
           <MapComponent />
         </div>
       </ContentSection>

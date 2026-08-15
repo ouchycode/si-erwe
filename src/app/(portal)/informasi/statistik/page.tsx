@@ -5,13 +5,14 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { ChevronUp, ChevronDown, BarChart2, TrendingUp, TrendingDown, Minus } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ContentSection } from "@/components/ui/ContentSection";
-import { MONTHS } from "@/lib/statisticsData";
+import { MONTHS, statistikYears, STATISTIK_YEARS_START } from "@/lib/statisticsData";
 import { api } from "@/lib/api";
 import type { StatistikResponse, StatistikCategory } from "@/lib/types";
 
 export default function StatistikPage() {
   const today = new Date();
   const [year, setYear] = useState(today.getFullYear());
+  const [yearStart, setYearStart] = useState(STATISTIK_YEARS_START);
   const [selectedMonthIndex, setSelectedMonthIndex] = useState(today.getMonth());
   const [statsData, setStatsData] = useState<StatistikResponse | null>(null);
   const [prevStatsData, setPrevStatsData] = useState<StatistikResponse | null>(null);
@@ -32,6 +33,16 @@ export default function StatistikPage() {
     () => ({ periode, prevPeriode }),
     [periode, prevPeriode]
   );
+
+  useEffect(() => {
+    api
+      .get<{ data: Record<string, Record<string, unknown>> }>("/settings")
+      .then((res) => {
+        const start = res.data?.statistik?.tahunAwal;
+        if (typeof start === "number" && start > 0) setYearStart(start);
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     let active = true;
@@ -151,7 +162,7 @@ export default function StatistikPage() {
                 onChange={(e) => setYear(Number(e.target.value))}
                 className="bg-transparent text-white font-bold text-sm outline-none cursor-pointer appearance-none border-b border-white/30 pb-0.5 hover:border-white transition-colors"
               >
-                {[today.getFullYear(), today.getFullYear() - 1].map((y) => (
+                {statistikYears(yearStart).map((y) => (
                   <option key={y} value={y} className="text-slate-800">
                     {y}
                   </option>
@@ -208,10 +219,10 @@ export default function StatistikPage() {
 
             {/* Perbandingan Bulan Ini vs Bulan Kemarin */}
             {comparison.length > 0 && (
-              <div className="mb-6 rounded-xs border border-slate-200 bg-slate-50 p-5">
+              <div className="mb-6 rounded-xs border border-slate-200 bg-slate-50 p-5" data-aos="fade-up">
                 <div className="flex items-center gap-2 mb-4">
                   <BarChart2 size={16} className="text-brand-primary" />
-                  <h3 className="text-sm font-bold text-slate-800 uppercase tracking-widest">
+                  <h3 className="text-sm font-bold text-slate-800 uppercase tracking-widest" data-aos="fade-up">
                     Analisis: {MONTHS[selectedMonthIndex]} {year} vs {MONTHS[selectedMonthIndex === 0 ? 11 : selectedMonthIndex - 1]} {selectedMonthIndex === 0 ? year - 1 : year}
                   </h3>
                 </div>
@@ -221,6 +232,8 @@ export default function StatistikPage() {
                     return (
                       <div
                         key={c.label}
+                        data-aos="fade-up"
+
                         className={`rounded-xs border p-3 ${
                           stable
                             ? "bg-white border-slate-200"
@@ -267,7 +280,7 @@ export default function StatistikPage() {
             )}
 
             {/* Content Layout */}
-            <div className="flex flex-col lg:flex-row gap-6 items-start">
+            <div className="flex flex-col lg:flex-row gap-6 items-start" data-aos="fade-up">
               {/* Table Container */}
               <div className="flex-1 w-full bg-slate-50 shadow-sm overflow-hidden rounded-xs">
                 <div className="overflow-x-auto">
@@ -341,8 +354,8 @@ export default function StatistikPage() {
               </div>
 
               {/* Chart Container */}
-              <div className="w-full lg:w-[350px] shrink-0 bg-slate-50 shadow-sm rounded-xs p-6 sticky top-24">
-                <h3 className="text-sm font-bold text-center text-gray-800 mb-6 uppercase tracking-widest">
+              <div className="w-full lg:w-[350px] shrink-0 bg-slate-50 shadow-sm rounded-xs p-6 sticky top-24" data-aos="fade-up">
+                <h3 className="text-sm font-bold text-center text-gray-800 mb-6 uppercase tracking-widest" data-aos="fade-up">
                   {activeCategory.chartTitle}
                 </h3>
                 <div className="h-[250px] w-full">

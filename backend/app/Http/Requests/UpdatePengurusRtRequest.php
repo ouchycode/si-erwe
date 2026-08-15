@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdatePengurusRtRequest extends FormRequest
 {
@@ -14,7 +15,12 @@ class UpdatePengurusRtRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'rt_number' => ['sometimes', 'string', 'max:3'],
+            'rt_number' => [
+                'sometimes',
+                'string',
+                'max:3',
+                Rule::unique('pengurus_rt', 'rt_number')->ignore($this->route('pengurusRt')),
+            ],
             'nama' => ['sometimes', 'string', 'max:255'],
             'blok' => ['nullable', 'string', 'max:100'],
             'telp' => ['nullable', 'string', 'max:30'],

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import AOSInit from "@/components/layout/AOSInit";
 
 const figtree = Figtree({
   subsets: ["latin"],
@@ -39,6 +40,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full bg-gray-100 font-sans">
+        <AOSInit />
         {children}
         <Toaster position="top-right" richColors />
       </body>

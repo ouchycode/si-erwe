@@ -16,10 +16,10 @@ export default async function BeritaSection() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4 tracking-tight">
+            <h2 data-aos="fade-up" className="text-3xl md:text-4xl font-bold text-slate-800 mb-4 tracking-tight">
               Kabar Lingkungan
             </h2>
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+            <p data-aos="fade-up" className="text-base md:text-lg text-gray-600 leading-relaxed">
               Agenda kegiatan dan pengumuman terbaru dari pengurus lingkungan
               Rukun Warga 04.
             </p>
@@ -39,6 +39,8 @@ export default async function BeritaSection() {
             <Link
               key={news.id}
               href={`/informasi/berita/${news.slug}`}
+              data-aos="fade-up"
+
               className="group bg-white rounded-xs border border-slate-100 outline-none transition-colors duration-300 overflow-hidden no-underline flex flex-col"
             >
               {/* Image Container */}

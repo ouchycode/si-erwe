@@ -94,11 +94,16 @@ export default async function BeritaTerkini({
             <p className="text-gray-400 font-medium">Belum ada berita yang cocok.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            data-aos="fade-up"
+          >
             {beritaList.map((berita) => (
               <Link
                 key={berita.id}
                 href={`/informasi/berita/${berita.slug}`}
+                data-aos="fade-up"
+
                 className="group flex flex-col bg-slate-50 rounded-xs overflow-hidden no-underline transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5"
               >
                 <div className="relative w-full h-48 bg-gray-100 overflow-hidden">

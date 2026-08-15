@@ -83,10 +83,12 @@ export default async function ProgramWarga() {
       <ContentSection>
         <div className="flex flex-col gap-12">
             {/* Program Cards */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-4xl mx-auto" data-aos="fade-up">
               {programs.map(({ icon: Icon, title, subtitle, image, desc, detail }) => (
                 <article
                   key={title}
+                  data-aos="fade-up"
+
                   className="bg-slate-50 rounded-xs shadow-sm overflow-hidden flex flex-col"
                 >
                   <div className="relative aspect-[4/3] bg-slate-100 overflow-hidden">
@@ -127,7 +129,7 @@ export default async function ProgramWarga() {
             </div>
 
             {/* Jadwal & Cara Ikut */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6" data-aos="fade-up">
               <section className="lg:col-span-2 bg-slate-50 rounded-xs shadow-sm p-6 md:p-8">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-9 h-9 bg-brand-primary/10 rounded-xs flex items-center justify-center shrink-0">
@@ -143,7 +145,12 @@ export default async function ProgramWarga() {
 
                 <div className="divide-y divide-slate-200 rounded-xs overflow-hidden">
                   {JADWAL.map((item) => (
-                    <div key={item.label} className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-white px-5 py-4">
+                    <div
+                      key={item.label}
+                      data-aos="fade-up"
+
+                      className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-white px-5 py-4"
+                    >
                       <div className="text-sm font-bold text-slate-800">{item.label}</div>
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <CalendarDays size={14} className="text-gray-400" />
@@ -158,7 +165,7 @@ export default async function ProgramWarga() {
                 </div>
               </section>
 
-              <aside className="bg-brand-primary rounded-xs shadow-sm p-6 text-white">
+              <aside className="bg-brand-primary rounded-xs shadow-sm p-6 text-white" data-aos="fade-up">
                 <div className="flex items-center gap-3 mb-5 pb-4 border-b border-white/10">
                   <div className="w-9 h-9 bg-white/10 rounded-xs flex items-center justify-center shrink-0">
                     <ClipboardList size={16} className="text-white/70" />
@@ -167,7 +174,7 @@ export default async function ProgramWarga() {
                 </div>
                 <div className="flex flex-col gap-4">
                   {ALUR.map((item, index) => (
-                    <div key={item} className="flex gap-3">
+                    <div key={item} className="flex gap-3" data-aos="fade-up">
                       <span className="w-6 h-6 bg-white text-brand-primary rounded-xs flex items-center justify-center text-xs font-bold shrink-0">
                         {index + 1}
                       </span>
@@ -179,7 +186,7 @@ export default async function ProgramWarga() {
             </div>
 
             {/* Koordinator */}
-            <div className="bg-slate-50 rounded-xs shadow-sm p-6 flex flex-col md:flex-row md:items-center justify-between gap-5">
+            <div className="bg-slate-50 rounded-xs shadow-sm p-6 flex flex-col md:flex-row md:items-center justify-between gap-5" data-aos="fade-up">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-brand-primary/10 rounded-xs flex items-center justify-center shrink-0">
                   <Users size={16} className="text-brand-primary" />

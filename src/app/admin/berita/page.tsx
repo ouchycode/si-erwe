@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import RichTextEditor from "@/components/admin/RichTextEditor";
 import {
   Select,
   SelectContent,
@@ -339,11 +340,9 @@ export default function AdminBeritaPage() {
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="konten">Konten</Label>
-              <Textarea
-                id="konten"
-                rows={8}
+              <RichTextEditor
                 value={form.konten}
-                onChange={(e) => setForm({ ...form, konten: e.target.value })}
+                onChange={(html) => setForm({ ...form, konten: html })}
                 placeholder="Isi konten berita..."
               />
             </div>

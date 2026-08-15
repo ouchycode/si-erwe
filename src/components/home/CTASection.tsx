@@ -5,7 +5,7 @@ export default function CTASection() {
   return (
     <section className="bg-brand-primary py-16 border-b border-brand-primary-hover">
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+        <div data-aos="fade-up" className="flex flex-col md:flex-row md:items-center justify-between gap-8">
           <div className="max-w-2xl">
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 mb-3">
               Butuh Bantuan?

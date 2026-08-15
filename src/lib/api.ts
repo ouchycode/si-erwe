@@ -45,15 +45,32 @@ async function request<T>(
     ...(options.headers as Record<string, string>),
   };
 
+  let method = options.method ?? "GET";
+  const rawBody = options.body;
+
+  // PHP tidak mengisi $_POST pada request PUT/PATCH bertipe multipart/form-data,
+  // sehingga data form diterima kosong di backend (Laravel).
+  // Solusi: kirim sebagai POST + spoof "_method" milik Laravel.
+  if (rawBody instanceof FormData && (method === "PUT" || method === "PATCH")) {
+    rawBody.set("_method", method);
+    method = "POST";
+  }
+
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  if (!(options.body instanceof FormData)) {
+  if (!(rawBody instanceof FormData)) {
     headers["Content-Type"] = "application/json";
   }
 
-  const res = await fetch(`${API_URL}${path}`, { ...options, headers, cache: "no-store" });
+  const res = await fetch(`${API_URL}${path}`, {
+    ...options,
+    method,
+    headers,
+    body: rawBody,
+    cache: "no-store",
+  });
 
   return parseResponse<T>(res);
 }

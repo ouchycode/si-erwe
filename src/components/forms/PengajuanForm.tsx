@@ -62,7 +62,7 @@ export function PengajuanForm() {
   };
 
   return (
-    <form className="p-6 md:p-8 flex flex-col gap-6" onSubmit={handleSubmit}>
+    <form data-aos="fade-up" className="p-6 md:p-8 flex flex-col gap-6" onSubmit={handleSubmit}>
       {result ? (
         <div className="flex flex-col gap-5">
           <div className="bg-green-50 border border-green-200 rounded-xs p-5">
@@ -211,7 +211,7 @@ export function CekStatusPengajuan() {
   };
 
   return (
-    <div className="p-6 md:p-8 flex flex-col gap-6">
+    <div data-aos="fade-up" className="p-6 md:p-8 flex flex-col gap-6">
       <div className="flex items-center gap-2.5">
         <Search size={15} className="text-brand-primary" />
         <h3 className="text-sm font-bold text-slate-800">Lacak Status Pengajuan</h3>

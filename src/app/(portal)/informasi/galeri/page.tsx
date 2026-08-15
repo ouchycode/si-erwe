@@ -97,13 +97,15 @@ export default function GaleriPage() {
             <p className="text-gray-400 font-medium">Belum ada foto untuk kategori ini.</p>
           </div>
         ) : (
-          <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 gap-6 space-y-6">
+          <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 gap-6 space-y-6" data-aos="fade-up">
             {items.map((item) => {
               const src = resolveImageUrl(item.image) ?? "";
               return (
                 <div
                   key={item.id}
                   className="relative group overflow-hidden rounded-xs bg-gray-100 break-inside-avoid cursor-pointer shadow-sm hover:shadow-md transition-shadow"
+                  data-aos="fade-up"
+
                   onClick={() => setSelectedImage(src)}
                 >
                   <Image

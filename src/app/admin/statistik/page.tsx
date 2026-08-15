@@ -1,13 +1,14 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Plus, Trash2, Save, BarChart3 } from "lucide-react";
 import { toast } from "sonner";
 
 import { admin } from "@/lib/adminApi";
 import { ApiError } from "@/lib/api";
 import { useFetch } from "@/lib/hooks/useFetch";
-import type { StatistikResponse, StatistikCategory, ApiMessage } from "@/lib/types";
+import { StatistikResponse, StatistikCategory, ApiMessage, SettingGroups } from "@/lib/types";
+import { statistikYears, STATISTIK_YEARS_START } from "@/lib/statisticsData";
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -43,7 +44,6 @@ const MONTHS = [
 ];
 
 const CURRENT_YEAR = new Date().getFullYear();
-const YEARS = [CURRENT_YEAR, CURRENT_YEAR - 1];
 
 type EditableRow = {
   key: string;
@@ -53,6 +53,8 @@ type EditableRow = {
 };
 
 export default function AdminStatistikPage() {
+  const [yearStart, setYearStart] = useState(STATISTIK_YEARS_START);
+  const YEARS = useMemo(() => statistikYears(yearStart), [yearStart]);
   const [year, setYear] = useState(String(CURRENT_YEAR));
   const [monthIndex, setMonthIndex] = useState(String(new Date().getMonth()));
   const [activeCat, setActiveCat] = useState<string>("");
@@ -60,13 +62,44 @@ export default function AdminStatistikPage() {
   const [saving, setSaving] = useState(false);
   const [confirmDeleteRow, setConfirmDeleteRow] = useState<EditableRow | null>(null);
 
+  useEffect(() => {
+    admin
+      .get<{ data: SettingGroups }>("/admin/settings")
+      .then((res) => {
+        const start = res.data?.statistik?.tahunAwal;
+        if (typeof start === "number" && start > 0) {
+          setYearStart(start);
+          if (start > CURRENT_YEAR) setYear(String(start));
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const periode = `${year}-${String(Number(monthIndex) + 1).padStart(2, "0")}`;
 
   const fetcher = useCallback(async () => {
     const res = await admin.get<{ data: StatistikResponse }>(`/admin/statistik?periode=${periode}`);
     const cats = Object.keys(res.data);
+    const selected = cats.includes(activeCat) ? activeCat : (cats[0] ?? "");
     if (!cats.includes(activeCat)) {
-      setActiveCat(cats[0] ?? "");
+      setActiveCat(selected);
+    }
+    const cat: StatistikCategory | undefined = res.data[selected];
+    if (cat) {
+      const keys = cat.columns
+        .map((c) => c.key)
+        .filter((k) => k !== "jumlah");
+      setRows(
+        cat.data.map((r) => {
+          const row = r as Record<string, string | number | undefined>;
+          return {
+            key: String(row.id ?? row.rt),
+            rt: row.rt as string,
+            id: typeof row.id === "number" ? row.id : undefined,
+            values: Object.fromEntries(keys.map((k) => [k, String(row[k] ?? 0)])),
+          };
+        })
+      );
     }
     return res.data;
   }, [periode, activeCat]);
@@ -79,20 +112,6 @@ export default function AdminStatistikPage() {
     () => (category?.columns ?? []).map((c) => c.key).filter((k) => k !== "jumlah"),
     [category]
   );
-
-  const hydrateRows = useCallback(() => {
-    const source = category?.data ?? [];
-    setRows(
-      source.map((r) => ({
-        key: String(r.id ?? r.rt),
-        rt: r.rt,
-        id: typeof r.id === "number" ? r.id : undefined,
-        values: Object.fromEntries(
-          valueKeys.map((k) => [k, String((r as Record<string, string | number | undefined>)[k] ?? 0)])
-        ),
-      }))
-    );
-  }, [category, valueKeys]);
 
   const setRowValue = (key: string, field: string, value: string) => {
     setRows((prev) =>
@@ -142,7 +161,6 @@ export default function AdminStatistikPage() {
       }
       toast.success(`Berhasil menyimpan ${ok} baris data.`);
       await reload();
-      hydrateRows();
     } catch (err) {
       toast.error(err instanceof ApiError ? err.message : "Gagal menyimpan data statistik.");
     } finally {
@@ -165,7 +183,6 @@ export default function AdminStatistikPage() {
       toast.success(res.message);
       setConfirmDeleteRow(null);
       await reload();
-      hydrateRows();
     } catch (err) {
       toast.error(err instanceof ApiError ? err.message : "Gagal menghapus data.");
     }

@@ -19,10 +19,10 @@ export default async function LayananSection() {
     <section className="bg-slate-50 py-20 border-b border-slate-100">
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
         <div className="mb-12 text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4 tracking-tight">
+          <h2 data-aos="fade-up" className="text-3xl md:text-4xl font-bold text-slate-800 mb-4 tracking-tight">
             Layanan Publik
           </h2>
-          <p className="text-base md:text-lg text-gray-600 max-w-2xl">
+          <p data-aos="fade-up" className="text-base md:text-lg text-gray-600 max-w-2xl">
             Prosedur layanan administrasi maupun lingkungan terpadu untuk
             memudahkan warga.
           </p>
@@ -36,6 +36,8 @@ export default async function LayananSection() {
               <Link
                 key={item.id}
                 href={`/layanan/${item.slug}`}
+                data-aos="fade-up"
+
                 className="group flex flex-col bg-white rounded-xs border border-slate-100 p-6 md:p-8 outline-none transition-all duration-300 no-underline relative overflow-hidden hover:shadow-md"
               >
                 <div

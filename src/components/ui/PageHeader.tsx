@@ -15,7 +15,7 @@ export function PageHeader({
 }: PageHeaderProps) {
   return (
     <div className="bg-brand-primary px-6 md:px-8 pt-16 md:pt-20 pb-28 md:pb-36">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
+      <div data-aos="fade-up" className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
         <div>
           {category && (
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/50 mb-3">

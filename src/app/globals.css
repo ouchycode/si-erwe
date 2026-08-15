@@ -1,6 +1,8 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "aos/dist/aos.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -323,8 +325,29 @@ html.dark {
   .icon-badge {
     @apply bg-brand-primary border border-brand-primary-hover text-white transition-colors duration-200;
   }
+  .icon-badge {
+    @apply bg-brand-primary border border-brand-primary-hover text-white transition-colors duration-200;
+  }
   .group:hover .icon-badge,
   .icon-badge:hover {
     @apply bg-brand-primary-hover;
   }
+}
+
+/* Editor konten berita (Tiptap) */
+.tiptap-content {
+  min-height: 160px;
+}
+.tiptap-content .ProseMirror {
+  min-height: 160px;
+  outline: none;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+.tiptap-content .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--color-muted-foreground);
+  pointer-events: none;
+  height: 0;
 }

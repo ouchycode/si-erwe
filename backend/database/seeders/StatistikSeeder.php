@@ -68,30 +68,37 @@ class StatistikSeeder extends Seeder
             ], 'config' => ['sd' => [10, 30], 'smp' => [15, 35], 'sma' => [40, 80], 'sarjana' => [20, 50]], 'seed' => 5],
         ];
 
-        $periode = now()->format('Y-m');
+        $periodes = [
+            now()->subMonth()->format('Y-m'),
+            now()->format('Y-m'),
+        ];
 
-        foreach ($categories as $catIndex => $cat) {
-            $category = StatistikCat::updateOrCreate(
-                ['nama' => $cat['nama']],
-                [
-                    'columns' => $cat['columns'],
-                    'chart_title' => $cat['chart_title'],
-                    'chart_colors' => $cat['chart_colors'],
-                    'urutan' => $catIndex + 1,
-                ]
-            );
+        StatistikData::query()->delete();
 
-            for ($i = 1; $i <= 8; $i++) {
-                $values = $this->generateValues($cat['config'], $i, $cat['seed']);
-                $hasJumlah = collect($cat['columns'])->contains('key', 'jumlah');
-                if ($hasJumlah) {
-                    $values['jumlah'] = array_sum($values);
-                }
-
-                StatistikData::updateOrCreate(
-                    ['category_id' => $category->id, 'rt' => str_pad((string) $i, 3, '0', STR_PAD_LEFT), 'periode' => $periode],
-                    ['values' => $values]
+        foreach ($periodes as $periode) {
+            foreach ($categories as $catIndex => $cat) {
+                $category = StatistikCat::updateOrCreate(
+                    ['nama' => $cat['nama']],
+                    [
+                        'columns' => $cat['columns'],
+                        'chart_title' => $cat['chart_title'],
+                        'chart_colors' => $cat['chart_colors'],
+                        'urutan' => $catIndex + 1,
+                    ]
                 );
+
+                for ($i = 1; $i <= 5; $i++) {
+                    $values = $this->generateValues($cat['config'], $i, $cat['seed']);
+                    $hasJumlah = collect($cat['columns'])->contains('key', 'jumlah');
+                    if ($hasJumlah) {
+                        $values['jumlah'] = array_sum($values);
+                    }
+
+                    StatistikData::updateOrCreate(
+                        ['category_id' => $category->id, 'rt' => str_pad((string) $i, 3, '0', STR_PAD_LEFT), 'periode' => $periode],
+                        ['values' => $values]
+                    );
+                }
             }
         }
     }

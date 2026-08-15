@@ -189,14 +189,15 @@ export default async function StrukturRW() {
             <div className="flex justify-center">
               <div className="w-full max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-4">
                 {inti.map((p) => (
-                  <PersonCard
-                    key={p.id}
-                    jabatan={p.jabatan}
-                    nama={p.nama}
-                    deskripsi={p.deskripsi}
-                    icon={iconFor(p.jabatan)}
-                    foto={p.foto}
-                  />
+                  <div key={p.id} data-aos="fade-up">
+                    <PersonCard
+                      jabatan={p.jabatan}
+                      nama={p.nama}
+                      deskripsi={p.deskripsi}
+                      icon={iconFor(p.jabatan)}
+                      foto={p.foto}
+                    />
+                  </div>
                 ))}
               </div>
             </div>
@@ -209,14 +210,15 @@ export default async function StrukturRW() {
             {/* ── Level 3: Koordinator Bidang ── */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {koordinator.map((p) => (
-                <PersonCard
-                  key={p.id}
-                  jabatan={p.jabatan}
-                  nama={p.nama}
-                  deskripsi={p.deskripsi}
-                  icon={iconFor(p.jabatan)}
-                  foto={p.foto}
-                />
+                <div key={p.id} data-aos="fade-up">
+                  <PersonCard
+                    jabatan={p.jabatan}
+                    nama={p.nama}
+                    deskripsi={p.deskripsi}
+                    icon={iconFor(p.jabatan)}
+                    foto={p.foto}
+                  />
+                </div>
               ))}
             </div>
           </>

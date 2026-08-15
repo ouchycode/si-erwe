@@ -48,7 +48,7 @@ export default async function DetailBerita({ params }: { params: Promise<{ slug:
       </div>
 
       <div className="max-w-6xl mx-auto px-6 md:px-16 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10" data-aos="fade-up">
           {/* ARTIKEL UTAMA */}
           <div className="lg:col-span-2 flex flex-col gap-0 bg-slate-50 rounded-xs overflow-hidden shadow-sm">
             {/* Meta + Judul */}
@@ -64,7 +64,10 @@ export default async function DetailBerita({ params }: { params: Promise<{ slug:
                 </span>
               </div>
 
-              <h1 className="text-2xl md:text-3xl font-bold text-slate-800 leading-tight tracking-tight mb-6">
+              <h1
+                className="text-2xl md:text-3xl font-bold text-slate-800 leading-tight tracking-tight mb-6"
+                data-aos="fade-up"
+              >
                 {berita.judul}
               </h1>
 
@@ -128,7 +131,7 @@ export default async function DetailBerita({ params }: { params: Promise<{ slug:
           </div>
 
           {/* SIDEBAR */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4" data-aos="fade-up">
             <div className="bg-slate-50 rounded-xs p-6 shadow-sm sticky top-24">
               <div className="flex items-center gap-2.5 mb-5 pb-4 border-b border-slate-200">
                 <Tag size={16} className="text-brand-primary" />
@@ -140,6 +143,8 @@ export default async function DetailBerita({ params }: { params: Promise<{ slug:
                   <Link
                     key={item.id}
                     href={`/informasi/berita/${item.slug}`}
+                    data-aos="fade-up"
+
                     className="group flex flex-col gap-1.5 py-4 first:pt-0 last:pb-0 no-underline"
                   >
                     <p className="text-sm font-semibold text-slate-700 group-hover:text-brand-primary transition-colors leading-snug line-clamp-2">

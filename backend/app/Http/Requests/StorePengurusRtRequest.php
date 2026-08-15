@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StorePengurusRtRequest extends FormRequest
 {
@@ -14,7 +15,7 @@ class StorePengurusRtRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'rt_number' => ['required', 'string', 'max:3'],
+            'rt_number' => ['required', 'string', 'max:3', Rule::unique('pengurus_rt', 'rt_number')],
             'nama' => ['required', 'string', 'max:255'],
             'blok' => ['nullable', 'string', 'max:100'],
             'telp' => ['nullable', 'string', 'max:30'],

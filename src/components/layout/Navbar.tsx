@@ -5,7 +5,15 @@ import TopBar from "./TopBar";
 import DesktopNav from "./DesktopNav";
 import MobileMenu from "./MobileMenu";
 
-export default function Navbar() {
+export default function Navbar({
+  initialIdentitas,
+}: {
+  initialIdentitas?: {
+    logo?: string;
+    nama?: string;
+    tagline?: string;
+  };
+}) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileGroup, setOpenMobileGroup] = useState<string | null>(null);
 
@@ -15,7 +23,11 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 font-sans flex flex-col w-full">
-      <TopBar isOpen={isMobileMenuOpen} onToggle={() => setIsMobileMenuOpen((p) => !p)} />
+      <TopBar
+        initialIdentitas={initialIdentitas}
+        isOpen={isMobileMenuOpen}
+        onToggle={() => setIsMobileMenuOpen((p) => !p)}
+      />
       <DesktopNav />
       <MobileMenu
         isOpen={isMobileMenuOpen}

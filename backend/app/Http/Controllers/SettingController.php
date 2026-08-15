@@ -7,14 +7,20 @@ use App\Models\Setting;
 use App\Support\Upload;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class SettingController extends Controller
 {
     public function index(): JsonResponse
     {
-        $settings = Setting::orderBy('group')->get()->groupBy('group')->map(
-            fn ($items) => $items->mapWithKeys(fn ($s) => [$s->key => $s->value])
-        );
+        $settings = Cache::store('file')->remember('settings.all', 300, function () {
+            return Setting::orderBy('group')->get()
+                ->groupBy('group')
+                ->mapWithKeys(function ($items, $group) {
+                    return [$group => $items->pluck('value', 'key')->toArray()];
+                })
+                ->toArray();
+        });
 
         return response()->json(['data' => $settings]);
     }
@@ -25,6 +31,8 @@ class SettingController extends Controller
             ['group' => $request->group, 'key' => $request->key],
             ['value' => $request->value]
         );
+
+        Cache::store('file')->forget('settings.all');
 
         return response()->json([
             'message' => 'Pengaturan berhasil disimpan.',

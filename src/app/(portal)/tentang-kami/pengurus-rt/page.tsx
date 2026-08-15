@@ -49,6 +49,8 @@ export default async function PengurusRT() {
             <div
               key={item.id}
               className="group bg-slate-50 rounded-xs overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+              data-aos="fade-up"
+
             >
               <div className="bg-brand-primary px-5 py-4 flex items-center justify-between">
                 <h3 className="text-white font-bold text-base tracking-wide">
@@ -113,7 +115,7 @@ export default async function PengurusRT() {
 
       <section className="bg-slate-50 py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="bg-white rounded-xs shadow-sm p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="bg-white rounded-xs shadow-sm p-8 flex flex-col md:flex-row md:items-center justify-between gap-6" data-aos="fade-up">
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-xs flex items-center justify-center shrink-0 icon-badge shadow-sm">
                 <User size={18} />

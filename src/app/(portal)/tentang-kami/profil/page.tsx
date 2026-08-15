@@ -34,9 +34,9 @@ export default async function ProfilRW() {
   const settings = await getSettings();
 
   const umum = (getGroup<ProfilUmum>(settings, "profil", "umum") ?? DEFAULT_UMUM) as ProfilUmum;
-  const visi = (getGroup<string>(settings, "profil", "visi") || DEFAULT_VISI) as string;
-  const misi = (getGroup<string[]>(settings, "profil", "misi") ?? DEFAULT_MISI) as string[];
-  const sejarah = (getGroup<string[]>(settings, "profil", "sejarah") ?? DEFAULT_SEJARAH) as string[];
+  const visi = (getGroup<string | string[]>(settings, "profil", "visi") || DEFAULT_VISI) as string | string[];
+  const misi = (getGroup<string | string[]>(settings, "profil", "misi") ?? DEFAULT_MISI) as string | string[];
+  const sejarah = (getGroup<string | string[]>(settings, "profil", "sejarah") ?? DEFAULT_SEJARAH) as string | string[];
 
   const wilayah = [
     { icon: Home, label: "Jumlah RT", value: `${umum.jumlahRt} Rukun Tetangga` },
@@ -74,57 +74,95 @@ export default async function ProfilRW() {
               <div className="lg:col-span-2 flex flex-col gap-16">
 
                 {/* Sejarah */}
-                <div>
+                <div data-aos="fade-up">
                   <div className="flex items-center gap-3 mb-8">
                     <div className="w-12 h-12 rounded-xs bg-brand-primary/10 flex items-center justify-center shrink-0 text-brand-primary">
                       <BookOpen size={24} />
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-slate-800">Sejarah Singkat</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold text-slate-800" data-aos="fade-up">
+                      Sejarah Singkat
+                    </h2>
                   </div>
-                  <div className="text-lg text-gray-600 leading-relaxed flex flex-col gap-6">
-                    {sejarah.map((p, i) => (
-                      <p key={i}>{p}</p>
-                    ))}
+                  <div className="text-lg text-gray-600 leading-relaxed">
+                    {Array.isArray(sejarah) ? (
+                      <div className="flex flex-col gap-6">
+                        {sejarah.map((p, i) => (
+                          <p key={i} data-aos="fade-up">
+                            {p}
+                          </p>
+                        ))}
+                      </div>
+                    ) : (
+                      <div
+                        className="space-y-6 prose prose-slate max-w-none prose-p:my-0 prose-p:text-lg prose-p:text-gray-600 prose-p:leading-relaxed"
+                        data-aos="fade-up"
+                        dangerouslySetInnerHTML={{ __html: sejarah }}
+                      />
+                    )}
                   </div>
                 </div>
 
                 {/* Visi & Misi */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* Visi */}
-                  <div className="bg-brand-primary rounded-xs p-8 text-white flex flex-col gap-6 shadow-sm">
+                  <div
+                    className="bg-brand-primary rounded-xs p-8 text-white flex flex-col gap-6 shadow-sm"
+                    data-aos="fade-up"
+                  >
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 bg-white/10 rounded-xs flex items-center justify-center shrink-0">
                         <Eye size={20} className="text-white/70" />
                       </div>
-                      <h2 className="text-sm font-bold tracking-widest uppercase text-white/70">
+                      <h2 className="text-sm font-bold tracking-widest uppercase text-white/70" data-aos="fade-up">
                         Visi
                       </h2>
                     </div>
-                    <p className="text-lg text-white/90 leading-relaxed italic">
-                      &quot;{visi}&quot;
-                    </p>
+                    <div
+                      className="text-lg text-white/90 leading-relaxed italic"
+                      data-aos="fade-up"
+
+                      dangerouslySetInnerHTML={{ __html: Array.isArray(visi) ? visi.join(" ") : visi }}
+                    />
                   </div>
 
                   {/* Misi */}
-                  <div className="bg-slate-50 rounded-xs p-8 flex flex-col gap-6 shadow-sm">
+                  <div
+                    className="bg-slate-50 rounded-xs p-8 flex flex-col gap-6 shadow-sm"
+                    data-aos="fade-up"
+
+                  >
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 bg-white rounded-xs flex items-center justify-center shrink-0 shadow-sm text-gray-500">
                         <Target size={20} />
                       </div>
-                      <h2 className="text-sm font-bold tracking-widest uppercase text-gray-500">
+                      <h2 className="text-sm font-bold tracking-widest uppercase text-gray-500" data-aos="fade-up">
                         Misi
                       </h2>
                     </div>
-                    <ul className="flex flex-col gap-4 text-base text-gray-600 leading-relaxed">
-                      {misi.map((m, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <span className="text-brand-primary font-bold mt-0.5 shrink-0 w-5">
-                            {i + 1}.
-                          </span>
-                          {m}
-                        </li>
-                      ))}
-                    </ul>
+                    {Array.isArray(misi) ? (
+                      <ul className="flex flex-col gap-4 text-base text-gray-600 leading-relaxed">
+                        {misi.map((m, i) => (
+                          <li
+                            key={i}
+                            className="flex items-start gap-3"
+                            data-aos="fade-up"
+
+                          >
+                            <span className="text-brand-primary font-bold mt-0.5 shrink-0 w-5">
+                              {i + 1}.
+                            </span>
+                            {m}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div
+                        className="prose prose-slate max-w-none prose-p:my-0 prose-li:text-base prose-li:text-gray-600 prose-li:leading-relaxed prose-li:marker:text-brand-primary"
+                        data-aos="fade-up"
+
+                        dangerouslySetInnerHTML={{ __html: misi }}
+                      />
+                    )}
                   </div>
                 </div>
               </div>
@@ -138,7 +176,12 @@ export default async function ProfilRW() {
                   </p>
                   <div className="flex flex-col gap-6">
                     {wilayah.map(({ icon: Icon, label, value }) => (
-                      <div key={label} className="flex items-center gap-5">
+                      <div
+                        key={label}
+                        className="flex items-center gap-5"
+                        data-aos="fade-up"
+
+                      >
                         <div className={`w-12 h-12 rounded-xs flex items-center justify-center shrink-0 bg-brand-primary/10 text-brand-primary`}>
                           <Icon size={20} />
                         </div>
@@ -154,7 +197,7 @@ export default async function ProfilRW() {
                 </div>
 
                 {/* Peta */}
-                <div className="rounded-xs overflow-hidden shadow-md">
+                <div className="rounded-xs overflow-hidden shadow-md" data-aos="fade-up">
                   <div className="w-full h-64 bg-gray-100 relative">
                     <MapComponent />
                   </div>

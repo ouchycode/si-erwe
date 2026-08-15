@@ -6,8 +6,8 @@ import { Home, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NAV_ITEMS, SOCIAL_LINKS } from "@/lib/navigation";
 import { ALAMAT } from "@/lib/constants";
-import { api } from "@/lib/api";
-import type { SettingGroups, SekretariatAlamat } from "@/lib/types";
+import { getSettingsClient } from "@/lib/settings";
+import type { SekretariatAlamat } from "@/lib/types";
 
 const FOOTER_COLUMNS = [
   { header: "Tentang Kami", items: NAV_ITEMS[0].children },
@@ -20,10 +20,9 @@ export default function Footer() {
   const [alamat, setAlamat] = useState<SekretariatAlamat>(ALAMAT);
 
   useEffect(() => {
-    api
-      .get<{ data: SettingGroups }>("/settings")
-      .then((res) => {
-        const s = res.data?.alamat?.sekretariat as SekretariatAlamat | undefined;
+    getSettingsClient()
+      .then((groups) => {
+        const s = groups.alamat?.sekretariat as SekretariatAlamat | undefined;
         if (s) {
           setAlamat({ ...ALAMAT, ...s });
         }

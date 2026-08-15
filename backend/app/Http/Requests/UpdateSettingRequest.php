@@ -16,7 +16,7 @@ class UpdateSettingRequest extends FormRequest
         return [
             'group' => ['required', 'string', 'max:100'],
             'key' => ['required', 'string', 'max:100'],
-            'value' => ['required'],
+            'value' => ['present'],
         ];
     }
 }

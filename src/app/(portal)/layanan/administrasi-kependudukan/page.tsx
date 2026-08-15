@@ -81,16 +81,18 @@ export default async function AdministrasiKependudukan() {
       {/* ALUR */}
       <ContentSection>
         <div className="flex items-center justify-center gap-3 mb-12">
-          <h2 className="text-3xl font-bold text-slate-800">
+          <h2 data-aos="fade-up" className="text-3xl font-bold text-slate-800">
             Alur Pengurusan
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+        <div data-aos="fade-up" className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
           {/* connector line */}
           <div className="hidden md:block absolute top-5 left-[12.5%] right-[12.5%] h-px bg-gray-100 z-0" />
           {ALUR.map((item) => (
             <div
               key={item.step}
+              data-aos="fade-up"
+
               className="relative z-10 flex flex-col gap-3 bg-slate-50 border border-slate-100 rounded-xs px-5 py-5"
             >
               <span className="text-xs font-bold text-brand-primary tracking-widest">
@@ -109,8 +111,8 @@ export default async function AdministrasiKependudukan() {
       <section className="bg-slate-50 py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="bg-white shadow-xl overflow-hidden rounded-xs">
-            <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.65fr]">
-              <div className="bg-brand-primary text-white p-6 md:p-8 flex flex-col justify-between gap-8">
+            <div data-aos="fade-up" className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.65fr]">
+              <div data-aos="fade-up" className="bg-brand-primary text-white p-6 md:p-8 flex flex-col justify-between gap-8">
                 <div>
                   <div className="w-10 h-10 bg-white/10 rounded-xs flex items-center justify-center mb-5">
                     <FileSignature size={18} className="text-white/70" />
@@ -152,15 +154,17 @@ export default async function AdministrasiKependudukan() {
       <section className="bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex items-center gap-3 mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-800">
+            <h2 data-aos="fade-up" className="text-2xl md:text-3xl font-bold text-slate-800">
               Syarat & Ketentuan Layanan
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div data-aos="fade-up" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {LAYANAN.map((layanan, i) => (
               <div
                 key={i}
+                data-aos="fade-up"
+
                 className="bg-slate-50 border border-slate-100 rounded-xs p-6 hover:shadow-md transition-shadow group relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 w-24 h-24 bg-brand-primary/5 rounded-bl-full -z-0 transition-transform group-hover:scale-110" />
@@ -191,7 +195,7 @@ export default async function AdministrasiKependudukan() {
           </div>
 
           {/* Alert */}
-          <div className="mt-8 bg-amber-50 border border-amber-200/50 rounded-xs p-5">
+          <div data-aos="fade-up" className="mt-8 bg-amber-50 border border-amber-200/50 rounded-xs p-5">
             <div className="flex gap-3">
               <AlertCircle size={18} className="text-amber-500 shrink-0 mt-0.5" />
               <div>

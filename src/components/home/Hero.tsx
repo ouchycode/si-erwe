@@ -4,18 +4,18 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { api, resolveImageUrl } from "@/lib/api";
+import { resolveImageUrl } from "@/lib/api";
+import { getSettingsClient } from "@/lib/settings";
 
 export default function Hero() {
   const [heroImage, setHeroImage] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
-    api
-      .get<{ data: { hero?: { gambar?: string } } }>("/settings")
-      .then((res) => {
+    getSettingsClient()
+      .then((groups) => {
         if (!active) return;
-        const gambar = res.data?.hero?.gambar;
+        const gambar = groups.hero?.gambar as string | undefined;
         setHeroImage(resolveImageUrl(gambar) ?? null);
       })
       .catch(() => {
@@ -42,7 +42,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-[64vh] max-w-7xl items-center px-4 py-20 md:px-8 md:py-28">
-        <div className="max-w-3xl text-white">
+        <div data-aos="fade-up" className="max-w-3xl text-white">
           <h1 className="max-w-2xl text-3xl font-medium leading-tight tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.30)] md:text-5xl">
             Sekretariat RW 04, rapi dan mudah diakses.
           </h1>

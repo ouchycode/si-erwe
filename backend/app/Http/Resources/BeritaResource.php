@@ -10,7 +10,7 @@ class BeritaResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-        $detail = $request->routeIs('api.berita.show');
+        $includeKonten = $request->routeIs('api.berita.show') || !$request->routeIs('api.berita.index');
 
         return [
             'id' => $this->id,
@@ -22,7 +22,8 @@ class BeritaResource extends JsonResource
             'author' => $this->author,
             'tanggal' => $this->published_at?->translatedFormat('j F Y'),
             'views' => $this->views,
-            ...($detail ? ['konten' => $this->konten] : []),
+            'is_published' => $this->is_published,
+            ...($includeKonten ? ['konten' => $this->konten] : []),
         ];
     }
 }

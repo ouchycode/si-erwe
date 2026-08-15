@@ -37,6 +37,15 @@ export const MONTHS = [
   "Juli", "Agustus", "September", "Oktober", "November", "Desember"
 ];
 
+export const STATISTIK_YEARS_START = 2024;
+
+export function statistikYears(start: number = STATISTIK_YEARS_START): number[] {
+  const end = new Date().getFullYear() + 1;
+  const years: number[] = [];
+  for (let y = start; y <= end; y++) years.push(y);
+  return years;
+}
+
 export const getStatsData = (monthIndex: number) => ({
   "Penduduk": {
     columns: [
