@@ -9,6 +9,7 @@ import { ApiError } from "@/lib/api";
 import { useFetch } from "@/lib/hooks/useFetch";
 import type { Berita, Paginated, ApiMessage } from "@/lib/types";
 import { resolveImageUrl } from "@/lib/api";
+import { imageFileError } from "@/lib/imageFile";
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
 import { Pagination } from "@/components/admin/Pagination";
 import { Button } from "@/components/ui/button";
@@ -115,6 +116,13 @@ export default function AdminBeritaPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (file) {
+      const fileError = imageFileError(file, 3);
+      if (fileError) {
+        toast.error(fileError);
+        return;
+      }
+    }
     setSaving(true);
     try {
       const body = new FormData();

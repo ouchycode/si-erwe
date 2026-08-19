@@ -7,9 +7,26 @@ use Illuminate\Validation\Rule;
 
 class StorePengurusRtRequest extends FormRequest
 {
+    use HasImageValidation;
+
     public function authorize(): bool
     {
         return true;
+    }
+
+    protected function imageField(): string
+    {
+        return 'foto';
+    }
+
+    protected function imageFieldLabel(): string
+    {
+        return 'Foto';
+    }
+
+    protected function imageMaxMb(): int
+    {
+        return 3;
     }
 
     public function rules(): array

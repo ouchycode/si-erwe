@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { admin } from "@/lib/adminApi";
 import { ApiError } from "@/lib/api";
 import { resolveImageUrl } from "@/lib/api";
+import { imageFileError } from "@/lib/imageFile";
 import { useFetch } from "@/lib/hooks/useFetch";
 import type { Pengurus, Paginated, ApiMessage } from "@/lib/types";
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
@@ -115,6 +116,13 @@ export default function AdminPengurusPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (file) {
+      const fileError = imageFileError(file, 3);
+      if (fileError) {
+        toast.error(fileError);
+        return;
+      }
+    }
     setSaving(true);
     try {
       const body = new FormData();

@@ -6,9 +6,16 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateGaleriRequest extends FormRequest
 {
+    use HasImageValidation;
+
     public function authorize(): bool
     {
         return true;
+    }
+
+    protected function imageMaxMb(): int
+    {
+        return 5;
     }
 
     public function rules(): array

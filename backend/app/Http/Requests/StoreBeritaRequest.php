@@ -7,9 +7,21 @@ use Illuminate\Validation\Rule;
 
 class StoreBeritaRequest extends FormRequest
 {
+    use HasImageValidation;
+
     public function authorize(): bool
     {
         return true;
+    }
+
+    protected function imageField(): string
+    {
+        return 'gambar';
+    }
+
+    protected function imageMaxMb(): int
+    {
+        return 3;
     }
 
     public function rules(): array

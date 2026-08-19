@@ -44,6 +44,11 @@ class SettingController extends Controller
     {
         $request->validate([
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
+        ], [
+            'image.required' => 'Pilih Gambar yang akan diunggah.',
+            'image.image' => 'File yang diunggah harus berupa gambar.',
+            'image.mimes' => 'Format Gambar harus JPEG, PNG, atau WebP.',
+            'image.max' => 'Ukuran Gambar maksimal 4 MB.',
         ]);
 
         $path = Upload::store($request->file('image'), 'settings');

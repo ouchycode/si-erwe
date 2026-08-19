@@ -27,6 +27,7 @@ import { toast } from "sonner";
 
 import { admin } from "@/lib/adminApi";
 import { ApiError, resolveImageUrl } from "@/lib/api";
+import { imageFileError } from "@/lib/imageFile";
 import { useFetch } from "@/lib/hooks/useFetch";
 import type { SettingGroups, ApiMessage } from "@/lib/types";
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
@@ -226,6 +227,11 @@ function ImageEditor({
 
   const handleFile = async (file: File | undefined) => {
     if (!file) return;
+    const fileError = imageFileError(file, 4);
+    if (fileError) {
+      toast.error(fileError);
+      return;
+    }
     setUploading(true);
     try {
       const fd = new FormData();
