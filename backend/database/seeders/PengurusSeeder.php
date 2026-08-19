@@ -10,7 +10,7 @@ class PengurusSeeder extends Seeder
     public function run(): void
     {
         $pengurus = [
-            ['jabatan' => 'Ketua RW 04', 'nama' => 'Muhamad Fadli Husna Mubarok', 'deskripsi' => 'Pimpinan utama dan pengarah seluruh kegiatan RW 04 Pabuaran.', 'level' => 'ketua', 'urutan' => 1],
+            ['jabatan' => 'Ketua RW 004', 'nama' => 'Muhamad Fadli Husna Mubarok', 'deskripsi' => 'Pimpinan utama dan pengarah seluruh kegiatan RW 004 Pabuaran.', 'level' => 'ketua', 'urutan' => 1],
             ['jabatan' => 'Sekretaris', 'nama' => 'Kevin Ardiansyah', 'deskripsi' => 'Administrasi, surat-menyurat, dan dokumentasi kegiatan.', 'level' => 'inti', 'urutan' => 1],
             ['jabatan' => 'Bendahara', 'nama' => 'Fadhila', 'deskripsi' => 'Pencatatan dan pengelolaan keuangan RW.', 'level' => 'inti', 'urutan' => 2],
             ['jabatan' => 'Keamanan & Ketertiban', 'nama' => 'Bagus', 'deskripsi' => 'Koordinasi siskamling dan keamanan lingkungan.', 'level' => 'koordinator', 'urutan' => 1],

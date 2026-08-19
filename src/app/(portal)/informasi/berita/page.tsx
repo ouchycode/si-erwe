@@ -37,7 +37,7 @@ export default async function BeritaTerkini({
       <PageHeader
         category="Pusat Informasi"
         title="Berita Terkini"
-        description="Update kegiatan, pengumuman, dan informasi terbaru dari lingkungan RW 04 Pabuaran."
+        description="Update kegiatan, pengumuman, dan informasi terbaru dari lingkungan RW 004 Pabuaran."
       />
 
       <ContentSection>

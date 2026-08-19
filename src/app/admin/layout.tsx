@@ -69,7 +69,7 @@ function SidebarContent({
         {!collapsed && (
           <div className="min-w-0 flex-1">
             <p className="text-sm font-bold leading-tight tracking-tight text-brand-primary">
-              Admin RW 04
+              Admin RW 004
             </p>
           </div>
         )}

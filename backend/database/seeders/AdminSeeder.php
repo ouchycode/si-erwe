@@ -12,7 +12,7 @@ class AdminSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'd'],
             [
-                'name' => 'Sekretariat RW 04',
+                'name' => 'Sekretariat RW 004',
                 'username' => 'admin',
                 'password' => 'admin123',
                 'role' => 'admin',

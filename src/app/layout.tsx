@@ -12,10 +12,10 @@ const figtree = Figtree({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Sekretariat RW 04 Pabuaran",
-    default: "Sekretariat RW 04 Pabuaran, Karawaci",
+    template: "%s | Sekretariat RW 004 Pabuaran",
+    default: "Sekretariat RW 004 Pabuaran, Karawaci",
   },
-  description: "Situs resmi Sekretariat RW 04 Pabuaran, Karawaci, Kota Tangerang.",
+  description: "Situs resmi Sekretariat RW 004 Pabuaran, Karawaci, Kota Tangerang.",
 };
 
 export default function RootLayout({

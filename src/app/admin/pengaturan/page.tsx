@@ -5,7 +5,6 @@ import {
   Save,
   Settings,
   RefreshCw,
-  Code2,
   Upload,
   Trash2,
   Plus,
@@ -41,7 +40,7 @@ import { Badge } from "@/components/ui/badge";
 import RichTextEditor from "@/components/admin/RichTextEditor";
 
 type Scalar = string | number | boolean;
-type ListRow = Record<string, Scalar | string[]>;
+type ListRow = Record<string, Scalar | string[] | Record<string, Scalar>>;
 
 const SETTING_LABELS: Record<string, { label: string; desc?: string }> = {
   "identitas.logo": {
@@ -66,7 +65,7 @@ const SETTING_LABELS: Record<string, { label: string; desc?: string }> = {
   },
   "alamat.sekretariat": {
     label: "Alamat Sekretariat",
-    desc: "Alamat kantor/sekretariat RW 04 yang tampil di situs.",
+    desc: "Alamat kantor/sekretariat RW 004 yang tampil di situs.",
   },
   "kontak.sekretariat": {
     label: "Kontak Sekretariat",
@@ -80,14 +79,14 @@ const SETTING_LABELS: Record<string, { label: string; desc?: string }> = {
     label: "Profil Umum",
     desc: "Periode kepengurusan dan jumlah RT/KK.",
   },
-  "profil.visi": { label: "Visi", desc: "Visi RW 04." },
+  "profil.visi": { label: "Visi", desc: "Visi RW 004." },
   "profil.misi": {
     label: "Misi",
-    desc: "Misi RW 04, tulis satu misi per baris.",
+    desc: "Misi RW 004, tulis satu misi per baris.",
   },
   "profil.sejarah": {
     label: "Sejarah",
-    desc: "Sejarah RW 04, tulis satu paragraf per baris.",
+    desc: "Sejarah RW 004, tulis satu paragraf per baris.",
   },
   "layanan.kartu": {
     label: "Kartu Layanan",
@@ -114,7 +113,7 @@ const SETTING_LABELS: Record<string, { label: string; desc?: string }> = {
     label: "Paragraf Bagian 1",
     desc: "Tulis satu paragraf per baris.",
   },
-  "keamanan_wilayah.s1Gambar": { label: "Gambar Bagian 1", desc: "URL gambar (bisa dari Unsplash)." },
+  "keamanan_wilayah.s1Gambar": { label: "Gambar Bagian 1", desc: "Unggah gambar, atau tempel URL gambar." },
   "keamanan_wilayah.s2Judul": { label: "Judul Bagian 2" },
   "keamanan_wilayah.s2Teks": {
     label: "Paragraf Bagian 2",
@@ -124,7 +123,7 @@ const SETTING_LABELS: Record<string, { label: string; desc?: string }> = {
     label: "Poin Bagian 2",
     desc: "Daftar poin, satu per baris.",
   },
-  "keamanan_wilayah.s2Gambar": { label: "Gambar Bagian 2", desc: "URL gambar (bisa dari Unsplash)." },
+  "keamanan_wilayah.s2Gambar": { label: "Gambar Bagian 2", desc: "Unggah gambar, atau tempel URL gambar." },
   "keamanan_wilayah.s3Judul": { label: "Judul Bagian 3" },
   "keamanan_wilayah.s3Teks": {
     label: "Paragraf Bagian 3",
@@ -139,13 +138,13 @@ const SETTING_LABELS: Record<string, { label: string; desc?: string }> = {
     label: "Paragraf Bagian 1",
     desc: "Tulis satu paragraf per baris.",
   },
-  "kebersihan_lingkungan.s1Gambar": { label: "Gambar Bagian 1", desc: "URL gambar (bisa dari Unsplash)." },
+  "kebersihan_lingkungan.s1Gambar": { label: "Gambar Bagian 1", desc: "Unggah gambar, atau tempel URL gambar." },
   "kebersihan_lingkungan.s2Judul": { label: "Judul Bagian 2" },
   "kebersihan_lingkungan.s2Teks": {
     label: "Paragraf Bagian 2",
     desc: "Tulis satu paragraf per baris.",
   },
-  "kebersihan_lingkungan.s2Gambar": { label: "Gambar Bagian 2", desc: "URL gambar (bisa dari Unsplash)." },
+  "kebersihan_lingkungan.s2Gambar": { label: "Gambar Bagian 2", desc: "Unggah gambar, atau tempel URL gambar." },
   "posyandu.deskripsi": {
     label: "Deskripsi Halaman",
     desc: "Ringkasan singkat di bawah judul halaman Posyandu.",
@@ -156,13 +155,13 @@ const SETTING_LABELS: Record<string, { label: string; desc?: string }> = {
     desc: "Tulis satu paragraf per baris.",
   },
   "posyandu.s1Kutipan": { label: "Kutipan Bagian 1", desc: "Kalimat kutipan yang ditebalkan." },
-  "posyandu.s1Gambar": { label: "Gambar Bagian 1", desc: "URL gambar (bisa dari Unsplash)." },
+  "posyandu.s1Gambar": { label: "Gambar Bagian 1", desc: "Unggah gambar, atau tempel URL gambar." },
   "posyandu.s2Judul": { label: "Judul Bagian 2" },
   "posyandu.s2Teks": {
     label: "Paragraf Bagian 2",
     desc: "Tulis satu paragraf per baris.",
   },
-  "posyandu.s2Gambar": { label: "Gambar Bagian 2", desc: "URL gambar (bisa dari Unsplash)." },
+  "posyandu.s2Gambar": { label: "Gambar Bagian 2", desc: "Unggah gambar, atau tempel URL gambar." },
 };
 
 const GROUP_META: Record<string, { label: string; icon: React.ElementType }> = {
@@ -195,36 +194,6 @@ function toLabel(s: string): string {
     .replace(/^./, (c) => c.toUpperCase());
 }
 
-function isStringArray(v: unknown): v is string[] {
-  return Array.isArray(v) && v.every((x) => typeof x === "string");
-}
-
-function isFlatObject(v: unknown): v is Record<string, Scalar> {
-  return (
-    typeof v === "object" &&
-    v !== null &&
-    !Array.isArray(v) &&
-    Object.values(v).every(
-      (x) => typeof x === "string" || typeof x === "number" || typeof x === "boolean"
-    )
-  );
-}
-
-function isListRow(v: unknown): v is ListRow {
-  return (
-    typeof v === "object" &&
-    v !== null &&
-    !Array.isArray(v) &&
-    Object.values(v).every(
-      (x) =>
-        typeof x === "string" ||
-        typeof x === "number" ||
-        typeof x === "boolean" ||
-        (Array.isArray(x) && x.every((y) => typeof y === "string"))
-    )
-  );
-}
-
 function toRichText(value: unknown, asList: boolean): string {
   if (typeof value === "string") {
     if (value.includes("<")) return value;
@@ -241,14 +210,16 @@ function toRichText(value: unknown, asList: boolean): string {
   return clean.map((s) => `<p>${s}</p>`).join("");
 }
 
-function HeroImageEditor({
+function ImageEditor({
   value,
   onUploaded,
   onClear,
+  alt,
 }: {
   value: string;
   onUploaded: (path: string) => void;
   onClear: () => void;
+  alt: string;
 }) {
   const [uploading, setUploading] = useState(false);
   const src = resolveImageUrl(value) ?? "";
@@ -280,7 +251,7 @@ function HeroImageEditor({
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={src}
-              alt="Pratinjau gambar hero"
+              alt={`Pratinjau ${alt}`}
               className="h-full w-full object-cover"
             />
           ) : (
@@ -354,7 +325,7 @@ function ListEditor({
     const template: ListRow = {};
     if (value.length > 0) {
       Object.entries(value[0]).forEach(([k, v]) => {
-        template[k] = Array.isArray(v) ? [] : typeof v === "number" ? 0 : "";
+        template[k] = cloneCell(v);
       });
     }
     onChange([...value, template]);
@@ -413,37 +384,13 @@ function ListEditor({
                   <Label className="text-xs text-muted-foreground">
                     {toLabel(k)}
                   </Label>
-                  {Array.isArray(v) ? (
-                    <Textarea
-                      rows={3}
-                      value={v.join("\n")}
-                      onChange={(e) =>
-                        updateRow(index, {
-                          ...row,
-                          [k]: e.target.value.split("\n"),
-                        })
-                      }
-                    />
-                  ) : typeof v === "number" ? (
-                    <Input
-                      type="number"
-                      value={String(v)}
-                      onChange={(e) =>
-                        updateRow(index, {
-                          ...row,
-                          [k]:
-                            e.target.value === "" ? 0 : Number(e.target.value),
-                        })
-                      }
-                    />
-                  ) : (
-                    <Input
-                      value={String(v)}
-                      onChange={(e) =>
-                        updateRow(index, { ...row, [k]: e.target.value })
-                      }
-                    />
-                  )}
+                  <StructuredFieldEditor
+                    value={v}
+                    fieldKey={k}
+                    onChange={(nv) =>
+                      updateRow(index, { ...row, [k]: nv as ListRow[string] })
+                    }
+                  />
                 </div>
               ))}
             </div>
@@ -456,6 +403,142 @@ function ListEditor({
       </Button>
     </div>
   );
+}
+
+function normalizeSettings(groups: SettingGroups): SettingGroups {
+  const daftar = groups.program_warga?.daftar;
+  if (!Array.isArray(daftar)) return groups;
+  const next = daftar.map((r) => {
+    if (!r || typeof r !== "object" || Array.isArray(r)) return r;
+    const row = r as Record<string, unknown>;
+    return {
+      ...row,
+      gambar: typeof row.gambar === "string" ? row.gambar : "",
+    };
+  });
+  return {
+    ...groups,
+    program_warga: { ...groups.program_warga, daftar: next },
+  };
+}
+
+function cloneCell(v: ListRow[string]): ListRow[string] {  if (Array.isArray(v)) return [];
+  if (typeof v === "boolean") return false;
+  if (typeof v === "number") return 0;
+  if (typeof v === "object" && v !== null) {
+    const out: Record<string, Scalar> = {};
+    Object.entries(v).forEach(([sk, sv]) => {
+      out[sk] =
+        typeof sv === "boolean" ? false : typeof sv === "number" ? 0 : "";
+    });
+    return out;
+  }
+  return "";
+}
+
+function isImageKey(k: string): boolean {
+  return k === "logo" || /gambar/i.test(k);
+}
+
+function StructuredFieldEditor({
+  value,
+  onChange,
+  fieldKey,
+}: {
+  value: unknown;
+  onChange: (next: unknown) => void;
+  fieldKey?: string;
+}) {
+  if (fieldKey && isImageKey(fieldKey)) {
+    return (
+      <ImageEditor
+        value={typeof value === "string" ? value : ""}
+        onUploaded={(path) => onChange(path)}
+        onClear={() => onChange("")}
+        alt={toLabel(fieldKey)}
+      />
+    );
+  }
+
+  if (value === null || value === undefined) {
+    return (
+      <Input value="" onChange={(e) => onChange(e.target.value)} />
+    );
+  }
+
+  if (typeof value === "string") {
+    const isLong = value.length > 60 || value.includes("\n");
+    return isLong ? (
+      <Textarea
+        rows={5}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    ) : (
+      <Input value={value} onChange={(e) => onChange(e.target.value)} />
+    );
+  }
+
+  if (typeof value === "number") {
+    return (
+      <Input
+        type="number"
+        value={String(value)}
+        onChange={(e) =>
+          onChange(e.target.value === "" ? 0 : Number(e.target.value))
+        }
+      />
+    );
+  }
+
+  if (typeof value === "boolean") {
+    return (
+      <div className="flex items-center gap-3">
+        <Switch
+          checked={value}
+          onCheckedChange={(v) => onChange(v)}
+        />
+        <span className="text-sm text-muted-foreground">
+          {value ? "Ya / Aktif" : "Tidak / Nonaktif"}
+        </span>
+      </div>
+    );
+  }
+
+  if (Array.isArray(value)) {
+    if (value.every((x) => typeof x === "string")) {
+      return (
+        <Textarea
+          rows={6}
+          value={value.join("\n")}
+          onChange={(e) => onChange(e.target.value.split("\n"))}
+        />
+      );
+    }
+    return <ListEditor value={value as ListRow[]} onChange={onChange} />;
+  }
+
+  if (typeof value === "object" && value !== null) {
+    const record = value as Record<string, unknown>;
+    return (
+      <div className="grid gap-3 sm:grid-cols-2">
+        {Object.entries(record).map(([k, v]) => (
+          <div key={k} className="space-y-1">
+            <Label className="text-xs text-muted-foreground">
+              {toLabel(k)}
+            </Label>
+            <StructuredFieldEditor
+              value={v}
+              fieldKey={k}
+              onChange={(nv) => onChange({ ...record, [k]: nv })}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return null;
 }
 
 function SettingEditor({
@@ -472,34 +555,13 @@ function SettingEditor({
   const [editValue, setEditValue] = useState<unknown>(value);
   const [dirty, setDirty] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [showJson, setShowJson] = useState(false);
-  const [jsonRaw, setJsonRaw] = useState(() => JSON.stringify(value, null, 2));
 
-  const kind =
-    typeof editValue === "boolean"
-      ? "boolean"
-      : typeof editValue === "number"
-        ? "number"
-        : typeof editValue === "string"
-          ? "text"
-          : isStringArray(editValue)
-            ? "lines"
-            : isFlatObject(editValue)
-              ? "fields"
-              : Array.isArray(editValue) && editValue.every(isListRow)
-                ? "list"
-                : "complex";
-
-  const isHeroImage =
-    (group === "hero" && settingKey === "gambar") ||
-    (group === "identitas" && settingKey === "logo");
+  const isImageField =
+    settingKey === "logo" || /gambar/i.test(settingKey);
 
   const isProfilRich =
     group === "profil" &&
     (settingKey === "visi" || settingKey === "misi" || settingKey === "sejarah");
-
-  const isLongText =
-    typeof editValue === "string" && (editValue.length > 60 || editValue.includes("\n"));
 
   const handleChange = (next: unknown) => {
     setEditValue(next);
@@ -524,32 +586,18 @@ function SettingEditor({
     }
   };
 
-  const handleSaveFriendly = () => {
+  const handleSave = () => {
     let next: unknown = editValue;
-    if (kind === "lines") {
-      next = (editValue as string[]).map((s) => s.trim()).filter(Boolean);
+    if (Array.isArray(next) && next.every((x) => typeof x === "string")) {
+      next = (next as string[]).map((s) => s.trim()).filter(Boolean);
     }
-    if (kind === "number") {
-      next = Number(editValue);
-    }
+    if (typeof next === "number" && !Number.isFinite(next)) next = 0;
     void save(next);
-  };
-
-  const handleSaveJson = () => {
-    let parsed: unknown;
-    try {
-      parsed = JSON.parse(jsonRaw);
-    } catch {
-      toast.error("JSON tidak valid. Periksa kembali formatnya.");
-      return;
-    }
-    void save(parsed);
   };
 
   const reset = () => {
     setEditValue(value);
     setDirty(false);
-    setJsonRaw(JSON.stringify(value, null, 2));
   };
 
   const label = SETTING_LABELS[`${group}.${settingKey}`]?.label ?? toLabel(settingKey);
@@ -564,192 +612,51 @@ function SettingEditor({
             <p className="mt-0.5 text-xs text-muted-foreground">{desc}</p>
           )}
         </div>
-        <div className="flex items-center gap-2">
-          {dirty && (
-            <Badge variant="secondary" className="text-amber-600">
-              Belum disimpan
-            </Badge>
-          )}
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setShowJson((v) => !v)}
-          >
-            <Code2 className="size-3.5" />
-            {showJson ? "Tutup JSON" : "JSON (Lanjutan)"}
-          </Button>
-        </div>
+        {dirty && (
+          <Badge variant="secondary" className="text-amber-600">
+            Belum disimpan
+          </Badge>
+        )}
       </div>
 
-      {!showJson && (
-        <>
-          {isHeroImage ? (
-            <HeroImageEditor
-              value={value as string}
-              onUploaded={(path) => void save(path)}
-              onClear={() => void save("")}
-            />
-          ) : isProfilRich ? (
-            <RichTextEditor
-              value={toRichText(editValue, settingKey === "misi")}
-              onChange={(html) => handleChange(html)}
-              placeholder={
-                settingKey === "visi"
-                  ? "Tuliskan visi RW 04..."
-                  : settingKey === "misi"
-                    ? "Tuliskan misi RW 04, satu poin per baris..."
-                    : "Tuliskan sejarah RW 04..."
-              }
-            />
-          ) : (
-            <>
-              {kind === "boolean" && (
-                <div className="flex items-center gap-3">
-                  <Switch
-                    checked={editValue as boolean}
-                    onCheckedChange={(v) => handleChange(v)}
-                  />
-                  <span className="text-sm text-muted-foreground">
-                    {(editValue as boolean) ? "Ya / Aktif" : "Tidak / Nonaktif"}
-                  </span>
-                </div>
-              )}
-
-              {kind === "number" && (
-                <Input
-                  type="number"
-                  value={String(editValue)}
-                  onChange={(e) =>
-                    handleChange(
-                      e.target.value === "" ? 0 : Number(e.target.value)
-                    )
-                  }
-                />
-              )}
-
-              {kind === "text" && isLongText && (
-                <Textarea
-                  rows={5}
-                  value={editValue as string}
-                  onChange={(e) => handleChange(e.target.value)}
-                />
-              )}
-              {kind === "text" && !isLongText && (
-                <Input
-                  value={editValue as string}
-                  onChange={(e) => handleChange(e.target.value)}
-                />
-              )}
-
-              {kind === "lines" && (
-                <Textarea
-                  rows={6}
-                  value={(editValue as string[]).join("\n")}
-                  onChange={(e) => handleChange(e.target.value.split("\n"))}
-                />
-              )}
-
-              {kind === "fields" && (
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {Object.entries(editValue as Record<string, Scalar>).map(
-                    ([k, v]) => (
-                      <div key={k} className="space-y-1">
-                        <Label className="text-xs text-muted-foreground">
-                          {toLabel(k)}
-                        </Label>
-                        {typeof v === "boolean" ? (
-                          <Switch
-                            checked={v}
-                            onCheckedChange={(nv) =>
-                              handleChange({
-                                ...(editValue as Record<string, Scalar>),
-                                [k]: nv,
-                              })
-                            }
-                          />
-                        ) : (
-                          <Input
-                            type={typeof v === "number" ? "number" : "text"}
-                            value={String(v)}
-                            onChange={(e) =>
-                              handleChange({
-                                ...(editValue as Record<string, Scalar>),
-                                [k]:
-                                  typeof v === "number"
-                                    ? e.target.value === ""
-                                      ? 0
-                                      : Number(e.target.value)
-                                    : e.target.value,
-                              })
-                            }
-                          />
-                        )}
-                      </div>
-                    )
-                  )}
-                </div>
-              )}
-
-              {kind === "list" && (
-                <ListEditor
-                  value={editValue as ListRow[]}
-                  onChange={handleChange}
-                />
-              )}
-
-              {kind === "complex" && (
-                <p className="rounded-xs border border-dashed border-border bg-muted/30 p-3 text-sm text-muted-foreground">
-                  Data ini memiliki struktur khusus. Gunakan tab{" "}
-                  <span className="font-medium">JSON (Lanjutan)</span> untuk
-                  mengubahnya.
-                </p>
-              )}
-            </>
-          )}
-
-          {dirty && (
-            <div className="mt-4 flex items-center justify-end gap-2 border-t border-slate-100 pt-4">
-              <Button variant="outline" size="sm" onClick={reset}>
-                Batal
-              </Button>
-              <Button
-                size="sm"
-                disabled={saving}
-                onClick={handleSaveFriendly}
-                className="bg-brand-primary hover:bg-brand-primary-hover"
-              >
-                <Save className="size-3.5" />
-                {saving ? "Menyimpan..." : "Simpan"}
-              </Button>
-            </div>
-          )}
-        </>
+      {isImageField ? (
+        <ImageEditor
+          value={value as string}
+          onUploaded={(path) => void save(path)}
+          onClear={() => void save("")}
+          alt={label.toLowerCase()}
+        />
+      ) : isProfilRich ? (
+        <RichTextEditor
+          value={toRichText(editValue, settingKey === "misi")}
+          onChange={(html) => handleChange(html)}
+          placeholder={
+            settingKey === "visi"
+              ? "Tuliskan visi RW 004..."
+              : settingKey === "misi"
+                ? "Tuliskan misi RW 004, satu poin per baris..."
+                : "Tuliskan sejarah RW 004..."
+          }
+        />
+      ) : (
+        <StructuredFieldEditor value={editValue} onChange={handleChange} />
       )}
 
-      {showJson && (
-        <>
-          <Textarea
-            rows={8}
-            value={jsonRaw}
-            onChange={(e) => setJsonRaw(e.target.value)}
-            className="font-mono text-xs"
-            spellCheck={false}
-          />
-          <div className="mt-3 flex items-center justify-end gap-2">
-            <Button variant="outline" size="sm" onClick={() => setShowJson(false)}>
-              Batal
-            </Button>
-            <Button
-              size="sm"
-              disabled={saving}
-              onClick={handleSaveJson}
-              className="bg-brand-primary hover:bg-brand-primary-hover"
-            >
-              <Save className="size-3.5" />
-              {saving ? "Menyimpan..." : "Simpan"}
-            </Button>
-          </div>
-        </>
+      {dirty && (
+        <div className="mt-4 flex items-center justify-end gap-2 border-t border-slate-100 pt-4">
+          <Button variant="outline" size="sm" onClick={reset}>
+            Batal
+          </Button>
+          <Button
+            size="sm"
+            disabled={saving}
+            onClick={handleSave}
+            className="bg-brand-primary hover:bg-brand-primary-hover"
+          >
+            <Save className="size-3.5" />
+            {saving ? "Menyimpan..." : "Simpan"}
+          </Button>
+        </div>
       )}
     </div>
   );
@@ -761,7 +668,7 @@ export default function AdminPengaturanPage() {
     []
   );
 
-  const groups = data?.data ?? {};
+  const groups = normalizeSettings(data?.data ?? {});
   const groupNames = Object.keys(groups);
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
   const [query, setQuery] = useState("");

@@ -15,7 +15,7 @@ class PengajuanController extends Controller
     public function store(StorePengajuanRequest $request): JsonResponse
     {
         $pengajuan = Pengajuan::create([
-            'kode' => 'PRW-' . strtoupper(now()->format('ymd')) . '-' . strtoupper(Str::random(5)),
+            'kode' => 'PRW004-' . strtoupper(now()->format('ymd')) . '-' . strtoupper(Str::random(5)),
             'nik' => $request->nik,
             'nama' => $request->nama,
             'jenis_layanan' => $request->jenis_layanan,

@@ -117,7 +117,7 @@ export default function AdminDashboardPage() {
             {user?.name ?? "Admin"}
           </h1>
           <p className="mt-1 text-sm text-white/75">
-            Ringkasan konten dan aktivitas pengelolaan Sekretariat RW 04.
+            Ringkasan konten dan aktivitas pengelolaan Sekretariat RW 004.
           </p>
         </div>
         <Button

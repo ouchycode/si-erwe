@@ -4,13 +4,13 @@ import Image from "next/image";
 import { ContentSection } from "@/components/ui/ContentSection";
 import { getSettings, getGroup } from "@/lib/settings";
 
-export const metadata = { title: "Pos Pelayanan Terpadu (Posyandu) - RW 04 Pabuaran, Kota Tangerang" };
+export const metadata = { title: "Pos Pelayanan Terpadu (Posyandu) - RW 004 Pabuaran, Kota Tangerang" };
 
 const DEFAULTS = {
-  deskripsi: "Pos Pelayanan Terpadu kesehatan ibu, anak, dan lanjut usia RW 04 Pabuaran, Kota Tangerang",
+  deskripsi: "Pos Pelayanan Terpadu kesehatan ibu, anak, dan lanjut usia RW 004 Pabuaran, Kota Tangerang",
   s1Judul: "Kader Posyandu & Pelayanan",
   s1Teks: [
-    "Layanan Posyandu RW 04 Pabuaran digerakkan oleh para kader kesehatan yang terlatih dan berdedikasi tinggi. Mereka bertugas memberikan pelayanan kesehatan dasar bagi ibu hamil, bayi, balita, serta warga lanjut usia (lansia) di lingkungan sekitar.",
+    "Layanan Posyandu RW 004 Pabuaran digerakkan oleh para kader kesehatan yang terlatih dan berdedikasi tinggi. Mereka bertugas memberikan pelayanan kesehatan dasar bagi ibu hamil, bayi, balita, serta warga lanjut usia (lansia) di lingkungan sekitar.",
     "Kader juga memberikan edukasi kesehatan kepada masyarakat untuk meningkatkan kesadaran gizi dan kualitas hidup warga sejak usia dini.",
   ],
   s1Kutipan:
@@ -18,8 +18,8 @@ const DEFAULTS = {
   s1Gambar: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop",
   s2Judul: "Fasilitas & Layanan Kesehatan",
   s2Teks: [
-    "Gedung Posyandu RW 04 Pabuaran dilengkapi dengan fasilitas yang memadai untuk menunjang kegiatan pelayanan kesehatan secara optimal. Bekerja sama dengan tenaga kesehatan dari Puskesmas setempat, kami menyediakan layanan imunisasi dasar lengkap, pemeriksaan ibu hamil, hingga pengecekan kesehatan preventif seperti tekanan darah dan gula darah bagi lansia.",
-    "Partisipasi aktif warga sangat diharapkan dalam setiap kegiatan Posyandu yang diselenggarakan. Dengan fasilitas yang mudah dijangkau dan pelayanan yang ramah serta profesional, kami berkomitmen untuk mewujudkan generasi penerus yang sehat, kuat, dan cerdas, sekaligus menjaga kesejahteraan kesehatan para lansia di lingkungan RW 04 Pabuaran.",
+    "Gedung Posyandu RW 004 Pabuaran dilengkapi dengan fasilitas yang memadai untuk menunjang kegiatan pelayanan kesehatan secara optimal. Bekerja sama dengan tenaga kesehatan dari Puskesmas setempat, kami menyediakan layanan imunisasi dasar lengkap, pemeriksaan ibu hamil, hingga pengecekan kesehatan preventif seperti tekanan darah dan gula darah bagi lansia.",
+    "Partisipasi aktif warga sangat diharapkan dalam setiap kegiatan Posyandu yang diselenggarakan. Dengan fasilitas yang mudah dijangkau dan pelayanan yang ramah serta profesional, kami berkomitmen untuk mewujudkan generasi penerus yang sehat, kuat, dan cerdas, sekaligus menjaga kesejahteraan kesehatan para lansia di lingkungan RW 004 Pabuaran.",
   ],
   s2Gambar: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=1200&auto=format&fit=crop",
 };

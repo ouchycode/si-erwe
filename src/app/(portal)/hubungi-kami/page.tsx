@@ -50,7 +50,7 @@ export default function HubungiKami() {
       setKategori("pertanyaan");
       setPesan("");
       toast.success("Pesan Terkirim", {
-        description: "Terima kasih! Pesan Anda telah terkirim ke sekretariat RW 04.",
+        description: "Terima kasih! Pesan Anda telah terkirim ke sekretariat RW 004.",
       });
     } catch (err: unknown) {
       toast.error("Gagal mengirim pesan", {
@@ -66,7 +66,7 @@ export default function HubungiKami() {
       <PageHeader
         category="Layanan Warga"
         title="Hubungi Kami"
-        description="Punya pertanyaan, keluhan, atau saran? Hubungi sekretariat RW 04 melalui formulir atau kontak di bawah ini."
+        description="Punya pertanyaan, keluhan, atau saran? Hubungi sekretariat RW 004 melalui formulir atau kontak di bawah ini."
       />
 
       <ContentSection>

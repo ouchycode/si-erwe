@@ -1,13 +1,13 @@
 export const ALAMAT = {
-  tempat: "Gedung Serbaguna RW 04",
-  jalan: "Jl. Pabuaran Raya No.1A",
+  tempat: "Gedung Serbaguna RW 004",
+  jalan: "Jl. Darma Bakti No.64, RT.001/RW.005",
   kelurahan: "Pabuaran",
   kecamatan: "Karawaci",
   kota: "Kota Tangerang",
   provinsi: "Banten",
   kodePos: "15114",
-  full: "Gedung Serbaguna RW 04, Jl. Pabuaran Raya No.1A, Pabuaran, Kec. Karawaci, Kota Tangerang, Banten 15114",
-  singkat: "Sekretariat RW 04 Pabuaran, Karawaci, Kota Tangerang",
+  full: "Gedung Serbaguna RW 004, Jl. Darma Bakti No.64, RT.001/RW.005, Pabuaran, Kec. Karawaci, Kota Tangerang, Banten 15114",
+  singkat: "Sekretariat RW 004 Pabuaran, Karawaci, Kota Tangerang",
 } as const;
 
 export const KONTAK = {

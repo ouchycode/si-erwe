@@ -139,6 +139,7 @@ export interface ProgramWargaItem {
   subtitle: string;
   deskripsi: string;
   detail: string[];
+  gambar?: string;
   jadwal?: { waktu: string; tempat: string };
 }
 

@@ -1,9 +1,9 @@
-import { FileText, CreditCard, FileBadge, CheckCircle2, Clock, AlertCircle, FileSignature, MapPin } from "lucide-react";
+import { FileText, CreditCard, FileBadge, CheckCircle2, Clock, AlertCircle, MessageCircle } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ContentSection } from "@/components/ui/ContentSection";
-import { PengajuanForm, CekStatusPengajuan } from "@/components/forms/PengajuanForm";
 import { getSettings, getGroup } from "@/lib/settings";
-import type { LayananAdministrasi, LayananAlur } from "@/lib/types";
+import { KONTAK } from "@/lib/constants";
+import type { LayananAdministrasi, LayananAlur, SekretariatKontak } from "@/lib/types";
 
 export const metadata = { title: "Administrasi Kependudukan" };
 
@@ -45,7 +45,7 @@ const DEFAULT_ALUR: LayananAlur[] = [
   {
     step: "03",
     title: "Validasi RW",
-    desc: "Bawa surat yang sudah ditandatangani RT ke Sekretariat RW 04 untuk validasi stempel.",
+    desc: "Bawa surat yang sudah ditandatangani RT ke Sekretariat RW 004 untuk validasi stempel.",
   },
   {
     step: "04",
@@ -70,12 +70,15 @@ export default async function AdministrasiKependudukan() {
 
   const ALUR = alurSetting && alurSetting.length > 0 ? alurSetting : DEFAULT_ALUR;
 
+  const kontakInfo = (getGroup<SekretariatKontak>(settings, "kontak", "sekretariat") ?? KONTAK) as SekretariatKontak;
+  const waTelp = kontakInfo.waTelp || KONTAK.waTelp;
+
   return (
     <div className="min-h-screen bg-white font-sans pb-20">
       <PageHeader
         category="Layanan Warga"
         title="Administrasi Kependudukan"
-        description="Alur, persyaratan, dan panduan pengurusan dokumen kependudukan untuk warga RW 04 Pabuaran, Kota Tangerang."
+        description="Alur, persyaratan, dan panduan pengurusan dokumen kependudukan untuk warga RW 004 Pabuaran, Kota Tangerang."
       />
 
       {/* ALUR */}
@@ -107,31 +110,33 @@ export default async function AdministrasiKependudukan() {
         </div>
       </ContentSection>
 
-      {/* FORM PENGAJUAN */}
+      {/* PENGAJUAN VIA WHATSAPP */}
       <section className="bg-slate-50 py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="bg-white shadow-xl overflow-hidden rounded-xs">
-            <div data-aos="fade-up" className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.65fr]">
+            <div data-aos="fade-up" className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr]">
               <div data-aos="fade-up" className="bg-brand-primary text-white p-6 md:p-8 flex flex-col justify-between gap-8">
                 <div>
                   <div className="w-10 h-10 bg-white/10 rounded-xs flex items-center justify-center mb-5">
-                    <FileSignature size={18} className="text-white/70" />
+                    <MessageCircle size={18} className="text-white/70" />
                   </div>
                   <p className="text-[11px] font-bold uppercase tracking-widest text-white/40 mb-3">
                     Pengajuan Awal
                   </p>
                   <h3 className="text-2xl font-bold text-white mb-4 leading-tight">
-                    Mulai Proses <br /> Administrasi Anda
+                    Ajukan Melalui <br /> WhatsApp
                   </h3>
                   <p className="text-sm text-white/70 leading-relaxed">
-                    Kini Anda bisa memulai pengajuan surat pengantar secara online sebelum mengambil dokumen fisik di pos RT/RW.
+                    Kirim permohonan surat pengantar langsung ke WhatsApp
+                    sekretariat. Tim kami akan memproses dan memberi tahu
+                    hasilnya.
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-3 bg-white/10 rounded-xs p-3">
-                    <MapPin size={16} className="text-white" />
-                    <p className="text-xs font-semibold text-white/90">Ambil di Sekretariat RW</p>
+                    <MessageCircle size={16} className="text-white" />
+                    <p className="text-xs font-semibold text-white/90">Chat dengan Admin Sekretariat</p>
                   </div>
                   <div className="flex items-center gap-3 bg-white/10 rounded-xs p-3">
                     <Clock size={16} className="text-white" />
@@ -140,12 +145,29 @@ export default async function AdministrasiKependudukan() {
                 </div>
               </div>
 
-              <PengajuanForm />
-            </div>
-          </div>
+              <div data-aos="fade-up" className="p-6 md:p-8 flex flex-col justify-center gap-6">
+                <div>
+                  <h3 className="text-xl font-bold text-slate-800 mb-2">Siapkan Data Anda</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    Siapkan NIK, nama lengkap sesuai KTP, dan jenis surat yang
+                    dibutuhkan sebelum menghubungi kami.
+                  </p>
+                </div>
 
-          <div className="bg-white shadow-xl overflow-hidden rounded-xs mt-8">
-            <CekStatusPengajuan />
+                <a
+                  href={`https://wa.me/${waTelp}?text=${encodeURIComponent("Halo Admin RW 004, saya ingin mengajukan surat pengantar. Berikut data saya:\n\nNama: ...\nNIK: ...\nJenis surat: ...\nKeperluan: ...")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-xs bg-[#25D366] px-6 py-4 text-sm font-bold text-white transition-opacity hover:opacity-90"
+                >
+                  <MessageCircle size={18} />
+                  Ajukan via WhatsApp
+                </a>
+                <p className="text-xs text-gray-400">
+                  Klik tombol di atas untuk membuka obrolan WhatsApp dengan sekretariat.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

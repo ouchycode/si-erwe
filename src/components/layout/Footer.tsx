@@ -74,7 +74,7 @@ export default function Footer() {
         </div>
 
         <div className="flex md:hidden flex-col items-center text-center gap-4 pb-4">
-          <h4 className="text-base font-bold text-slate-800">Sekretariat RW 04</h4>
+          <h4 className="text-base font-bold text-slate-800">Sekretariat RW 004</h4>
           <div className="text-sm text-gray-500 leading-relaxed">
             <p>{alamat.jalan}</p>
             <p>{alamat.kelurahan}, {alamat.kecamatan}</p>
@@ -97,7 +97,7 @@ export default function Footer() {
 
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
           <div className="flex flex-col gap-4 lg:col-span-1">
-            <h4 className="text-sm font-bold uppercase tracking-wide text-slate-800">Sekretariat RW 04</h4>
+            <h4 className="text-sm font-bold uppercase tracking-wide text-slate-800">Sekretariat RW 004</h4>
             <div className="flex flex-col gap-1 text-sm text-gray-500 leading-relaxed">
               <p>{alamat.tempat}</p>
               <p>{alamat.jalan}</p>
@@ -141,7 +141,7 @@ export default function Footer() {
       <div className="border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-5">
           <div className="flex flex-col items-center justify-center gap-1.5 text-xs text-gray-400 text-center">
-            <p>&copy; 2026 Sekretariat RW 04 Pabuaran.</p>
+            <p>&copy; 2026 Sekretariat RW 004 Pabuaran.</p>
             <p>Developed by KKN UYM Threeverse Bytewizard Team 2026.</p>
           </div>
         </div>

@@ -16,12 +16,12 @@ const DEFAULT_UMUM: ProfilUmum = {
 };
 
 const DEFAULT_SEJARAH = [
-  "RW 04 Pabuaran, Kota Tangerang, dibentuk seiring dengan perkembangan pesat pemukiman di wilayah Kota Tangerang. Pada awalnya, wilayah ini hanya terdiri dari beberapa Rukun Tetangga yang terus berkembang hingga sekarang.",
-  "Seiring bertambahnya jumlah penduduk, RW 04 kini menaungi 5 RT. Warga RW 04 dikenal dengan semangat kegotongroyongannya yang tinggi, multikultural, dan aktif dalam berbagai kegiatan sosial kemasyarakatan.",
+  "RW 004 Pabuaran, Kota Tangerang, dibentuk seiring dengan perkembangan pesat pemukiman di wilayah Kota Tangerang. Pada awalnya, wilayah ini hanya terdiri dari beberapa Rukun Tetangga yang terus berkembang hingga sekarang.",
+  "Seiring bertambahnya jumlah penduduk, RW 004 kini menaungi 5 RT. Warga RW 004 dikenal dengan semangat kegotongroyongannya yang tinggi, multikultural, dan aktif dalam berbagai kegiatan sosial kemasyarakatan.",
 ];
 
 const DEFAULT_VISI =
-  "Terwujudnya lingkungan RW 04 yang Aman, Bersih, Guyub, dan Sejahtera berlandaskan nilai-nilai Ketuhanan dan Gotong Royong.";
+  "Terwujudnya lingkungan RW 004 yang Aman, Bersih, Guyub, dan Sejahtera berlandaskan nilai-nilai Ketuhanan dan Gotong Royong.";
 
 const DEFAULT_MISI = [
   "Meningkatkan sistem keamanan lingkungan terpadu.",
@@ -49,8 +49,8 @@ export default async function ProfilRW() {
     <div className="min-h-screen bg-white font-sans pb-20">
       <PageHeader
         category="Tentang Kami"
-        title="Profil & Sejarah RW 04"
-        description="Mengenal lebih dekat lingkungan RW 04 Pabuaran, Kota Tangerang — bersama membangun kehidupan bertetangga yang rukun, aman, dan sejahtera."
+        title="Profil & Sejarah RW 004"
+        description="Mengenal lebih dekat lingkungan RW 004 Pabuaran, Kota Tangerang — bersama membangun kehidupan bertetangga yang rukun, aman, dan sejahtera."
         rightContent={
           <div className="flex items-center gap-4 bg-white/10 border border-white/20 rounded-xs px-6 py-4 shrink-0">
             <div className="w-10 h-10 bg-white/10 rounded-xs flex items-center justify-center">
@@ -203,7 +203,7 @@ export default async function ProfilRW() {
                   </div>
                   <div className="bg-slate-50 py-4">
                     <p className="text-sm text-center text-gray-500 font-medium">
-                      Peta Lokasi RW 04 Pabuaran
+                      Peta Lokasi RW 004 Pabuaran
                     </p>
                   </div>
                 </div>

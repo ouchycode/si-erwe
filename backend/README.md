@@ -1,6 +1,6 @@
-# Backend API — Sistem Informasi RW 04 Pabuaran
+# Backend API — Sistem Informasi RW 004 Pabuaran
 
-REST API untuk website Sekretariat RW 04 Pabuaran (frontend Next.js di `../`).
+REST API untuk website Sekretariat RW 004 Pabuaran (frontend Next.js di `../`).
 
 - **Stack:** Laravel 13, PHP 8.3, MySQL, Sanctum (token auth)
 - **Format:** JSON — semua endpoint publik & admin

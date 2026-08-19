@@ -77,7 +77,7 @@ export default async function DetailBerita({ params }: { params: Promise<{ slug:
                 </div>
                 <div>
                   <p className="text-sm font-bold text-slate-800">
-                    {berita.author ?? "Sekretariat RW 04"}
+                    {berita.author ?? "Sekretariat RW 004"}
                   </p>
                   <p className="text-xs text-gray-400">{berita.views} kali dibaca</p>
                 </div>

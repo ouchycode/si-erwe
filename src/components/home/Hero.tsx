@@ -32,7 +32,7 @@ export default function Hero() {
         {heroImage ? (
           <Image
             src={heroImage}
-            alt="Lingkungan RW 04"
+            alt="Lingkungan RW 004"
             fill
             priority
             className="object-cover opacity-55"
@@ -44,7 +44,7 @@ export default function Hero() {
       <div className="relative z-10 mx-auto flex min-h-[64vh] max-w-7xl items-center px-4 py-20 md:px-8 md:py-28">
         <div data-aos="fade-up" className="max-w-3xl text-white">
           <h1 className="max-w-2xl text-3xl font-medium leading-tight tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.30)] md:text-5xl">
-            Sekretariat RW 04, rapi dan mudah diakses.
+            Sekretariat RW 004, rapi dan mudah diakses.
           </h1>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/85 drop-shadow-[0_1px_5px_rgba(0,0,0,0.22)] md:text-base">
             Satu pintu untuk informasi warga, layanan administrasi, dan

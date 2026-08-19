@@ -26,7 +26,7 @@ export default async function PengurusRT() {
     <div className="min-h-screen bg-white font-sans">
       <PageHeader
         title="Daftar Pengurus RT"
-        description={`Para ujung tombak pelayanan warga di lingkungan RW 04 Pabuaran — mengelola ${jumlahRt} wilayah RT dengan semangat gotong royong.`}
+        description={`Para ujung tombak pelayanan warga di lingkungan RW 004 Pabuaran — mengelola ${jumlahRt} wilayah RT dengan semangat gotong royong.`}
         rightContent={
           <div className="flex items-center gap-4 bg-white/10 border border-white/20 rounded-xs px-6 py-4 shrink-0">
             <div className="w-10 h-10 bg-white/10 rounded-xs flex items-center justify-center">
@@ -57,7 +57,7 @@ export default async function PengurusRT() {
                   RT {item.rt}
                 </h3>
                 <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest">
-                  RW 04
+                  RW 004
                 </span>
               </div>
               <div className="p-5 flex flex-col gap-4">
@@ -123,7 +123,7 @@ export default async function PengurusRT() {
               <div>
                 <h3 className="text-sm font-bold text-slate-800 mb-0.5">Periode Kepengurusan {periode}</h3>
                 <p className="text-xs text-gray-500 leading-relaxed">
-                  Seluruh Ketua RT berada di bawah koordinasi langsung Ketua RW 04 Pabuaran.
+                  Seluruh Ketua RT berada di bawah koordinasi langsung Ketua RW 004 Pabuaran.
                 </p>
               </div>
             </div>

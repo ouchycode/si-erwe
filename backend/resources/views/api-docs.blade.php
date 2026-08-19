@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
-    <title>Dokumentasi API — Sekretariat RW 04 Pabuaran</title>
+    <title>Dokumentasi API — Sekretariat RW 004 Pabuaran</title>
     <link rel="stylesheet" href="/vendor/swagger-ui/swagger-ui.css">
     <style>
         html { box-sizing: border-box; overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
@@ -17,7 +17,7 @@
 </head>
 <body>
     <div class="topbar">
-        <h1>Dokumentasi API — Sekretariat RW 04 Pabuaran</h1>
+        <h1>Dokumentasi API — Sekretariat RW 004 Pabuaran</h1>
         <p>REST API SI-RW12 | Base URL: <code>/api</code></p>
     </div>
     <div id="swagger-ui"></div>

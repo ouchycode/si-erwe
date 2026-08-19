@@ -14,7 +14,7 @@ export default function CTASection() {
               Ada pertanyaan atau butuh layanan administrasi?
             </h2>
             <p className="text-sm md:text-base text-white/60 leading-relaxed">
-              Hubungi sekretariat RW 04 atau kunjungi halaman layanan untuk
+              Hubungi sekretariat RW 004 atau kunjungi halaman layanan untuk
               informasi prosedur lengkap.
             </p>
           </div>

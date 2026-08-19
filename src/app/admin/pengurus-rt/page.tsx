@@ -150,7 +150,7 @@ export default function AdminPengurusRtPage() {
     <div className="space-y-6">
       <AdminPageHeader
         title="Kelola Pengurus RT"
-        subtitle="Kelola data ketua RT di lingkungan RW 04."
+        subtitle="Kelola data ketua RT di lingkungan RW 004."
         action={
           <Button className="bg-brand-primary hover:bg-brand-primary-hover" onClick={openCreate}>
             <Plus className="size-4" />

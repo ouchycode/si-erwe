@@ -3,20 +3,20 @@ import { Recycle, Truck } from "lucide-react";
 import Image from "next/image";
 import { getSettings, getGroup } from "@/lib/settings";
 
-export const metadata = { title: "Kebersihan Lingkungan - RW 04 Pabuaran, Kota Tangerang" };
+export const metadata = { title: "Kebersihan Lingkungan - RW 004 Pabuaran, Kota Tangerang" };
 
 const DEFAULTS = {
-  deskripsi: "Layanan kebersihan dan pengelolaan lingkungan RW 04 Pabuaran, Kota Tangerang",
+  deskripsi: "Layanan kebersihan dan pengelolaan lingkungan RW 004 Pabuaran, Kota Tangerang",
   s1Judul: "Petugas Kebersihan",
   s1Teks: [
-    "Kebersihan lingkungan RW 04 Pabuaran dijaga oleh tim kebersihan khusus yang berdedikasi tinggi. Petugas kebersihan bertugas setiap hari untuk mengumpulkan sampah dari rumah-rumah warga dan memastikan fasilitas umum serta jalanan tetap bersih dan nyaman untuk seluruh warga.",
+    "Kebersihan lingkungan RW 004 Pabuaran dijaga oleh tim kebersihan khusus yang berdedikasi tinggi. Petugas kebersihan bertugas setiap hari untuk mengumpulkan sampah dari rumah-rumah warga dan memastikan fasilitas umum serta jalanan tetap bersih dan nyaman untuk seluruh warga.",
     "Pengangkutan sampah dilakukan menggunakan armada gerobak motor (bentor) yang beroperasi sesuai jadwal rutin harian. Selain pengangkutan sampah dari rumah ke rumah, petugas kebersihan juga membantu dalam pemeliharaan taman, penyapuan jalan raya utama, dan pembersihan saluran air (drainase) secara berkala untuk mencegah genangan air saat musim hujan.",
   ],
   s1Gambar: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=1200&auto=format&fit=crop",
   s2Judul: "Sistem Pengelolaan Sampah",
   s2Teks: [
-    "Pengelolaan sampah di RW 04 Pabuaran dilakukan dengan sistem yang terpadu dan berwawasan lingkungan. Warga diimbau untuk memisahkan sampah organik dan anorganik sebelum diangkut oleh petugas. Sampah anorganik bernilai ekonomis dapat disetorkan secara kolektif ke Bank Sampah yang dikelola oleh kader PKK dan Karang Taruna setempat.",
-    "Sistem pengelolaan ini didukung oleh iuran kebersihan warga yang dikelola secara transparan oleh pengurus RW. Dana tersebut dialokasikan sepenuhnya untuk kesejahteraan petugas kebersihan, perawatan armada angkut, serta pengadaan alat kebersihan lingkungan. Dengan sinergi yang baik antara warga dan petugas, RW 04 Pabuaran berkomitmen menciptakan lingkungan yang asri, bersih, hijau, dan bebas dari penyakit menular.",
+    "Pengelolaan sampah di RW 004 Pabuaran dilakukan dengan sistem yang terpadu dan berwawasan lingkungan. Warga diimbau untuk memisahkan sampah organik dan anorganik sebelum diangkut oleh petugas. Sampah anorganik bernilai ekonomis dapat disetorkan secara kolektif ke Bank Sampah yang dikelola oleh kader PKK dan Karang Taruna setempat.",
+    "Sistem pengelolaan ini didukung oleh iuran kebersihan warga yang dikelola secara transparan oleh pengurus RW. Dana tersebut dialokasikan sepenuhnya untuk kesejahteraan petugas kebersihan, perawatan armada angkut, serta pengadaan alat kebersihan lingkungan. Dengan sinergi yang baik antara warga dan petugas, RW 004 Pabuaran berkomitmen menciptakan lingkungan yang asri, bersih, hijau, dan bebas dari penyakit menular.",
   ],
   s2Gambar: "https://images.unsplash.com/photo-1604187351574-c75ca79f5807?q=80&w=800&auto=format&fit=crop",
 };

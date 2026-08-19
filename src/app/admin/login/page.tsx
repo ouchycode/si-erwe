@@ -55,9 +55,9 @@ export default function AdminLoginPage() {
           <div className="mb-3 flex size-14 items-center justify-center rounded-xs bg-brand-primary text-white shadow-md">
             <Shield className="size-7" />
           </div>
-          <h1 className="text-xl font-bold text-slate-800 tracking-tight">Admin RW 04</h1>
+          <h1 className="text-xl font-bold text-slate-800 tracking-tight">Admin RW 004</h1>
           <p className="mt-1 text-sm text-slate-500">
-            Masuk untuk mengelola konten situs Sekretariat RW 04
+            Masuk untuk mengelola konten situs Sekretariat RW 004
           </p>
         </div>
 

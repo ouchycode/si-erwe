@@ -151,8 +151,8 @@ export default function StatistikPage() {
     <div className="min-h-screen bg-white font-sans pb-20">
       <PageHeader
         category="Data Demografi"
-        title="Statistik Warga RW 04"
-        description="Visualisasi data kependudukan, demografi, dan persebaran warga di lingkungan RW 04 Pabuaran yang diperbarui secara berkala."
+        title="Statistik Warga RW 004"
+        description="Visualisasi data kependudukan, demografi, dan persebaran warga di lingkungan RW 004 Pabuaran yang diperbarui secara berkala."
         rightContent={
           <div className="flex items-center gap-3 bg-white/10 border border-white/20 rounded-xs px-5 py-4 shrink-0">
             <BarChart2 size={16} className="text-white/70" />

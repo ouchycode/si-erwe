@@ -44,8 +44,8 @@ export default function GaleriPage() {
     <div className="min-h-screen bg-white font-sans pb-20">
       <PageHeader
         category="Dokumentasi"
-        title="Galeri Kegiatan RW 04"
-        description="Kumpulan foto dan dokumentasi kegiatan warga, rapat pengurus, serta momen-momen penting di lingkungan RW 04."
+        title="Galeri Kegiatan RW 004"
+        description="Kumpulan foto dan dokumentasi kegiatan warga, rapat pengurus, serta momen-momen penting di lingkungan RW 004."
         rightContent={
           <div className="flex items-center gap-3 bg-white/10 border border-white/20 rounded-xs px-5 py-4 shrink-0">
             <Camera size={16} className="text-white/70" />

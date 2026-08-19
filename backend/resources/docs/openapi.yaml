@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
-  title: API Sekretariat RW 04 Pabuaran
+  title: API Sekretariat RW 004 Pabuaran
   description: |
-    REST API untuk aplikasi Sistem Informasi Sekretariat RW 04 Pabuaran, Kecamatan Karawaci, Kota Tangerang.
+    REST API untuk aplikasi Sistem Informasi Sekretariat RW 004 Pabuaran, Kecamatan Karawaci, Kota Tangerang.
 
     - Base URL: `http://127.0.0.1:8000/api`
     - Format: `application/json`, kecuali unggah berkas menggunakan `multipart/form-data`.
@@ -10,7 +10,7 @@ info:
     - Seluruh endpoint publik dibatasi oleh `throttle` (60 permintaan/menit). Endpoint `POST /pengajuan` dan `POST /pesan` dibatasi 10 permintaan/menit.
   version: 1.0.0
   contact:
-    name: Sekretariat RW 04 Pabuaran
+    name: Sekretariat RW 004 Pabuaran
     email: admin@rw04pabuaran.id
 servers:
   - url: http://127.0.0.1:8000/api
@@ -341,7 +341,7 @@ paths:
                     example:
                       alamat:
                         sekretariat:
-                          full: Gedung Serbaguna RW 04
+                          full: Gedung Serbaguna RW 004
                       layanan:
                         administrasi: []
 

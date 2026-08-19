@@ -143,8 +143,8 @@ export default async function StrukturRW() {
   return (
     <div className="min-h-screen bg-white font-sans">
       <PageHeader
-        title="Struktur Organisasi RW 04"
-        description={`Sinergi pengurus dalam melayani dan mengelola lingkungan demi kenyamanan seluruh warga RW 04 Pabuaran periode ${periode}.`}
+        title="Struktur Organisasi RW 004"
+        description={`Sinergi pengurus dalam melayani dan mengelola lingkungan demi kenyamanan seluruh warga RW 004 Pabuaran periode ${periode}.`}
         rightContent={
           <div className="flex items-center gap-4 bg-white/10 border border-white/20 rounded-xs px-6 py-4 shrink-0">
             <div className="w-10 h-10 bg-white/10 rounded-xs flex items-center justify-center">

@@ -29,9 +29,9 @@ const DEFAULT_PROGRAMS: ProgramWargaItem[] = [
   {
     nama: "KWT",
     subtitle: "Kelompok Wanita Tani",
-    deskripsi: "Mengelola kebun lingkungan, bibit tanaman, dan kegiatan pangan keluarga bersama ibu-ibu warga RW 04.",
+    deskripsi: "Mengelola kebun lingkungan, bibit tanaman, dan kegiatan pangan keluarga bersama ibu-ibu warga RW 004.",
     detail: ["Kebun sayur bersama", "Pembibitan tanaman", "Edukasi pangan keluarga"],
-    jadwal: { waktu: "Sabtu pekan ke-1", tempat: "Kebun RW 04" },
+    jadwal: { waktu: "Sabtu pekan ke-1", tempat: "Kebun RW 004" },
   },
   {
     nama: "Bank Sampah",
@@ -45,7 +45,7 @@ const DEFAULT_PROGRAMS: ProgramWargaItem[] = [
 const ALUR = [
   "Hubungi kader atau Ketua RT setempat.",
   "Isi data warga yang ingin ikut kegiatan.",
-  "Datang sesuai jadwal program di lokasi RW 04.",
+  "Datang sesuai jadwal program di lokasi RW 004.",
 ];
 
 export default async function ProgramWarga() {
@@ -58,7 +58,10 @@ export default async function ProgramWarga() {
     icon: PROGRAM_ICON[p.nama] ?? Sprout,
     title: p.nama,
     subtitle: p.subtitle,
-    image: PROGRAM_IMAGES[p.nama] ?? fallbackImages[i % fallbackImages.length],
+    image:
+      p.gambar ||
+      (PROGRAM_IMAGES[p.nama] ??
+        fallbackImages[i % fallbackImages.length]),
     desc: p.deskripsi,
     detail: p.detail,
   }));
@@ -76,8 +79,8 @@ export default async function ProgramWarga() {
     <div className="min-h-screen bg-white font-sans pb-20">
       <PageHeader
         category="Informasi Publik"
-        title="Program Warga RW 04"
-        description="Informasi kegiatan KWT dan Bank Sampah sebagai ruang gotong royong warga RW 04 Pabuaran."
+        title="Program Warga RW 004"
+        description="Informasi kegiatan KWT dan Bank Sampah sebagai ruang gotong royong warga RW 004 Pabuaran."
       />
 
       <ContentSection>

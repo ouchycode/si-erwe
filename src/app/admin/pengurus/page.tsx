@@ -168,7 +168,7 @@ export default function AdminPengurusPage() {
     <div className="space-y-6">
       <AdminPageHeader
         title="Kelola Pengurus RW"
-        subtitle="Kelola susunan pengurus dan ketua RW 04."
+        subtitle="Kelola susunan pengurus dan ketua RW 004."
         action={
           <Button className="bg-brand-primary hover:bg-brand-primary-hover" onClick={openCreate}>
             <Plus className="size-4" />
@@ -304,7 +304,7 @@ export default function AdminPengurusPage() {
                 required
                 value={form.jabatan}
                 onChange={(e) => setForm({ ...form, jabatan: e.target.value })}
-                placeholder="Mis. Ketua RW 04, Sekretaris"
+                placeholder="Mis. Ketua RW 004, Sekretaris"
               />
             </div>
             <div className="space-y-1.5">

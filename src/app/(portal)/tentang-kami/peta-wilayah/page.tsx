@@ -8,7 +8,7 @@ export default function PetaWilayahPage() {
       <PageHeader
         category="Profil Lingkungan"
         title="Peta Wilayah Interaktif"
-        description="Jelajahi batas wilayah, lokasi sekretariat RW, serta titik sebaran Poskamling dan Fasilitas Umum di RW 04 Pabuaran."
+        description="Jelajahi batas wilayah, lokasi sekretariat RW, serta titik sebaran Poskamling dan Fasilitas Umum di RW 004 Pabuaran."
       />
 
       <ContentSection className="pt-0 md:pt-0 pb-0 md:pb-0">
