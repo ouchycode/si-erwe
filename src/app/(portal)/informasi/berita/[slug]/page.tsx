@@ -91,6 +91,7 @@ export default async function DetailBerita({ params }: { params: Promise<{ slug:
                   src={gambar}
                   alt={berita.judul}
                   fill
+                  priority
                   sizes="(max-width: 768px) 100vw, 66vw"
                   className="object-cover"
                 />

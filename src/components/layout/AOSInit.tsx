@@ -23,7 +23,7 @@ export default function AOSInit() {
   }, []);
 
   useEffect(() => {
-    AOS.refreshHard();
+    AOS.refresh();
   }, [pathname]);
 
   return null;

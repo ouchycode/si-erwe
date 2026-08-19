@@ -3,6 +3,7 @@ import { ContentSection } from "@/components/ui/ContentSection";
 import { Video, ShieldAlert } from "lucide-react";
 import Image from "next/image";
 import { getSettings, getGroup } from "@/lib/settings";
+import { resolveImageUrl } from "@/lib/api";
 
 export const metadata = { title: "Keamanan Wilayah - RW 004 Pabuaran, Kota Tangerang" };
 
@@ -64,10 +65,10 @@ export default async function KeamananWilayah() {
 
           <div data-aos="fade-up" className="relative h-[400px] lg:h-[500px] w-full rounded-xs overflow-hidden shadow-xl">
             <Image
-              src={(g("s1Gambar", DEFAULTS.s1Gambar) as string) || DEFAULTS.s1Gambar}
+              src={resolveImageUrl(g("s1Gambar", DEFAULTS.s1Gambar) as string) || DEFAULTS.s1Gambar}
               alt="Petugas Keamanan"
               fill
-              loading="eager"
+              priority
               className="object-cover"
             />
           </div>
@@ -80,7 +81,7 @@ export default async function KeamananWilayah() {
           <div data-aos="fade-up" className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="relative h-[400px] lg:h-[500px] w-full rounded-xs overflow-hidden shadow-xl order-2 lg:order-1">
               <Image
-                src={(g("s2Gambar", DEFAULTS.s2Gambar) as string) || DEFAULTS.s2Gambar}
+                src={resolveImageUrl(g("s2Gambar", DEFAULTS.s2Gambar) as string) || DEFAULTS.s2Gambar}
                 alt="Sistem Pengawasan CCTV"
                 fill
                 className="object-cover"

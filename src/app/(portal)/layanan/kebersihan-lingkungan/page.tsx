@@ -2,6 +2,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Recycle, Truck } from "lucide-react";
 import Image from "next/image";
 import { getSettings, getGroup } from "@/lib/settings";
+import { resolveImageUrl } from "@/lib/api";
 
 export const metadata = { title: "Kebersihan Lingkungan - RW 004 Pabuaran, Kota Tangerang" };
 
@@ -42,10 +43,10 @@ export default async function KebersihanLingkungan() {
         <section className="bg-white shadow-[0_-8px_30px_-15px_rgba(0,0,0,0.1)] overflow-hidden">
           <div className="relative h-[400px] md:h-[500px] w-full">
             <Image
-              src={(g("s1Gambar", DEFAULTS.s1Gambar) as string) || DEFAULTS.s1Gambar}
+              src={resolveImageUrl(g("s1Gambar", DEFAULTS.s1Gambar) as string) || DEFAULTS.s1Gambar}
               alt="Petugas Kebersihan"
               fill
-              loading="eager"
+              priority
               className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent flex items-end">
@@ -92,7 +93,7 @@ export default async function KebersihanLingkungan() {
               </div>
               <div data-aos="fade-up" className="w-full lg:w-5/12 relative aspect-square lg:aspect-[4/3] rounded-xs overflow-hidden shadow-xl rotate-2 hover:rotate-0 transition-transform duration-500">
                 <Image
-                  src={(g("s2Gambar", DEFAULTS.s2Gambar) as string) || DEFAULTS.s2Gambar}
+                  src={resolveImageUrl(g("s2Gambar", DEFAULTS.s2Gambar) as string) || DEFAULTS.s2Gambar}
                   alt="Sistem Pengelolaan Sampah"
                   fill
                   className="object-cover"

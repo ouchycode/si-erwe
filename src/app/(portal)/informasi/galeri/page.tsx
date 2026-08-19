@@ -98,7 +98,7 @@ export default function GaleriPage() {
           </div>
         ) : (
           <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 gap-6 space-y-6" data-aos="fade-up">
-            {items.map((item) => {
+            {items.map((item, index) => {
               const src = resolveImageUrl(item.image) ?? "";
               return (
                 <div
@@ -113,6 +113,7 @@ export default function GaleriPage() {
                     alt={item.title}
                     width={800}
                     height={600}
+                    priority={index === 0}
                     className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
                   />
 

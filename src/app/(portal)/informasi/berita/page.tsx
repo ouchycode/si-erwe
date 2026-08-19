@@ -98,7 +98,7 @@ export default async function BeritaTerkini({
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             data-aos="fade-up"
           >
-            {beritaList.map((berita) => (
+            {beritaList.map((berita, index) => (
               <Link
                 key={berita.id}
                 href={`/informasi/berita/${berita.slug}`}
@@ -112,6 +112,7 @@ export default async function BeritaTerkini({
                       src={resolveImageUrl(berita.gambar) ?? ""}
                       alt={berita.judul}
                       fill
+                      priority={index === 0}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />

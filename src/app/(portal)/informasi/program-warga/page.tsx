@@ -11,6 +11,7 @@ import {
 import { ContentSection } from "@/components/ui/ContentSection";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { getSettings, getGroup } from "@/lib/settings";
+import { resolveImageUrl } from "@/lib/api";
 import type { ProgramWargaItem, SekretariatKontak } from "@/lib/types";
 
 export const metadata = { title: "Program Warga" };
@@ -59,7 +60,7 @@ export default async function ProgramWarga() {
     title: p.nama,
     subtitle: p.subtitle,
     image:
-      p.gambar ||
+      resolveImageUrl(p.gambar) ||
       (PROGRAM_IMAGES[p.nama] ??
         fallbackImages[i % fallbackImages.length]),
     desc: p.deskripsi,
@@ -87,7 +88,7 @@ export default async function ProgramWarga() {
         <div className="flex flex-col gap-12">
             {/* Program Cards */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-4xl mx-auto" data-aos="fade-up">
-              {programs.map(({ icon: Icon, title, subtitle, image, desc, detail }) => (
+              {programs.map(({ icon: Icon, title, subtitle, image, desc, detail }, index) => (
                 <article
                   key={title}
                   data-aos="fade-up"
@@ -99,6 +100,7 @@ export default async function ProgramWarga() {
                       src={image}
                       alt={`Kegiatan ${title}`}
                       fill
+                      priority={index === 0}
                       sizes="(min-width: 1024px) 33vw, 100vw"
                       className="object-cover transition-transform duration-500 hover:scale-105"
                     />

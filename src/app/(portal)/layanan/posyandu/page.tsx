@@ -3,6 +3,7 @@ import { Users, HeartPulse } from "lucide-react";
 import Image from "next/image";
 import { ContentSection } from "@/components/ui/ContentSection";
 import { getSettings, getGroup } from "@/lib/settings";
+import { resolveImageUrl } from "@/lib/api";
 
 export const metadata = { title: "Pos Pelayanan Terpadu (Posyandu) - RW 004 Pabuaran, Kota Tangerang" };
 
@@ -49,10 +50,10 @@ export default async function PosyanduPage() {
           <div className="flex flex-col lg:flex-row gap-16 items-center">
             <div data-aos="fade-up" className="w-full lg:w-5/12 relative aspect-[4/5] rounded-xs overflow-hidden shadow-xl">
               <Image
-                src={(g("s1Gambar", DEFAULTS.s1Gambar) as string) || DEFAULTS.s1Gambar}
+                src={resolveImageUrl(g("s1Gambar", DEFAULTS.s1Gambar) as string) || DEFAULTS.s1Gambar}
                 alt="Kader Posyandu"
                 fill
-                loading="eager"
+                priority
                 className="object-cover"
               />
             </div>
@@ -103,7 +104,7 @@ export default async function PosyanduPage() {
         <div className="w-full max-w-7xl mx-auto px-4 md:px-8 pb-16 md:pb-24">
           <div data-aos="fade-up" className="relative h-[400px] md:h-[600px] w-full rounded-xs overflow-hidden shadow-xl">
             <Image
-              src={(g("s2Gambar", DEFAULTS.s2Gambar) as string) || DEFAULTS.s2Gambar}
+              src={resolveImageUrl(g("s2Gambar", DEFAULTS.s2Gambar) as string) || DEFAULTS.s2Gambar}
               alt="Fasilitas Layanan Kesehatan"
               fill
               className="object-cover object-center"

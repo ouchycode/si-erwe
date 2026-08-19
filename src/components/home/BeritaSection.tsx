@@ -35,7 +35,7 @@ export default async function BeritaSection() {
 
         {/* 3 Column Minimal Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
-          {beritaList.map((news) => (
+          {beritaList.map((news, index) => (
             <Link
               key={news.id}
               href={`/informasi/berita/${news.slug}`}
@@ -50,6 +50,7 @@ export default async function BeritaSection() {
                     src={resolveImageUrl(news.gambar) ?? ""}
                     alt={news.judul}
                     fill
+                    priority={index === 0}
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
