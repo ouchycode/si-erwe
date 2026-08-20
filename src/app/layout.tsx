@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     default: "Sekretariat RW 004 Pabuaran, Karawaci",
   },
   description: "Situs resmi Sekretariat RW 004 Pabuaran, Karawaci, Kota Tangerang.",
+  verification: {
+    google: "CZ44k-zzgO9eENqJDecl_5ZbJ2OfugWTGKRYQoQh_68",
+  },
 };
 
 export default function RootLayout({
