@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { Plus, Pencil, Trash2, Search, House } from "lucide-react";
+import { Plus, Pencil, Trash2, Search, House, User } from "lucide-react";
 import { toast } from "sonner";
 
 import { admin } from "@/lib/adminApi";
@@ -224,8 +224,8 @@ export default function AdminPengurusRtPage() {
                           className="h-10 w-10 shrink-0 rounded-full object-cover"
                         />
                       ) : (
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-semibold text-muted-foreground">
-                          {item.ketua.charAt(0)}
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground">
+                          <User className="h-5 w-5 opacity-70" strokeWidth={1.5} />
                         </div>
                       )}
                     </TableCell>

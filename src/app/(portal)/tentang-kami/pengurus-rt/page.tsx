@@ -2,7 +2,6 @@ import Image from "next/image";
 import { Users, User, Phone, MapPin } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ContentSection } from "@/components/ui/ContentSection";
-import { getInitials } from "@/lib/utils";
 import { api, resolveImageUrl } from "@/lib/api";
 import { getSettings, getGroup } from "@/lib/settings";
 import type { PengurusRt, ProfilUmum } from "@/lib/types";
@@ -72,7 +71,7 @@ export default async function PengurusRT() {
                         sizes="96px"
                       />
                     ) : (
-                      getInitials(item.ketua)
+                      <User className="h-10 w-10 opacity-70" strokeWidth={1.5} />
                     )}
                   </div>
                   <div>

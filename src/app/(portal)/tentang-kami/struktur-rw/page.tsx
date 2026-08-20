@@ -1,6 +1,5 @@
 import Image from "next/image";
 import type { LucideIcon } from "lucide-react";
-import { getInitials } from "@/lib/utils";
 import { ContentSection } from "@/components/ui/ContentSection";
 import {
   Heart,
@@ -80,7 +79,7 @@ function PersonCard({
           {fotoUrl ? (
             <Image src={fotoUrl} alt={nama} fill className="object-cover object-top" sizes="128px" />
           ) : (
-            getInitials(nama)
+            <User className="h-12 w-12 opacity-70" strokeWidth={1.5} />
           )}
         </div>
 
