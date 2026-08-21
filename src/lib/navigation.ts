@@ -11,8 +11,8 @@ import {
   Sprout,
   Camera,
   Mail,
-  MessageSquare,
 } from "lucide-react";
+import { InstagramIcon, WhatsAppIcon } from "@/components/ui/brand-icons";
 
 export interface NavChild {
   label: string;
@@ -122,6 +122,6 @@ export const NAV_ITEMS: NavItem[] = [
 
 export const SOCIAL_LINKS = [
   { href: "mailto:info@rw04pabuaran.id", icon: Mail, label: "Email" },
-  { href: "https://www.instagram.com", icon: Camera, label: "Instagram" },
-  { href: "https://wa.me/6281200000000", icon: MessageSquare, label: "WhatsApp" },
+  { href: "https://www.instagram.com", icon: InstagramIcon, label: "Instagram" },
+  { href: "https://wa.me/6281200000000", icon: WhatsAppIcon, label: "WhatsApp" },
 ];

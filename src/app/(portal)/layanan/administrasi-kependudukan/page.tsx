@@ -1,4 +1,5 @@
-import { FileText, CreditCard, FileBadge, CheckCircle2, Clock, AlertCircle, MessageCircle } from "lucide-react";
+import { FileText, CreditCard, FileBadge, CheckCircle2, Clock } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/brand-icons";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ContentSection } from "@/components/ui/ContentSection";
 import { getSettings, getGroup } from "@/lib/settings";
@@ -118,7 +119,7 @@ export default async function AdministrasiKependudukan() {
               <div data-aos="fade-up" className="bg-brand-primary text-white p-6 md:p-8 flex flex-col justify-between gap-8">
                 <div>
                   <div className="w-10 h-10 bg-white/10 rounded-xs flex items-center justify-center mb-5">
-                    <MessageCircle size={18} className="text-white/70" />
+                    <WhatsAppIcon size={18} className="text-white/70" />
                   </div>
                   <p className="text-[11px] font-bold uppercase tracking-widest text-white/40 mb-3">
                     Pengajuan Awal
@@ -135,7 +136,7 @@ export default async function AdministrasiKependudukan() {
 
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-3 bg-white/10 rounded-xs p-3">
-                    <MessageCircle size={16} className="text-white" />
+                    <WhatsAppIcon size={16} className="text-white" />
                     <p className="text-xs font-semibold text-white/90">Chat dengan Admin Sekretariat</p>
                   </div>
                   <div className="flex items-center gap-3 bg-white/10 rounded-xs p-3">
@@ -160,7 +161,7 @@ export default async function AdministrasiKependudukan() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-xs bg-[#25D366] px-6 py-4 text-sm font-bold text-white transition-opacity hover:opacity-90"
                 >
-                  <MessageCircle size={18} />
+                  <WhatsAppIcon size={18} />
                   Ajukan via WhatsApp
                 </a>
                 <p className="text-xs text-gray-400">
@@ -214,22 +215,6 @@ export default async function AdministrasiKependudukan() {
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* Alert */}
-          <div data-aos="fade-up" className="mt-8 bg-amber-50 border border-amber-200/50 rounded-xs p-5">
-            <div className="flex gap-3">
-              <AlertCircle size={18} className="text-amber-500 shrink-0 mt-0.5" />
-              <div>
-                <h4 className="text-sm font-bold text-amber-800 mb-1.5">Catatan Penting</h4>
-                <p className="text-sm text-amber-700 leading-relaxed">
-                  Pengurusan surat pengantar{" "}
-                  <span className="font-bold">TIDAK DIPUNGUT BIAYA</span>.
-                  Warga dihimbau mengurus secara langsung demi kelancaran
-                  validasi data kependudukan.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>

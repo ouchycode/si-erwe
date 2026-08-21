@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Phone, Mail, MapPin, Clock, Send, Loader2 } from "lucide-react";
+import { Mail, MapPin, Clock, Send, Loader2 } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/brand-icons";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ContentSection } from "@/components/ui/ContentSection";
 import { ALAMAT, KONTAK, JAM_OPERASIONAL } from "@/lib/constants";
@@ -168,7 +169,7 @@ export default function HubungiKami() {
                         ),
                       },
                       {
-                        icon: Phone,
+                        icon: WhatsAppIcon,
                         label: "WhatsApp / Telepon",
                         content: (
                           <a
