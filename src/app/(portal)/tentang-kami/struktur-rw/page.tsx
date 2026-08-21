@@ -1,6 +1,6 @@
-import Image from "next/image";
 import type { LucideIcon } from "lucide-react";
 import { ContentSection } from "@/components/ui/ContentSection";
+import { PersonAvatar } from "@/components/ui/person-avatar";
 import {
   Heart,
   HardHat,
@@ -69,19 +69,17 @@ function PersonCard({
     >
       <div className="p-6 flex flex-col items-center text-center gap-4">
         {/* Avatar */}
-        <div
-          className={`w-32 h-32 rounded-full flex items-center justify-center text-2xl font-bold tracking-wide overflow-hidden relative shadow-lg ${
+        <PersonAvatar
+          src={fotoUrl}
+          alt={nama}
+          sizes="128px"
+          className={`w-32 h-32 text-2xl font-bold tracking-wide shadow-lg ${
             isHighlight
               ? "bg-white/15 text-white border border-white/20"
               : "bg-brand-light text-brand-primary border border-brand-primary/10"
           }`}
-        >
-          {fotoUrl ? (
-            <Image src={fotoUrl} alt={nama} fill className="object-cover object-top" sizes="128px" />
-          ) : (
-            <User className="h-12 w-12 opacity-70" strokeWidth={1.5} />
-          )}
-        </div>
+          iconClassName="h-12 w-12"
+        />
 
         {/* Role badge */}
         <div className="flex items-center gap-2">

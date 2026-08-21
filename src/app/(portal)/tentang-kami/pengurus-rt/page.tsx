@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { Users, User, Phone, MapPin } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ContentSection } from "@/components/ui/ContentSection";
+import { PersonAvatar } from "@/components/ui/person-avatar";
 import { api, resolveImageUrl } from "@/lib/api";
 import { getSettings, getGroup } from "@/lib/settings";
 import type { PengurusRt, ProfilUmum } from "@/lib/types";
@@ -61,19 +61,13 @@ export default async function PengurusRT() {
               </div>
               <div className="p-5 flex flex-col gap-4">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                  <div className="w-24 h-24 rounded-full bg-brand-light text-brand-primary flex items-center justify-center border border-brand-primary/10 shrink-0 font-bold text-lg overflow-hidden relative shadow-md">
-                    {resolveImageUrl(item.foto) ? (
-                      <Image
-                        src={resolveImageUrl(item.foto) ?? ""}
-                        alt={item.ketua}
-                        fill
-                        className="object-cover object-top"
-                        sizes="96px"
-                      />
-                    ) : (
-                      <User className="h-10 w-10 opacity-70" strokeWidth={1.5} />
-                    )}
-                  </div>
+                  <PersonAvatar
+                    src={resolveImageUrl(item.foto)}
+                    alt={item.ketua}
+                    sizes="96px"
+                    className="w-24 h-24 bg-brand-light text-brand-primary border border-brand-primary/10 font-bold text-lg shadow-md"
+                    iconClassName="h-10 w-10"
+                  />
                   <div>
                     <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-0.5">Ketua RT</p>
                     <p className="text-sm font-bold text-slate-800 leading-tight">{item.ketua}</p>

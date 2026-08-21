@@ -5,7 +5,6 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\LayananController;
-use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\PengurusRtController;
 use App\Http\Controllers\PesanController;
@@ -40,8 +39,6 @@ Route::middleware('throttle:api')->group(function () {
     Route::get('/statistik', [StatistikController::class, 'index']);
     Route::get('/settings', [SettingController::class, 'index']);
 
-    Route::post('/pengajuan', [PengajuanController::class, 'store'])->middleware('throttle:10,1');
-    Route::get('/pengajuan/{kode}/status', [PengajuanController::class, 'show']);
     Route::post('/pesan', [PesanController::class, 'store'])->middleware('throttle:10,1');
 });
 
@@ -70,10 +67,6 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function ()
     Route::get('/statistik', [StatistikController::class, 'index']);
     Route::post('/statistik', [StatistikController::class, 'store']);
     Route::delete('/statistik/{statistikDatum}', [StatistikController::class, 'destroy']);
-
-    Route::get('/pengajuan', [PengajuanController::class, 'index']);
-    Route::put('/pengajuan/{pengajuan}', [PengajuanController::class, 'update']);
-    Route::put('/pengajuan/{pengajuan}/read', [PengajuanController::class, 'markRead']);
 
     Route::get('/pesan', [PesanController::class, 'index']);
     Route::put('/pesan/{pesan}/read', [PesanController::class, 'markRead']);

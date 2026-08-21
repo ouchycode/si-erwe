@@ -69,19 +69,6 @@ export interface StatistikCategory {
 
 export type StatistikResponse = Record<string, StatistikCategory>;
 
-export interface Pengajuan {
-  id: number;
-  kode: string;
-  nik: string;
-  nama: string;
-  jenis_layanan: string;
-  keperluan: string;
-  status: "menunggu" | "diproses" | "selesai" | "ditolak";
-  catatan: string | null;
-  is_read: boolean;
-  created_at: string;
-}
-
 export interface Pesan {
   id: number;
   nama: string;
@@ -184,34 +171,12 @@ export interface ApiMessage<T = null> {
   data?: T;
 }
 
-export const JENIS_LAYANAN_OPTIONS = [
-  { value: "surat-pengantar", label: "Surat Pengantar" },
-  { value: "surat-domisili", label: "Surat Domisili" },
-  { value: "ktp-kk-baru", label: "KTP/KK Baru" },
-  { value: "lainnya", label: "Lainnya" },
-] as const;
-
-export const STATUS_PENGAJUAN_OPTIONS = [
-  { value: "menunggu", label: "Menunggu" },
-  { value: "diproses", label: "Diproses" },
-  { value: "selesai", label: "Selesai" },
-  { value: "ditolak", label: "Ditolak" },
-] as const;
-
 export const KATEGORI_PESAN_OPTIONS = [
   { value: "pertanyaan", label: "Pertanyaan" },
   { value: "laporan", label: "Laporan" },
   { value: "saran", label: "Saran" },
   { value: "lainnya", label: "Lainnya" },
 ] as const;
-
-export const LAYANAN_LABEL: Record<string, string> = Object.fromEntries(
-  JENIS_LAYANAN_OPTIONS.map((o) => [o.value, o.label])
-);
-
-export const STATUS_PENGAJUAN_LABEL: Record<string, string> = Object.fromEntries(
-  STATUS_PENGAJUAN_OPTIONS.map((o) => [o.value, o.label])
-);
 
 export const KATEGORI_PESAN_LABEL: Record<string, string> = Object.fromEntries(
   KATEGORI_PESAN_OPTIONS.map((o) => [o.value, o.label])

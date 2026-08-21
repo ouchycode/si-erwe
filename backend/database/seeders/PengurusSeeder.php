@@ -33,6 +33,6 @@ class PengurusSeeder extends Seeder
 
     private function fotoFile(string $nama): string
     {
-        return strtoupper(explode(' ', $nama)[0]) . '.png';
+        return strtoupper(str_replace(' ', '%20', $nama)) . '.png';
     }
 }

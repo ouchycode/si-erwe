@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   Newspaper,
   Images,
-  Inbox,
   MessageSquare,
   Users,
   ArrowRight,
@@ -16,21 +15,14 @@ import { useFetch } from "@/lib/hooks/useFetch";
 import { admin, getUserSnapshot, subscribeUser } from "@/lib/adminApi";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import type { Pengajuan, Pesan } from "@/lib/types";
-import {
-  LAYANAN_LABEL,
-  STATUS_PENGAJUAN_LABEL,
-} from "@/lib/types";
+import type { Pesan } from "@/lib/types";
 
 interface DashboardSummary {
   berita: number;
   galeri: number;
   pengurus: number;
-  pengajuan: number;
   pesan: number;
-  recent_pengajuan: Pengajuan[];
   recent_pesan: Pesan[];
 }
 
@@ -71,13 +63,6 @@ function StatCard({
   );
 }
 
-const STATUS_BADGE: Record<string, "warning" | "default" | "success" | "destructive"> = {
-  menunggu: "warning",
-  diproses: "default",
-  selesai: "success",
-  ditolak: "destructive",
-};
-
 function formatDate(iso: string | undefined): string {
   if (!iso) return "-";
   const d = new Date(iso);
@@ -102,9 +87,7 @@ export default function AdminDashboardPage() {
     berita: 0,
     galeri: 0,
     pengurus: 0,
-    pengajuan: 0,
     pesan: 0,
-    recent_pengajuan: [],
     recent_pesan: [],
   };
 
@@ -131,7 +114,7 @@ export default function AdminDashboardPage() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
         <StatCard
           label="Berita"
           value={s.berita}
@@ -157,14 +140,6 @@ export default function AdminDashboardPage() {
           tone="bg-sky-50 text-sky-600"
         />
         <StatCard
-          label="Pengajuan"
-          value={s.pengajuan}
-          loading={loading}
-          icon={Inbox}
-          href="/admin/pengajuan"
-          tone="bg-amber-50 text-amber-600"
-        />
-        <StatCard
           label="Pesan Masuk"
           value={s.pesan}
           loading={loading}
@@ -174,57 +149,7 @@ export default function AdminDashboardPage() {
         />
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-2">
-        <section className="space-y-3">
-          <div className="flex items-center justify-between">
-            <h2 className="text-base font-bold tracking-tight text-slate-800">
-              Pengajuan Terbaru
-            </h2>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-brand-primary hover:text-brand-primary-hover"
-              nativeButton={false}
-              render={<Link href="/admin/pengajuan" />}
-            >
-              Lihat semua <ArrowRight className="size-3.5" />
-            </Button>
-          </div>
-          <div className="overflow-hidden rounded-xs bg-white shadow-sm">
-            {loading ? (
-              <div className="space-y-3 p-4">
-                {[1, 2, 3].map((i) => (
-                  <Skeleton key={i} className="h-10 w-full" />
-                ))}
-              </div>
-            ) : s.recent_pengajuan.length === 0 ? (
-              <p className="py-6 text-center text-sm text-muted-foreground">
-                Belum ada pengajuan.
-              </p>
-            ) : (
-              <div className="divide-y divide-slate-100">
-                {s.recent_pengajuan.map((p) => (
-                  <div
-                    key={p.id}
-                    className="flex items-center justify-between gap-3 px-4 py-3 transition-colors hover:bg-white"
-                  >
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-medium">{p.nama}</p>
-                      <p className="truncate text-xs text-muted-foreground">
-                        {LAYANAN_LABEL[p.jenis_layanan] ?? p.jenis_layanan} · {p.kode}
-                      </p>
-                    </div>
-                    <Badge variant={STATUS_BADGE[p.status] ?? "default"}>
-                      {STATUS_PENGAJUAN_LABEL[p.status] ?? p.status}
-                    </Badge>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-
-        <section className="space-y-3">
+      <section className="space-y-3">
           <div className="flex items-center justify-between">
             <h2 className="text-base font-bold tracking-tight text-slate-800">
               Pesan Terbaru
@@ -274,7 +199,6 @@ export default function AdminDashboardPage() {
             )}
           </div>
         </section>
-      </div>
     </div>
   );
 }

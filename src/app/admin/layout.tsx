@@ -10,7 +10,6 @@ import {
   Users,
   House,
   BarChart3,
-  Inbox,
   MessageSquare,
   Settings,
   LogOut,
@@ -31,7 +30,6 @@ const NAV_ITEMS = [
   { href: "/admin/pengurus", label: "Pengurus RW", icon: Users },
   { href: "/admin/pengurus-rt", label: "Pengurus RT", icon: House },
   { href: "/admin/statistik", label: "Statistik", icon: BarChart3 },
-  { href: "/admin/pengajuan", label: "Pengajuan", icon: Inbox },
   { href: "/admin/pesan", label: "Pesan", icon: MessageSquare },
   { href: "/admin/pengaturan", label: "Pengaturan", icon: Settings },
 ];

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { Plus, Pencil, Trash2, Search, House, User } from "lucide-react";
+import { Plus, Pencil, Trash2, Search, House } from "lucide-react";
 import { toast } from "sonner";
 
 import { admin } from "@/lib/adminApi";
@@ -12,6 +12,7 @@ import { useFetch } from "@/lib/hooks/useFetch";
 import type { PengurusRt, Paginated, ApiMessage } from "@/lib/types";
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
 import { Pagination } from "@/components/admin/Pagination";
+import { PersonAvatar } from "@/components/ui/person-avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -216,18 +217,13 @@ export default function AdminPengurusRtPage() {
                 (data?.data ?? []).map((item) => (
                   <TableRow key={item.id}>
                     <TableCell>
-                      {item.foto ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={resolveImageUrl(item.foto)}
-                          alt={item.ketua}
-                          className="h-10 w-10 shrink-0 rounded-full object-cover"
-                        />
-                      ) : (
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground">
-                          <User className="h-5 w-5 opacity-70" strokeWidth={1.5} />
-                        </div>
-                      )}
+                      <PersonAvatar
+                        src={resolveImageUrl(item.foto)}
+                        alt={item.ketua}
+                        sizes="40px"
+                        className="h-10 w-10 bg-muted text-muted-foreground"
+                        iconClassName="h-5 w-5"
+                      />
                     </TableCell>
                     <TableCell>
                       <Badge variant="outline">RT {item.rt}</Badge>

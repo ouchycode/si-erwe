@@ -53,13 +53,9 @@ Accept: application/json
 | GET | `/api/pengurus-rt` | Daftar 8 ketua RT |
 | GET | `/api/statistik?periode=2026-08` | Statistik per periode (default bulan berjalan), format tabel + totals + chart |
 | GET | `/api/settings` | Konfigurasi konten (alamat, kontak, jam, profil, layanan, program) |
-| POST | `/api/pengajuan` | Submit pengajuan: `{nik, nama, jenis_layanan, keperluan}` |
-| GET | `/api/pengajuan/{kode}/status` | Cek status pengajuan via kode |
 | POST | `/api/pesan` | Submit pesan: `{nama, kontak, kategori, pesan}` |
 
-**Jenis layanan:** `surat-pengantar`, `surat-domisili`, `ktp-kk-baru`, `lainnya`
 **Kategori pesan:** `pertanyaan`, `laporan`, `saran`, `lainnya`
-**Status pengajuan:** `menunggu`, `diproses`, `selesai`, `ditolak`
 
 ## Endpoint Admin (`/api/admin/*`, butuh token admin)
 
@@ -72,8 +68,6 @@ Accept: application/json
 | POST/PUT/DELETE | `/api/admin/pengurus` & `/api/admin/pengurus-rt` | Kelola pengurus |
 | GET/POST | `/api/admin/statistik` | Kelola data statistik per RT per periode |
 | DELETE | `/api/admin/statistik/{id}` | Hapus baris statistik |
-| GET | `/api/admin/pengajuan` | List pengajuan (`?status=`, `?q=`) |
-| PUT | `/api/admin/pengajuan/{id}` | Update status + catatan |
 | GET | `/api/admin/pesan` | List pesan (`?status=`) |
 | PUT | `/api/admin/pesan/{id}/read` | Tandai dibaca |
 | GET/POST | `/api/admin/settings` | Baca / simpan pengaturan |
@@ -84,9 +78,9 @@ File disimpan di `storage/app/public` dan disajikan via `/storage/...`.
 ## Struktur Modul
 
 ```
-app/Http/Controllers   Auth, Berita, Galeri, Pengurus, PengurusRt, Pengajuan, Pesan, Statistik, Setting
+app/Http/Controllers   Auth, Berita, Galeri, Pengurus, PengurusRt, Pesan, Statistik, Setting
 app/Http/Requests      Validasi per-aksi
 app/Http/Resources     Format respons JSON
-app/Models             User, Berita, Pengajuan, Pesan, GaleriItem, Pengurus, PengurusRt, StatistikCat, StatistikData, Setting
+app/Models             User, Berita, Pesan, GaleriItem, Pengurus, PengurusRt, StatistikCat, StatistikData, Setting
 database/seeders       Admin, Berita, Pengurus, PengurusRt, Galeri, Statistik, Setting
 ```

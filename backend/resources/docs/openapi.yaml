@@ -7,7 +7,7 @@ info:
     - Base URL: `http://127.0.0.1:8000/api`
     - Format: `application/json`, kecuali unggah berkas menggunakan `multipart/form-data`.
     - Otentikasi: bearer token (`Authorization: Bearer {token}`) yang diperoleh dari `POST /auth/login`.
-    - Seluruh endpoint publik dibatasi oleh `throttle` (60 permintaan/menit). Endpoint `POST /pengajuan` dan `POST /pesan` dibatasi 10 permintaan/menit.
+    - Seluruh endpoint publik dibatasi oleh `throttle` (60 permintaan/menit). Endpoint `POST /pesan` dibatasi 10 permintaan/menit.
   version: 1.0.0
   contact:
     name: Sekretariat RW 004 Pabuaran
@@ -28,8 +28,6 @@ tags:
     description: Katalog layanan yang dikelola via pengaturan.
   - name: Statistik
     description: Data statistik warga per RT dan periode.
-  - name: Pengajuan
-    description: Pengajuan surat oleh warga beserta pelacakan status.
   - name: Pesan
     description: Kotak pesan masuk dari halaman Hubungi Kami.
   - name: Pengaturan
@@ -344,77 +342,6 @@ paths:
                           full: Gedung Serbaguna RW 004
                       layanan:
                         administrasi: []
-
-  /pengajuan:
-    post:
-      tags: [Pengajuan]
-      summary: Ajukan pengajuan
-      description: Membuat pengajuan baru berstatus `menunggu` dan mengembalikan kode pelacakan.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [nik, nama, jenis_layanan, keperluan]
-              properties:
-                nik:
-                  type: string
-                  description: NIK 16 digit.
-                  example: '3204012345678901'
-                nama:
-                  type: string
-                  example: Budi Santoso
-                jenis_layanan:
-                  type: string
-                  enum: [surat-pengantar, surat-domisili, ktp-kk-baru, lainnya]
-                  example: surat-domisili
-                keperluan:
-                  type: string
-                  maxLength: 1000
-                  example: Pengurusan surat domisili untuk keperluan kerja.
-      responses:
-        '201':
-          description: Pengajuan berhasil dibuat.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                  data:
-                    $ref: '#/components/schemas/Pengajuan'
-        '422':
-          description: Validasi gagal.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationError'
-
-  /pengajuan/{kode}/status:
-    get:
-      tags: [Pengajuan]
-      summary: Lacak status pengajuan
-      parameters:
-        - name: kode
-          in: path
-          required: true
-          description: Kode pengajuan, contoh `PRW-260806-ABCDE`.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Status pengajuan.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    $ref: '#/components/schemas/Pengajuan'
-        '404':
-          description: Kode tidak ditemukan.
 
   /pesan:
     post:
@@ -1154,107 +1081,6 @@ paths:
                   message:
                     type: string
 
-  /admin/pengajuan:
-    get:
-      tags: [Admin]
-      summary: Daftar pengajuan
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: status
-          in: query
-          schema:
-            type: string
-            enum: [menunggu, diproses, selesai, ditolak]
-        - name: q
-          in: query
-          description: Cari berdasarkan nama, NIK, atau kode.
-          schema:
-            type: string
-        - name: per_page
-          in: query
-          schema:
-            type: integer
-            default: 15
-      responses:
-        '200':
-          description: Daftar pengajuan (paginated).
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/Pagination'
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Pengajuan'
-
-  /admin/pengajuan/{pengajuan}:
-    parameters:
-      - name: pengajuan
-        in: path
-        required: true
-        schema:
-          type: integer
-    put:
-      tags: [Admin]
-      summary: Perbarui status pengajuan
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [status]
-              properties:
-                status:
-                  type: string
-                  enum: [menunggu, diproses, selesai, ditolak]
-                  example: diproses
-                catatan:
-                  type: string
-                  maxLength: 1000
-                  example: Sedang diproses pengurus.
-      responses:
-        '200':
-          description: Status diperbarui.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                  data:
-                    $ref: '#/components/schemas/Pengajuan'
-
-  /admin/pengajuan/{pengajuan}/read:
-    parameters:
-      - name: pengajuan
-        in: path
-        required: true
-        schema:
-          type: integer
-    put:
-      tags: [Admin]
-      summary: Tandai pengajuan sudah dibaca
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: Ditandai sudah dibaca.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-
   /admin/pesan:
     get:
       tags: [Admin]
@@ -1514,33 +1340,6 @@ components:
           type: integer
         is_active:
           type: boolean
-    Pengajuan:
-      type: object
-      properties:
-        id:
-          type: integer
-        kode:
-          type: string
-        nik:
-          type: string
-        nama:
-          type: string
-        jenis_layanan:
-          type: string
-          enum: [surat-pengantar, surat-domisili, ktp-kk-baru, lainnya]
-        keperluan:
-          type: string
-        status:
-          type: string
-          enum: [menunggu, diproses, selesai, ditolak]
-        catatan:
-          type: string
-          nullable: true
-        is_read:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
     Pesan:
       type: object
       properties:
