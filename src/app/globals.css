@@ -7,7 +7,6 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: var(--font-figtree);
   --font-mono: "Courier New", "Consolas", monospace;
 
   /* Pemerintahan Maroon */
@@ -15,11 +14,16 @@
   --color-brand-primary-hover: #5e1720; /* Darker Maroon */
   --color-brand-light: #fef2f2; /* rose-50 */
 
+  /* Webdesa maroon scale (banner / strip / footer) */
+  --color-wd-maroon: #7a1f2b;
+  --color-wd-maroon-dark: #4a141d; /* banner, footer, strip judul halaman */
+  --color-wd-maroon-darker: #2e0c11; /* slider, panel tergelap */
+  --color-wd-maroon-deep: #3a1016; /* hover di area gelap */
+
   --radius-xs: 4px;
 }
 
 :root {
-  --font-sans: var(--font-figtree);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -55,8 +59,8 @@
 }
 
 @theme inline {
-  --font-heading: var(--font-sans);
-  --font-sans: var(--font-sans);
+  --font-heading: var(--font-oswald);
+  --font-sans: var(--font-nunito);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -243,6 +247,34 @@ html.dark {
   color: #f2a9ad;
 }
 
+/* ── Tabel admin: header & zebra aman di kedua mode ──
+   Ditaruh di @layer components supaya kelas utilitas per-baris
+   (mis. sorotan "belum dibaca" di halaman pesan) tetap menang. */
+@layer components {
+  [data-slot="table-header"] > tr {
+    background-color: #f6eef0;
+  }
+  .dark [data-slot="table-header"] > tr {
+    background-color: rgb(255 255 255 / 0.06);
+  }
+  [data-slot="table-body"] > tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+  .dark [data-slot="table-body"] > tr:nth-child(even) {
+    background-color: rgb(255 255 255 / 0.03);
+  }
+}
+
+/* ── SweetAlert2: permukaan mengikuti tema ── */
+.dark .swal2-popup {
+  background: var(--bg-1);
+  color: oklch(0.95 0 0);
+}
+.dark .swal2-title,
+.dark .swal2-html-container {
+  color: oklch(0.95 0 0);
+}
+
 .dark .border-slate-200,
 .dark .border-slate-100,
 .dark .border-gray-200,
@@ -272,6 +304,43 @@ html.dark {
 }
 .dark .prose-slate :where(h1, h2, h3, h4, h5, h6) {
   color: #e8e8e8;
+}
+
+/* Dark mode: kartu & elemen gaya webdesa */
+.dark .wd-card {
+  background: var(--bg-1);
+  border-color: oklch(1 0 0 / 10%);
+}
+/* Body wrapper abu terang -> gelap saat mode dark */
+.dark .bg-\[\#ededed\] {
+  background-color: var(--bg);
+}
+.dark .wd-lift:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.5);
+}
+.dark .wd-date-box {
+  background: var(--bg-2);
+  border-color: oklch(1 0 0 / 12%);
+}
+.dark .wd-chip {
+  background: var(--bg-1);
+  border-color: #f2a9ad;
+  color: #f2a9ad;
+}
+.dark .wd-chip:hover {
+  background: var(--bg-3);
+}
+.dark .wd-chip.is-active {
+  background: var(--color-brand-primary);
+  color: #fff;
+}
+.dark .wd-btn--ghost {
+  background: var(--bg-3);
+  color: #d8d8d8;
+}
+.dark .wd-btn--ghost:hover {
+  background: var(--bg-hover);
+  color: #fff;
 }
 
 @layer base {
@@ -328,12 +397,180 @@ html.dark {
   .icon-badge {
     @apply bg-brand-primary border border-brand-primary-hover text-white transition-colors duration-200;
   }
-  .icon-badge {
-    @apply bg-brand-primary border border-brand-primary-hover text-white transition-colors duration-200;
-  }
   .group:hover .icon-badge,
   .icon-badge:hover {
     @apply bg-brand-primary-hover;
+  }
+
+  /* ---------- Gaya webdesa (maroon) ---------- */
+  .wd-container {
+    max-width: 1170px;
+    margin-inline: auto;
+    padding-inline: 15px;
+  }
+
+  .wd-heading {
+    font-family: var(--font-oswald);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .wd-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-oswald);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    color: #fff;
+    background-color: var(--color-brand-primary);
+    border: 0;
+    padding: 10px 22px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14);
+    transition:
+      background 0.15s ease,
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      color 0.15s ease;
+  }
+  .wd-btn:hover {
+    background-color: var(--color-brand-primary-hover);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+  }
+  .wd-btn--light {
+    background: #fff;
+    color: var(--color-brand-primary);
+  }
+  .wd-btn--light:hover {
+    background: #f3f3f3;
+    color: var(--color-brand-primary-hover);
+  }
+  .wd-btn--ghost {
+    background: #f1f2ee;
+    color: #495057;
+  }
+  .wd-btn--ghost:hover {
+    background: #e6e6e1;
+    color: #495057;
+  }
+
+  .wd-card {
+    background: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Kartu interaktif: hover lift seragam */
+  .wd-lift {
+    transition:
+      box-shadow 0.2s ease,
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+  .wd-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Tanggal kotak ala list berita desa */
+  .wd-date-box {
+    flex-shrink: 0;
+    width: 78px;
+    text-align: center;
+    border: 1px solid #e2e2e2;
+    padding: 6px 4px;
+    font-family: var(--font-oswald);
+    border-radius: 6px;
+    background: #fff;
+  }
+  .wd-date-box .d {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-brand-primary);
+    line-height: 1;
+  }
+  .wd-date-box .m {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #6b7280;
+    letter-spacing: 0.5px;
+  }
+
+  /* Badge kategori kecil */
+  .wd-cat {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-family: var(--font-oswald);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: rgba(122, 31, 43, 0.12);
+    color: var(--color-brand-primary);
+  }
+
+  /* Chip filter (kategori berita) */
+  .wd-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-family: var(--font-oswald);
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    border: 1px solid var(--color-brand-primary);
+    color: var(--color-brand-primary);
+    background: #fff;
+    transition: 0.2s;
+    text-decoration: none;
+  }
+  .wd-chip:hover {
+    background: rgba(122, 31, 43, 0.08);
+  }
+  .wd-chip.is-active {
+    background: var(--color-brand-primary);
+    color: #fff;
+  }
+
+  /* Fokus keyboard konsisten */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--color-brand-primary);
+    outline-offset: 2px;
+  }
+}
+
+/* Slider home: fade halus saat ganti slide */
+@keyframes wd-slide-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wd-lift,
+  .wd-btn {
+    transition: none;
   }
 }
 

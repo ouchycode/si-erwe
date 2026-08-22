@@ -4,7 +4,7 @@ import { ContentSection } from "@/components/ui/ContentSection";
 
 export default function PetaWilayahPage() {
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen font-sans">
       <PageHeader
         category="Profil Lingkungan"
         title="Peta Wilayah Interaktif"

@@ -138,7 +138,7 @@ export default async function StrukturRW() {
   const koordinator = list.filter((p) => p.level === "koordinator");
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen font-sans">
       <PageHeader
         title="Struktur Organisasi RW 004"
         description={`Sinergi pengurus dalam melayani dan mengelola lingkungan demi kenyamanan seluruh warga RW 004 Pabuaran periode ${periode}.`}

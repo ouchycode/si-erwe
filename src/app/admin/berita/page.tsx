@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { Plus, Pencil, Trash2, Search, Newspaper } from "lucide-react";
-import { toast } from "sonner";
+import { toast, confirmDelete as confirmDeleteSwal } from "@/lib/toast";
 
 import { admin } from "@/lib/adminApi";
 import { ApiError } from "@/lib/api";
@@ -81,8 +81,6 @@ export default function AdminBeritaPage() {
   const [form, setForm] = useState<BeritaForm>(EMPTY_FORM);
   const [file, setFile] = useState<File | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
-  const [deleting, setDeleting] = useState(false);
-
   const fetcher = useCallback(() => {
     const params = new URLSearchParams({ per_page: "15" });
     if (search) params.set("q", search);
@@ -119,7 +117,7 @@ export default function AdminBeritaPage() {
     if (file) {
       const fileError = imageFileError(file, 3);
       if (fileError) {
-        toast.error(fileError);
+        toast(fileError, "error");
         return;
       }
     }
@@ -136,32 +134,38 @@ export default function AdminBeritaPage() {
 
       if (form.id) {
         const res = await admin.put<ApiMessage<Berita>>(`/admin/berita/${form.id}`, body);
-        toast.success(res.message);
+        toast(res.message);
       } else {
         const res = await admin.post<ApiMessage<Berita>>("/admin/berita", body);
-        toast.success(res.message);
+        toast(res.message);
       }
       setDialogOpen(false);
       void reload();
     } catch (err) {
-      toast.error(err instanceof ApiError ? err.message : "Gagal menyimpan berita.");
+      toast(err instanceof ApiError ? err.message : "Gagal menyimpan berita.", "error");
     } finally {
       setSaving(false);
     }
   };
 
-  const handleDelete = async () => {
-    if (!deleteId) return;
-    setDeleting(true);
+  const askDelete = (id: number, label: string) => {
+    void confirmDeleteSwal(
+      `Yakin ingin menghapus ${label}? Tindakan ini tidak dapat dibatalkan.`,
+    ).then((ok) => {
+      if (ok) void handleDelete(id);
+    });
+  };
+
+  const handleDelete = async (id?: number) => {
+    const target = id ?? deleteId;
+    if (!target) return;
     try {
-      const res = await admin.delete<ApiMessage>(`/admin/berita/${deleteId}`);
-      toast.success(res.message);
+      const res = await admin.delete<ApiMessage>(`/admin/berita/${target}`);
+      toast(res.message);
       setDeleteId(null);
       void reload();
     } catch (err) {
-      toast.error(err instanceof ApiError ? err.message : "Gagal menghapus berita.");
-    } finally {
-      setDeleting(false);
+      toast(err instanceof ApiError ? err.message : "Gagal menghapus berita.", "error");
     }
   };
 
@@ -284,7 +288,7 @@ export default function AdminBeritaPage() {
                           variant="ghost"
                           size="icon-sm"
                           className="text-destructive"
-                          onClick={() => setDeleteId(item.id)}
+                          onClick={() => askDelete(item.id, "berita ini")}
                           aria-label="Hapus berita"
                         >
                           <Trash2 className="size-4" />
@@ -415,28 +419,6 @@ export default function AdminBeritaPage() {
         </DialogContent>
       </Dialog>
 
-      <Dialog open={deleteId !== null} onOpenChange={(o) => !o && setDeleteId(null)}>
-        <DialogContent className="max-w-sm">
-          <DialogHeader>
-            <DialogTitle>Hapus Berita</DialogTitle>
-            <DialogDescription>
-              Yakin ingin menghapus berita ini? Tindakan ini tidak dapat dibatalkan.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setDeleteId(null)}>
-              Batal
-            </Button>
-            <Button
-              variant="destructive"
-              disabled={deleting}
-              onClick={handleDelete}
-            >
-              {deleting ? "Menghapus..." : "Hapus"}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }

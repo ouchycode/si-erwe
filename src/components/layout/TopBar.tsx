@@ -1,85 +1,61 @@
-"use client";
-
 import Link from "next/link";
-import { Building2, Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
-import ThemeToggle from "./ThemeToggle";
+import { Building2 } from "lucide-react";
 import { resolveImageUrl } from "@/lib/api";
-import { getSettingsClient } from "@/lib/settings";
 
 const DEFAULT_NAMA = "DARMA BAKTI RW 004";
-const DEFAULT_TAGLINE = "Kota Tangerang";
+const DEFAULT_TAGLINE = "Kel. Pabuaran · Kec. Karawaci · Kota Tangerang";
 
 export default function TopBar({
-  isOpen,
-  onToggle,
-  initialIdentitas,
+  identitas,
+  heroImage,
 }: {
-  isOpen: boolean;
-  onToggle: () => void;
-  initialIdentitas?: {
+  identitas?: {
     logo?: string;
     nama?: string;
     tagline?: string;
   };
+  heroImage?: string | null;
 }) {
-  const [logo, setLogo] = useState<string | undefined>(() =>
-    initialIdentitas?.logo ? resolveImageUrl(initialIdentitas.logo) : undefined
-  );
-  const [nama, setNama] = useState(initialIdentitas?.nama || DEFAULT_NAMA);
-  const [tagline, setTagline] = useState(
-    initialIdentitas?.tagline || DEFAULT_TAGLINE
-  );
-
-  useEffect(() => {
-    getSettingsClient()
-      .then((groups) => {
-        const ident = groups.identitas;
-        setNama((ident?.nama as string) || DEFAULT_NAMA);
-        setTagline((ident?.tagline as string) || DEFAULT_TAGLINE);
-        setLogo(
-          typeof ident?.logo === "string" ? resolveImageUrl(ident.logo) : undefined
-        );
-      })
-      .catch(() => {});
-  }, []);
+  const nama = identitas?.nama || DEFAULT_NAMA;
+  const tagline = identitas?.tagline || DEFAULT_TAGLINE;
+  const logo = identitas?.logo ? resolveImageUrl(identitas.logo) : undefined;
 
   return (
-    <div className="bg-card px-4 md:px-8 py-3 md:py-3.5">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3 md:gap-4 no-underline">
+    <div className="relative flex min-h-[170px] items-center overflow-hidden bg-wd-maroon-dark md:min-h-[190px]">
+      {heroImage ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={heroImage}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : null}
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(30,7,11,0.94)_0%,rgba(74,20,29,0.82)_55%,rgba(74,20,29,0.55)_100%)]" />
+
+      <div className="wd-container relative z-10 w-full">
+        <Link href="/" className="flex items-center gap-4 py-7 text-white no-underline md:gap-[18px]">
           {logo ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={logo}
               alt={nama}
-              className="w-10 h-10 md:w-12 md:h-12 rounded-xs shrink-0 object-contain"
+              className="h-16 w-auto shrink-0 rounded-xs bg-white/95 object-contain p-1 shadow-[0_2px_8px_rgba(0,0,0,0.25)] md:h-24"
             />
           ) : (
-            <div className="w-10 h-10 md:w-12 md:h-12 bg-brand-primary rounded-xs flex items-center justify-center shrink-0 overflow-hidden">
-              <Building2 className="text-white w-5 h-5 md:w-6 md:h-6" />
-            </div>
+            <span className="flex size-16 shrink-0 items-center justify-center rounded-xs bg-white/95 text-wd-maroon-dark shadow-[0_2px_8px_rgba(0,0,0,0.25)] md:size-24">
+              <Building2 className="size-8 md:size-10" />
+            </span>
           )}
-          <div className="flex flex-col">
-            <span className="text-sm md:text-base font-bold text-brand-primary leading-tight">
+          <span>
+            <span className="wd-heading block text-xl font-bold leading-tight tracking-[1px] md:text-[30px]">
               {nama}
             </span>
-            <span className="text-[10px] md:text-xs text-gray-500 font-medium uppercase tracking-widest mt-0.5">
+            <span className="wd-heading mt-1 block text-[11px] tracking-[2px] text-white/85 md:text-[13px] md:tracking-[3px]">
               {tagline}
             </span>
-          </div>
+          </span>
         </Link>
-
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <button
-            className="md:hidden p-2 text-gray-500 hover:text-brand-primary transition-colors cursor-pointer border-none bg-transparent"
-            onClick={onToggle}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
       </div>
     </div>
   );

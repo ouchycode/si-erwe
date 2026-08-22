@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { Plus, Pencil, Trash2, Search, Users } from "lucide-react";
-import { toast } from "sonner";
+import { toast, confirmDelete as confirmDeleteSwal } from "@/lib/toast";
 
 import { admin } from "@/lib/adminApi";
 import { ApiError } from "@/lib/api";
@@ -82,7 +82,6 @@ export default function AdminPengurusPage() {
   const [form, setForm] = useState<PengurusForm>(EMPTY_FORM);
   const [file, setFile] = useState<File | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
-  const [deleting, setDeleting] = useState(false);
 
   const fetcher = useCallback(() => {
     const params = new URLSearchParams({ per_page: "15" });
@@ -120,7 +119,7 @@ export default function AdminPengurusPage() {
     if (file) {
       const fileError = imageFileError(file, 3);
       if (fileError) {
-        toast.error(fileError);
+        toast(fileError, "error");
         return;
       }
     }
@@ -138,32 +137,38 @@ export default function AdminPengurusPage() {
 
       if (form.id) {
         const res = await admin.put<ApiMessage<Pengurus>>(`/admin/pengurus/${form.id}`, body);
-        toast.success(res.message);
+        toast(res.message);
       } else {
         const res = await admin.post<ApiMessage<Pengurus>>("/admin/pengurus", body);
-        toast.success(res.message);
+        toast(res.message);
       }
       setDialogOpen(false);
       void reload();
     } catch (err) {
-      toast.error(err instanceof ApiError ? err.message : "Gagal menyimpan pengurus.");
+      toast(err instanceof ApiError ? err.message : "Gagal menyimpan pengurus.", "error");
     } finally {
       setSaving(false);
     }
   };
 
-  const handleDelete = async () => {
-    if (!deleteId) return;
-    setDeleting(true);
+  const askDelete = (id: number, label: string) => {
+    void confirmDeleteSwal(
+      `Yakin ingin menghapus ${label}? Tindakan ini tidak dapat dibatalkan.`,
+    ).then((ok) => {
+      if (ok) void handleDelete(id);
+    });
+  };
+
+  const handleDelete = async (id?: number) => {
+    const target = id ?? deleteId;
+    if (!target) return;
     try {
-      const res = await admin.delete<ApiMessage>(`/admin/pengurus/${deleteId}`);
-      toast.success(res.message);
+      const res = await admin.delete<ApiMessage>(`/admin/pengurus/${target}`);
+      toast(res.message);
       setDeleteId(null);
       void reload();
     } catch (err) {
-      toast.error(err instanceof ApiError ? err.message : "Gagal menghapus pengurus.");
-    } finally {
-      setDeleting(false);
+      toast(err instanceof ApiError ? err.message : "Gagal menghapus pengurus.", "error");
     }
   };
 
@@ -266,7 +271,7 @@ export default function AdminPengurusPage() {
                           variant="ghost"
                           size="icon-sm"
                           className="text-destructive"
-                          onClick={() => setDeleteId(item.id)}
+                          onClick={() => askDelete(item.id, "data pengurus ini")}
                           aria-label="Hapus pengurus"
                         >
                           <Trash2 className="size-4" />
@@ -361,12 +366,13 @@ export default function AdminPengurusPage() {
                 accept="image/jpeg,image/png,image/jpg,image/webp"
                 onChange={(e) => setFile(e.target.files?.[0] ?? null)}
               />
-              {form.foto && !file && resolveImageUrl(form.foto) && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+              {!file && (
+                <PersonAvatar
                   src={resolveImageUrl(form.foto)}
                   alt="Foto saat ini"
-                  className="mt-2 h-16 w-16 rounded-full object-cover"
+                  sizes="64px"
+                  className="mt-2 size-16 border border-slate-200"
+                  iconClassName="size-6"
                 />
               )}
               <p className="text-xs text-muted-foreground">
@@ -401,24 +407,6 @@ export default function AdminPengurusPage() {
         </DialogContent>
       </Dialog>
 
-      <Dialog open={deleteId !== null} onOpenChange={(o) => !o && setDeleteId(null)}>
-        <DialogContent className="max-w-sm">
-          <DialogHeader>
-            <DialogTitle>Hapus Pengurus</DialogTitle>
-            <DialogDescription>
-              Yakin ingin menghapus data pengurus ini? Tindakan ini tidak dapat dibatalkan.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setDeleteId(null)}>
-              Batal
-            </Button>
-            <Button variant="destructive" disabled={deleting} onClick={handleDelete}>
-              {deleting ? "Menghapus..." : "Hapus"}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }

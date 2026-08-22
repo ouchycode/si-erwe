@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Mail, MapPin, Clock, Send, Loader2 } from "lucide-react";
+import { Mail, MapPin, Send, Loader2 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/brand-icons";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ContentSection } from "@/components/ui/ContentSection";
-import { ALAMAT, KONTAK, JAM_OPERASIONAL } from "@/lib/constants";
+import { ALAMAT, KONTAK } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,10 +17,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { api } from "@/lib/api";
 import { KATEGORI_PESAN_OPTIONS } from "@/lib/types";
-import type { SettingGroups, SekretariatAlamat, SekretariatKontak, JamOperasionalItem } from "@/lib/types";
+import type { SettingGroups, SekretariatAlamat, SekretariatKontak } from "@/lib/types";
 
 export default function HubungiKami() {
   const [settings, setSettings] = useState<SettingGroups | null>(null);
@@ -39,7 +39,6 @@ export default function HubungiKami() {
 
   const alamat = (settings?.alamat?.sekretariat as SekretariatAlamat | undefined) ?? ALAMAT;
   const kontakInfo = (settings?.kontak?.sekretariat as SekretariatKontak | undefined) ?? KONTAK;
-  const jam = (settings?.jam_operasional?.sekretariat as JamOperasionalItem[] | undefined) ?? JAM_OPERASIONAL;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,20 +49,19 @@ export default function HubungiKami() {
       setKontak("");
       setKategori("pertanyaan");
       setPesan("");
-      toast.success("Pesan Terkirim", {
-        description: "Terima kasih! Pesan Anda telah terkirim ke sekretariat RW 004.",
-      });
+      toast("Pesan Terkirim");
     } catch (err: unknown) {
-      toast.error("Gagal mengirim pesan", {
-        description: err instanceof Error ? err.message : "Terjadi kesalahan, coba lagi.",
-      });
+      toast(
+        err instanceof Error ? err.message : "Gagal mengirim pesan, coba lagi.",
+        "error",
+      );
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans pb-20">
+    <div className="min-h-screen font-sans pb-16">
       <PageHeader
         category="Layanan Warga"
         title="Hubungi Kami"
@@ -73,10 +71,10 @@ export default function HubungiKami() {
       <ContentSection>
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
               {/* FORM */}
-              <div data-aos="fade-up" className="lg:col-span-3 bg-slate-50 rounded-xs p-6 md:p-8 shadow-sm">
+              <div data-aos="fade-up" className="lg:col-span-3">
                 <div data-aos="fade-up" className="flex items-center gap-2.5 mb-7 pb-5 border-b border-slate-200">
                   <Send size={15} className="text-brand-primary" />
-                  <h2 className="text-[13.5px] font-bold text-slate-800">
+                  <h2 className="wd-heading text-sm font-semibold tracking-[0.5px] uppercase text-slate-800">
                     Kirim Pesan / Aspirasi
                   </h2>
                 </div>
@@ -205,25 +203,6 @@ export default function HubungiKami() {
                         </div>
                       </div>
                     ))}
-                  </div>
-                </div>
-
-                {/* Jam Operasional */}
-                <div className="bg-slate-50 rounded-xs p-6 shadow-sm">
-                  <div data-aos="fade-up" className="flex items-center gap-2.5 mb-4 pb-4 border-b border-slate-200">
-                    <Clock size={14} className="text-brand-primary" />
-                    <h3 className="text-[13px] font-bold text-slate-800">
-                      Jam Operasional
-                    </h3>
-                  </div>
-                  <div className="flex flex-col gap-2.5 text-[12.5px]">
-                    {Array.isArray(jam) &&
-                      jam.map((item) => (
-                        <div key={item.hari} className={`flex justify-between items-center ${item.libur ? "pt-2.5 border-t border-slate-200" : ""}`}>
-                          <span className={item.libur ? "text-gray-400" : "text-gray-500"}>{item.hari}</span>
-                          <span className={`font-bold ${item.libur ? "text-red-400" : "text-slate-800"}`}>{item.jam}</span>
-                        </div>
-                      ))}
                   </div>
                 </div>
               </div>

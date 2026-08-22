@@ -34,7 +34,7 @@ export default async function PosyanduPage() {
   const s2Teks = g("s2Teks", DEFAULTS.s2Teks) as string[];
 
   return (
-    <div className="min-h-screen bg-white font-sans pb-20">
+    <div className="min-h-screen font-sans pb-16">
       <PageHeader
         category="Layanan Warga"
         title="Pos Pelayanan Terpadu (Posyandu)"

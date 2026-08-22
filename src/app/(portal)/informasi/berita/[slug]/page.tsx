@@ -33,13 +33,13 @@ export default async function DetailBerita({ params }: { params: Promise<{ slug:
   const gambar = resolveImageUrl(berita.gambar);
 
   return (
-    <div className="min-h-screen bg-white font-sans pb-20">
+    <div className="min-h-screen font-sans pb-16">
       {/* BREADCRUMB */}
-      <div className="bg-brand-primary px-6 md:px-16 py-5">
-        <div className="max-w-6xl mx-auto">
+      <div className="bg-wd-maroon-dark px-4 py-4 md:px-6">
+        <div className="wd-container">
           <Link
             href="/informasi/berita"
-            className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium transition-colors no-underline"
+            className="wd-heading inline-flex items-center gap-2 text-sm font-medium tracking-[0.5px] text-white/70 transition-colors no-underline hover:text-white"
           >
             <ArrowLeft size={16} />
             Kembali ke Indeks Berita
@@ -47,10 +47,10 @@ export default async function DetailBerita({ params }: { params: Promise<{ slug:
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 md:px-16 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10" data-aos="fade-up">
+      <div className="wd-container mt-7">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-7" data-aos="fade-up">
           {/* ARTIKEL UTAMA */}
-          <div className="lg:col-span-2 flex flex-col gap-0 bg-slate-50 rounded-xs overflow-hidden shadow-sm">
+          <article className="wd-card flex flex-col gap-0 overflow-hidden lg:col-span-2">
             {/* Meta + Judul */}
             <div className="p-6 md:p-8">
               <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-gray-500">
@@ -65,7 +65,7 @@ export default async function DetailBerita({ params }: { params: Promise<{ slug:
               </div>
 
               <h1
-                className="text-2xl md:text-3xl font-bold text-slate-800 leading-tight tracking-tight mb-6"
+                className="wd-heading text-2xl font-bold leading-tight tracking-[0.3px] text-slate-800 md:text-3xl mb-6"
                 data-aos="fade-up"
               >
                 {berita.judul}
@@ -129,26 +129,25 @@ export default async function DetailBerita({ params }: { params: Promise<{ slug:
                 </button>
               </div>
             </div>
-          </div>
+          </article>
 
           {/* SIDEBAR */}
           <div className="flex flex-col gap-4" data-aos="fade-up">
-            <div className="bg-slate-50 rounded-xs p-6 shadow-sm sticky top-24">
-              <div className="flex items-center gap-2.5 mb-5 pb-4 border-b border-slate-200">
-                <Tag size={16} className="text-brand-primary" />
-                <h3 className="text-base font-bold text-slate-800">Berita Lainnya</h3>
+            <div className="wd-card sticky top-24 overflow-hidden">
+              <div className="wd-heading bg-brand-primary px-4 py-2.5 text-base font-semibold tracking-[1px] text-white">
+                Berita Lainnya
               </div>
 
-              <div className="flex flex-col divide-y divide-slate-200">
+              <div className="flex flex-col px-5 pb-5 pt-1 divide-y divide-slate-200">
                 {beritaLain.map((item) => (
                   <Link
                     key={item.id}
                     href={`/informasi/berita/${item.slug}`}
                     data-aos="fade-up"
 
-                    className="group flex flex-col gap-1.5 py-4 first:pt-0 last:pb-0 no-underline"
+                    className="group flex flex-col gap-1.5 py-4 first:pt-3 last:pb-0 no-underline"
                   >
-                    <p className="text-sm font-semibold text-slate-700 group-hover:text-brand-primary transition-colors leading-snug line-clamp-2">
+                    <p className="wd-heading text-sm font-medium leading-snug tracking-[0.2px] text-slate-800 line-clamp-2 transition-colors group-hover:text-brand-primary">
                       {item.judul}
                     </p>
                     <span className="flex items-center gap-1.5 text-xs text-slate-500">
@@ -159,13 +158,12 @@ export default async function DetailBerita({ params }: { params: Promise<{ slug:
                 ))}
               </div>
 
-              <Link
-                href="/informasi/berita"
-                className="mt-6 flex items-center justify-center gap-2 w-full py-3 bg-brand-primary hover:bg-brand-primary-hover text-white rounded-xs text-sm font-semibold transition-colors no-underline"
-              >
-                Lihat Semua Berita
-                <ChevronRight size={16} />
-              </Link>
+              <div className="px-5 pb-5">
+                <Link href="/informasi/berita" className="wd-btn w-full">
+                  Lihat Semua Berita
+                  <ChevronRight size={16} />
+                </Link>
+              </div>
             </div>
           </div>
         </div>

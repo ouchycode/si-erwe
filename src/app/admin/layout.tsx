@@ -14,14 +14,14 @@ import {
   Settings,
   LogOut,
   Menu,
-  PanelLeftClose,
-  PanelLeftOpen,
+  ChevronDown,
   Landmark,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { getToken, adminLogout, getUserSnapshot, subscribeUser } from "@/lib/adminApi";
 import { getInitials } from "@/lib/utils";
+import ThemeToggle from "@/components/layout/ThemeToggle";
 
 const NAV_ITEMS = [
   { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -40,48 +40,22 @@ function isAuthRoute(pathname: string) {
 
 function SidebarContent({
   collapsed,
-  user,
   pathname,
-  onLogout,
   onNavigate,
-  onToggle,
 }: {
   collapsed: boolean;
-  user: { name: string } | null;
   pathname: string;
-  onLogout: () => void;
   onNavigate: () => void;
-  onToggle: () => void;
 }) {
   return (
-    <div className="flex h-full flex-col border-r border-slate-100 bg-white">
-      <div
-        className={cn(
-          "flex items-center border-b border-slate-100",
-          collapsed ? "flex-col gap-3 px-2 py-4" : "gap-3 px-5 py-5"
-        )}
-      >
-        <div className="flex size-10 shrink-0 items-center justify-center rounded-xs bg-brand-primary text-white">
-          <Landmark className="size-5" />
+    <div className="flex h-full flex-col border-r border-slate-200 bg-white">
+      {!collapsed && (
+        <div className="wd-heading border-b border-slate-200 px-5 py-3.5 text-[11px] font-semibold uppercase tracking-[1.5px] text-gray-400">
+          Menu
         </div>
-        {!collapsed && (
-          <div className="min-w-0 flex-1">
-            <p className="text-sm font-bold leading-tight tracking-tight text-brand-primary">
-              Admin RW 004
-            </p>
-          </div>
-        )}
-        <button
-          className="hidden rounded-xs p-1.5 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 lg:block"
-          onClick={onToggle}
-          aria-label={collapsed ? "Buka menu samping" : "Tutup menu samping"}
-          title={collapsed ? "Buka menu" : "Tutup menu"}
-        >
-          {collapsed ? <PanelLeftOpen className="size-4" /> : <PanelLeftClose className="size-4" />}
-        </button>
-      </div>
+      )}
 
-      <nav className={cn("flex-1 overflow-y-auto px-3 pb-4", collapsed ? "mt-4" : "mt-3")}>
+      <nav className={cn("flex-1 overflow-y-auto p-3", collapsed && "pt-4")}>
         <div className={cn("space-y-1", collapsed && "flex flex-col items-center gap-2")}>
           {NAV_ITEMS.map((item) => {
             const active =
@@ -93,11 +67,11 @@ function SidebarContent({
                 title={collapsed ? item.label : undefined}
                 onClick={onNavigate}
                 className={cn(
-                  "group flex items-center gap-3 rounded-xs text-sm font-medium transition-colors",
+                  "wd-heading group flex items-center gap-3 rounded-xs text-[13.5px] font-medium tracking-[0.3px] transition-colors",
                   collapsed ? "size-10 justify-center px-0" : "px-3 py-2.5",
                   active
-                    ? "bg-brand-light text-brand-primary"
-                    : "text-slate-600 hover:bg-slate-50 hover:text-brand-primary"
+                    ? "bg-brand-primary text-white shadow-sm"
+                    : "text-slate-600 hover:bg-brand-light hover:text-brand-primary"
                 )}
               >
                 <item.icon className="size-4 shrink-0" />
@@ -107,37 +81,6 @@ function SidebarContent({
           })}
         </div>
       </nav>
-
-      <div className={cn("border-t border-slate-100 px-3 py-3", collapsed && "flex justify-center px-2")}>
-        {collapsed ? (
-          <button
-            className="flex size-10 items-center justify-center rounded-xs text-slate-400 transition-colors hover:bg-slate-50 hover:text-brand-primary"
-            onClick={onLogout}
-            aria-label="Keluar"
-            title="Keluar"
-          >
-            <LogOut className="size-4" />
-          </button>
-        ) : (
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 px-1">
-              <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-brand-light text-xs font-semibold text-brand-primary">
-                {user ? getInitials(user.name) : "AD"}
-              </div>
-              <p className="min-w-0 flex-1 truncate text-xs font-semibold text-slate-700">
-                {user?.name ?? "Admin"}
-              </p>
-            </div>
-            <button
-              className="flex w-full items-center gap-2 rounded-xs px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-red-50 hover:text-red-600"
-              onClick={onLogout}
-            >
-              <LogOut className="size-4" />
-              Keluar
-            </button>
-          </div>
-        )}
-      </div>
     </div>
   );
 }
@@ -151,6 +94,7 @@ export default function AdminLayout({
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const user = useSyncExternalStore(subscribeUser, getUserSnapshot, () => null);
   useEffect(() => {
@@ -170,18 +114,107 @@ export default function AdminLayout({
     router.replace("/admin/login");
   };
 
-  const sidebarProps = {
-    user,
-    pathname,
-    onLogout: handleLogout,
-    onNavigate: () => setMobileOpen(false),
-  };
-
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-[#ededed]">
+      {/* Topbar maroon */}
+      <header className="sticky top-0 z-40 bg-brand-primary shadow-[0_2px_12px_rgba(0,0,0,0.2)]">
+        <div className="flex h-[62px] items-center gap-2 px-4">
+          <button
+            className="cursor-pointer rounded-md border-none bg-transparent p-2 text-lg text-white transition-colors hover:bg-white/15"
+            onClick={() => {
+              if (window.innerWidth >= 1024) setSidebarOpen((o) => !o);
+              else setMobileOpen(true);
+            }}
+            aria-label="Buka menu"
+          >
+            <Menu className="size-5" />
+          </button>
+
+          <Link href="/admin/dashboard" className="flex items-center gap-2.5 no-underline">
+            <span className="flex size-10 items-center justify-center rounded-xs bg-white text-brand-primary shadow-[0_2px_8px_rgba(0,0,0,0.25)]">
+              <Landmark className="size-5" />
+            </span>
+            <span className="leading-tight text-white">
+              <span className="wd-heading block text-base font-bold tracking-[1px] uppercase">
+                Admin RW 004
+              </span>
+              <span className="wd-heading block text-[10px] font-normal tracking-[2px] uppercase opacity-85">
+                Panel Admin
+              </span>
+            </span>
+          </Link>
+
+          {/* Kanan: tema + akun */}
+          <div className="ml-auto flex items-center gap-1.5">
+            <ThemeToggle variant="navbar" />
+
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setProfileOpen((o) => !o)}
+                aria-label="Menu akun"
+                className="flex cursor-pointer items-center gap-2.5 rounded-md border-none bg-white/10 px-2.5 py-1.5 text-white transition-colors hover:bg-white/20"
+              >
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white text-xs font-bold text-brand-primary">
+                  {user ? getInitials(user.name) : "AD"}
+                </span>
+                <span className="hidden text-left leading-tight sm:block">
+                  <span className="wd-heading block max-w-[140px] truncate text-[13px] font-semibold tracking-[0.3px]">
+                    {user?.name ?? "Admin"}
+                  </span>
+                  <span className="block text-[10px] uppercase tracking-[1px] opacity-80">
+                    Administrator
+                  </span>
+                </span>
+                <ChevronDown
+                  className={cn(
+                    "size-3.5 transition-transform",
+                    profileOpen && "rotate-180"
+                  )}
+                />
+              </button>
+
+              {profileOpen && (
+                <>
+                  <div
+                    className="fixed inset-0 z-40 cursor-default"
+                    onClick={() => setProfileOpen(false)}
+                  />
+                  <div className="absolute right-0 top-full z-50 mt-2 w-60 overflow-hidden rounded-md border border-slate-200 bg-white shadow-xl">
+                    <div className="border-b border-slate-100 px-4 py-3">
+                      <p className="m-0 truncate text-sm font-bold text-slate-800">
+                        {user?.name ?? "Admin"}
+                      </p>
+                      <p className="wd-heading m-0 text-[11px] uppercase tracking-[1px] text-gray-400">
+                        Administrator RW 004
+                      </p>
+                    </div>
+                    <Link
+                      href="/admin/pengaturan"
+                      className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium text-slate-600 no-underline transition-colors hover:bg-brand-light hover:text-brand-primary"
+                    >
+                      <Settings className="size-4" />
+                      Pengaturan
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="flex w-full cursor-pointer items-center gap-2.5 border-t border-slate-100 border-t-solid bg-transparent px-4 py-2.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-50"
+                    >
+                      <LogOut className="size-4" />
+                      Keluar
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </header>
+
       {/* Mobile overlay */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-40 lg:hidden">
+        <div className="fixed inset-0 z-50 lg:hidden">
           <div
             className="absolute inset-0 bg-black/50"
             onClick={() => setMobileOpen(false)}
@@ -189,8 +222,8 @@ export default function AdminLayout({
           <div className="absolute inset-y-0 left-0 z-50 w-64 shadow-xl">
             <SidebarContent
               collapsed={false}
-              onToggle={() => setMobileOpen(false)}
-              {...sidebarProps}
+              pathname={pathname}
+              onNavigate={() => setMobileOpen(false)}
             />
           </div>
         </div>
@@ -199,25 +232,16 @@ export default function AdminLayout({
       {/* Desktop sidebar */}
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-30 hidden transition-[width] duration-300 lg:block",
+          "fixed bottom-0 left-0 top-[62px] z-30 hidden transition-[width] duration-300 lg:block",
           sidebarOpen ? "w-64" : "w-16"
         )}
       >
         <SidebarContent
           collapsed={!sidebarOpen}
-          onToggle={() => setSidebarOpen((o) => !o)}
-          {...sidebarProps}
+          pathname={pathname}
+          onNavigate={() => setMobileOpen(false)}
         />
       </aside>
-
-      {/* Floating menu button (mobile) */}
-      <button
-        className="fixed top-4 left-4 z-40 flex size-9 items-center justify-center rounded-xs bg-white text-slate-700 shadow-md ring-1 ring-slate-200 transition-colors hover:bg-slate-100 lg:hidden"
-        onClick={() => setMobileOpen(true)}
-        aria-label="Buka menu"
-      >
-        <Menu className="size-5" />
-      </button>
 
       <div
         className={cn(
@@ -225,7 +249,17 @@ export default function AdminLayout({
           sidebarOpen ? "lg:pl-64" : "lg:pl-16"
         )}
       >
-        <main className="p-4 lg:p-8">{children}</main>
+        <main className="p-4 lg:p-6">{children}</main>
+        <footer className="border-t border-slate-200/70 px-4 py-4 pb-6 lg:px-6">
+          <div className="flex flex-col items-center justify-between gap-1 sm:flex-row">
+            <span className="wd-heading text-[12px] uppercase tracking-[0.5px] text-gray-500">
+              Developed by KKN UYM Threeverse Bytewizard Team 2026
+            </span>
+            <span className="wd-heading text-[12px] uppercase tracking-[0.5px] text-gray-500">
+              RW 004, Kelurahan Pabuaran
+            </span>
+          </div>
+        </footer>
       </div>
     </div>
   );

@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
-import { Figtree } from "next/font/google";
+import { Oswald, Nunito_Sans } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/sonner";
 import AOSInit from "@/components/layout/AOSInit";
 
-const figtree = Figtree({
+const oswald = Oswald({
   subsets: ["latin"],
-  variable: "--font-figtree",
+  variable: "--font-oswald",
+  display: "swap",
+});
+
+const nunitoSans = Nunito_Sans({
+  subsets: ["latin"],
+  variable: "--font-nunito",
   display: "swap",
 });
 
@@ -27,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" suppressHydrationWarning className={`h-full antialiased ${figtree.variable} font-sans`}>
+    <html lang="id" suppressHydrationWarning className={`h-full antialiased ${oswald.variable} ${nunitoSans.variable} font-sans`}>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -45,7 +50,6 @@ export default function RootLayout({
       <body className="min-h-full bg-gray-100 font-sans">
         <AOSInit />
         {children}
-        <Toaster position="top-right" richColors />
       </body>
     </html>
   );

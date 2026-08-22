@@ -16,6 +16,7 @@ import { admin, getUserSnapshot, subscribeUser } from "@/lib/adminApi";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
+import { StatistikChart } from "./StatistikChart";
 import type { Pesan } from "@/lib/types";
 
 interface DashboardSummary {
@@ -148,6 +149,8 @@ export default function AdminDashboardPage() {
           tone="bg-purple-50 text-purple-600"
         />
       </div>
+
+      <StatistikChart />
 
       <section className="space-y-3">
           <div className="flex items-center justify-between">

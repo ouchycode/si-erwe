@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Plus, Trash2, Save, BarChart3 } from "lucide-react";
-import { toast } from "sonner";
+import { toast, confirmDelete as confirmDeleteSwal } from "@/lib/toast";
 
 import { admin } from "@/lib/adminApi";
 import { ApiError } from "@/lib/api";
@@ -29,19 +29,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 
 const MONTHS = [
   "Januari", "Februari", "Maret", "April", "Mei", "Juni",
   "Juli", "Agustus", "September", "Oktober", "November", "Desember",
 ];
+
+/* Base UI Select butuh `items` agar label nilai terpilih ter-render
+   sebelum popup dibuka; tanpa ini trigger menampilkan nilai mentah ("7"). */
+const MONTH_ITEMS = MONTHS.map((m, i) => ({ label: m, value: String(i) }));
 
 const CURRENT_YEAR = new Date().getFullYear();
 
@@ -60,7 +56,7 @@ export default function AdminStatistikPage() {
   const [activeCat, setActiveCat] = useState<string>("");
   const [rows, setRows] = useState<EditableRow[]>([]);
   const [saving, setSaving] = useState(false);
-  const [confirmDeleteRow, setConfirmDeleteRow] = useState<EditableRow | null>(null);
+
 
   useEffect(() => {
     admin
@@ -159,10 +155,10 @@ export default function AdminStatistikPage() {
         });
         ok += 1;
       }
-      toast.success(`Berhasil menyimpan ${ok} baris data.`);
+      toast(`Berhasil menyimpan ${ok} baris data.`);
       await reload();
     } catch (err) {
-      toast.error(err instanceof ApiError ? err.message : "Gagal menyimpan data statistik.");
+      toast(err instanceof ApiError ? err.message : "Gagal menyimpan data statistik.", "error");
     } finally {
       setSaving(false);
     }
@@ -173,18 +169,21 @@ export default function AdminStatistikPage() {
       removeRow(row.key);
       return;
     }
-    setConfirmDeleteRow(row);
+    void confirmDeleteSwal(
+      `Yakin ingin menghapus data RT ${row.rt} untuk periode ini? Tindakan ini tidak dapat dibatalkan.`,
+    ).then((ok) => {
+      if (!ok || typeof row.id !== "number") return;
+      void doDeleteRow(row.id);
+    });
   };
 
-  const confirmDelete = async () => {
-    if (!confirmDeleteRow || typeof confirmDeleteRow.id !== "number") return;
+  const doDeleteRow = async (id: number) => {
     try {
-      const res = await admin.delete<ApiMessage>(`/admin/statistik/${confirmDeleteRow.id}`);
-      toast.success(res.message);
-      setConfirmDeleteRow(null);
+      const res = await admin.delete<ApiMessage>(`/admin/statistik/${id}`);
+      toast(res.message);
       await reload();
     } catch (err) {
-      toast.error(err instanceof ApiError ? err.message : "Gagal menghapus data.");
+      toast(err instanceof ApiError ? err.message : "Gagal menghapus data.", "error");
     }
   };
 
@@ -226,7 +225,7 @@ export default function AdminStatistikPage() {
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="month">Bulan</Label>
-              <Select value={monthIndex} onValueChange={(v) => setMonthIndex(v ?? "0")}>
+              <Select items={MONTH_ITEMS} value={monthIndex} onValueChange={(v) => setMonthIndex(v ?? "0")}>
                 <SelectTrigger id="month" className="w-full sm:w-40">
                   <SelectValue />
                 </SelectTrigger>
@@ -359,26 +358,6 @@ export default function AdminStatistikPage() {
           )}
       </div>
 
-      <Dialog open={confirmDeleteRow !== null} onOpenChange={(o) => !o && setConfirmDeleteRow(null)}>
-        <DialogContent className="max-w-sm">
-          <DialogHeader>
-            <DialogTitle>Hapus Data Statistik</DialogTitle>
-            <DialogDescription>
-              Yakin ingin menghapus data RT{" "}
-              <span className="font-medium">{confirmDeleteRow?.rt ?? "-"}</span> untuk periode ini?
-              Tindakan ini tidak dapat dibatalkan.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setConfirmDeleteRow(null)}>
-              Batal
-            </Button>
-            <Button variant="destructive" onClick={confirmDelete}>
-              Hapus
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }

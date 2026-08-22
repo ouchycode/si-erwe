@@ -4,8 +4,6 @@ import {
   Users,
   Map,
   FileText,
-  Shield,
-  Home,
   Newspaper,
   BarChart2,
   Sprout,
@@ -67,18 +65,6 @@ export const NAV_ITEMS: NavItem[] = [
         href: "/layanan/administrasi-kependudukan",
         icon: FileText,
         description: "Layanan surat pengantar dan administrasi warga.",
-      },
-      {
-        label: "Keamanan Wilayah",
-        href: "/layanan/keamanan-wilayah",
-        icon: Shield,
-        description: "Informasi keamanan, tamu, dan siskamling.",
-      },
-      {
-        label: "Kebersihan Lingkungan",
-        href: "/layanan/kebersihan-lingkungan",
-        icon: Home,
-        description: "Jadwal kebersihan dan kerja bakti warga.",
       },
       {
         label: "Layanan Posyandu",

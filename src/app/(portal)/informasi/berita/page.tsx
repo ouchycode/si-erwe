@@ -33,7 +33,7 @@ export default async function BeritaTerkini({
   const kategoris = Array.from(new Set(beritaList.map((b) => b.kategori).filter(Boolean)));
 
   return (
-    <div className="min-h-screen bg-white font-sans pb-20">
+    <div className="min-h-screen font-sans pb-16">
       <PageHeader
         category="Pusat Informasi"
         title="Berita Terkini"
@@ -45,11 +45,7 @@ export default async function BeritaTerkini({
           <div className="flex flex-wrap gap-2">
             <Link
               href="/informasi/berita"
-              className={`text-xs font-semibold px-3 py-1.5 rounded-xs transition-colors no-underline border ${
-                !kategori
-                  ? "bg-brand-primary text-white border-brand-primary"
-                  : "bg-slate-50 text-slate-600 border-slate-200 hover:bg-gray-100"
-              }`}
+              className={`wd-chip !text-xs ${!kategori ? "is-active" : ""}`}
             >
               Semua
             </Link>
@@ -57,11 +53,7 @@ export default async function BeritaTerkini({
               <Link
                 key={k}
                 href={`/informasi/berita?kategori=${encodeURIComponent(k)}`}
-                className={`text-xs font-semibold px-3 py-1.5 rounded-xs transition-colors no-underline border ${
-                  kategori === k
-                    ? "bg-brand-primary text-white border-brand-primary"
-                    : "bg-slate-50 text-slate-600 border-slate-200 hover:bg-gray-100"
-                }`}
+                className={`wd-chip !text-xs ${kategori === k ? "is-active" : ""}`}
               >
                 {k}
               </Link>
@@ -77,13 +69,10 @@ export default async function BeritaTerkini({
                 name="q"
                 defaultValue={q ?? ""}
                 placeholder="Cari berita..."
-                className="w-full md:w-56 pl-9 pr-3 py-2 text-sm rounded-xs border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-primary/30"
+                className="w-full md:w-56 rounded-md border border-gray-300 bg-white py-2 pl-9 pr-3 text-sm text-gray-700 outline-none transition-colors focus:border-brand-primary"
               />
             </div>
-            <button
-              type="submit"
-              className="px-4 py-2 text-sm font-semibold text-white bg-brand-primary hover:bg-brand-primary-hover rounded-xs transition-colors cursor-pointer border-none"
-            >
+            <button type="submit" className="wd-btn !py-2 !text-[13px]">
               Cari
             </button>
           </form>
@@ -104,9 +93,9 @@ export default async function BeritaTerkini({
                 href={`/informasi/berita/${berita.slug}`}
                 data-aos="fade-up"
 
-                className="group flex flex-col bg-slate-50 rounded-xs overflow-hidden no-underline transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                className="wd-card wd-lift group flex flex-col overflow-hidden no-underline"
               >
-                <div className="relative w-full h-48 bg-gray-100 overflow-hidden">
+                <div className="relative h-[190px] w-full overflow-hidden bg-gray-100">
                   {berita.gambar ? (
                     <Image
                       src={resolveImageUrl(berita.gambar) ?? ""}
@@ -114,34 +103,34 @@ export default async function BeritaTerkini({
                       fill
                       priority={index === 0}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : (
-                    <div className="absolute inset-0 flex items-center justify-center text-gray-400 text-sm font-medium">
-                      Media tidak tersedia
+                    <div className="wd-heading flex h-full items-center justify-center bg-brand-light tracking-[1px] text-brand-primary opacity-80">
+                      RW 004
                     </div>
                   )}
-                  <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-xs bg-brand-primary text-white shadow-sm">
+                  <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-brand-primary px-2.5 py-1 text-xs font-semibold text-white shadow-sm">
                     <Tag size={10} />
                     {berita.kategori}
                   </span>
                 </div>
 
-                <div className="p-6 flex flex-col flex-1">
-                  <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-3 font-mono uppercase tracking-wider">
+                <div className="flex flex-1 flex-col p-5">
+                  <div className="wd-heading flex items-center gap-1.5 text-xs tracking-[1px] text-brand-primary uppercase">
                     <Calendar size={12} />
                     {berita.tanggal}
                   </div>
 
-                  <h3 className="text-base font-bold text-slate-800 leading-snug mb-3 group-hover:text-brand-primary transition-colors line-clamp-2 flex-1">
+                  <h3 className="wd-heading mt-2 line-clamp-2 flex-1 text-base font-semibold leading-snug text-slate-800 transition-colors group-hover:text-brand-primary">
                     {berita.judul}
                   </h3>
 
-                  <p className="text-sm text-gray-500 leading-relaxed line-clamp-2 mb-5">
+                  <p className="mb-4 mt-2 line-clamp-2 text-sm leading-relaxed text-gray-500">
                     {berita.ringkasan}
                   </p>
 
-                  <div className="flex items-center gap-1.5 text-sm font-bold text-brand-primary mt-auto">
+                  <div className="wd-heading mt-auto inline-flex items-center gap-1.5 text-[13px] tracking-[0.5px] text-brand-primary uppercase">
                     Baca Selengkapnya
                     <ChevronRight size={14} />
                   </div>
@@ -152,23 +141,23 @@ export default async function BeritaTerkini({
         )}
 
         {lastPage > 1 && (
-          <div className="flex items-center justify-center gap-2 mt-12">
+          <div className="mt-10 flex items-center justify-center gap-2">
             {currentPage > 1 && (
               <Link
                 href={`/informasi/berita?${new URLSearchParams({ page: String(currentPage - 1), ...(kategori ? { kategori } : {}), ...(q ? { q } : {}) })}`}
-                className="inline-flex items-center gap-1 px-3 py-2 text-sm font-semibold text-slate-600 border border-slate-200 rounded-xs hover:bg-slate-50 no-underline"
+                className="wd-heading inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-3.5 py-2 text-[13px] tracking-[0.5px] text-gray-600 no-underline transition-colors hover:border-brand-primary hover:bg-brand-primary hover:text-white"
               >
                 <ChevronLeft size={14} />
                 Sebelumnya
               </Link>
             )}
-            <span className="text-sm text-gray-400 font-medium px-2">
+            <span className="wd-heading px-2 text-sm tracking-[0.5px] text-gray-500">
               Halaman {currentPage} dari {lastPage}
             </span>
             {currentPage < lastPage && (
               <Link
                 href={`/informasi/berita?${new URLSearchParams({ page: String(currentPage + 1), ...(kategori ? { kategori } : {}), ...(q ? { q } : {}) })}`}
-                className="inline-flex items-center gap-1 px-3 py-2 text-sm font-semibold text-slate-600 border border-slate-200 rounded-xs hover:bg-slate-50 no-underline"
+                className="wd-heading inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-3.5 py-2 text-[13px] tracking-[0.5px] text-gray-600 no-underline transition-colors hover:border-brand-primary hover:bg-brand-primary hover:text-white"
               >
                 Berikutnya
                 <ChevronRight size={14} />
@@ -177,8 +166,8 @@ export default async function BeritaTerkini({
           </div>
         )}
 
-        <div className="flex justify-center mt-6">
-          <p className="text-sm text-gray-400 font-medium">Menampilkan {total} berita</p>
+        <div className="mt-6 flex justify-center">
+          <p className="text-sm text-gray-400">Menampilkan {total} berita</p>
         </div>
       </ContentSection>
     </div>

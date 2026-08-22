@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { Plus, Pencil, Trash2, Search, Images } from "lucide-react";
-import { toast } from "sonner";
+import { toast, confirmDelete as confirmDeleteSwal } from "@/lib/toast";
 
 import { admin } from "@/lib/adminApi";
 import { ApiError } from "@/lib/api";
@@ -69,7 +69,6 @@ export default function AdminGaleriPage() {
   const [form, setForm] = useState<GaleriForm>(EMPTY_FORM);
   const [file, setFile] = useState<File | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
-  const [deleting, setDeleting] = useState(false);
 
   const fetcher = useCallback(() => {
     const params = new URLSearchParams({ per_page: "15" });
@@ -105,7 +104,7 @@ export default function AdminGaleriPage() {
     if (file) {
       const fileError = imageFileError(file, 5);
       if (fileError) {
-        toast.error(fileError);
+        toast(fileError, "error");
         return;
       }
     }
@@ -120,32 +119,38 @@ export default function AdminGaleriPage() {
 
       if (form.id) {
         const res = await admin.put<ApiMessage<GaleriItem>>(`/admin/galeri/${form.id}`, body);
-        toast.success(res.message);
+        toast(res.message);
       } else {
         const res = await admin.post<ApiMessage<GaleriItem>>("/admin/galeri", body);
-        toast.success(res.message);
+        toast(res.message);
       }
       setDialogOpen(false);
       void reload();
     } catch (err) {
-      toast.error(err instanceof ApiError ? err.message : "Gagal menyimpan foto.");
+      toast(err instanceof ApiError ? err.message : "Gagal menyimpan foto.", "error");
     } finally {
       setSaving(false);
     }
   };
 
-  const handleDelete = async () => {
-    if (!deleteId) return;
-    setDeleting(true);
+  const askDelete = (id: number, label: string) => {
+    void confirmDeleteSwal(
+      `Yakin ingin menghapus ${label}? Tindakan ini tidak dapat dibatalkan.`,
+    ).then((ok) => {
+      if (ok) void handleDelete(id);
+    });
+  };
+
+  const handleDelete = async (id?: number) => {
+    const target = id ?? deleteId;
+    if (!target) return;
     try {
-      const res = await admin.delete<ApiMessage>(`/admin/galeri/${deleteId}`);
-      toast.success(res.message);
+      const res = await admin.delete<ApiMessage>(`/admin/galeri/${target}`);
+      toast(res.message);
       setDeleteId(null);
       void reload();
     } catch (err) {
-      toast.error(err instanceof ApiError ? err.message : "Gagal menghapus foto.");
-    } finally {
-      setDeleting(false);
+      toast(err instanceof ApiError ? err.message : "Gagal menghapus foto.", "error");
     }
   };
 
@@ -269,7 +274,7 @@ export default function AdminGaleriPage() {
                           variant="ghost"
                           size="icon-sm"
                           className="text-destructive"
-                          onClick={() => setDeleteId(item.id)}
+                          onClick={() => askDelete(item.id, "foto ini")}
                           aria-label="Hapus foto"
                         >
                           <Trash2 className="size-4" />
@@ -369,24 +374,6 @@ export default function AdminGaleriPage() {
         </DialogContent>
       </Dialog>
 
-      <Dialog open={deleteId !== null} onOpenChange={(o) => !o && setDeleteId(null)}>
-        <DialogContent className="max-w-sm">
-          <DialogHeader>
-            <DialogTitle>Hapus Foto</DialogTitle>
-            <DialogDescription>
-              Yakin ingin menghapus foto ini? Tindakan ini tidak dapat dibatalkan.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setDeleteId(null)}>
-              Batal
-            </Button>
-            <Button variant="destructive" disabled={deleting} onClick={handleDelete}>
-              {deleting ? "Menghapus..." : "Hapus"}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }

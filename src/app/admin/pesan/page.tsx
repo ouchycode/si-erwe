@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { MessageSquare, Trash2 } from "lucide-react";
-import { toast } from "sonner";
+import { toast, confirmDelete as confirmDeleteSwal } from "@/lib/toast";
 
 import { admin } from "@/lib/adminApi";
 import { ApiError } from "@/lib/api";
@@ -55,7 +55,6 @@ export default function AdminPesanPage() {
   const [kategori, setKategori] = useState("");
   const [selected, setSelected] = useState<Pesan | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
-  const [deleting, setDeleting] = useState(false);
 
   const fetcher = useCallback(() => {
     const params = new URLSearchParams({ per_page: "15" });
@@ -77,19 +76,25 @@ export default function AdminPesanPage() {
     }
   };
 
-  const handleDelete = async () => {
-    if (!deleteId) return;
-    setDeleting(true);
+  const askDelete = (id: number, label: string) => {
+    void confirmDeleteSwal(
+      `Yakin ingin menghapus ${label}? Tindakan ini tidak dapat dibatalkan.`,
+    ).then((ok) => {
+      if (ok) void handleDelete(id);
+    });
+  };
+
+  const handleDelete = async (id?: number) => {
+    const target = id ?? deleteId;
+    if (!target) return;
     try {
-      const res = await admin.delete<ApiMessage>(`/admin/pesan/${deleteId}`);
-      toast.success(res.message);
+      const res = await admin.delete<ApiMessage>(`/admin/pesan/${target}`);
+      toast(res.message);
       setDeleteId(null);
-      if (selected?.id === deleteId) setSelected(null);
+      if (selected?.id === target) setSelected(null);
       void reload();
     } catch (err) {
-      toast.error(err instanceof ApiError ? err.message : "Gagal menghapus pesan.");
-    } finally {
-      setDeleting(false);
+      toast(err instanceof ApiError ? err.message : "Gagal menghapus pesan.", "error");
     }
   };
 
@@ -178,7 +183,7 @@ export default function AdminPesanPage() {
                 </TableRow>
               ) : (
                 (data?.data ?? []).map((item) => (
-                  <TableRow key={item.id} className={item.is_read ? "" : "bg-amber-50/50 even:bg-amber-50/50!"}>
+                  <TableRow key={item.id} className={item.is_read ? "" : "bg-amber-100/70 dark:bg-amber-400/10"}>
                     <TableCell className="font-medium">
                       {!item.is_read && <span className="mr-2 inline-block size-2 rounded-full bg-brand-primary" />}
                       {item.nama}
@@ -207,7 +212,7 @@ export default function AdminPesanPage() {
                           variant="ghost"
                           size="icon-sm"
                           className="text-destructive"
-                          onClick={() => setDeleteId(item.id)}
+                          onClick={() => askDelete(item.id, "pesan ini")}
                           aria-label="Hapus pesan"
                         >
                           <Trash2 className="size-4" />
@@ -251,7 +256,7 @@ export default function AdminPesanPage() {
               <DialogFooter>
                 <Button
                   variant="destructive"
-                  onClick={() => setDeleteId(selected.id)}
+                  onClick={() => askDelete(selected.id, "pesan ini")}
                 >
                   <Trash2 className="size-4" />
                   Hapus
@@ -265,24 +270,6 @@ export default function AdminPesanPage() {
         </DialogContent>
       </Dialog>
 
-      <Dialog open={deleteId !== null} onOpenChange={(o) => !o && setDeleteId(null)}>
-        <DialogContent className="max-w-sm">
-          <DialogHeader>
-            <DialogTitle>Hapus Pesan</DialogTitle>
-            <DialogDescription>
-              Yakin ingin menghapus pesan ini? Tindakan ini tidak dapat dibatalkan.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setDeleteId(null)}>
-              Batal
-            </Button>
-            <Button variant="destructive" disabled={deleting} onClick={handleDelete}>
-              {deleting ? "Menghapus..." : "Hapus"}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }

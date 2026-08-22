@@ -54,7 +54,11 @@ export function applyTheme(dark: boolean): void {
   emit();
 }
 
-export default function ThemeToggle() {
+export default function ThemeToggle({
+  variant = "default",
+}: {
+  variant?: "default" | "navbar";
+}) {
   const dark = useSyncExternalStore(
     subscribe,
     readSnapshot,
@@ -64,6 +68,20 @@ export default function ThemeToggle() {
   const toggleTheme = useCallback(() => {
     applyTheme(!readStored());
   }, []);
+
+  if (variant === "navbar") {
+    return (
+      <button
+        type="button"
+        onClick={toggleTheme}
+        aria-label={dark ? "Aktifkan mode terang" : "Aktifkan mode gelap"}
+        title={dark ? "Mode terang" : "Mode gelap"}
+        className="inline-flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full border-none bg-white/15 text-white transition-colors hover:bg-white/30"
+      >
+        {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
+      </button>
+    );
+  }
 
   return (
     <button

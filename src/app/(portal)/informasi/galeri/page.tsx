@@ -41,7 +41,7 @@ export default function GaleriPage() {
   const kategoris = Array.from(new Set((items ?? []).map((i) => i.category).filter(Boolean)));
 
   return (
-    <div className="min-h-screen bg-white font-sans pb-20">
+    <div className="min-h-screen font-sans pb-16">
       <PageHeader
         category="Dokumentasi"
         title="Galeri Kegiatan RW 004"

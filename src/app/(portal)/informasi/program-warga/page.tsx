@@ -77,7 +77,7 @@ export default async function ProgramWarga() {
   const waUrl = kontak?.waTelp ? `https://wa.me/${kontak.waTelp}` : "https://wa.me/62812XXXXXXX";
 
   return (
-    <div className="min-h-screen bg-white font-sans pb-20">
+    <div className="min-h-screen font-sans pb-16">
       <PageHeader
         category="Informasi Publik"
         title="Program Warga RW 004"

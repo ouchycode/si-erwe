@@ -22,7 +22,7 @@ export default async function PengurusRT() {
   const dataRt = res.data;
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen font-sans">
       <PageHeader
         title="Daftar Pengurus RT"
         description={`Para ujung tombak pelayanan warga di lingkungan RW 004 Pabuaran — mengelola ${jumlahRt} wilayah RT dengan semangat gotong royong.`}

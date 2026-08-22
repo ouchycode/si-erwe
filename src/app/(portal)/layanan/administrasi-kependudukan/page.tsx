@@ -75,7 +75,7 @@ export default async function AdministrasiKependudukan() {
   const waTelp = kontakInfo.waTelp || KONTAK.waTelp;
 
   return (
-    <div className="min-h-screen bg-white font-sans pb-20">
+    <div className="min-h-screen font-sans pb-16">
       <PageHeader
         category="Layanan Warga"
         title="Administrasi Kependudukan"

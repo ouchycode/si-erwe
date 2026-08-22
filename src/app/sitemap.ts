@@ -11,8 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/informasi/program-warga",
     "/informasi/statistik",
     "/layanan/administrasi-kependudukan",
-    "/layanan/keamanan-wilayah",
-    "/layanan/kebersihan-lingkungan",
     "/layanan/posyandu",
     "/tentang-kami/pengurus-rt",
     "/tentang-kami/peta-wilayah",

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Home, Phone } from "lucide-react";
+import { ChevronDown, Home, Phone, Search } from "lucide-react";
 import { NAV_ITEMS } from "@/lib/navigation";
 
 export default function MobileMenu({
@@ -19,63 +19,87 @@ export default function MobileMenu({
   const pathname = usePathname();
   if (!isOpen) return null;
 
+  const linkClass = (active: boolean) =>
+    `wd-heading flex items-center gap-3 border-b border-white/10 px-[18px] py-3 text-sm font-medium tracking-[0.5px] text-white no-underline transition-colors ${
+      active ? "bg-wd-maroon-darker" : "hover:bg-wd-maroon-deep"
+    }`;
+
   return (
-    <div className="md:hidden bg-brand-primary text-white border-t border-white/10">
-      <div className="flex flex-col">
-        <Link
-          href="/"
-          className={`flex items-center gap-3 py-3.5 px-6 text-sm font-semibold no-underline border-b border-white/10 ${
-            pathname === "/" ? "bg-white/20" : ""
-          }`}
-          onClick={onClose}
+    <div className="border-t border-white/15 bg-wd-maroon-dark text-white md:hidden">
+      <form
+        action="/informasi/berita"
+        method="GET"
+        role="search"
+        className="mx-[18px] mt-3 flex items-center overflow-hidden rounded-full border border-white/25 bg-wd-maroon-darker"
+      >
+        <input
+          type="search"
+          name="q"
+          placeholder="Cari berita…"
+          minLength={2}
+          aria-label="Cari berita"
+          className="w-full border-none bg-transparent px-4 py-2 font-sans text-[13px] text-white outline-none placeholder:text-white/50"
+        />
+        <button
+          type="submit"
+          aria-label="Cari"
+          className="flex size-9 shrink-0 cursor-pointer items-center justify-center border-none bg-transparent text-white"
         >
+          <Search size={16} />
+        </button>
+      </form>
+
+      <div className="flex flex-col pt-2">
+        <Link href="/" className={linkClass(pathname === "/")} onClick={onClose}>
           <Home size={16} />
           Beranda
         </Link>
 
-        {NAV_ITEMS.map((item) => (
-          <div key={item.label} className="border-b border-white/10 flex flex-col">
-            <button
-              className="flex items-center justify-between w-full py-3.5 px-6 text-sm font-semibold bg-transparent border-none text-white cursor-pointer"
-              onClick={() => onToggleGroup(item.label)}
-            >
-              <div className="flex items-center gap-3">
-                <item.icon size={16} />
-                {item.label}
-              </div>
-              <ChevronDown size={15} className="text-white/50" />
-            </button>
+        {NAV_ITEMS.map((item) => {
+          const groupActive = item.children.some((child) =>
+            pathname?.startsWith(child.href)
+          );
+          return (
+            <div key={item.label} className="flex flex-col border-b border-white/10">
+              <button
+                className={`wd-heading flex w-full cursor-pointer items-center justify-between border-none bg-transparent px-[18px] py-3 text-left text-sm font-medium tracking-[0.5px] text-white ${
+                  openGroup === item.label ? "bg-wd-maroon-deep" : ""
+                }`}
+                onClick={() => onToggleGroup(item.label)}
+              >
+                <span>{item.label}</span>
+                <ChevronDown
+                  size={15}
+                  className={`transition-transform ${openGroup === item.label ? "rotate-180" : ""}`}
+                />
+              </button>
 
-            {openGroup === item.label && (
-              <div className="flex flex-col bg-brand-primary-hover">
-                {item.children.map((child) => (
-                  <Link
-                    key={child.href}
-                    href={child.href}
-                    className={`flex items-start gap-3 px-6 py-3 pl-12 text-[13px] font-medium no-underline border-b border-white/5 last:border-0 ${
-                      pathname === child.href ? "text-white bg-white/10" : "text-white/70"
-                    }`}
-                    onClick={onClose}
-                  >
-                    <child.icon size={14} className={`mt-0.5 shrink-0 ${
-                      pathname === child.href ? "text-white" : "text-white/70"
-                    }`} />
-                    <span className="flex flex-col gap-0.5">
-                      <span className="text-sm font-semibold leading-tight">{child.label}</span>
-                      <span className="text-[11px] font-normal leading-snug text-white/60">{child.description}</span>
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
+              {openGroup === item.label && (
+                <div className="flex flex-col bg-wd-maroon-darker">
+                  {item.children.map((child) => (
+                    <Link
+                      key={child.href}
+                      href={child.href}
+                      onClick={onClose}
+                      className={`wd-heading flex items-center gap-2 border-b border-white/5 py-2.5 pl-9 pr-4 text-[13px] no-underline last:border-0 ${
+                        pathname === child.href || groupActive
+                          ? "text-white"
+                          : "text-white/75 hover:text-white"
+                      }`}
+                    >
+                      <child.icon size={14} className="shrink-0" />
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
 
         <Link
           href="/hubungi-kami"
-          className={`flex items-center gap-3 py-3.5 px-6 text-sm font-semibold no-underline transition-colors ${
-            pathname === "/hubungi-kami" ? "bg-white/20" : ""
-          }`}
+          className={linkClass(pathname === "/hubungi-kami")}
           onClick={onClose}
         >
           <Phone size={16} />

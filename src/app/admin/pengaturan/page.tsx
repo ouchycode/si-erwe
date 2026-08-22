@@ -1,27 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Save,
-  Settings,
   RefreshCw,
   Upload,
   Trash2,
   Plus,
-  Search,
-  MapPin,
-  Phone,
-  Clock,
-  User,
-  ShieldAlert,
-  Recycle,
-  HeartPulse,
-  BarChart3,
-  Sprout,
-  Home,
-  FileText,
   ChevronUp,
   ChevronDown,
+  Image as ImageIcon,
+  Settings,
+  User,
+  Phone,
+  FileText,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -37,19 +29,98 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Badge } from "@/components/ui/badge";
 import RichTextEditor from "@/components/admin/RichTextEditor";
 
 type Scalar = string | number | boolean;
 type ListRow = Record<string, Scalar | string[] | Record<string, Scalar>>;
+type Entry = { group: string; key: string; value: unknown };
 
-const SETTING_LABELS: Record<string, { label: string; desc?: string }> = {
-  "identitas.logo": {
-    label: "Logo",
-    desc: "Logo situs di pojok kiri atas. Kosongkan untuk memakai ikon bawaan.",
+/* ------------------------------------------------------------------ */
+/* Tab konfigurasi ala panel admin kelurahan                          */
+/* ------------------------------------------------------------------ */
+
+interface SectionDef {
+  group: string;
+  /** batasi & urutkan key tertentu; kosong = semua key pada grup */
+  keys?: string[];
+  /** heading bagian (dipakai untuk memisah halaman dalam satu tab) */
+  title?: string;
+  desc?: string;
+}
+
+interface TabDef {
+  id: string;
+  label: string;
+  icon: React.ElementType;
+  sections: SectionDef[];
+}
+
+const TABS: TabDef[] = [
+  {
+    id: "media",
+    label: "Logo & Hero",
+    icon: ImageIcon,
+    sections: [
+      { group: "identitas", keys: ["logo"], title: "Logo Situs" },
+      {
+        group: "hero",
+        keys: ["gambar"],
+        title: "Banner Utama (Hero)",
+        desc: "Gambar latar banner besar di halaman depan.",
+      },
+    ],
   },
+  {
+    id: "umum",
+    label: "Umum",
+    icon: Settings,
+    sections: [
+      { group: "identitas", keys: ["nama", "tagline"] },
+      { group: "statistik", keys: ["tahunAwal"] },
+    ],
+  },
+  {
+    id: "profil",
+    label: "Profil",
+    icon: User,
+    sections: [{ group: "profil" }],
+  },
+  {
+    id: "kontak",
+    label: "Kontak & Alamat",
+    icon: Phone,
+    sections: [
+      { group: "alamat", title: "Alamat Sekretariat" },
+      { group: "kontak", title: "Kontak Sekretariat" },
+    ],
+  },
+  {
+    id: "konten",
+    label: "Konten Halaman",
+    icon: FileText,
+    sections: [
+      {
+        group: "program_warga",
+        title: "Halaman Program Warga",
+        desc: "Daftar program warga yang tampil di beranda dan halaman Program Warga.",
+      },
+      {
+        group: "layanan",
+        title: "Halaman Administrasi Kependudukan",
+        desc: "Jenis surat beserta persyaratannya, dan alur pengurusannya.",
+      },
+      {
+        group: "posyandu",
+        title: "Halaman Posyandu",
+        desc: "Isi konten halaman informasi Pos Pelayanan Terpadu.",
+      },
+    ],
+  },
+];
+
+const FIELD_LABELS: Record<string, { label: string; desc?: string }> = {
   "identitas.nama": {
-    label: "Nama Institusi",
+    label: "Nama Situs",
     desc: "Nama yang tampil di samping logo pada menu navigasi.",
   },
   "identitas.tagline": {
@@ -58,130 +129,51 @@ const SETTING_LABELS: Record<string, { label: string; desc?: string }> = {
   },
   "statistik.tahunAwal": {
     label: "Tahun Awal Statistik",
-    desc: "Tahun pertama yang muncul di dropdown statistik. Ubah di sini jika perlu menambah tahun.",
+    desc: "Tahun pertama yang muncul di dropdown statistik.",
   },
-  "hero.gambar": {
-    label: "Gambar Hero",
-    desc: "Gambar latar banner utama halaman depan. Kosongkan untuk memakai gambar bawaan.",
-  },
-  "alamat.sekretariat": {
-    label: "Alamat Sekretariat",
-    desc: "Alamat kantor/sekretariat RW 004 yang tampil di situs.",
-  },
-  "kontak.sekretariat": {
-    label: "Kontak Sekretariat",
-    desc: "Nomor WhatsApp dan email pengurus.",
-  },
-  "jam_operasional.sekretariat": {
-    label: "Jam Operasional",
-    desc: "Jadwal buka layanan administrasi.",
-  },
-  "profil.umum": {
-    label: "Profil Umum",
-    desc: "Periode kepengurusan dan jumlah RT/KK.",
-  },
-  "profil.visi": { label: "Visi", desc: "Visi RW 004." },
-  "profil.misi": {
-    label: "Misi",
-    desc: "Misi RW 004, tulis satu misi per baris.",
-  },
-  "profil.sejarah": {
-    label: "Sejarah",
-    desc: "Sejarah RW 004, tulis satu paragraf per baris.",
-  },
-  "layanan.kartu": {
-    label: "Kartu Layanan",
-    desc: "Daftar layanan warga yang tampil di beranda.",
+
+  // ── Konten halaman ──
+  "program_warga.daftar": {
+    label: "Daftar Program",
+    desc: "Klik “Tambah Item” untuk menambah program baru (KWT, Bank Sampah, dll.).",
   },
   "layanan.administrasi": {
-    label: "Layanan Administrasi",
-    desc: "Surat dan persyaratan administrasi.",
+    label: "Jenis Surat & Persyaratan",
+    desc: "Setiap item berisi nama surat dan daftar syaratnya.",
   },
   "layanan.alur": {
-    label: "Alur Layanan",
-    desc: "Tahapan pengurusan layanan.",
+    label: "Alur Pengurusan",
+    desc: "Urutan langkah pengurusan surat, dari awal sampai selesai.",
   },
-  "program_warga.daftar": {
-    label: "Program Warga",
-    desc: "Program KWT dan Bank Sampah.",
-  },
-  "keamanan_wilayah.deskripsi": {
-    label: "Deskripsi Halaman",
-    desc: "Ringkasan singkat di bawah judul halaman Keamanan Wilayah.",
-  },
-  "keamanan_wilayah.s1Judul": { label: "Judul Bagian 1" },
-  "keamanan_wilayah.s1Teks": {
-    label: "Paragraf Bagian 1",
-    desc: "Tulis satu paragraf per baris.",
-  },
-  "keamanan_wilayah.s1Gambar": { label: "Gambar Bagian 1", desc: "Unggah gambar, atau tempel URL gambar." },
-  "keamanan_wilayah.s2Judul": { label: "Judul Bagian 2" },
-  "keamanan_wilayah.s2Teks": {
-    label: "Paragraf Bagian 2",
-    desc: "Tulis satu paragraf per baris.",
-  },
-  "keamanan_wilayah.s2List": {
-    label: "Poin Bagian 2",
-    desc: "Daftar poin, satu per baris.",
-  },
-  "keamanan_wilayah.s2Gambar": { label: "Gambar Bagian 2", desc: "Unggah gambar, atau tempel URL gambar." },
-  "keamanan_wilayah.s3Judul": { label: "Judul Bagian 3" },
-  "keamanan_wilayah.s3Teks": {
-    label: "Paragraf Bagian 3",
-    desc: "Tulis satu paragraf per baris.",
-  },
-  "kebersihan_lingkungan.deskripsi": {
-    label: "Deskripsi Halaman",
-    desc: "Ringkasan singkat di bawah judul halaman Kebersihan Lingkungan.",
-  },
-  "kebersihan_lingkungan.s1Judul": { label: "Judul Bagian 1" },
-  "kebersihan_lingkungan.s1Teks": {
-    label: "Paragraf Bagian 1",
-    desc: "Tulis satu paragraf per baris.",
-  },
-  "kebersihan_lingkungan.s1Gambar": { label: "Gambar Bagian 1", desc: "Unggah gambar, atau tempel URL gambar." },
-  "kebersihan_lingkungan.s2Judul": { label: "Judul Bagian 2" },
-  "kebersihan_lingkungan.s2Teks": {
-    label: "Paragraf Bagian 2",
-    desc: "Tulis satu paragraf per baris.",
-  },
-  "kebersihan_lingkungan.s2Gambar": { label: "Gambar Bagian 2", desc: "Unggah gambar, atau tempel URL gambar." },
   "posyandu.deskripsi": {
     label: "Deskripsi Halaman",
     desc: "Ringkasan singkat di bawah judul halaman Posyandu.",
   },
-  "posyandu.s1Judul": { label: "Judul Bagian 1" },
+  "posyandu.s1Judul": { label: "Bagian 1 · Judul" },
   "posyandu.s1Teks": {
-    label: "Paragraf Bagian 1",
-    desc: "Tulis satu paragraf per baris.",
+    label: "Bagian 1 · Paragraf",
+    desc: "Satu paragraf per baris.",
   },
-  "posyandu.s1Kutipan": { label: "Kutipan Bagian 1", desc: "Kalimat kutipan yang ditebalkan." },
-  "posyandu.s1Gambar": { label: "Gambar Bagian 1", desc: "Unggah gambar, atau tempel URL gambar." },
-  "posyandu.s2Judul": { label: "Judul Bagian 2" },
+  "posyandu.s1Kutipan": {
+    label: "Bagian 1 · Kutipan",
+    desc: "Kalimat kutipan yang ditampilkan menonjol.",
+  },
+  "posyandu.s1Gambar": { label: "Bagian 1 · Gambar Pendukung" },
+  "posyandu.s2Judul": { label: "Bagian 2 · Judul" },
   "posyandu.s2Teks": {
-    label: "Paragraf Bagian 2",
-    desc: "Tulis satu paragraf per baris.",
+    label: "Bagian 2 · Paragraf",
+    desc: "Satu paragraf per baris.",
   },
-  "posyandu.s2Gambar": { label: "Gambar Bagian 2", desc: "Unggah gambar, atau tempel URL gambar." },
+  "posyandu.s2Gambar": { label: "Bagian 2 · Gambar Pendukung" },
 };
 
-const GROUP_META: Record<string, { label: string; icon: React.ElementType }> = {
-  identitas: { label: "Identitas & Logo", icon: Settings },
-  hero: { label: "Banner Utama", icon: Home },
-  alamat: { label: "Alamat Sekretariat", icon: MapPin },
-  kontak: { label: "Kontak", icon: Phone },
-  jam_operasional: { label: "Jam Operasional", icon: Clock },
-  profil: { label: "Profil RW", icon: User },
-  layanan: { label: "Layanan", icon: FileText },
-  program_warga: { label: "Program Warga", icon: Sprout },
-  keamanan_wilayah: { label: "Keamanan Wilayah", icon: ShieldAlert },
-  kebersihan_lingkungan: { label: "Kebersihan Lingkungan", icon: Recycle },
-  posyandu: { label: "Posyandu", icon: HeartPulse },
-  statistik: { label: "Statistik", icon: BarChart3 },
-};
-
-function groupLabel(group: string): string {
-  return GROUP_META[group]?.label ?? toLabel(group);
+function fieldMeta(group: string, key: string) {
+  return (
+    FIELD_LABELS[`${group}.${key}`] ?? {
+      label: toLabel(key),
+      desc: undefined,
+    }
+  );
 }
 
 function toLabel(s: string): string {
@@ -191,6 +183,7 @@ function toLabel(s: string): string {
     .replace(/\bRt\b/g, "RT")
     .replace(/\bKk\b/g, "KK")
     .replace(/\bWa\b/g, "WA")
+    .replace(/\bTelp\b/g, "Telepon")
     .replace(/\bKwt\b/g, "KWT")
     .replace(/^./, (c) => c.toUpperCase());
 }
@@ -210,6 +203,60 @@ function toRichText(value: unknown, asList: boolean): string {
   }
   return clean.map((s) => `<p>${s}</p>`).join("");
 }
+
+function normalizeSettings(groups: SettingGroups): SettingGroups {
+  const next: SettingGroups = {};
+  Object.entries(groups).forEach(([g, settings]) => {
+    // Grup yang halamannya sudah tidak ada tidak ditampilkan lagi
+    if (
+      g === "jam_operasional" ||
+      g === "keamanan_wilayah" ||
+      g === "kebersihan_lingkungan"
+    )
+      return;
+    next[g] = { ...(settings as Record<string, unknown>) };
+  });
+  const daftar = next.program_warga?.daftar;
+  if (Array.isArray(daftar)) {
+    next.program_warga = {
+      ...next.program_warga,
+      daftar: daftar.map((r) => {
+        if (!r || typeof r !== "object" || Array.isArray(r)) return r;
+        const row = r as Record<string, unknown>;
+        return {
+          ...row,
+          gambar: typeof row.gambar === "string" ? row.gambar : "",
+        };
+      }),
+    };
+  }
+  // Setting lama yang tidak lagi dipakai halaman mana pun
+  if (next.layanan) delete next.layanan.kartu;
+  return next;
+}
+
+function cloneCell(v: ListRow[string]): ListRow[string] {
+  if (Array.isArray(v)) return [];
+  if (typeof v === "boolean") return false;
+  if (typeof v === "number") return 0;
+  if (typeof v === "object" && v !== null) {
+    const out: Record<string, Scalar> = {};
+    Object.entries(v).forEach(([sk, sv]) => {
+      out[sk] =
+        typeof sv === "boolean" ? false : typeof sv === "number" ? 0 : "";
+    });
+    return out;
+  }
+  return "";
+}
+
+function isImageKey(k: string): boolean {
+  return k === "logo" || /gambar/i.test(k);
+}
+
+/* ------------------------------------------------------------------ */
+/* Editor gambar                                                       */
+/* ------------------------------------------------------------------ */
 
 function ImageEditor({
   value,
@@ -300,6 +347,10 @@ function ImageEditor({
     </div>
   );
 }
+
+/* ------------------------------------------------------------------ */
+/* Editor daftar / struktur                                            */
+/* ------------------------------------------------------------------ */
 
 function ListEditor({
   value,
@@ -411,41 +462,6 @@ function ListEditor({
   );
 }
 
-function normalizeSettings(groups: SettingGroups): SettingGroups {
-  const daftar = groups.program_warga?.daftar;
-  if (!Array.isArray(daftar)) return groups;
-  const next = daftar.map((r) => {
-    if (!r || typeof r !== "object" || Array.isArray(r)) return r;
-    const row = r as Record<string, unknown>;
-    return {
-      ...row,
-      gambar: typeof row.gambar === "string" ? row.gambar : "",
-    };
-  });
-  return {
-    ...groups,
-    program_warga: { ...groups.program_warga, daftar: next },
-  };
-}
-
-function cloneCell(v: ListRow[string]): ListRow[string] {  if (Array.isArray(v)) return [];
-  if (typeof v === "boolean") return false;
-  if (typeof v === "number") return 0;
-  if (typeof v === "object" && v !== null) {
-    const out: Record<string, Scalar> = {};
-    Object.entries(v).forEach(([sk, sv]) => {
-      out[sk] =
-        typeof sv === "boolean" ? false : typeof sv === "number" ? 0 : "";
-    });
-    return out;
-  }
-  return "";
-}
-
-function isImageKey(k: string): boolean {
-  return k === "logo" || /gambar/i.test(k);
-}
-
 function StructuredFieldEditor({
   value,
   onChange,
@@ -547,126 +563,9 @@ function StructuredFieldEditor({
   return null;
 }
 
-function SettingEditor({
-  group,
-  settingKey,
-  value,
-  onSaved,
-}: {
-  group: string;
-  settingKey: string;
-  value: unknown;
-  onSaved: () => void;
-}) {
-  const [editValue, setEditValue] = useState<unknown>(value);
-  const [dirty, setDirty] = useState(false);
-  const [saving, setSaving] = useState(false);
-
-  const isImageField =
-    settingKey === "logo" || /gambar/i.test(settingKey);
-
-  const isProfilRich =
-    group === "profil" &&
-    (settingKey === "visi" || settingKey === "misi" || settingKey === "sejarah");
-
-  const handleChange = (next: unknown) => {
-    setEditValue(next);
-    setDirty(true);
-  };
-
-  const save = async (next: unknown) => {
-    setSaving(true);
-    try {
-      const res = await admin.post<ApiMessage>("/admin/settings", {
-        group,
-        key: settingKey,
-        value: next,
-      });
-      toast.success(res.message);
-      setDirty(false);
-      onSaved();
-    } catch (err) {
-      toast.error(err instanceof ApiError ? err.message : "Gagal menyimpan pengaturan.");
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  const handleSave = () => {
-    let next: unknown = editValue;
-    if (Array.isArray(next) && next.every((x) => typeof x === "string")) {
-      next = (next as string[]).map((s) => s.trim()).filter(Boolean);
-    }
-    if (typeof next === "number" && !Number.isFinite(next)) next = 0;
-    void save(next);
-  };
-
-  const reset = () => {
-    setEditValue(value);
-    setDirty(false);
-  };
-
-  const label = SETTING_LABELS[`${group}.${settingKey}`]?.label ?? toLabel(settingKey);
-  const desc = SETTING_LABELS[`${group}.${settingKey}`]?.desc;
-
-  return (
-    <div className="rounded-xs border border-slate-200 bg-white p-4 sm:p-5">
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <div>
-          <Label className="text-sm font-semibold text-slate-800">{label}</Label>
-          {desc && (
-            <p className="mt-0.5 text-xs text-muted-foreground">{desc}</p>
-          )}
-        </div>
-        {dirty && (
-          <Badge variant="secondary" className="text-amber-600">
-            Belum disimpan
-          </Badge>
-        )}
-      </div>
-
-      {isImageField ? (
-        <ImageEditor
-          value={value as string}
-          onUploaded={(path) => void save(path)}
-          onClear={() => void save("")}
-          alt={label.toLowerCase()}
-        />
-      ) : isProfilRich ? (
-        <RichTextEditor
-          value={toRichText(editValue, settingKey === "misi")}
-          onChange={(html) => handleChange(html)}
-          placeholder={
-            settingKey === "visi"
-              ? "Tuliskan visi RW 004..."
-              : settingKey === "misi"
-                ? "Tuliskan misi RW 004, satu poin per baris..."
-                : "Tuliskan sejarah RW 004..."
-          }
-        />
-      ) : (
-        <StructuredFieldEditor value={editValue} onChange={handleChange} />
-      )}
-
-      {dirty && (
-        <div className="mt-4 flex items-center justify-end gap-2 border-t border-slate-100 pt-4">
-          <Button variant="outline" size="sm" onClick={reset}>
-            Batal
-          </Button>
-          <Button
-            size="sm"
-            disabled={saving}
-            onClick={handleSave}
-            className="bg-brand-primary hover:bg-brand-primary-hover"
-          >
-            <Save className="size-3.5" />
-            {saving ? "Menyimpan..." : "Simpan"}
-          </Button>
-        </div>
-      )}
-    </div>
-  );
-}
+/* ------------------------------------------------------------------ */
+/* Halaman                                                             */
+/* ------------------------------------------------------------------ */
 
 export default function AdminPengaturanPage() {
   const { data, loading, reload } = useFetch(
@@ -674,35 +573,163 @@ export default function AdminPengaturanPage() {
     []
   );
 
-  const groups = normalizeSettings(data?.data ?? {});
-  const groupNames = Object.keys(groups);
-  const [activeGroup, setActiveGroup] = useState<string | null>(null);
-  const [query, setQuery] = useState("");
+  const groups = useMemo(() => normalizeSettings(data?.data ?? {}), [data]);
 
-  const selectedGroup = activeGroup ?? groupNames[0] ?? null;
+  // Nilai hasil editan yang belum tersimpan: "group.key" -> nilai baru
+  const [edits, setEdits] = useState<Record<string, unknown>>({});
+  // Nilai yang sudah langsung tersimpan lewat upload gambar
+  const [savedOverrides, setSavedOverrides] = useState<
+    Record<string, unknown>
+  >({});
+  const [activeTab, setActiveTab] = useState("media");
+  const [saving, setSaving] = useState(false);
 
-  const filteredKeys = (() => {
-    if (!selectedGroup) return [];
-    const keys = Object.keys(groups[selectedGroup] ?? {});
-    const q = query.trim().toLowerCase();
-    if (!q) return keys;
-    return keys.filter((key) => {
-      const label = SETTING_LABELS[`${selectedGroup}.${key}`]?.label ?? toLabel(key);
-      const desc = SETTING_LABELS[`${selectedGroup}.${key}`]?.desc ?? "";
-      return (
-        label.toLowerCase().includes(q) ||
-        desc.toLowerCase().includes(q) ||
-        key.toLowerCase().includes(q)
-      );
+  const editCount = Object.keys(edits).length;
+
+  const getEntry = (group: string, key: string): unknown => {
+    const fullKey = `${group}.${key}`;
+    if (fullKey in edits) return edits[fullKey];
+    if (fullKey in savedOverrides) return savedOverrides[fullKey];
+    return groups[group]?.[key];
+  };
+
+  const setEntry = (group: string, key: string, value: unknown) => {
+    setEdits((prev) => ({ ...prev, [`${group}.${key}`]: value }));
+  };
+
+  const clearEdit = (group: string, key: string) => {
+    setEdits((prev) => {
+      const next = { ...prev };
+      delete next[`${group}.${key}`];
+      return next;
     });
-  })();
+  };
+
+  const handleUploadedImage = async (
+    group: string,
+    key: string,
+    path: string
+  ) => {
+    // Gambar langsung disimpan agar pratinjau langsung akurat
+    const fullKey = `${group}.${key}`;
+    try {
+      const res = await admin.post<ApiMessage>("/admin/settings", {
+        group,
+        key,
+        value: path,
+      });
+      toast.success(res.message);
+      setSavedOverrides((prev) => ({ ...prev, [fullKey]: path }));
+      setEdits((prev) => {
+        const next = { ...prev };
+        delete next[fullKey];
+        return next;
+      });
+      reload();
+    } catch (err) {
+      toast.error(
+        err instanceof ApiError ? err.message : "Gagal menyimpan gambar."
+      );
+    }
+  };
+
+  const saveAll = async () => {
+    const entries = Object.entries(edits);
+    if (entries.length === 0) return;
+    setSaving(true);
+    let ok = 0;
+    for (const [fullKey, value] of entries) {
+      const [group, key] = fullKey.split(".");
+      try {
+        await admin.post<ApiMessage>("/admin/settings", {
+          group,
+          key,
+          value,
+        });
+        ok += 1;
+      } catch (err) {
+        toast.error(
+          err instanceof ApiError
+            ? `${toLabel(key)}: ${err.message}`
+            : "Gagal menyimpan pengaturan."
+        );
+      }
+    }
+    setSaving(false);
+    if (ok > 0) {
+      toast.success(`${ok} pengaturan berhasil disimpan.`);
+      setEdits({});
+      reload();
+    }
+  };
+
+  // Bagian-bagian (section) yang dirender pada sebuah tab, sesuai urutan TABS.
+  // Grup yang tidak terdaftar di tab mana pun otomatis masuk ke tab terakhir
+  // sebagai bagian "Lainnya" agar tidak ada setting yang hilang.
+  const buildSections = (
+    tab: TabDef
+  ): { title?: string; desc?: string; entries: Entry[] }[] => {
+    const out: { title?: string; desc?: string; entries: Entry[] }[] = [];
+    tab.sections.forEach((sec) => {
+      const settings = groups[sec.group] ?? {};
+      let keys = [...(sec.keys ?? Object.keys(settings))];
+      Object.keys(settings).forEach((k) => {
+        if (!keys.includes(k)) keys.push(k);
+      });
+      keys = keys.filter((k) => k in settings);
+      if (keys.length === 0) return;
+      out.push({
+        title: sec.title,
+        desc: sec.desc,
+        entries: keys.map((key) => ({
+          group: sec.group,
+          key,
+          value: settings[key],
+        })),
+      });
+    });
+
+    if (tab === TABS[TABS.length - 1]) {
+      const covered = new Set(TABS.flatMap((t) => t.sections.map((s) => s.group)));
+      Object.entries(groups).forEach(([group, settings]) => {
+        if (covered.has(group)) return;
+        const entries = Object.keys(settings ?? {}).map((key) => ({
+          group,
+          key,
+          value: settings[key],
+        }));
+        if (entries.length > 0)
+          out.push({ title: toLabel(group), entries });
+      });
+    }
+    return out;
+  };
+
+  const tab = TABS.find((t) => t.id === activeTab) ?? TABS[0];
+  const sections = buildSections(tab);
+
+  const isRich = (group: string, key: string) =>
+    group === "profil" &&
+    (key === "visi" || key === "misi" || key === "sejarah");
+
+  const isFullWidth = (group: string, key: string, value: unknown) => {
+    if (isImageKey(key) || isRich(group, key)) return true;
+    if (Array.isArray(value)) return true;
+    if (typeof value === "object" && value !== null) {
+      return Object.values(value as Record<string, unknown>).some(
+        (v) => typeof v === "string" && (v.length > 60 || v.includes("\n"))
+      );
+    }
+    if (typeof value === "string") return value.length > 60;
+    return false;
+  };
 
   if (loading && Object.keys(groups).length === 0) {
     return (
       <div className="space-y-6">
-        <AdminPageHeader title="Pengaturan" subtitle="Kelola konten pengaturan situs." />
-        <div className="space-y-4 rounded-xs bg-white p-4 shadow-sm sm:p-5">
-          <Skeleton className="h-40 w-full" />
+        <AdminPageHeader title="Pengaturan" subtitle="Kelola identitas, banner, profil, dan konten situs." />
+        <div className="rounded-xs border border-border bg-card p-4 shadow-sm sm:p-5">
+          <Skeleton className="mb-4 h-10 w-full" />
           <Skeleton className="h-40 w-full" />
         </div>
       </div>
@@ -713,7 +740,7 @@ export default function AdminPengaturanPage() {
     <div className="space-y-6">
       <AdminPageHeader
         title="Pengaturan"
-        subtitle="Kelola konten pengaturan situs seperti alamat, kontak, dan layanan."
+        subtitle="Kelola identitas, banner, profil, kontak, dan konten halaman situs."
         action={
           <Button variant="outline" size="sm" onClick={() => reload()}>
             <RefreshCw className="size-3.5" />
@@ -722,87 +749,155 @@ export default function AdminPengaturanPage() {
         }
       />
 
-      {groupNames.length === 0 ? (
-        <div className="rounded-xs bg-white py-10 text-center text-muted-foreground shadow-sm">
-          <Settings className="mx-auto mb-2 size-8 opacity-40" />
-          Belum ada pengaturan.
+      <div className="overflow-hidden rounded-xs border border-border bg-card shadow-sm">
+        {/* Tab bar ala nav-tabs kelurahan */}
+        <div className="flex overflow-x-auto border-b border-border bg-muted/40 px-2 pt-2">
+          {TABS.map((t) => {
+            const Icon = t.icon;
+            const active = t.id === tab.id;
+            return (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => setActiveTab(t.id)}
+                className={`wd-heading flex shrink-0 cursor-pointer items-center gap-2 border-b-[3px] px-4 py-3 text-[13px] font-medium uppercase tracking-[0.5px] transition-colors ${
+                  active
+                    ? "border-brand-primary text-brand-primary"
+                    : "border-transparent text-slate-500 hover:text-slate-800"
+                }`}
+              >
+                <Icon className="size-4 shrink-0" />
+                {t.label}
+              </button>
+            );
+          })}
         </div>
-      ) : (
-        <div className="grid gap-6 lg:grid-cols-[260px_1fr]">
-          {/* Sidebar */}
-          <aside className="space-y-1 rounded-xs bg-white p-3 shadow-sm h-fit lg:sticky lg:top-24">
-            {groupNames.map((group) => {
-              const Icon = GROUP_META[group]?.icon ?? Settings;
-              const count = Object.keys(groups[group] ?? {}).length;
-              const active = group === selectedGroup;
-              return (
-                <button
-                  key={group}
-                  type="button"
-                  onClick={() => setActiveGroup(group)}
-                  className={`flex w-full items-center gap-3 rounded-xs px-3 py-2.5 text-left text-sm transition-colors ${
-                    active
-                      ? "bg-brand-primary text-white shadow-sm"
-                      : "text-slate-700 hover:bg-slate-100"
-                  }`}
-                >
-                  <Icon className="size-4 shrink-0" />
-                  <span className="flex-1 truncate font-medium">
-                    {groupLabel(group)}
-                  </span>
-                  <Badge
-                    variant="outline"
-                    className={active ? "border-white/40 text-white" : ""}
-                  >
-                    {count}
-                  </Badge>
-                </button>
-              );
-            })}
-          </aside>
 
-          {/* Content */}
-          <div className="min-w-0">
-            <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <h2 className="text-lg font-bold tracking-tight text-slate-800">
-                  {groupLabel(selectedGroup)}
-                </h2>
-                <p className="text-sm text-muted-foreground">
-                  {filteredKeys.length} item ditemukan
-                </p>
-              </div>
-              <div className="relative w-full sm:w-72">
-                <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Cari pengaturan..."
-                  className="pl-9"
-                />
-              </div>
-            </div>
+        {/* Isi tab */}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            void saveAll();
+          }}
+          className="p-4 sm:p-6"
+        >
+          {sections.length === 0 ? (
+            <p className="py-10 text-center text-sm text-muted-foreground">
+              Tidak ada pengaturan pada tab ini.
+            </p>
+          ) : (
+            sections.map((sec, si) => (
+              <div
+                key={si}
+                className={si > 0 ? "mt-8 border-t border-border pt-6" : ""}
+              >
+                {(sec.title || sec.desc) && (
+                  <div className="mb-5">
+                    {sec.title && (
+                      <h3 className="wd-heading m-0 text-[15px] font-semibold uppercase tracking-[1px] text-brand-primary">
+                        {sec.title}
+                      </h3>
+                    )}
+                    {sec.desc && (
+                      <p className="mb-0 mt-1 text-xs text-muted-foreground">
+                        {sec.desc}
+                      </p>
+                    )}
+                  </div>
+                )}
+                <div className="grid gap-x-6 gap-y-5 sm:grid-cols-2">
+                  {sec.entries.map(({ group, key, value }) => {
+                    const meta = fieldMeta(group, key);
+                    const current = getEntry(group, key);
+                    const dirty = `${group}.${key}` in edits;
+                    const full = isFullWidth(group, key, value);
 
-            {filteredKeys.length === 0 ? (
-              <div className="rounded-xs bg-white py-10 text-center text-muted-foreground shadow-sm">
-                Tidak ada pengaturan yang cocok dengan pencarian.
+                    return (
+                      <div
+                        key={`${group}.${key}`}
+                        className={`space-y-2 ${full ? "sm:col-span-2" : ""}`}
+                      >
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <Label className="text-sm font-semibold">
+                            {meta.label}
+                            {dirty && (
+                              <span className="ml-2 align-middle text-[10px] font-bold uppercase tracking-wide text-amber-600">
+                                belum disimpan
+                              </span>
+                            )}
+                          </Label>
+                          {dirty && (
+                            <button
+                              type="button"
+                              onClick={() => clearEdit(group, key)}
+                              className="cursor-pointer border-none bg-transparent p-0 text-xs text-muted-foreground underline hover:text-slate-600"
+                            >
+                              Batalkan
+                            </button>
+                          )}
+                        </div>
+                        {meta.desc && (
+                          <p className="-mt-1 text-xs text-muted-foreground">
+                            {meta.desc}
+                          </p>
+                        )}
+
+                        {isImageKey(key) ? (
+                          <ImageEditor
+                            value={typeof current === "string" ? current : ""}
+                            alt={meta.label.toLowerCase()}
+                            onUploaded={(path) =>
+                              void handleUploadedImage(group, key, path)
+                            }
+                            onClear={() =>
+                              void handleUploadedImage(group, key, "")
+                            }
+                          />
+                        ) : isRich(group, key) ? (
+                          <RichTextEditor
+                            value={toRichText(current, key === "misi")}
+                            onChange={(html) => setEntry(group, key, html)}
+                            placeholder={
+                              key === "visi"
+                                ? "Tuliskan visi RW 004..."
+                                : key === "misi"
+                                  ? "Tuliskan misi RW 004, satu poin per baris..."
+                                  : "Tuliskan sejarah RW 004..."
+                            }
+                          />
+                        ) : (
+                          <StructuredFieldEditor
+                            value={current}
+                            fieldKey={key}
+                            onChange={(nv) => setEntry(group, key, nv)}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            ) : (
-              <div className="space-y-4">
-                {filteredKeys.map((key) => (
-                  <SettingEditor
-                    key={key}
-                    group={selectedGroup}
-                    settingKey={key}
-                    value={groups[selectedGroup][key]}
-                    onSaved={() => reload()}
-                  />
-                ))}
-              </div>
+            ))
+          )}
+
+          {/* Bar simpan ala kelurahan: satu tombol untuk semua */}
+          <div className="mt-6 flex items-center justify-end gap-3 border-t border-border pt-4">
+            {editCount > 0 && (
+              <span className="mr-auto text-xs font-semibold text-amber-600">
+                {editCount} perubahan belum disimpan
+              </span>
             )}
+            <Button
+              type="submit"
+              disabled={saving || editCount === 0}
+              className="bg-brand-primary hover:bg-brand-primary-hover"
+            >
+              <Save className="size-4" />
+              {saving ? "Menyimpan..." : "Simpan Pengaturan"}
+            </Button>
           </div>
-        </div>
-      )}
+        </form>
+      </div>
     </div>
   );
 }
